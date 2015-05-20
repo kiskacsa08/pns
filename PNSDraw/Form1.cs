@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
 
 namespace PNSDraw
 {
@@ -1210,6 +1211,33 @@ namespace PNSDraw
             if (e.Button == MouseButtons.Right)
             {
                 e.Node.TreeView.SelectedNode = e.Node;
+            }
+        }
+
+        private void toolStripButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (toolStripButton3.Checked)
+            {
+                Image check = PNSDraw.Properties.Resources.green_check;
+                toolStripButton3.Image = check;
+                toolStripTextBox1.Enabled = true;
+                toolStripTextBox2.Enabled = true;
+                toolStripComboBox2.Items.Clear();
+                toolStripComboBox2.Items.Add("ABB");
+                toolStripComboBox2.Items.Add("SSG");
+                toolStripComboBox2.SelectedIndex = 0;
+            }
+            else
+            {
+                toolStripButton3.Image = null;
+                toolStripTextBox1.Enabled = false;
+                toolStripTextBox2.Enabled = false;
+                toolStripComboBox2.Items.Clear();
+                toolStripComboBox2.Items.Add("MSG");
+                toolStripComboBox2.Items.Add("SSG");
+                toolStripComboBox2.Items.Add("SSG+LP");
+                toolStripComboBox2.Items.Add("ABB");
+                toolStripComboBox2.SelectedIndex = 0;
             }
         }
 
