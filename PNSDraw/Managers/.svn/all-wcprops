@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svnroot/pnsdraw/!svn/ver/1/PNSDraw/Managers
+END
+ConvertManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/pnsdraw/!svn/ver/1/PNSDraw/Managers/ConvertManager.cs
+END
+GeometryTools.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/pnsdraw/!svn/ver/1/PNSDraw/Managers/GeometryTools.cs
+END
+Globals.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/pnsdraw/!svn/ver/1/PNSDraw/Managers/Globals.cs
+END
+IO.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/pnsdraw/!svn/ver/1/PNSDraw/Managers/IO.cs
+END

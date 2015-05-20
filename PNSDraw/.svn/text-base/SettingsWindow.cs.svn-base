@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+
+namespace PNSDraw
+{
+    public partial class SettingsWindow : Form
+    {
+
+        public bool Changed = false;
+
+        public SettingsWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void SettingsWindow_Load(object sender, EventArgs e)
+        {
+            textBox_fontsize.Text = Globals.DefaultFontSize.ToString();
+            textBox_gridsize.Text = Globals.GridSize.ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Globals.ResetDefaults();
+            textBox_fontsize.Text = Globals.DefaultFontSize.ToString();
+            textBox_gridsize.Text = Globals.GridSize.ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Globals.ResetDefaults();
+            int temp = 0;
+            temp = ConvertManager.ToInt(textBox_fontsize.Text);
+            if (temp > 0)
+            {
+                Globals.DefaultFontSize = temp;
+            }
+            temp = ConvertManager.ToInt(textBox_gridsize.Text);
+            if (temp > 0)
+            {
+                Globals.GridSize = temp;
+            }
+            Changed = true;
+            Close();
+        }
+    }
+}
