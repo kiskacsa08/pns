@@ -1229,7 +1229,8 @@ namespace PNSDraw
             }
             else
             {
-                toolStripButton3.Image = null;
+                Image check = PNSDraw.Properties.Resources.red_check;
+                toolStripButton3.Image = check;
                 toolStripTextBox1.Enabled = false;
                 toolStripTextBox2.Enabled = false;
                 toolStripComboBox2.Items.Clear();
