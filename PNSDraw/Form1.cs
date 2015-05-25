@@ -7,6 +7,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
+//using PNSDraw.PnsSolver;
+using PNSDraw.Entities;
+using System.Threading;
+using System.Globalization;
+using Pns.PnsSolver;
 
 namespace PNSDraw
 {
@@ -1269,6 +1274,272 @@ namespace PNSDraw
                 toolStripComboBox2.SelectedIndex = 0;
             }
         }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            if (toolStripButton3.Checked)
+            {
+                // TODO: Ide jön az online megoldó hívása
+                MessageBox.Show("Online");
+            }
+            else
+            {
+                MessageBox.Show("Offline");
+                Pns.PnsStudio ps = new Pns.PnsStudio();
+                switch (toolStripComboBox2.SelectedIndex)
+                {
+                    case 0:
+                        Console.WriteLine(ps.StartSolver(Solver_keys._KEY_MSG));
+                        break;
+                    case 1:
+                        ps.StartSolver(Solver_keys._KEY_SSG);
+                        break;
+                    case 2:
+                        ps.StartSolver(Solver_keys._KEY_SSGLP);
+                        break;
+                    case 3:
+                        ps.StartSolver(Solver_keys._KEY_ABB);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+
+
+        //-------------------------------------------------------------------SOLVER-------------------------------------------------------------------------------------------
+
+        //Solutions m_solutions;
+        //StringBuilder m_result_string;
+        //bool m_result;
+        //private void StartSolver(string t_method)
+        //{
+        //    m_solutions = new Solutions();
+        //    m_result_string = new StringBuilder(1000000);
+        //    Thread t_solver = new Thread(new ParameterizedThreadStart(SolverThread));
+        //}
+
+        //private void SolverThread(object t_method)
+        //{
+        //    m_result = false;
+        //    m_result = CallSolver((string)t_method);
+        //}
+
+
+        //bool CallSolver(string t_method)
+        //{
+        //    ProblemToSolverInput();
+        //    ProcessStartInfo t_info = new ProcessStartInfo();
+        //    t_info.WorkingDirectory = System.Windows.Forms.Application.StartupPath;
+        //    t_info.FileName = Solver_keys.solver;
+        //    t_info.Arguments = t_method +
+        //        " \"" + m_filename + Solver_keys._SOLVER_INPUT_EXTENSION + "\" " +
+        //        "\"" + m_filename + Solver_keys._SOLVER_ROW_OUTPUT_EXTENSION + "\" " +
+        //        DefaultMUsAndValues.DefaultValues.max_solutions;
+        //    t_info.RedirectStandardError = true;
+        //    t_info.RedirectStandardOutput = true;
+        //    t_info.CreateNoWindow = true;
+        //    t_info.UseShellExecute = false;
+        //    t_info.WindowStyle = ProcessWindowStyle.Hidden;
+        //    Process t_proc = new Process();
+        //    try
+        //    {
+        //        t_proc.StartInfo = t_info;
+        //        t_proc.OutputDataReceived += new DataReceivedEventHandler(t_proc_OutputDataReceived);
+        //        t_proc.Start();
+        //        m_solver_dlg.SolverProcess = t_proc;
+        //        t_proc.BeginOutputReadLine();
+        //        t_proc.WaitForExit();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        m_result_string.AppendLine(ex.ToString());
+        //        return false;
+        //    }
+        //    if (t_proc.ExitCode != 0)
+        //    {
+        //        string t_error = t_proc.StandardError.ReadToEnd();
+        //        if (t_error == "") m_result_string.AppendLine("Solver error!\nExit code: " + t_proc.ExitCode);
+        //        else m_result_string.AppendLine(t_error);
+        //        return false;
+        //    }
+        //    m_timer.Stop();
+        //    m_startpos = 0;
+        //    FileStream fs = new FileStream(m_filename + Solver_keys._SOLVER_ROW_OUTPUT_EXTENSION, FileMode.Open);
+        //    StreamReader sr = new StreamReader(fs);
+        //    m_result_string = new StringBuilder();
+        //    while (!sr.EndOfStream &&
+        //        (m_result_string.Length < Solver_keys._SOLVER_ROW_OUTPUT_MAX_DISPLAYED_SIZE ||
+        //        t_method == Solver_keys._KEY_ABB || t_method == Solver_keys._KEY_SSGLP)) m_result_string.AppendLine(sr.ReadLine());
+        //    if (!sr.EndOfStream) m_result_string.AppendLine("...");
+        //    sr.Close();
+        //    fs.Close();
+        //    if (t_method == Solver_keys._KEY_ABB || t_method == Solver_keys._KEY_SSGLP)
+        //    {
+        //        m_solutions = ParseSolution(m_result_string.ToString());
+        //    }
+
+        //    return true;
+        //}
+
+
+        //public void ProblemToSolverInput()
+        //{
+        //    CultureInfo t_original_culture = CultureInfo.CurrentCulture;
+        //    Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+        //    FileStream fs = new FileStream(m_filename + Solver_keys._SOLVER_INPUT_EXTENSION, FileMode.Create);
+        //    StreamWriter sw = new StreamWriter(fs);
+        //    string t_str = Solver_keys._FILE_TYPE;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._FILE_NAME + Converters.ToNameString(Path.GetFileName(m_filename) + Solver_keys._SOLVER_INPUT_EXTENSION);
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._MEASUREMENT_UNITS;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._MASS_UNIT;
+        //    t_str += DefaultMUsAndValues.MUs.DefaultMaterialMU;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._TIME_UNIT;
+        //    t_str += DefaultMUsAndValues.MUs.DefaultTimeMU;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._MONEY_UNIT;
+        //    t_str += "Euro";//Defaults.MUs.DefaultCurrencyMU;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._DEFAULTS;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._MATERIAL_TYPE;
+        //    t_str += Solver_keys._INTERMEDIATE;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._DEF_MAT_LB;
+        //    t_str += DefaultMUsAndValues.DefaultValues.d_minimum_flow;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._DEF_MAT_UB;
+        //    t_str += DefaultMUsAndValues.DefaultValues.d_maximum_flow;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._DEF_MAT_PRICE;
+        //    t_str += DefaultMUsAndValues.DefaultValues.d_price;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._DEF_OPUNIT_LB;
+        //    t_str += DefaultMUsAndValues.DefaultValues.CapacityConstraints.d_lower_bound;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._DEF_OPUNIT_UB;
+        //    t_str += DefaultMUsAndValues.DefaultValues.CapacityConstraints.d_upper_bound;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._DEF_OPUNIT_FIX;
+        //    t_str += "0";
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._DEF_OPUNIT_PROP;
+        //    t_str += "0";
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._MATERIALS;
+        //    t_str += Solver_keys._NEWLINE;
+        //    sw.Write(t_str);
+        //    foreach (MaterialProperties matprop in m_materials.m_rawlist)
+        //    {
+        //        t_str = Solver_keys._RAW;
+        //        t_str += matprop.gmin != def_Values.d_NperA ? ", " + Solver_keys._MAT_LB + matprop.gmin : "";
+        //        t_str += matprop.gmax != def_Values.d_NperA ? ", " + Solver_keys._MAT_UB + matprop.gmax : "";
+        //        t_str += matprop.gprice != def_Values.d_NperA ? ", " + Solver_keys._MAT_PRICE + matprop.gprice : "";
+        //        sw.Write(matprop.currname + ": " + t_str + Solver_keys._NEWLINE);
+        //    }
+        //    foreach (MaterialProperties matprop in m_materials.m_intermediatelist)
+        //    {
+        //        if (matprop.gmax != def_Values.d_NperA) sw.Write(matprop.currname + ": " + Solver_keys._INTERMEDIATE + ", " + Solver_keys._MAT_UB + matprop.gmax + Solver_keys._NEWLINE);
+        //    }
+        //    foreach (MaterialProperties matprop in m_materials.m_productlist)
+        //    {
+        //        t_str = Solver_keys._PRODUCT;
+        //        t_str += matprop.gmin != def_Values.d_NperA ? ", " + Solver_keys._MAT_LB + matprop.gmin : "";
+        //        t_str += matprop.gmax != def_Values.d_NperA ? ", " + Solver_keys._MAT_UB + matprop.gmax : "";
+        //        t_str += matprop.gprice != def_Values.d_NperA ? ", " + Solver_keys._MAT_PRICE + matprop.gprice : "";
+        //        sw.Write(matprop.currname + ": " + t_str + Solver_keys._NEWLINE);
+        //    }
+        //    t_str = Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._OPUNITS;
+        //    t_str += Solver_keys._NEWLINE;
+        //    sw.Write(t_str);
+        //    foreach (OperatingUnitProperties ouprop in m_operatingunitlist)
+        //    {
+        //        t_str = "";
+        //        if (ouprop.bounds.d_lb != DefaultMUsAndValues.DefaultValues.CapacityConstraints.d_lower_bound) t_str = Solver_keys._OPUNIT_LB + ouprop.bounds.d_lb;
+        //        if (ouprop.bounds.d_ub != DefaultMUsAndValues.DefaultValues.CapacityConstraints.d_upper_bound)
+        //        {
+        //            if (t_str != "") t_str += ", ";
+        //            t_str += Solver_keys._OPUNIT_UB + ouprop.bounds.d_ub;
+        //        }
+        //        if (ouprop.overallcost.g_fix != 0)
+        //        {
+        //            if (t_str != "") t_str += ", ";
+        //            t_str += Solver_keys._OPUNIT_FIX + ouprop.overallcost.g_fix;
+        //        }
+        //        if (ouprop.overallcost.g_prop != 0)
+        //        {
+        //            if (t_str != "") t_str += ", ";
+        //            t_str += Solver_keys._OPUNIT_PROP + ouprop.overallcost.g_prop;
+        //        }
+        //        if (t_str != "") sw.Write(ouprop.currname + ": " + t_str + Solver_keys._NEWLINE);
+        //    }
+        //    t_str = Solver_keys._NEWLINE;
+        //    t_str += Solver_keys._OPUNIT_RATES;
+        //    t_str += Solver_keys._NEWLINE;
+        //    sw.Write(t_str);
+        //    foreach (OperatingUnitProperties ouprop in m_operatingunitlist)
+        //    {
+        //        sw.Write(ouprop.currname + ": ");
+        //        t_str = "";
+        //        foreach (CustomProp prop in ouprop.imats.list)
+        //        {
+        //            IOMaterial mat = (IOMaterial)prop.Value;
+        //            if (t_str != "") t_str += " + ";
+        //            if (mat.g_rate != 1) t_str += mat.g_rate + " ";
+        //            t_str += mat.Name;
+        //        }
+        //        sw.Write(t_str + " => ");
+        //        t_str = "";
+        //        foreach (CustomProp prop in ouprop.omats.list)
+        //        {
+        //            IOMaterial mat = (IOMaterial)prop.Value;
+        //            if (t_str != "") t_str += " + ";
+        //            if (mat.g_rate != 1) t_str += mat.g_rate + " ";
+        //            t_str += mat.Name;
+        //        }
+        //        sw.Write(t_str + Solver_keys._NEWLINE);
+        //    }
+        //    sw.Write(Solver_keys._NEWLINE);
+        //    sw.Close();
+        //    fs.Close();
+        //    Thread.CurrentThread.CurrentCulture = t_original_culture;
+        //}
+
+        //private void StartSolver(string t_method)
+        //{
+        //    s_pns_editor.tabPageSolutions.Text = def_PnsStudio.SolutionsTabTextField;
+        //    Solutions m_solutions = new Solutions();
+        //    comboBoxSolutionsLeft.Items.Clear();
+        //    comboBoxSolutionsRight.Items.Clear();
+        //    UpdateSolutionsTree(s_pns_editor.treeViewSolutionsLeft, s_pns_editor.comboBoxSolutionsLeft, true);
+        //    UpdateSolutionsTree(s_pns_editor.treeViewSolutionsRight, s_pns_editor.comboBoxSolutionsRight, false);
+        //    s_pns_editor.richTextBoxSolutions.Hide();
+        //    s_pns_editor.splitContainerSolutions.Show();
+        //    m_method = t_method;
+        //    m_result_string = new StringBuilder(1000000);
+        //    m_startpos = 0;
+        //    Thread t_solver = new Thread(new ParameterizedThreadStart(SolverThread));
+        //    m_solver_dlg = new SolverDialog(t_solver);
+        //    m_timer = new System.Windows.Forms.Timer();
+        //    m_timer.Tick += new EventHandler(m_timer_Tick);
+        //    m_timer.Interval = 1000;
+        //    t_solver.Start(t_method);
+        //    m_solver_dlg.Show();
+        //    m_timer.Start();
+        //    update = false;
+        //}
+
+
+        //--------------------------------------------------------------------------------SOLVER END-----------------------------------------------------------------------
 
     }
 }
