@@ -666,7 +666,6 @@ namespace PNSDraw
             }
 
             treeMaterials.ExpandAll();
-            treeOpUnits.ExpandAll();
 
             treeMaterials.Update();
             treeOpUnits.Update();
