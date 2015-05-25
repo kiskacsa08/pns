@@ -625,8 +625,8 @@ namespace PNSDraw
                 }
             }
 
-            
 
+            int i = 0;
             foreach (OperatingUnit ou in Graph.OperatingUnits)
             {
                 TreeNode tn2 = new TreeNode();
@@ -634,6 +634,35 @@ namespace PNSDraw
                 tn2.Name = ou.Name;
                 tn2.Text = ou.Name;
                 treeOpUnits.Nodes[0].Nodes.Add(tn2);
+                treeOpUnits.Nodes[0].Nodes[i].Nodes.Add("Input materials");
+                treeOpUnits.Nodes[0].Nodes[i].Nodes.Add("Output materials");
+                foreach (Canvas.IConnectableObject obj in ou.connectedobjects)
+                {
+                    treeOpUnits.Nodes[0].Nodes[i].Nodes[0].Nodes.Add(((Material)obj).Name);
+                }
+
+                foreach (Material mat in Graph.Materials)
+                {
+                    foreach (Canvas.IConnectableObject obj in mat.connectedobjects)
+                    {
+                        OperatingUnit act = (OperatingUnit)obj;
+                        if (act.Name == ou.Name)
+                        {
+                            treeOpUnits.Nodes[0].Nodes[i].Nodes[1].Nodes.Add(mat.Name);
+                        }
+                    }
+                }
+                i++;
+            }
+
+            treeOpUnits.ExpandAll();
+
+            for (int j = 0; j < i; j++)
+            {
+                if (i > 0)
+                {
+                    treeOpUnits.Nodes[0].Nodes[j].Collapse();
+                }
             }
 
             treeMaterials.ExpandAll();

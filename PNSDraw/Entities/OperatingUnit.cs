@@ -23,7 +23,7 @@ namespace PNSDraw
         string name;
         string title;
 
-        List<Canvas.IConnectableObject> connectedobjects;
+        public List<Canvas.IConnectableObject> connectedobjects;
         Canvas.IGraphicsStructure Container;
 
         TextObject Label;
