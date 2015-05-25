@@ -77,6 +77,7 @@
       <DependentUpon>PNSCanvas.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\ObjectProperty.cs" />
+    <Compile Include="Entities\Solution.cs" />
     <Compile Include="Managers\PropertyManager.cs" />
     <Compile Include="MyPropertyGrid.cs">
       <SubType>Component</SubType>
@@ -179,6 +180,12 @@
   <ItemGroup>
     <Content Include="pnsdraw.ico" />
     <None Include="Resources\green_check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Desktop\asd\munka-veszprem\PnsStudio_20140529\PnsStudio_20140529\pns\Pns.csproj">
+      <Project>{b00ff780-c041-4f4f-8086-4ea1c2b0f96d}</Project>
+      <Name>Pns</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
