@@ -54,6 +54,18 @@
     <ApplicationIcon>pnsdraw.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\mongo\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\mongo\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core">
+      <HintPath>..\mongo\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Legacy">
+      <HintPath>..\mongo\MongoDB.Driver.Legacy.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -77,7 +89,9 @@
     <Compile Include="Canvas\PNSCanvas.Designer.cs">
       <DependentUpon>PNSCanvas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Default.cs" />
     <Compile Include="Entities\ObjectProperty.cs" />
+    <Compile Include="Entities\Problem.cs" />
     <Compile Include="Entities\Solution.cs" />
     <Compile Include="Managers\PropertyManager.cs" />
     <Compile Include="MyPropertyGrid.cs">
@@ -99,6 +113,10 @@
     <Compile Include="Managers\GeometryTools.cs" />
     <Compile Include="Managers\Globals.cs" />
     <Compile Include="Managers\IO.cs" />
+    <Compile Include="online\MongoHandler.cs" />
+    <Compile Include="online\MUs.cs" />
+    <Compile Include="online\Socket.cs" />
+    <Compile Include="online\Solver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -179,6 +197,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="online\Units.xml" />
     <Content Include="pnsdraw.ico" />
     <None Include="Resources\green_check.png" />
   </ItemGroup>
