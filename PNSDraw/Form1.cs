@@ -1267,41 +1267,67 @@ namespace PNSDraw
                 toolStripTextBox1.Enabled = false;
                 toolStripTextBox2.Enabled = false;
                 toolStripComboBox2.Items.Clear();
-                toolStripComboBox2.Items.Add("MSG");
+                toolStripComboBox2.Items.Add("ABB");
                 toolStripComboBox2.Items.Add("SSG");
                 toolStripComboBox2.Items.Add("SSG+LP");
-                toolStripComboBox2.Items.Add("ABB");
+                toolStripComboBox2.Items.Add("MSG");
                 toolStripComboBox2.SelectedIndex = 0;
             }
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
+            string algorithm;
+            switch (toolStripComboBox2.SelectedIndex)
+            {
+                case 0:
+                    algorithm = Solver_keys._KEY_ABB;
+                    break;
+                case 1:
+                    algorithm = Solver_keys._KEY_SSG;
+                    break;
+                case 2:
+                    algorithm = Solver_keys._KEY_SSGLP;
+                    break;
+                case 3:
+                    algorithm = Solver_keys._KEY_MSG;
+                    break;
+                default:
+                    algorithm = "";
+                    break;
+            }
+
             if (toolStripButton3.Checked)
             {
-                // TODO: Ide jön az online megoldó hívása
-                MessageBox.Show("Online");
+                if (toolStripTextBox1.Text == "" || toolStripTextBox2.Text == "")
+                {
+                    MessageBox.Show("Please fill all fields!");
+                }
+                else
+                {
+                    int processes = int.Parse(toolStripTextBox1.Text);
+                    int limit = int.Parse(toolStripTextBox2.Text);
+                    //string algorithm tartalmazza az algoritmust (feljebb), int processes a folyamatok számát, int limit a megoldások limitjét
+                    // TODO: Ide jön az online megoldó hívása
+                    MessageBox.Show("Online");
+                }
             }
             else
             {
                 MessageBox.Show("Offline");
-                switch (toolStripComboBox2.SelectedIndex)
-                {
-                    case 0:
-                        Console.WriteLine(Adapter.StartSolver(Solver_keys._KEY_MSG, Graph));
-                        break;
-                    case 1:
-                        Adapter.StartSolver(Solver_keys._KEY_SSG, Graph);
-                        break;
-                    case 2:
-                        Adapter.StartSolver(Solver_keys._KEY_SSGLP, Graph);
-                        break;
-                    case 3:
-                        Adapter.StartSolver(Solver_keys._KEY_ABB, Graph);
-                        break;
-                    default:
-                        break;
-                }
+                Console.WriteLine(Adapter.StartSolver(algorithm, Graph));
+            }
+        }
+
+        private void toolStripTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue < 48 || e.KeyValue > 57)
+            {
+                e.SuppressKeyPress = true;
+            }
+            else
+            {
+                e.SuppressKeyPress = false;
             }
         }
 
