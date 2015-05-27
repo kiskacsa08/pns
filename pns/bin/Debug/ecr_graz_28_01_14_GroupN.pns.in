@@ -1,0 +1,469 @@
+file_type=PNS_problem_v1
+file_name=ecr_graz_28_01_14_GroupN_pns_in
+
+measurement_units:
+mass_unit=t
+time_unit=yr
+money_unit=Euro
+
+defaults:
+material_type=intermediate
+material_flow_rate_lower_bound=0
+material_flow_rate_upper_bound=1000000000
+material_price=0
+operating_unit_capacity_lower_bound=0
+operating_unit_capacity_upper_bound=1000000000
+operating_unit_fix_cost=0
+operating_unit_proportional_cost=0
+
+materials:
+Operating_costs: raw_material, price=1
+Invest_costs_OperatUnits: raw_material, price=1
+InvCostsDiggingwithPipe1m: raw_material, price=108
+dummy_digging_with_pipe_1m: raw_material
+r_electricity: raw_material, price=150
+r_gasfossil_OFF: raw_material, price=42.5
+r_water_EnerGraz78C: raw_material, price=35
+r_water_EnerGrazStorage78C: raw_material, flow_rate_upper_bound=151025.199, price=35.1
+r_water_Marie78C_w: raw_material, flow_rate_upper_bound=6000, price=35
+r_water_Marie78C_mt: raw_material, flow_rate_upper_bound=6000, price=35
+r_water_Marie78C_s: raw_material, flow_rate_upper_bound=6000, price=35
+r_water_Marie30C_w: raw_material, flow_rate_upper_bound=33333.333
+r_water_Marie30C_mt: raw_material, flow_rate_upper_bound=33333.333
+r_water_Marie30C_s: raw_material, flow_rate_upper_bound=33333.333
+r_water_Linde22_5C_w: raw_material, flow_rate_upper_bound=11008.4
+r_water_Linde22_5C_mt: raw_material, flow_rate_upper_bound=11008.4
+r_water_Linde22_5C_s: raw_material, flow_rate_upper_bound=11008.4
+r_water_Stamag10C_w: raw_material, flow_rate_upper_bound=2920
+r_water_Stamag10C_mt: raw_material, flow_rate_upper_bound=2920
+r_water_Stamag10C_s: raw_material, flow_rate_upper_bound=2920
+r_solar_PV_N_w: raw_material, flow_rate_upper_bound=55.121
+r_solar_PV_N_mt: raw_material, flow_rate_upper_bound=109.506
+r_solar_PV_N_s: raw_material, flow_rate_upper_bound=138.904
+r_solar_Solarthermie_N_w: raw_material, flow_rate_upper_bound=46.107
+r_solar_Solarthermie_N_mt: raw_material, flow_rate_upper_bound=110.777
+r_solar_Solarthermie_N_s: raw_material, flow_rate_upper_bound=181.878
+p_heating65C_N_w: product, flow_rate_upper_bound=796.55
+p_heating65C_N_mt: product, flow_rate_upper_bound=16.48
+p_hotwater65C_N_w: product, flow_rate_upper_bound=271.01
+p_hotwater65C_N_mt: product, flow_rate_upper_bound=271.01
+p_hotwater65C_N_s: product, flow_rate_upper_bound=271.01
+p_cool_N_w: product, flow_rate_upper_bound=0
+p_cool_N_mt: product, flow_rate_upper_bound=0
+p_cool_N_s: product, flow_rate_upper_bound=444.246
+p_electricity_CHP_w: product, flow_rate_upper_bound=0, price=150
+p_electricity_CHP_mt: product, flow_rate_upper_bound=0, price=150
+p_electricity_CHP_s: product, flow_rate_upper_bound=0, price=150
+p_electricity_raw_w: product, flow_rate_upper_bound=0, price=150
+p_electricity_raw_mt: product, flow_rate_upper_bound=0, price=150
+p_electricity_raw_s: product, flow_rate_upper_bound=0, price=150
+p_electricity_PV_w: product, flow_rate_upper_bound=0, price=250
+p_electricity_PV_mt: product, flow_rate_upper_bound=0, price=250
+p_electricity_PV_s: product, flow_rate_upper_bound=0, price=250
+demand_electricity_w: product, flow_rate_upper_bound=451.683
+demand_electricity_mt: product, flow_rate_upper_bound=451.683
+demand_electricity_s: product, flow_rate_upper_bound=451.683
+Price_heating_w: product, flow_rate_lower_bound=796.55, flow_rate_upper_bound=796.55, price=35
+Price_heating_mt: product, flow_rate_lower_bound=16.48, flow_rate_upper_bound=16.48, price=35
+Price_hotwater_w: product, flow_rate_lower_bound=271.01, flow_rate_upper_bound=271.01, price=35
+Price_hotwater_mt: product, flow_rate_lower_bound=271.01, flow_rate_upper_bound=271.01, price=35
+Price_hotwater_s: product, flow_rate_lower_bound=271.01, flow_rate_upper_bound=271.01, price=35
+Price_cool_mt: product, flow_rate_lower_bound=100.484, flow_rate_upper_bound=100.484, price=35
+Price_cool_s: product, flow_rate_lower_bound=444.246, flow_rate_upper_bound=444.246, price=40
+
+operating_units:
+CENTR_periods_HeatEx_EnerGraz78C_300kW: capacity_lower_bound=0.6, capacity_upper_bound=2
+CENTR_periods_HeatEx_EnerGraz78C_1MW: capacity_lower_bound=2.01, capacity_upper_bound=6
+CENTR_periods_HeatEx_EnerGraz78C_3MW: capacity_lower_bound=6.01
+CENTR_periods_GasfurnaceMarie_300kWth: capacity_lower_bound=0.6, capacity_upper_bound=2
+CENTR_periods_GasfurnaceMarie_1MWth: capacity_lower_bound=2.01, capacity_upper_bound=6
+CENTR_periods_GasfurnaceMarie_3MWth: capacity_lower_bound=6.01
+CENTR_periods_CHPmarie_300kWel: capacity_lower_bound=0.6, capacity_upper_bound=2
+CENTR_periods_CHPmarie_1MWel: capacity_lower_bound=0.6, capacity_upper_bound=1.8
+CENTR_periods_CHPmarie_3MWel: capacity_lower_bound=1.81
+CENTR_periods_HeatEx_Marie78C_300kW: capacity_lower_bound=0.6, capacity_upper_bound=2
+CENTR_periods_HeatEx_Marie78C_1MW: capacity_lower_bound=2.01, capacity_upper_bound=6
+CENTR_periods_HeatEx_Marie78C_3MW: capacity_lower_bound=6
+CENTR_periods_HeatEx_Marie30C_300kW: capacity_lower_bound=0.6, capacity_upper_bound=2
+CENTR_periods_HeatEx_Marie30C_1MW: capacity_lower_bound=2.01, capacity_upper_bound=6
+CENTR_periods_HeatEx_Marie30C_3MW: capacity_lower_bound=6
+CENTR_periods_HeatEx_Linde22C_300kW: capacity_lower_bound=0.6, capacity_upper_bound=2
+CENTR_periods_HeatEx_Linde22C_1MW: capacity_lower_bound=2.01, capacity_upper_bound=6
+CENTR_periods_HeatEx_Linde22C_3MW: capacity_lower_bound=6.01
+CENTR_periods_HeatEx_Stamag10C_300kW: capacity_lower_bound=0.6, capacity_upper_bound=2
+CENTR_periods_HeatEx_Stamag10C_1MW: capacity_lower_bound=2.01, capacity_upper_bound=6
+CENTR_periods_HeatEx_Stamag10C_3MW: capacity_lower_bound=6
+CENTR_periods_HP_Marie30C__400kW: capacity_lower_bound=0.6, capacity_upper_bound=1.12
+CENTR_periods_HP_Linde22C__400kW: capacity_lower_bound=0.6, capacity_upper_bound=1.12
+CENTR_periods_HP_Linde22C__750kW: capacity_lower_bound=0.6
+CENTR_periods_HP_Stamag10C__400kW: capacity_lower_bound=0.6, capacity_upper_bound=1.12
+CENTR_periods_HP_Stamag10C__750kW: capacity_lower_bound=0.6
+CENTR_periods_HeatEnerGrazStorage78C: capacity_lower_bound=0.6
+CENTR_HP_Marie_30to78C__400kW_w: capacity_lower_bound=0.6
+CENTR_HP_Marie_30to78C__400kW_mt: capacity_lower_bound=0.6
+CENTR_HP_Marie_30to78C__400kW_s: capacity_lower_bound=0.6
+CENTR_HeatEnerGrazStorage78C_w: capacity_upper_bound=1
+CENTR_HeatEnerGrazStorage78C_mt: capacity_upper_bound=1
+CENTR_HeatEnerGrazStorage78C_s: capacity_upper_bound=1
+Digging_HeatEnerGrazWest_to_KnotSouth: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_HeatEnerGrazWest_to_KnotNorthEast: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_HeatEnerGrazWest_to_KnotNorthWest: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_HeatMarie78C_to_KnotNorthEast: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_HeatMarie30C_to_KnotNorthEast: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_HeatLinde_to_KnotNorthEast: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_HeatStamag_to_KnotNorthWest: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_GasNorth_to_KnotNorthWest: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_GasNorth_to_KnotNorthEast: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_GasSouth_to_KnotSouth: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_KnotNorthWest_to_KnotNorthEast: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_KnotNorthWest_to_KnotSouth: capacity_lower_bound=1, capacity_upper_bound=1
+Digging_KnotNorthEast_to_KnotSouth: capacity_lower_bound=1, capacity_upper_bound=1
+Pipe_HeatEnerGrazWest78C_to_KnotNorthEast_w: capacity_upper_bound=1
+Pipe_HeatEnerGrazWest78C_to_KnotNorthEast_mt: capacity_upper_bound=1
+Pipe_HeatEnerGrazWest78C_to_KnotNorthEast_s: capacity_upper_bound=1
+Pipe_Marie30C_to_KnotNorthEast_w: capacity_upper_bound=1
+Pipe_Marie30C_to_KnotNothEast_mt: capacity_upper_bound=1
+Pipe_Marie30C_to_KnotNorthEast_s: capacity_upper_bound=1
+Pipe_Linde22_5C_to_KnotNorthEast_w: capacity_upper_bound=1
+Pipe_Linde22_5C_to_KnotNorthEast_mt: capacity_upper_bound=1
+Pipe_Linde22_5C_to_KnotNorthEast_s: capacity_upper_bound=1
+Pipe_Linde_cooling_to_KnotNorthEast_mt: capacity_upper_bound=1
+Pipe_Linde_cooling_to_KnotNorthEast_s: capacity_upper_bound=1
+Pipe_Stamag10C_to_KnotNorthEast_w: capacity_upper_bound=1
+Pipe_Stamag10C_to_KnotNorthEast_mt: capacity_upper_bound=1
+Pipe_Stamag10C_to_KnotNorthEast_s: capacity_upper_bound=1
+Pipe_Stamag_cooling_to_KnotNorthEast_mt: capacity_upper_bound=1
+Pipe_Stamag_cooling_to_KnotNorthEast_s: capacity_upper_bound=1
+Pipe_LindeLech78C_to_KnotNorthEast_w: capacity_upper_bound=1
+Pipe_LindeLech78C_to_KnotNorthEast_mt: capacity_upper_bound=1
+Pipe_LindeLech78C_to_KnotNorthEast_s: capacity_upper_bound=1
+Pipe_Stamag78C_to_KnotNorthEast_w: capacity_upper_bound=1
+Pipe_Stamag78C_to_KnotNorthEast_mt: capacity_upper_bound=1
+Pipe_Stamag78C_to_KnotNorthEast_s: capacity_upper_bound=1
+Pipe_Gas_to_KnotNorthEast_w: capacity_upper_bound=1
+Pipe_Gas_to_KnotNorthEast_mt: capacity_upper_bound=1
+Pipe_Gas_to_KnotNorthEast_s: capacity_upper_bound=1
+N_periods_gasfurnace_45kWth: capacity_lower_bound=0.6, capacity_upper_bound=2
+N_periods_gasfurnace_150kWth: capacity_lower_bound=2.01, capacity_upper_bound=4
+N_periods_gasfurnace_300kWth: capacity_lower_bound=0.6
+N_periods_CHP_45kWel: capacity_lower_bound=0.6, capacity_upper_bound=2
+N_periods_CHP_150kWel: capacity_lower_bound=0.6, capacity_upper_bound=1.2
+N_periods_CHP_300kWel: capacity_lower_bound=0.6
+N_periods_PVroof_8kWel: capacity_lower_bound=1, capacity_upper_bound=7.5
+N_periods_PVroof_100kWel: capacity_lower_bound=0.6, capacity_upper_bound=1.8
+N_periods_PVroof_300kWel: capacity_lower_bound=0.6
+N_periods_Solartherm_8kWth: capacity_lower_bound=0.6, capacity_upper_bound=7.5
+N_periods_Solartherm_100kWth: capacity_lower_bound=0.6, capacity_upper_bound=1.8
+N_periods_Solartherm_300kWth: capacity_lower_bound=0.6
+N_periods_HeatPumpWater_Linde_50kW: capacity_lower_bound=0.6, capacity_upper_bound=1.97
+N_periods_HeatPumpWater_Linde_200kW: capacity_lower_bound=0.6, capacity_upper_bound=1.4
+N_periods_HeatPumpWater_Linde_400kW: capacity_lower_bound=0.6
+N_periods_HeatPumpWater_Marie_50kW: capacity_lower_bound=0.6, capacity_upper_bound=1.94
+N_periods_HeatPumpWater_Marie_200kW: capacity_lower_bound=0.6, capacity_upper_bound=1.46
+N_periods_HeatPumpWater_Marie_400kW: capacity_lower_bound=0.6
+N_periods_HeatPumpWater_Stamag_50kW: capacity_lower_bound=0.6, capacity_upper_bound=1.85
+N_periods_HeatPumpWater_Stamag_200kW: capacity_lower_bound=0.6, capacity_upper_bound=1.79
+N_periods_HeatPumpWater_Stamag_400kW: capacity_lower_bound=0.6
+N_periods_CoolingExchanger_Stamag_45kW: capacity_lower_bound=0.6, capacity_upper_bound=1.8
+N_periods_CoolingExchanger_Stamag_150kW: capacity_lower_bound=1.8, capacity_upper_bound=3.6
+N_periods_CoolingExchanger_Stamag_300kW: capacity_lower_bound=0.6
+N_periods_AirCondition_22kW: capacity_lower_bound=0.6, capacity_upper_bound=1.22
+N_periods_AirCondition_45kW: capacity_lower_bound=0.6, capacity_upper_bound=1.8
+N_periods_AirCondition_135kW: capacity_lower_bound=0.6
+N_Solartherm_8kWth_mt: capacity_lower_bound=0.6
+Canalicer_heating_N_w: capacity_upper_bound=1
+Canalicer_heating_N_mt: capacity_upper_bound=1
+Canalicer_hotwater_N_w: capacity_upper_bound=1
+Canalicer_hotwater_N_mt: capacity_upper_bound=1
+Canalicer_hotwater_N_s: capacity_upper_bound=1
+Canalicer_cooling_N_mt: capacity_upper_bound=1
+Canalicer_cooling_N_s: capacity_upper_bound=1
+
+material_to_operating_unit_flow_rates:
+CENTR_periods_HeatEx_EnerGraz78C_300kW: 146 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_EnerGraz_78C_300kW + 0.3342 Midterm_CENTR_HeatEx_EnerGraz_78C_300kW + 0.3369 Summer_CENTR_HeatEx_EnerGraz_78C_300kW
+CENTR_periods_HeatEx_EnerGraz78C_1MW: 102 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_EnerGraz_78C_1MW + 0.3342 Midterm_CENTR_HeatEx_EnerGraz_78C_1MW + 0.3369 Summer_CENTR_HeatEx_EnerGraz_78C_1MW
+CENTR_periods_HeatEx_EnerGraz78C_3MW: 29 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_EnerGraz_78C_3MW + 0.3342 Midterm_CENTR_HeatEx_EnerGraz_78C_3MW + 0.3369 Summer_CENTR_HeatEx_EnerGraz_78C_3MW
+CENTR_periods_GasfurnaceMarie_300kWth: 1777 Invest_costs_OperatUnits + 888 Operating_costs => 0.3287 Winter_CENTR_gasfurnace_300kWhth + 0.3342 Midterm_CENTR_gasfurnace_300kWhth + 0.3369 Summer_CENTR_gasfurnace_300kWhth
+CENTR_periods_GasfurnaceMarie_1MWth: 1239 Invest_costs_OperatUnits + 433.5 Operating_costs => 0.3369 Summer_CENTR_gasfurnace_1MWth + 0.3342 Midterm_CENTR_gasfurnace_1MWth + 0.3287 Winter_CENTR_gasfurnace_1MWth
+CENTR_periods_GasfurnaceMarie_3MWth: 891 Invest_costs_OperatUnits + 311.7 Operating_costs => 0.3369 Summer_CENTR_gasfurnace_3MWth + 0.3342 Midterm_CENTR_gasfurnace_3MWth + 0.3287 Winter_CENTR_gasfurnace_3MWth
+CENTR_periods_CHPmarie_300kWel: 22072 Invest_costs_OperatUnits + 26788 Operating_costs => 0.3287 Winter_CENTR_CHP_300kWel + 0.3342 Midterm_CENTR_CHP_300kWel + 0.3369 Summer_CENTR_CHP_300kWel
+CENTR_periods_CHPmarie_1MWel: 38589 Invest_costs_OperatUnits + 50222 Operating_costs => 0.3287 Winter_CENTR_CHP_1MWel + 0.3342 Midterm_CENTR_CHP_1MWel + 0.3369 Summer_CENTR_CHP_1MWel
+CENTR_periods_CHPmarie_3MWel: 21415 Invest_costs_OperatUnits + 29705 Operating_costs => 0.3287 Winter_CENTR_CHP_3MWel + 0.3342 Midterm_CENTR_CHP_3MWel + 0.3369 Summer_CENTR_CHP_3MWel
+CENTR_periods_HeatEx_Marie78C_300kW: 146 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Marie_78C_300kW + 0.3342 Midterm_CENTR_HeatEx_Marie_78C_300kW + 0.3369 Summer_CENTR_HeatEx_Marie_78C_300kW
+CENTR_periods_HeatEx_Marie78C_1MW: 102 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Marie_78C_1MW + 0.3342 Midterm_CENTR_HeatEx_Marie_78C_1MW + 0.3369 Summer_CENTR_HeatEx_Marie_78C_1MW
+CENTR_periods_HeatEx_Marie78C_3MW: 73 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Marie_78C_3MW + 0.3342 Midterm_CENTR_HeatEx_Marie_78C_3MW + 0.3369 Summer_CENTR_HeatEx_Marie_78C_3MW
+CENTR_periods_HeatEx_Marie30C_300kW: 146 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Marie_30C_300kW + 0.3342 Midterm_CENTR_HeatEx_Marie_30C_300kW + 0.3369 Summer_CENTR_HeatEx_Marie_30C_300kW
+CENTR_periods_HeatEx_Marie30C_1MW: 102 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Marie_30C_1MW + 0.3342 Midterm_CENTR_HeatEx_Marie_30C_1MW + 0.3369 Summer_CENTR_HeatEx_Marie_30C_1MW
+CENTR_periods_HeatEx_Marie30C_3MW: 73 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Marie_30C_3MW + 0.3342 Midterm_CENTR_HeatEx_Marie_30C_3MW + 0.3369 Summer_CENTR_HeatEx_Marie_30C_3MW
+CENTR_periods_HeatEx_Linde22C_300kW: 146 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Linde_22C_300kW + 0.3342 Midterm_CENTR_HeatEx_Linde_22C_300kW + 0.3369 Summer_CENTR_HeatEx_Linde_22C_300kW
+CENTR_periods_HeatEx_Linde22C_1MW: 102 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Linde_22C_1MW + 0.3342 Midterm_CENTR_HeatEx_Linde_22C_1MW + 0.3369 Summer_CENTR_HeatEx_Linde_22C_1MW
+CENTR_periods_HeatEx_Linde22C_3MW: 73 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Linde_22C_3MW + 0.3342 Midterm_CENTR_HeatEx_Linde_22C_3MW + 0.3369 Summer_CENTR_HeatEx_Linde_22C_3MW
+CENTR_periods_HeatEx_Stamag10C_300kW: 146 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Stamag_10C_300kW + 0.3342 Midterm_CENTR_HeatEx_Stamag_10C_300kW + 0.3369 Summer_CENTR_HeatEx_Stamag_10C_300kW
+CENTR_periods_HeatEx_Stamag10C_1MW: 102 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Stamag_10C_1MW + 0.3342 Midterm_CENTR_HeatEx_Stamag_10C_1MW + 0.3369 Summer_CENTR_HeatEx_Stamag_10C_1MW
+CENTR_periods_HeatEx_Stamag10C_3MW: 73 Invest_costs_OperatUnits => 0.3287 Winter_CENTR_HeatEx_Stamag_10C_3MW + 0.3342 Midterm_CENTR_HeatEx_Stamag_10C_3MW + 0.3369 Summer_CENTR_HeatEx_Stamag_10C_3MW
+CENTR_periods_HP_Marie30C__400kW: 5128 Invest_costs_OperatUnits + 1502 Operating_costs => 0.3287 Winter_CENTR_water_Marie_30C__400kW + 0.3342 Midterm_CENTR_water_Marie_30C__400kW + 0.3369 Summer_CENTR_water_Marie_30C__400kW
+CENTR_periods_HP_Linde22C__400kW: 5128 Invest_costs_OperatUnits + 1502 Operating_costs => 0.3287 Winter_CENTR_water_Linde_22_5C__400kW + 0.3342 Midterm_CENTR_water_Linde_22_5C__400kW + 0.3369 Summer_CENTR_water_Linde_22_5C__400kW
+CENTR_periods_HP_Linde22C__750kW: 8141 Invest_costs_OperatUnits + 1502 Operating_costs => 0.3287 Winter_CENTR_water_Linde_22_5C__750kW + 0.3342 Midterm_CENTR_water_Linde_22_5C__750kW + 0.3369 Summer_CENTR_water_Linde_22_5C__750kW
+CENTR_periods_HP_Stamag10C__400kW: 5128 Invest_costs_OperatUnits + 1502 Operating_costs => 0.3287 Winter_CENTR_water_Stamag_10C__400kW + 0.3342 Midterm_CENTR_water_Stamag_10C__400kW + 0.3369 Summer_CENTR_water_Stamag_10C__400kW
+CENTR_periods_HP_Stamag10C__750kW: 8141 Invest_costs_OperatUnits + 1502 Operating_costs => 0.3287 Winter_CENTR_water_Stamag_10C__750kW + 0.3342 Midterm_CENTR_water_Stamag_10C__750kW + 0.3369 Summer_CENTR_water_Stamag_10C__750kW
+CENTR_periods_HeatEnerGrazStorage78C: Invest_costs_OperatUnits + Operating_costs => 0.3287 Winter_HeatEnerStorage_78C + 0.3342 Midterm_HeatEneStorage_78C + 0.3369 Summer_HeatEnerStorage_78C
+CENTR_HeatEx_EnerGraz78C_300kW_w: Winter_CENTR_HeatEx_EnerGraz_78C_300kW + 2628 r_water_EnerGraz78C => 2628 ip_EnerGraz_water_78C_CENTR_w
+CENTR_HeatEx_EnerGraz78C_1MW_w: Winter_CENTR_HeatEx_EnerGraz_78C_1MW + 2628 r_water_EnerGraz78C => 2628 ip_EnerGraz_water_78C_CENTR_w
+CENTR_HeatEx_EnerGraz78C_3MW_w: Winter_CENTR_HeatEx_EnerGraz_78C_3MW + 2628 r_water_EnerGraz78C => 2628 ip_EnerGraz_water_78C_CENTR_w
+CENTR_HeatEx_EnerGraz78C_300kW_mt: 2628 r_water_EnerGraz78C + Midterm_CENTR_HeatEx_EnerGraz_78C_300kW => 2628 ip_EnerGraz_water_78C_CENTR_mt
+CENTR_HeatEx_EnerGraz78C_1MW_mt: 2628 r_water_EnerGraz78C + Midterm_CENTR_HeatEx_EnerGraz_78C_1MW => 2628 ip_EnerGraz_water_78C_CENTR_mt
+CENTR_HeatEx_EnerGraz78C_3MW_mt: 2628 r_water_EnerGraz78C + Midterm_CENTR_HeatEx_EnerGraz_78C_3MW => 2628 ip_EnerGraz_water_78C_CENTR_mt
+CENTR_HeatEx_EnerGraz78C_300kW_s: 2628 r_water_EnerGraz78C + Summer_CENTR_HeatEx_EnerGraz_78C_300kW => 2628 ip_EnerGraz_water_78C_CENTR_s
+CENTR_HeatEx_EnerGraz78C_1MW_s: 2628 r_water_EnerGraz78C + Summer_CENTR_HeatEx_EnerGraz_78C_1MW => 2628 ip_EnerGraz_water_78C_CENTR_s
+CENTR_HeatEx_EnerGraz78C_3MW_s: 2628 r_water_EnerGraz78C + Summer_CENTR_HeatEx_EnerGraz_78C_3MW => 2628 ip_EnerGraz_water_78C_CENTR_s
+CENTR_HeatEx_Marie78C_300kW_w: 2628 r_water_Marie78C_w + Winter_CENTR_HeatEx_Marie_78C_300kW => 2628 ip_Marie_water_78C_CENTR_w
+CENTR_HeatEx_Marie78C_1MW_w: Winter_CENTR_HeatEx_Marie_78C_1MW + 2628 r_water_Marie78C_w => 2628 ip_Marie_water_78C_CENTR_w
+CENTR_HeatEx_Marie78C_3MW_w: Winter_CENTR_HeatEx_Marie_78C_3MW + 2628 r_water_Marie78C_w => 2628 ip_Marie_water_78C_CENTR_w
+CENTR_HeatEx_Marie78C_300kW_mt: 2628 r_water_Marie78C_mt + Midterm_CENTR_HeatEx_Marie_78C_300kW => 2628 ip_Marie_water_78C_CENTR_mt
+CENTR_HeatEx_Marie78C_1MW_mt: 2628 r_water_Marie78C_mt + Midterm_CENTR_HeatEx_Marie_78C_1MW => 2628 ip_Marie_water_78C_CENTR_mt
+CENTR_HeatEx_Marie78C_3MW_mt: Midterm_CENTR_HeatEx_Marie_78C_3MW + 2628 r_water_Marie78C_mt => 2628 ip_Marie_water_78C_CENTR_mt
+CENTR_HeatEx_Marie78C_300kW_s: 2628 r_water_Marie78C_s + Summer_CENTR_HeatEx_Marie_78C_300kW => 2628 ip_Marie_water_78C_CENTR_s
+CENTR_HeatEx_Marie78C_1MW_s: 2628 r_water_Marie78C_s + Summer_CENTR_HeatEx_Marie_78C_1MW => 2628 ip_Marie_water_78C_CENTR_s
+CENTR_HeatEx_Marie78C_3MW_s: 2628 r_water_Marie78C_s + Summer_CENTR_HeatEx_Marie_78C_3MW => 2628 ip_Marie_water_78C_CENTR_s
+CENTR_HeatEx_Marie30C_300kW_w: 2628 r_water_Marie30C_w + Winter_CENTR_HeatEx_Marie_30C_300kW => 2628 ip_Marie_water_30C_CENTR_w
+CENTR_HeatEx_Marie30C_1MW_w: 2628 r_water_Marie30C_w + Winter_CENTR_HeatEx_Marie_30C_1MW => 2628 ip_Marie_water_30C_CENTR_w
+CENTR_HeatEx_Marie30C_3MW_w: 2628 r_water_Marie30C_w + Winter_CENTR_HeatEx_Marie_30C_3MW => 2628 ip_Marie_water_30C_CENTR_w
+CENTR_HeatEx_Marie30C_300kW_mt: 2628 r_water_Marie30C_mt + Midterm_CENTR_HeatEx_Marie_30C_300kW => 2628 ip_Marie_water_30C_CENTR_mt
+CENTR_HeatEx_Marie30C_1MW_mt: 2628 r_water_Marie30C_mt + Midterm_CENTR_HeatEx_Marie_30C_1MW => 2628 ip_Marie_water_30C_CENTR_mt
+CENTR_HeatEx_Marie30C_3MW_mt: 2628 r_water_Marie30C_mt + Midterm_CENTR_HeatEx_Marie_30C_3MW => 2628 ip_Marie_water_30C_CENTR_mt
+CENTR_HeatEx_Marie30C_300kW_s: 2628 r_water_Marie30C_s + Summer_CENTR_HeatEx_Marie_30C_300kW => 2628 ip_Marie_water_30C_CENTR_s
+CENTR_HeatEx_Marie30C_1MW_s: 2628 r_water_Marie30C_s + Summer_CENTR_HeatEx_Marie_30C_1MW => 2628 ip_Marie_water_30C_CENTR_s
+CENTR_HeatEx_Marie30C_3MW_s: 2628 r_water_Marie30C_s + Summer_CENTR_HeatEx_Marie_30C_3MW => 2628 ip_Marie_water_30C_CENTR_s
+CENTR_HeatEx_Linde22C_300kW_w: 2628 r_water_Linde22_5C_w + Winter_CENTR_HeatEx_Linde_22C_300kW => 2628 ip_Linde_water_22C_CENTR_w
+CENTR_HeatEx_Linde22C_1MW_w: 2628 r_water_Linde22_5C_w + Winter_CENTR_HeatEx_Linde_22C_1MW => 2628 ip_Linde_water_22C_CENTR_w
+CENTR_HeatEx_Linde22C_3MW_w: 2628 r_water_Linde22_5C_w + Winter_CENTR_HeatEx_Linde_22C_3MW => 2628 ip_Linde_water_22C_CENTR_w
+CENTR_HeatEx_Linde22C_300kW_mt: 2628 r_water_Linde22_5C_mt + Midterm_CENTR_HeatEx_Linde_22C_300kW => 2628 ip_Linde_water_22C_CENTR_mt
+CENTR_HeatEx_Linde22C_1MW_mt: 2628 r_water_Linde22_5C_mt + Midterm_CENTR_HeatEx_Linde_22C_1MW => 2628 ip_Linde_water_22C_CENTR_mt
+CENTR_HeatEx_Linde22C_3MW_mt: 2628 r_water_Linde22_5C_mt + Midterm_CENTR_HeatEx_Linde_22C_3MW => 2628 ip_Linde_water_22C_CENTR_mt
+CENTR_HeatEx_Linde22C_300kW_s: 2628 r_water_Linde22_5C_s + Summer_CENTR_HeatEx_Linde_22C_300kW => 2628 ip_Linde_water_22C_CENTR_s
+CENTR_HeatEx_Linde22C_1MW_s: 2628 r_water_Linde22_5C_s + Summer_CENTR_HeatEx_Linde_22C_1MW => 2628 ip_Linde_water_22C_CENTR_s
+CENTR_HeatEx_Linde22C_3MW_s: 2628 r_water_Linde22_5C_s + Summer_CENTR_HeatEx_Linde_22C_3MW => 2628 ip_Linde_water_22C_CENTR_s
+CENTR_HeatEx_Stamag10C_300kW_w: Winter_CENTR_HeatEx_Stamag_10C_300kW + 2628 r_water_Stamag10C_w => 2628 ip_Stamag_water_10C_CENTR_w
+CENTR_HeatEx_Stamag10C_1MW_w: Winter_CENTR_HeatEx_Stamag_10C_1MW + 2628 r_water_Stamag10C_w => 2628 ip_Stamag_water_10C_CENTR_w
+CENTR_HeatEx_Stamag10C_3MW_w: Winter_CENTR_HeatEx_Stamag_10C_3MW + 2628 r_water_Stamag10C_w => 2628 ip_Stamag_water_10C_CENTR_w
+CENTR_HeatEx_Stamag10C_300kW_mt: Midterm_CENTR_HeatEx_Stamag_10C_300kW + 2628 r_water_Stamag10C_mt => 2628 ip_Stamag_water_10C_CENTR_mt
+CENTR_HeatEx_Stamag10C_1MW_mt: Midterm_CENTR_HeatEx_Stamag_10C_1MW + 2628 r_water_Stamag10C_mt => 2628 ip_Stamag_water_10C_CENTR_mt
+CENTR_HeatEx_Stamag10C_3MW_mt: Midterm_CENTR_HeatEx_Stamag_10C_3MW + 2628 r_water_Stamag10C_mt => 2628 ip_Stamag_water_10C_CENTR_mt
+CENTR_HeatEx_Stamag10C_300kW_s: Summer_CENTR_HeatEx_Stamag_10C_300kW + 2628 r_water_Stamag10C_s => 2628 ip_Stamag_water_10C_CENTR_s
+CENTR_HeatEx_Stamag10C_1MW_s: Summer_CENTR_HeatEx_Stamag_10C_1MW + 2628 r_water_Stamag10C_s => 2628 ip_Stamag_water_10C_CENTR_s
+CENTR_HeatEx_Stamag10C_3MW_s: Summer_CENTR_HeatEx_Stamag_10C_3MW + 2628 r_water_Stamag10C_s => 2628 ip_Stamag_water_10C_CENTR_s
+CENTR_GasfurnaceMarie_300kWth_w: 4.7 r_electricity + 2608.7 r_gasfossil_OFF + Winter_CENTR_gasfurnace_300kWhth => 2400 ip_Marie_water_78C_CENTR_w
+CENTR_GasfurnaceMarie_1MWth_w: 4.7 r_electricity + 2608.7 r_gasfossil_OFF + Winter_CENTR_gasfurnace_1MWth => 2400 ip_Marie_water_78C_CENTR_w
+CENTR_GasfurnaceMarie_3MWth_w: 2608.7 r_gasfossil_OFF + 14.1 r_electricity + Winter_CENTR_gasfurnace_3MWth => 2400 ip_Marie_water_78C_CENTR_w
+CENTR_GasfurnaceMarie_300kWth_mt: 4.7 r_electricity + 2608.7 r_gasfossil_OFF + Midterm_CENTR_gasfurnace_300kWhth => 2400 ip_Marie_water_78C_CENTR_mt
+CENTR_GasfurnaceMarie_1MWth_mt: 4.7 r_electricity + 2608.7 r_gasfossil_OFF + Midterm_CENTR_gasfurnace_1MWth => 2400 ip_Marie_water_78C_CENTR_mt
+CENTR_GasfurnaceMarie_3MWth_mt: 4.7 r_electricity + 2608.7 r_gasfossil_OFF + Midterm_CENTR_gasfurnace_3MWth => 2400 ip_Marie_water_78C_CENTR_mt
+CENTR_GasfurnaceMarie_300kWth_s: 4.7 r_electricity + 2608.7 r_gasfossil_OFF + Summer_CENTR_gasfurnace_300kWhth => 2400 ip_Marie_water_78C_CENTR_s
+CENTR_GasfurnaceMarie_1MWth_s: 4.7 r_electricity + 2608.7 r_gasfossil_OFF + Summer_CENTR_gasfurnace_1MWth => 2400 ip_Marie_water_78C_CENTR_s
+CENTR_GasfurnaceMarie_3MWth_s: 4.7 r_electricity + 2608.7 r_gasfossil_OFF + Summer_CENTR_gasfurnace_3MWth => 2400 ip_Marie_water_78C_CENTR_s
+CENTR_CHPmarie_300kWel_w: 6316 r_gasfossil_OFF + Winter_CENTR_CHP_300kWel => 2653 ip_Marie_water_78C_CENTR_w + 2400 p_electricity_CHP_w
+CENTR_CHPmarie_1MWel_w: 19048 r_gasfossil_OFF + Winter_CENTR_CHP_1MWel => 8190 ip_Marie_water_78C_CENTR_w + 8000 p_electricity_CHP_w
+CENTR_CHPmarie_3MWel_w: 19048 r_gasfossil_OFF + Winter_CENTR_CHP_3MWel => 8190 ip_Marie_water_78C_CENTR_w + 8000 p_electricity_CHP_w
+CENTR_CHPmarie_300kWel_mt: 6316 r_gasfossil_OFF + Midterm_CENTR_CHP_300kWel => 2653 ip_Marie_water_78C_CENTR_mt + 2400 p_electricity_CHP_mt
+CENTR_CHPmarie_1MWel_mt: 19048 r_gasfossil_OFF + Midterm_CENTR_CHP_1MWel => 8190 ip_Marie_water_78C_CENTR_mt + 8000 p_electricity_CHP_mt
+CENTR_CHPmarie_3MWel_mt: 19048 r_gasfossil_OFF + Midterm_CENTR_CHP_3MWel => 8190 ip_Marie_water_78C_CENTR_mt + 8000 p_electricity_CHP_mt
+CENTR_CHPmarie_300kWel_s: 6316 r_gasfossil_OFF + Summer_CENTR_CHP_300kWel => 2653 ip_Marie_water_78C_CENTR_s + 2400 p_electricity_CHP_s
+CENTR_CHPmarie_1MWel_s: 19048 r_gasfossil_OFF + Summer_CENTR_CHP_1MWel => 8190 ip_Marie_water_78C_CENTR_s + 8000 p_electricity_CHP_s
+CENTR_CHPmarie_3MWel_s: 19048 r_gasfossil_OFF + Summer_CENTR_CHP_3MWel => 8190 ip_Marie_water_78C_CENTR_s + 8000 p_electricity_CHP_s
+CENTR_HP_Linde_22to78C__400kW_w: 1471.68 r_electricity + Winter_CENTR_water_Linde_22_5C__400kW + 2733.12 ip_Linde_water_22C_CENTR_w => 4204.8 ip_LindeLech_water78C_CENTR_w
+CENTR_HP_Linde_22to78C__750kW_w: 2601.72 r_electricity + Winter_CENTR_water_Linde_22_5C__750kW + 4993.2 ip_Linde_water_22C_CENTR_w => 7594.92 ip_LindeLech_water78C_CENTR_w
+CENTR_HP_Linde_22to78C__400kW_mt: 1471.68 r_electricity + Midterm_CENTR_water_Linde_22_5C__400kW + 2733.12 ip_Linde_water_22C_CENTR_mt => 798.912 ip_LindeLech_water78C_CENTR_mt + 2298.974 ip_Linde_coolingwater_CENTR_mt
+CENTR_HP_Linde_22to78C__750kW_mt: 2601.72 r_electricity + Midterm_CENTR_water_Linde_22_5C__750kW + 4993.2 ip_Linde_water_22C_CENTR_mt => 1443.035 ip_LindeLech_water78C_CENTR_mt + 4200.959 ip_Linde_coolingwater_CENTR_mt
+CENTR_HP_Linde_22to78C__400kW_s: 1471.68 r_electricity + Summer_CENTR_water_Linde_22_5C__400kW + 2733.12 ip_Linde_water_22C_CENTR_s => 798.912 ip_LindeLech_water78C_CENTR_s + 2298.974 ip_Linde_coolingwater_CENTR_s
+CENTR_HP_Linde_22to78C__750kW_s: 4993.2 ip_Linde_water_22C_CENTR_s + 2601.72 r_electricity + Summer_CENTR_water_Linde_22_5C__750kW => 1443.035 ip_LindeLech_water78C_CENTR_s + 4200.959 ip_Linde_coolingwater_CENTR_s
+CENTR_HP_Stamag_10to78C__400kW_w: 1382.328 r_electricity + Winter_CENTR_water_Stamag_10C__400kW + 2126.928 ip_Stamag_water_10C_CENTR_w => 3509.256 ip_Stamag_water_78C_CENTR_w
+CENTR_HP_Stamag_10to78C__750kW_w: 2441.85 r_electricity + Winter_CENTR_water_Stamag_10C__750kW + 3889.615 ip_Stamag_water_10C_CENTR_w => 6331.465 ip_Stamag_water_78C_CENTR_w
+CENTR_HP_Stamag_10to78C__400kW_mt: 1382.328 r_electricity + Midterm_CENTR_water_Stamag_10C__400kW + 2126.928 ip_Stamag_water_10C_CENTR_mt => 539.266 ip_Stamag_water_78C_CENTR_mt + 1723.521 ip_Stamag_coolingwater_CENTR_mt
+CENTR_HP_Stamag_10to78C__750kW_mt: 2441.85 r_electricity + Midterm_CENTR_water_Stamag_10C__750kW + 3889.615 ip_Stamag_water_10C_CENTR_mt => 1202.978 ip_Stamag_water_78C_CENTR_mt + 3150.588 ip_Stamag_coolingwater_CENTR_mt
+CENTR_HP_Stamag_10to78C__400kW_s: 1382.328 r_electricity + Summer_CENTR_water_Stamag_10C__400kW + 2126.928 ip_Stamag_water_10C_CENTR_s => 539.266 ip_Stamag_water_78C_CENTR_s + 1723.521 ip_Stamag_coolingwater_CENTR_s
+CENTR_HP_Stamag_10to78C__750kW_s: 2441.85 r_electricity + Summer_CENTR_water_Stamag_10C__750kW + 3889.615 ip_Stamag_water_10C_CENTR_s => 1202.978 ip_Stamag_water_78C_CENTR_s + 3150.588 ip_Stamag_coolingwater_CENTR_s
+CENTR_HP_Marie_30to78C__400kW_w: 1400 r_electricity + Winter_CENTR_water_Marie_30C__400kW + 5000 ip_Marie_water_30C_CENTR_w => 6000 ip_Marie_water_78C_CENTR_w
+CENTR_HP_Marie_30to78C__400kW_mt: 1400 r_electricity + Midterm_CENTR_water_Marie_30C__400kW + 5000 ip_Marie_water_30C_CENTR_mt => 6000 ip_Marie_water_78C_CENTR_mt
+CENTR_HP_Marie_30to78C__400kW_s: 1400 r_electricity + Summer_CENTR_water_Marie_30C__400kW + 5000 ip_Marie_water_30C_CENTR_s => 6000 ip_Marie_water_78C_CENTR_s
+CENTR_HeatEnerGrazStorage78C_w: 151025.199 r_water_EnerGrazStorage78C + Winter_HeatEnerStorage_78C => 151025.199 ip_LindeLech_water78C_CENTR_w
+CENTR_HeatEnerGrazStorage78C_mt: 151025.199 r_water_EnerGrazStorage78C + Midterm_HeatEneStorage_78C => 151025.199 ip_LindeLech_water78C_CENTR_mt
+CENTR_HeatEnerGrazStorage78C_s: 151025.199 r_water_EnerGrazStorage78C + Summer_HeatEnerStorage_78C => 151025.199 ip_LindeLech_water78C_CENTR_s
+Digging_HeatEnerGrazWest_to_KnotSouth: 376 InvCostsDiggingwithPipe1m + 376 dummy_digging_with_pipe_1m => digging_EnGrazWest_to_KnotSouth
+Digging_HeatEnerGrazWest_to_KnotNorthEast: 632 InvCostsDiggingwithPipe1m + 632 dummy_digging_with_pipe_1m => digging_EnGrazWest_to_KnotNorthEast
+Digging_HeatEnerGrazWest_to_KnotNorthWest: 419 InvCostsDiggingwithPipe1m + 419 dummy_digging_with_pipe_1m => digging_EnGrazWest_to_KnotNorthWest
+Digging_HeatMarie78C_to_KnotNorthEast: 235 InvCostsDiggingwithPipe1m + 235 dummy_digging_with_pipe_1m => digging_HeatMarie78C_to_KnotNorthEast
+Digging_HeatMarie30C_to_KnotNorthEast: 235 InvCostsDiggingwithPipe1m + 235 dummy_digging_with_pipe_1m => digging_HeatMarie30C_to_KnotNorthEast
+Digging_HeatLinde_to_KnotNorthEast: 318 InvCostsDiggingwithPipe1m + 318 dummy_digging_with_pipe_1m => digging_HeatLinde_to_KnotNorthEast
+Digging_HeatStamag_to_KnotNorthWest: 205 InvCostsDiggingwithPipe1m + 205 dummy_digging_with_pipe_1m => digging_HeatStamag_to_KnotNorthWest
+Digging_GasNorth_to_KnotNorthWest: 535 InvCostsDiggingwithPipe1m + 535 dummy_digging_with_pipe_1m => digging_Gas_to_KnotNorthWest
+Digging_GasNorth_to_KnotNorthEast: 516 InvCostsDiggingwithPipe1m + 516 dummy_digging_with_pipe_1m => digging_Gas_to_KnotNorthEast
+Digging_GasSouth_to_KnotSouth: 543 InvCostsDiggingwithPipe1m + 543 dummy_digging_with_pipe_1m => digging_Gas_to_KnotSouth
+Digging_KnotNorthWest_to_KnotNorthEast: 460 InvCostsDiggingwithPipe1m + 460 dummy_digging_with_pipe_1m => digging_KnotNorthWest_to_KnotNorthEast
+Digging_KnotNorthWest_to_KnotSouth: 780 InvCostsDiggingwithPipe1m + 780 dummy_digging_with_pipe_1m => digging_KnotNorthWest_to_KnotSouth
+Digging_KnotNorthEast_to_KnotSouth: 988 InvCostsDiggingwithPipe1m + 988 dummy_digging_with_pipe_1m => digging_KnotNorthEast_to_KnotSouth
+Pipe_HeatEnerGrazWest78C_to_KnotNorthEast_w: digging_EnGrazWest_to_KnotSouth + digging_KnotNorthEast_to_KnotSouth + 100000 ip_EnerGraz_water_78C_CENTR_w => 97000 ip_water65C_KnotNorthEast_w
+Pipe_HeatEnerGrazWest78C_to_KnotNorthEast_mt: digging_EnGrazWest_to_KnotSouth + digging_KnotNorthEast_to_KnotSouth + 100000 ip_EnerGraz_water_78C_CENTR_mt => 97000 ip_water65C_KnotNorthEast_mt
+Pipe_HeatEnerGrazWest78C_to_KnotNorthEast_s: digging_EnGrazWest_to_KnotSouth + digging_KnotNorthEast_to_KnotSouth + 100000 ip_EnerGraz_water_78C_CENTR_s => 97000 ip_water65C_KnotNorthEast_s
+Pipe_Marie78C_to_KnotNorthEast_w: digging_HeatMarie78C_to_KnotNorthEast + 6000 ip_Marie_water_78C_CENTR_w => 5820 ip_water65C_KnotNorthEast_w
+Pipe_Marie78C_to_KnotNorthEast_mt: digging_HeatMarie78C_to_KnotNorthEast + 6000 ip_Marie_water_78C_CENTR_mt => 5820 ip_water65C_KnotNorthEast_mt
+Pipe_Marie78C_to_KnotNorthEast_s: digging_HeatMarie78C_to_KnotNorthEast + 6000 ip_Marie_water_78C_CENTR_s => 5820 ip_water65C_KnotNorthEast_s
+Pipe_Marie30C_to_KnotNorthEast_w: digging_HeatMarie30C_to_KnotNorthEast + 33333.333 ip_Marie_water_30C_CENTR_w => 32333.333 ip_water30C_KnotNorthEast_w
+Pipe_Marie30C_to_KnotNothEast_mt: digging_HeatMarie30C_to_KnotNorthEast + 33333.333 ip_Marie_water_30C_CENTR_mt => 32333.333 ip_water30C_KnotNorthEast_mt
+Pipe_Marie30C_to_KnotNorthEast_s: digging_HeatMarie30C_to_KnotNorthEast + 33333.333 ip_Marie_water_30C_CENTR_s => 32333.333 ip_water30C_KnotNorthEast_s
+Pipe_Linde22_5C_to_KnotNorthEast_w: digging_HeatLinde_to_KnotNorthEast + 11008.4 ip_Linde_water_22C_CENTR_w => 10678.148 ip_water22_5C_KnotNorthEast_w
+Pipe_Linde22_5C_to_KnotNorthEast_mt: digging_HeatLinde_to_KnotNorthEast + 11008.4 ip_Linde_water_22C_CENTR_mt => 10678.148 ip_water22_5C_KnotNorthEast_mt
+Pipe_Linde22_5C_to_KnotNorthEast_s: digging_HeatLinde_to_KnotNorthEast + 11008.4 ip_Linde_water_22C_CENTR_s => 10678.148 ip_water22_5C_KnotNorthEast_s
+Pipe_Linde_cooling_to_KnotNorthEast_mt: digging_HeatLinde_to_KnotNorthEast + 11008.4 ip_Linde_coolingwater_CENTR_mt => 10678.148 ip_coolingwater_KnotNorthEast_mt
+Pipe_Linde_cooling_to_KnotNorthEast_s: digging_HeatLinde_to_KnotNorthEast + 11008.4 ip_Linde_coolingwater_CENTR_s => 10678.148 ip_coolingwater_KnotNorthEast_s
+Pipe_Stamag10C_to_KnotNorthEast_w: digging_HeatStamag_to_KnotNorthWest + digging_KnotNorthWest_to_KnotNorthEast + 2920 ip_Stamag_water_10C_CENTR_w => 2832.4 ip_water10C_KnotNorthEast_w
+Pipe_Stamag10C_to_KnotNorthEast_mt: digging_HeatStamag_to_KnotNorthWest + digging_KnotNorthWest_to_KnotNorthEast + 2920 ip_Stamag_water_10C_CENTR_mt => 2832.4 ip_water10C_KnotNorthEast_mt
+Pipe_Stamag10C_to_KnotNorthEast_s: digging_HeatStamag_to_KnotNorthWest + digging_KnotNorthWest_to_KnotNorthEast + 2920 ip_Stamag_water_10C_CENTR_s => 2832.4 ip_water10C_KnotNorthEast_s
+Pipe_Stamag_cooling_to_KnotNorthEast_mt: digging_HeatStamag_to_KnotNorthWest + digging_KnotNorthWest_to_KnotNorthEast + 2920 ip_Stamag_coolingwater_CENTR_mt => 2832.4 ip_coolingwater_KnotNorthEast_mt
+Pipe_Stamag_cooling_to_KnotNorthEast_s: digging_HeatStamag_to_KnotNorthWest + digging_KnotNorthWest_to_KnotNorthEast + 2920 ip_Stamag_coolingwater_CENTR_s => 2832.4 ip_coolingwater_KnotNorthEast_s
+Pipe_LindeLech78C_to_KnotNorthEast_w: digging_HeatLinde_to_KnotNorthEast + 11008.4 ip_LindeLech_water78C_CENTR_w => 10678.148 ip_water65C_KnotNorthEast_w
+Pipe_LindeLech78C_to_KnotNorthEast_mt: digging_HeatLinde_to_KnotNorthEast + 11008.4 ip_LindeLech_water78C_CENTR_mt => 10678.148 ip_water65C_KnotNorthEast_mt
+Pipe_LindeLech78C_to_KnotNorthEast_s: digging_HeatLinde_to_KnotNorthEast + 11008.4 ip_LindeLech_water78C_CENTR_s => 10678.148 ip_water65C_KnotNorthEast_s
+Pipe_Stamag78C_to_KnotNorthEast_w: digging_HeatStamag_to_KnotNorthWest + digging_KnotNorthWest_to_KnotNorthEast + 2920 ip_Stamag_water_78C_CENTR_w => 2832.4 ip_water65C_KnotNorthEast_w
+Pipe_Stamag78C_to_KnotNorthEast_mt: digging_HeatStamag_to_KnotNorthWest + digging_KnotNorthWest_to_KnotNorthEast + 2920 ip_Stamag_water_78C_CENTR_mt => 2832.4 ip_water65C_KnotNorthEast_mt
+Pipe_Stamag78C_to_KnotNorthEast_s: digging_HeatStamag_to_KnotNorthWest + digging_KnotNorthWest_to_KnotNorthEast + 2920 ip_Stamag_water_78C_CENTR_s => 2832.4 ip_water65C_KnotNorthEast_s
+Pipe_Gas_to_KnotNorthEast_w: digging_Gas_to_KnotNorthEast + 100000 r_gasfossil_OFF => 100000 ip_gas_KnotNorthEast_w
+Pipe_Gas_to_KnotNorthEast_mt: digging_Gas_to_KnotNorthEast + 100000 r_gasfossil_OFF => 100000 ip_gas_KnotNorthEast_mt
+Pipe_Gas_to_KnotNorthEast_s: digging_Gas_to_KnotNorthEast + 100000 r_gasfossil_OFF => 100000 ip_gas_KnotNorthEast_s
+water65CKnotNorthEast_to_N_w: ip_water65C_KnotNorthEast_w => ip_heat65C_N_w
+water65CKnotNorthEast_to_N_mt: ip_water65C_KnotNorthEast_mt => ip_heat65C_N_mt
+water65CKnotNorthEast_to_N_s: ip_water65C_KnotNorthEast_s => ip_heat65C_N_s
+coolingwater_KnotNorthEast_to_N_mt: ip_coolingwater_KnotNorthEast_mt => p_cool_N_mt
+coolingwater_KnotNorthEast_to_N_s: ip_coolingwater_KnotNorthEast_s => p_cool_N_s
+CENTR_electr_raw_to_P_electr_raw_w: r_electricity => p_electricity_raw_w
+CENTR_electr_raw_to_p_electr_raw_mt: r_electricity => p_electricity_raw_mt
+CENTR_electr_raw_to_p_electr_raw_s: r_electricity => p_electricity_raw_s
+N_periods_gasfurnace_45kWth: 1777 Invest_costs_OperatUnits + 888 Operating_costs => 0.3287 Winter_N_gasfurnace_45kWth + 0.3342 Midterm_N_gasfurnace_45kWth + 0.3369 Summer_N_gasfurnace_45kWth
+N_periods_gasfurnace_150kWth: 1239 Invest_costs_OperatUnits + 433.5 Operating_costs => 0.3287 Winter_N_gasfurnace_150kWth + 0.3342 Midterm_N_gasfurnace_150kWth + 0.3369 Summer_N_gasfurnace_150kWth
+N_periods_gasfurnace_300kWth: 1777 Invest_costs_OperatUnits + 888 Operating_costs => 0.3287 Winter_N_gasfurnace_300kWth + 0.3342 Midterm_N_gasfurnace_300kWth + 0.3369 Summer_N_gasfurnace_300kWth
+N_periods_CHP_45kWel: 9153 Invest_costs_OperatUnits + 9951 Operating_costs => 0.3287 Winter_N_CHP_45kWel + 0.3342 Midterm_N_CHP_45kWel + 0.3369 Summer_N_CHP_45kWel
+N_periods_CHP_150kWel: 16002 Invest_costs_OperatUnits + 18656 Operating_costs => 0.3287 Winter_N_CHP_150kWel + 0.3342 Midterm_N_CHP_150kWel + 0.3369 Summer_N_CHP_150kWel
+N_periods_CHP_300kWel: 22072 Invest_costs_OperatUnits + 26788 Operating_costs => 0.3287 Winter_N_CHP_300kWel + 0.3342 Midterm_N_CHP_300kWel + 0.3369 Summer_N_CHP_300kWel
+N_periods_PVroof_8kWel: 640 Invest_costs_OperatUnits + 480 Operating_costs => 0.3287 Winter_N_PVroof_8kWel + 0.3342 Midterm_N_PVroof_8kWel + 0.3369 Summer_N_PVroof_8kWel
+N_periods_PVroof_100kWel: 7600 Invest_costs_OperatUnits + 4750 Operating_costs => 0.3287 Winter_N_PVroof_100kWel + 0.3342 Midterm_N_PVroof_100kWel + 0.3369 Summer_N_PVroof_100kWel
+N_periods_PVroof_300kWel: 22200 Invest_costs_OperatUnits + 11100 Operating_costs => 0.3287 Winter_N_PVroof_300kWel + 0.3342 Midterm_N_PVroof_300kWel + 0.3369 Summer_N_PVroof_300kWel
+N_periods_Solartherm_8kWth: 571 Invest_costs_OperatUnits + 286 Operating_costs => 0.3287 Winter_N_Solartherm_8kWth + 0.3342 Midterm_N_Solartherm_8kWth + 0.3369 Summer_N_Solartherm_8kWth
+N_periods_Solartherm_100kWth: 4286 Invest_costs_OperatUnits + 1607 Operating_costs => 0.3287 Winter_N_Solartherm_100kWth + 0.3342 Midterm_N_Solartherm_100kWth + 0.3369 Summer_N_Solartherm_100kWth
+N_periods_Solartherm_300kWth: 6429 Invest_costs_OperatUnits + 1607 Operating_costs => 0.3287 Winter_N_Solartherm_300kWth + 0.3342 Midterm_N_Solartherm_300kWth + 0.3369 Summer_N_Solartherm_300kWth
+N_periods_HeatPumpWater_Linde_50kW: 1201 Invest_costs_OperatUnits + 750 Operating_costs => 0.3287 Winter_N_water_Linde_22C__50kW + 0.3342 Midterm_N_water_Linde_22C__50kW + 0.3369 Summer_N_water_Linde_22C__50kW
+N_periods_HeatPumpWater_Linde_200kW: 1459 Invest_costs_OperatUnits + 1502 Operating_costs => 0.3287 Winter_N_water_Linde_22C__200kW + 0.3342 Midterm_N_water_Linde_22C__200kW + 0.3369 Summer_N_water_Linde_22C__200kW
+N_periods_HeatPumpWater_Linde_400kW: 2979 Invest_costs_OperatUnits + 1502 Operating_costs => 0.3287 Winter_N_water_Linde_22C__400kW + 0.3342 Midterm_N_water_Linde_22C__400kW + 0.3369 Summer_N_water_Linde_22C__400kW
+N_periods_HeatPumpWater_Marie_50kW: 1201 Invest_costs_OperatUnits + 750 Operating_costs => 0.3287 Winter_N_water_Marie_30C__50kW + 0.3342 Midterm_N_water_Marie_30C__50kW + 0.3369 Summer_N_water_Marie_30C__50kW
+N_periods_HeatPumpWater_Marie_200kW: 1459 Invest_costs_OperatUnits + 1502 Operating_costs => 0.3287 Winter_N_water_Marie_30C__200kW + 0.3342 Midterm_N_water_Marie_30C__200kW + 0.3369 Summer_N_water_Marie_30C__200kW
+N_periods_HeatPumpWater_Marie_400kW: 2979 Invest_costs_OperatUnits + 1502 Operating_costs => 0.3287 Winter_N_water_Marie_30C__400kW + 0.3342 Midterm_N_water_Marie_30C__400kW + 0.3369 Summer_N_water_Marie_30C__400kW
+N_periods_HeatPumpWater_Stamag_50kW: 1201 Invest_costs_OperatUnits + 750 Operating_costs => 0.3287 Winter_N_water_Stamag_10C__50kW + 0.3342 Midterm_N_water_Stamag_10C__50kW + 0.3369 Summer_N_water_Stamag_10C__50kW
+N_periods_HeatPumpWater_Stamag_200kW: 1459 Invest_costs_OperatUnits + 1502 Operating_costs => 0.3287 Winter_N_water_Stamag_10C__200kW + 0.3342 Midterm_N_water_Stamag_10C__200kW + 0.3369 Summer_N_water_Stamag_10C__200kW
+N_periods_HeatPumpWater_Stamag_400kW: 2979 Invest_costs_OperatUnits + 1502 Operating_costs => 0.3287 Winter_N_water_Stamag_10C__400kW + 0.3342 Midterm_N_water_Stamag_10C_400kW + 0.3369 Summer_N_water_Stamag_10C__400kW
+N_periods_CoolingExchanger_Stamag_45kW: 23 Invest_costs_OperatUnits => 0.3287 Winter_N_COOLING_Stamag_10C__150kW + 0.3342 Midterm_N_COOLING_Stamag_10C__150kW + 0.3369 Summer_N_COOLING_Stamag_10C__150kW
+N_periods_CoolingExchanger_Stamag_150kW: 16 Invest_costs_OperatUnits => 0.3287 Winter_N_COOLING_Stamag_10C__45kW + 0.3342 Midterm_N_COOLING_Stamag_10C__45kW + 0.3369 Summer_N_COOLING_Stamag_10C__45kW
+N_periods_CoolingExchanger_Stamag_300kW: 146 Invest_costs_OperatUnits => 0.3287 Winter_N_COOLING_Stamag_10C__300kW + 0.3342 Midterm_N_COOLING_Stamag_10C__300kW + 0.3369 Summer_N_COOLING_Stamag_10C__300kW
+N_periods_AirCondition_22kW: 3010 Invest_costs_OperatUnits => 0.3342 Midterm_N_AC_22kW + 0.3287 Winter_N_AC_22kW + 0.3369 Summer_N_AC_22kW
+N_periods_AirCondition_45kW: 4295 Invest_costs_OperatUnits => 0.3287 Winter_N_AC_45kW + 0.3342 Midterm_N_AC_45kW + 0.3369 Summer_N_AC_45kW
+N_periods_AirCondition_135kW: 8652 Invest_costs_OperatUnits => 0.3287 Winter_N_AC_135kW + 0.3342 MIdterm_N_AC_135kW + 0.3369 Summer_N_AC_135kW
+N_Gasfurnace_45kWth_w: 4.7 r_electricity + Winter_N_gasfurnace_45kWth + 391.3 ip_gas_KnotNorthEast_w => 360 ip_heat65C_N_w
+N_Gasfurnace_150kWth_w: 4.7 r_electricity + Winter_N_gasfurnace_150kWth + 391.3 ip_gas_KnotNorthEast_w => 360 ip_heat65C_N_w
+N_Gasfurnace_300kWth_w: 4.7 r_electricity + Winter_N_gasfurnace_300kWth + 2608.7 ip_gas_KnotNorthEast_w => 2400 ip_heat65C_N_w
+N_Gasfurnace_45kWth_mt: 4.7 r_electricity + Midterm_N_gasfurnace_45kWth + 391.3 ip_gas_KnotNorthEast_mt => 360 ip_heat65C_N_mt
+N_Gasfurnace_150kWth_mt: 4.7 r_electricity + Midterm_N_gasfurnace_150kWth + 391.3 ip_gas_KnotNorthEast_mt => 360 ip_heat65C_N_mt
+N_Gasfurnace_300kWth_mt: 4.7 r_electricity + Midterm_N_gasfurnace_300kWth + 2608.7 ip_gas_KnotNorthEast_mt => 2400 ip_heat65C_N_mt
+N_Gasfurnace_45kWth_s: 4.7 r_electricity + Summer_N_gasfurnace_45kWth + 391.3 ip_gas_KnotNorthEast_s => 360 ip_heat65C_N_s
+N_Gasfurnace_150kWth_s: 4.7 r_electricity + Summer_N_gasfurnace_150kWth + 391.3 ip_gas_KnotNorthEast_s => 360 ip_heat65C_N_s
+N_Gasfurnace_300kWth_s: 4.7 r_electricity + Summer_N_gasfurnace_300kWth + 2608.7 ip_gas_KnotNorthEast_s => 2400 ip_heat65C_N_s
+N_CHP_45kWel_w: Winter_N_CHP_45kWel + 1000 ip_gas_KnotNorthEast_w => 420 ip_heat65C_N_w + 360 p_electricity_CHP_w
+N_CHP_150kWel_w: Winter_N_CHP_150kWel + 3333 ip_gas_KnotNorthEast_w => 1400 ip_heat65C_N_w + 1200 p_electricity_CHP_w
+N_CHP_300kWel_w: Winter_N_CHP_300kWel + 6316 ip_gas_KnotNorthEast_w => 2653 ip_heat65C_N_w + 2400 p_electricity_CHP_w
+N_CHP_45kWel_mt: Midterm_N_CHP_45kWel + 1000 ip_gas_KnotNorthEast_mt => 420 ip_heat65C_N_mt + 360 p_electricity_CHP_mt
+N_CHP_150kWel_mt: Midterm_N_CHP_150kWel + 3333 ip_gas_KnotNorthEast_mt => 1400 ip_heat65C_N_mt + 1200 p_electricity_CHP_mt
+N_CHP_300kWel_mt: Midterm_N_CHP_300kWel + 6316 ip_gas_KnotNorthEast_mt => 2653 ip_heat65C_N_mt + 2400 p_electricity_CHP_mt
+N_CHP_45kWel_s: Summer_N_CHP_45kWel + 1000 ip_gas_KnotNorthEast_s => 420 ip_heat65C_N_s + 360 p_electricity_CHP_s
+N_CHP_150kWel_s: Summer_N_CHP_150kWel + 3333 ip_gas_KnotNorthEast_s => 1400 ip_heat65C_N_s + 1200 p_electricity_CHP_s
+N_CHP_300kWel_s: Summer_N_CHP_300kWel + 6316 ip_gas_KnotNorthEast_s => 2653 ip_heat65C_N_s + 2400 p_electricity_CHP_s
+N_PVroof_8kWel_w: 7.6 r_solar_PV_N_w + Winter_N_PVroof_8kWel => 7.6 p_electricity_PV_w
+N_PVroof_100kWel_w: 95 r_solar_PV_N_w + Winter_N_PVroof_100kWel => 95 p_electricity_PV_w
+N_PVroof_300kWel_w: Winter_N_PVroof_300kWel + 285 r_solar_PV_N_w => 285 p_electricity_PV_w
+N_PVroof_8kWel_mt: 7.6 r_solar_PV_N_mt + Midterm_N_PVroof_8kWel => 7.6 p_electricity_PV_mt
+N_PVroof_100kWel_mt: 95 r_solar_PV_N_mt + Midterm_N_PVroof_100kWel => 95 p_electricity_PV_mt
+N_PVroof_300kWel_mt: Midterm_N_PVroof_300kWel + 285 r_solar_PV_N_mt => 285 p_electricity_PV_mt
+N_PVroof_8kWel_s: 7.6 r_solar_PV_N_s + Summer_N_PVroof_8kWel => 7.6 p_electricity_PV_s
+N_PVroof_100kWel_s: 95 r_solar_PV_N_s + Summer_N_PVroof_100kWel => 95 p_electricity_PV_s
+N_PVroof_300kWel_s: Summer_N_PVroof_300kWel + 285 r_solar_PV_N_s => 285 demand_electricity_s
+N_Solartherm_8kWth_w: 5.857 r_solar_Solarthermie_N_w + Winter_N_Solartherm_8kWth => 5.857 p_hotwater65C_N_w
+N_Solartherm_100kWth_w: 73.214 r_solar_Solarthermie_N_w + Winter_N_Solartherm_100kWth => 73.214 p_hotwater65C_N_w
+N_Solartherm_300kWth_w: Winter_N_Solartherm_300kWth + 219.642 r_solar_Solarthermie_N_w => 219.642 p_hotwater65C_N_w
+N_Solartherm_8kWth_mt: 5.857 r_solar_Solarthermie_N_mt + Midterm_N_Solartherm_8kWth => 5.857 p_hotwater65C_N_mt
+N_Solartherm_100kWth_mt: 73.214 r_solar_Solarthermie_N_mt + Midterm_N_Solartherm_100kWth => 73.214 p_hotwater65C_N_mt
+N_Solartherm_300kWth_mt: Midterm_N_Solartherm_300kWth + 219.642 r_solar_Solarthermie_N_mt => 219.642 p_hotwater65C_N_mt
+N_Solartherm_8kWth_s: 5.857 r_solar_Solarthermie_N_s + Summer_N_Solartherm_8kWth => 5.857 p_hotwater65C_N_s
+N_Solartherm_100kWth_s: 73.214 r_solar_Solarthermie_N_s + Summer_N_Solartherm_100kWth => 73.214 p_hotwater65C_N_s
+N_Solartherm_300kWth_s: Summer_N_Solartherm_300kWth + 219.642 r_solar_Solarthermie_N_s => 219.642 p_hotwater65C_N_s
+N_HeatPumpWater_Marie_30to65C__50kW_w: 165.564 r_electricity + 658.752 ip_water30C_KnotNorthEast_w + Winter_N_water_Marie_30C__50kW => 824.316 ip_heat65C_N_w
+N_HeatPumpWater_Marie_30to65C__200kW_w: 665.76 r_electricity + 2004.288 ip_water30C_KnotNorthEast_w + Winter_N_water_Marie_30C__200kW => 2670.048 ip_heat65C_N_w
+N_HeatPumpWater_Marie_30to65C__400kW_w: 1372.692 r_electricity + 5162.268 ip_water30C_KnotNorthEast_w + Winter_N_water_Marie_30C__400kW => 6534.96 ip_heat65C_N_w
+N_HeatPumpWater_Marie_30to65C__50kW_mt: 165.564 r_electricity + 658.752 ip_water30C_KnotNorthEast_mt + Midterm_N_water_Marie_30C__50kW => 824.316 ip_heat65C_N_mt + p_cool_N_mt
+N_HeatPumpWater_Marie_30to65C__200kW_mt: 665.76 r_electricity + 2004.288 ip_water30C_KnotNorthEast_mt + Midterm_N_water_Marie_30C__200kW => 507.309 ip_heat65C_N_mt + 1513.917 p_cool_N_mt
+N_HeatPumpWater_Marie_30to65C__400kW_mt: 1372.692 r_electricity + 5162.268 ip_water30C_KnotNorthEast_mt + Midterm_N_water_Marie_30C__400kW => 6534.96 ip_heat65C_N_mt + p_cool_N_mt
+N_HeatPumpWater_Marie_30to65C__50kW_s: 165.564 r_electricity + 658.752 ip_water30C_KnotNorthEast_s + Summer_N_water_Marie_30C__50kW => 824.316 ip_heat65C_N_s + p_cool_N_s
+N_HeatPumpWater_Marie_30to65C__200kW_s: 665.76 r_electricity + 2004.288 ip_water30C_KnotNorthEast_s + Summer_N_water_Marie_30C__200kW => 507.309 ip_heat65C_N_s + 1513.917 p_cool_N_s
+N_HeatPumpWater_Marie_30to65C__400kW_s: 1372.692 r_electricity + 5162.268 ip_water30C_KnotNorthEast_s + Summer_N_water_Marie_30C__400kW => 6534.96 ip_heat65C_N_s + p_cool_N_s
+N_HeatPumpWater_Linde_20to65C__50kW_w: 162.06 r_electricity + 501.072 ip_water22_5C_KnotNorthEast_w + Winter_N_water_Linde_22C__50kW => 663.132 ip_heat65C_N_w
+N_HeatPumpWater_Linde_20to65C__200kW_w: 621.96 r_electricity + 1568.04 ip_water22_5C_KnotNorthEast_w + Winter_N_water_Linde_22C__200kW => 2190 ip_heat65C_N_w
+N_HeatPumpWater_Linde_20to65C__400kW_w: 1305.24 r_electricity + 3880.68 ip_water22_5C_KnotNorthEast_w + Winter_N_water_Linde_22C__400kW => 5185.92 ip_heat65C_N_w
+N_HeatPumpWater_Linde_20to65C__50kW_mt: 162.06 r_electricity + 501.072 ip_water22_5C_KnotNorthEast_mt + Midterm_N_water_Linde_22C__50kW => 125.995 ip_heat65C_N_mt + 392.11 p_cool_N_mt
+N_HeatPumpWater_Linde_20to65C__200kW_mt: 621.96 r_electricity + 1568.04 ip_water22_5C_KnotNorthEast_mt + Midterm_N_water_Linde_22C__200kW => 416.1 ip_heat65C_N_mt + 1270.112 p_cool_N_mt
+N_HeatPumpWater_Linde_20to65C__400kW_mt: 1305.24 r_electricity + 3880.68 ip_water22_5C_KnotNorthEast_mt + Midterm_N_water_Linde_22C__400kW => 985.325 ip_heat65C_N_mt + 3143.351 p_cool_N_mt
+N_HeatPumpWater_Linde_20to65C__50kW_s: 162.06 r_electricity + 501.072 ip_water22_5C_KnotNorthEast_s + Summer_N_water_Linde_22C__50kW => 125.995 ip_heat65C_N_s + 392.11 p_cool_N_s
+N_HeatPumpWater_Linde_20to65C__200kW_s: 621.96 r_electricity + 1568.04 ip_water22_5C_KnotNorthEast_s + Summer_N_water_Linde_22C__200kW => 416.1 ip_heat65C_N_s + 1270.112 p_cool_N_s
+N_HeatPumpWater_Linde_20to65C__400kW_s: 1305.24 r_electricity + 3880.68 ip_water22_5C_KnotNorthEast_s + Summer_N_water_Linde_22C__400kW => 985.325 ip_heat65C_N_s + 3143.351 p_cool_N_s
+N_HeatPumpWater_Stamag_10to65C__50kW_w: 158.556 r_electricity + 393.324 ip_water10C_KnotNorthEast_w + Winter_N_water_Stamag_10C__50kW => 551.88 ip_heat65C_N_w
+N_HeatPumpWater_Stamag_10to65C__200kW_w: 589.548 r_electricity + 1120.404 ip_water10C_KnotNorthEast_w + Winter_N_water_Stamag_10C__200kW => 1709.952 ip_heat65C_N_w
+N_HeatPumpWater_Stamag_10to65C__400kW_w: 1237.788 r_electricity + 2599.092 ip_water10C_KnotNorthEast_w + Winter_N_water_Stamag_10C__400kW => 3836.88 ip_heat65C_N_w
+N_HeatPumpWater_Stamag_10to65C__50kW_mt: 158.556 r_electricity + 343.392 ip_water10C_KnotNorthEast_mt + Midterm_N_water_Stamag_10C__50kW => 104.857 ip_heat65C_N_mt + 371.1 p_cool_N_mt
+N_HeatPumpWater_Stamag_10to65C__200kW_mt: 589.548 r_electricity + 1120.404 ip_water10C_KnotNorthEast_mt + Midterm_N_water_Stamag_10C__200kW => 324.891 ip_heat65C_N_mt + 907.527 p_cool_N_mt
+N_HeatPumpWater_Stamag_10to65C__400kW_mt: 1237.788 r_electricity + 2599.092 ip_water10C_KnotNorthEast_mt + Midterm_N_water_Stamag_10C_400kW => 729.007 ip_heat65C_N_mt + 2105.265 p_cool_N_mt
+N_HeatPumpWater_Stamag_10to65C__50kW_s: 158.556 r_electricity + 343.392 ip_water10C_KnotNorthEast_s + Summer_N_water_Stamag_10C__50kW => 104.857 ip_heat65C_N_s + 371.1 p_cool_N_s
+N_HeatPumpWater_Stamag_10to65C__200kW_s: 589.548 r_electricity + 1120.404 ip_water10C_KnotNorthEast_s + Summer_N_water_Stamag_10C__200kW => 324.891 ip_heat65C_N_s + 907.527 p_cool_N_s
+N_HeatPumpWater_Stamag_10to65C__400kW_s: 1237.788 r_electricity + 2599.092 ip_water10C_KnotNorthEast_s + Summer_N_water_Stamag_10C__400kW => 729.007 ip_heat65C_N_s + 2105.265 p_cool_N_s
+N_Cooling_Stamag_10C__45kW_w: 394.2 ip_water10C_KnotNorthEast_w + Winter_N_COOLING_Stamag_10C__45kW => 394.2 p_cool_N_w
+N_Cooling_Stamag_10C__150kW_w: 394.2 ip_water10C_KnotNorthEast_w + Winter_N_COOLING_Stamag_10C__150kW => 394.2 p_cool_N_w
+N_Cooling_Stamag_10C__300kW_w: 2628 ip_water10C_KnotNorthEast_w + Winter_N_COOLING_Stamag_10C__300kW => 2628 p_cool_N_w
+N_Cooling_Stamag_10C__45kW_mt: 394.2 ip_water10C_KnotNorthEast_mt + Midterm_N_COOLING_Stamag_10C__45kW => 394.2 p_cool_N_mt
+N_Cooling_Stamag_10C__150kW_mt: 394.2 ip_water10C_KnotNorthEast_mt + Midterm_N_COOLING_Stamag_10C__150kW => 394.2 p_cool_N_mt
+N_Cooling_Stamag_10C__300kW_mt: 2628 ip_water10C_KnotNorthEast_mt + Midterm_N_COOLING_Stamag_10C__300kW => 2628 p_cool_N_mt
+N_Cooling_Stamag_10C__45kW_s: 394.2 ip_water10C_KnotNorthEast_s + Summer_N_COOLING_Stamag_10C__45kW => 394.2 p_cool_N_s
+N_Cooling_Stamag_10C__150kW_s: 394.2 ip_water10C_KnotNorthEast_s + Summer_N_COOLING_Stamag_10C__150kW => 394.2 p_cool_N_s
+N_Cooling_Stamag_10C__300kW_s: 2628 ip_water10C_KnotNorthEast_s + Summer_N_COOLING_Stamag_10C__300kW => 2628 p_cool_N_s
+N_Heating_to_N_w: ip_heat65C_N_w => p_heating65C_N_w
+N_Hotwater_to_N_w: ip_heat65C_N_w => p_hotwater65C_N_w
+N_Heating_to_N_mt: ip_heat65C_N_mt => p_heating65C_N_mt
+N_Hotwater_to_N_mt: ip_heat65C_N_mt => p_hotwater65C_N_mt
+N_Hotwater_to_N_s: ip_heat65C_N_s => p_hotwater65C_N_s
+N_AirCondition_22kW_w: 121.484 r_electricity + Winter_N_AC_22kW => 196.224 p_cool_N_w
+N_AirCondition_22kW_mt: 121.484 r_electricity + Midterm_N_AC_22kW => 196.224 p_cool_N_mt
+N_AirCondition_22kW_s: 121.484 r_electricity + Summer_N_AC_22kW => 196.224 p_cool_N_s
+N_AirCondition_45kW_w: 122.955 r_electricity + Winter_N_AC_45kW => 394.2 p_cool_N_w
+N_AirCondition_45kW_mt: 122.955 r_electricity + Midterm_N_AC_45kW => 394.2 p_cool_N_mt
+N_AirCondition_45kW_s: 122.955 r_electricity + Summer_N_AC_45kW => 394.2 p_cool_N_s
+N_AirCondition_135kW_w: 265.082 r_electricity + Winter_N_AC_135kW => 1182.6 p_cool_N_w
+N_AirCondition_135kW_mt: 265.082 r_electricity + MIdterm_N_AC_135kW => 1182.6 p_cool_N_mt
+N_AirCondition_135kW_s: 265.082 r_electricity + Summer_N_AC_135kW => 1182.6 p_cool_N_s
+Canalicer_PV_electr_w: p_electricity_PV_w => demand_electricity_w
+Canalicer_PV_electr_mt: p_electricity_PV_mt => demand_electricity_mt
+Canalicer_PV_electr_s: p_electricity_PV_s => demand_electricity_s
+Canalicer_electr_raw_w: p_electricity_raw_w => demand_electricity_w
+Canalicer_electr_raw_mt: p_electricity_raw_mt => demand_electricity_mt
+Canalicer_electr_raw_s: p_electricity_raw_s => demand_electricity_s
+Canalicer_CHP_electr_w: p_electricity_CHP_w => demand_electricity_w
+Canalicer_CHP_electr_mt: p_electricity_CHP_mt => demand_electricity_mt
+Canalicer_CHP_electr_s: p_electricity_CHP_s => demand_electricity_s
+Canalicer_heating_N_w: 796.55 p_heating65C_N_w => 796.55 Price_heating_w
+Canalicer_heating_N_mt: 16.48 p_heating65C_N_mt => 16.48 Price_heating_mt
+Canalicer_hotwater_N_w: 271.01 p_hotwater65C_N_w => 271.01 Price_hotwater_w
+Canalicer_hotwater_N_mt: 271.01 p_hotwater65C_N_mt => 271.01 Price_hotwater_mt
+Canalicer_hotwater_N_s: 271.01 p_hotwater65C_N_s => 271.01 Price_hotwater_s
+Canalicer_cooling_N_mt: 100.484 p_cool_N_mt => 100.484 Price_cool_mt
+Canalicer_cooling_N_s: 444.246 p_cool_N_s => 444.246 Price_cool_s
+

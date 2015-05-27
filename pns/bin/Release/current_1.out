@@ -1,0 +1,382 @@
+Current best structure:
+Materials:
+Operating_costs (23231.4 Euro/yr): -23231.4 t/yr
+Invest_costs_OperatUnits (31354.8 Euro/yr): -31354.8 t/yr
+InvCostsDigging_1m (7988 Euro/yr): -1997 t/yr
+InvCostsPipe_1m (10132 Euro/yr): -2533 t/yr
+dummy_digging_with_pipe_1m (0 Euro/yr): -1997 t/yr
+r_electricity (59944.2 Euro/yr): -530.479 t/yr
+r_gasfossil (113879 Euro/yr): -2324.07 t/yr
+r_water_Linde22C_w (19661.8 Euro/yr): -786.471 t/yr
+r_water_Stamag20C_w (5070 Euro/yr): -338 t/yr
+r_water_Stamag20C_mt (5070 Euro/yr): -338 t/yr
+r_water_Stamag10C_mt (2125.81 Euro/yr): -59.0503 t/yr
+r_water_Stamag10C_s (31312.3 Euro/yr): -869.786 t/yr
+r_solar_PV_w_A (0 Euro/yr): -26 t/yr
+r_solar_PV_mt_A (0 Euro/yr): -26.4333 t/yr
+r_solar_PV_s_A (0 Euro/yr): -26.65 t/yr
+r_solar_PV_w_E (0 Euro/yr): -20 t/yr
+r_solar_PV_mt_E (0 Euro/yr): -20.3333 t/yr
+r_solar_PV_s_E (0 Euro/yr): -20.5 t/yr
+Price_heating_w (-100230 Euro/yr): 1542 t/yr
+Price_heating_mt (-7345 Euro/yr): 113 t/yr
+Price_hotwater_w (-21710 Euro/yr): 334 t/yr
+Price_hotwater_mt (-21515 Euro/yr): 331 t/yr
+Price_hotwater_s (-21905 Euro/yr): 337 t/yr
+Price_cool_mt (-11935 Euro/yr): 341 t/yr
+Price_cool_s (-35770 Euro/yr): 1022 t/yr
+Price_PV_w (-5750 Euro/yr): 46 t/yr
+Price_PV_mt (-5845.83 Euro/yr): 46.7667 t/yr
+Price_PV_s (-5893.75 Euro/yr): 47.15 t/yr
+Price_CHP_w (-42608.2 Euro/yr): 473.425 t/yr
+Price_CHP_mt (-17586.1 Euro/yr): 195.401 t/yr
+Price_CHP_s (-12131.2 Euro/yr): 134.791 t/yr
+CENTR_Winter_HeatEx_Marie_78C_300kW (-0 Euro/yr): 1728 t/yr
+CENTR_Midterm_HeatEx_Marie_78C_300kW (-0 Euro/yr): 1756.8 t/yr
+CENTR_Summer_HeatEx_Marie_78C_300kW (-0 Euro/yr): 1771.2 t/yr
+CENTR_Winter_HeatEx_Linde_22C_300kW: balanced
+CENTR_Midterm_HeatEx_Linde_22C_300kW (-0 Euro/yr): 2665.26 t/yr
+CENTR_Summer_HeatEx_Linde_22C_300kW (-0 Euro/yr): 2687.11 t/yr
+CENTR_Winter_HeatEx_Stamag_20C_300kW (-0 Euro/yr): 601.333 t/yr
+CENTR_Midterm_HeatEx_Stamag_20C_300kW (-0 Euro/yr): 630.133 t/yr
+CENTR_Summer_HeatEx_Stamag_20C_300kW (-0 Euro/yr): 1771.2 t/yr
+CENTR_Winter_HeatEx_Stamag_10C_300kW (-0 Euro/yr): 2828.57 t/yr
+CENTR_Midterm_HeatEx_Stamag_10C_300kW (-0 Euro/yr): 2678.88 t/yr
+CENTR_Summer_HeatEx_Stamag_10C_300kW: balanced
+ip_electricity_CHP_w (-0 Euro/yr): 473.425 t/yr
+ip_electricity_CHP_mt (-0 Euro/yr): 195.401 t/yr
+ip_electricity_CHP_s (-0 Euro/yr): 134.791 t/yr
+ip_Linde_water22C_CENTR_w: balanced
+ip_Stamag_water20C_CENTR_w: balanced
+ip_Stamag_water20C_CENTR_mt: balanced
+ip_Stamag_water10C_CENTR_mt: balanced
+ip_Stamag_water10C_CENTR_s: balanced
+digging_LindeLech_to_KnotEast (-0 Euro/yr): 9 t/yr
+digging_Stamag_to_KnotNorth (-0 Euro/yr): 8 t/yr
+digging_GasNord_to_KnotNorth (-0 Euro/yr): 9 t/yr
+digging_KnotNorth_to_KnotEast (-0 Euro/yr): 9 t/yr
+Winter_Pipe_Linde22C_to_KnotNorth (-0 Euro/yr): 2811.11 t/yr
+Midterm_Pipe_Linde22C_to_KnotNorth (-0 Euro/yr): 2928 t/yr
+Summer_Pipe_Linde22C_to_KnotNorth (-0 Euro/yr): 2952 t/yr
+ip_water20C_KnotNorth_w: balanced
+ip_water20C_KnotNorth_mt: balanced
+Winter_Pipe_Stamag20C_to_KnotNorth (-0 Euro/yr): 2850.39 t/yr
+Midterm_Pipe_Stamag20C_to_KnotNorth (-0 Euro/yr): 2898.39 t/yr
+Summer_Pipe_Stamag20C_to_KnotNorth (-0 Euro/yr): 2952 t/yr
+Winter_Pipe_Stamag10C_to_KnotNorth (-0 Euro/yr): 2880 t/yr
+Midterm_Pipe_Stamag10C_to_KnotNorth (-0 Euro/yr): 2922.83 t/yr
+Summer_Pipe_Stamag10C_to_KnotNorth (-0 Euro/yr): 2875.81 t/yr
+ip_water10C_KnotNorth_mt: balanced
+ip_water10C_KnotNorth_s: balanced
+Winter_Pipe_Gas_to_KnotNorth (-0 Euro/yr): 2770.86 t/yr
+Midterm_Pipe_Gas_to_KnotNorth (-0 Euro/yr): 2882.53 t/yr
+Summer_Pipe_Gas_to_KnotNorth (-0 Euro/yr): 2903.02 t/yr
+ip_gas_KnotNorth_w: balanced
+ip_gas_KnotNorth_mt: balanced
+ip_gas_KnotNorth_s: balanced
+ip_heat65C_w_A: balanced
+ip_heat65C_mt_A: balanced
+ip_heat65C_s_A: balanced
+A_cool_mt: balanced
+A_cool_s: balanced
+ip_heat65C_w_E: balanced
+ip_heat65C_mt_E: balanced
+ip_heat65C_s_E: balanced
+E_cool_mt: balanced
+E_cool_s: balanced
+ip_electricity_PV_w (-0 Euro/yr): 46 t/yr
+ip_electricity_PV_mt (-0 Euro/yr): 46.7667 t/yr
+ip_electricity_PV_s (-0 Euro/yr): 47.15 t/yr
+A_heating65C_w: balanced
+A_hotwater65C_w: balanced
+A_heating65C_mt: balanced
+A_hotwater65C_mt: balanced
+A_hotwater65C_s: balanced
+E_heating65C_w: balanced
+E_hotwater65C_w: balanced
+E_heating65C_mt: balanced
+E_hotwater65C_mt: balanced
+E_hotwater65C_s: balanced
+A_Winter_Gasfurnace_300kWth (-0 Euro/yr): 1728 t/yr
+A_Midterm_Gasfurnace_300kWth (-0 Euro/yr): 1740.54 t/yr
+A_Summer_Gasfurnace_300kWth (-0 Euro/yr): 1085 t/yr
+A_Winter_PVroof_100kWel: balanced
+A_Midterm_PVroof_100kWel: balanced
+A_Summer_PVroof_100kWel: balanced
+A_Winter_HP_Linde_22C__400kW (-0 Euro/yr): 349.643 t/yr
+A_Midterm_HP_Linde_22C__400kW (-0 Euro/yr): 1070.17 t/yr
+A_Summer_HP_Linde_22C__400kW (-0 Euro/yr): 1771.2 t/yr
+A_Midterm_Cooling_Stamag_10C__45kW (-0 Euro/yr): 3220.11 t/yr
+A_Summer_Cooling_Stamag_10C__45kW: balanced
+A_Midterm_Cooling_Stamag_10C__150kW (-0 Euro/yr): 9359.19 t/yr
+A_Summer_Cooling_Stamag_10C__150kW: balanced
+E_Winter_CHP_300kWel: balanced
+E_Midterm_CHP_300kWel (-0 Euro/yr): 1043.58 t/yr
+E_Summer_CHP_300kWel (-0 Euro/yr): 1279.21 t/yr
+E_Winter_PVroof_100kWel: balanced
+E_Midterm_PVroof_100kWel: balanced
+E_Summer_PVroof_100kWel: balanced
+E_Winter_HP_Linde_22C__400kW (-0 Euro/yr): 821.479 t/yr
+E_Midterm_HP_Linde_22C__400kW (-0 Euro/yr): 1756.8 t/yr
+E_Summer_HP_Linde_22C__400kW (-0 Euro/yr): 1771.2 t/yr
+E_Midterm_Cooling_Stamag_10C__45kW (-0 Euro/yr): 3502.13 t/yr
+E_Summer_Cooling_Stamag_10C__45kW: balanced
+E_Midterm_AC_135kW (-0 Euro/yr): 638.66 t/yr
+E_Summer_AC_135kW: balanced
+Operating units:
+0.6*CENTR_periods_HeatEx_Marie78C_300kW (0 Euro/yr): 
+Invest_costs_OperatUnits (-87.6 t/yr) => 
+  CENTR_Winter_HeatEx_Marie_78C_300kW (1728 t/yr) 
+  CENTR_Midterm_HeatEx_Marie_78C_300kW (1756.8 t/yr) 
+  CENTR_Summer_HeatEx_Marie_78C_300kW (1771.2 t/yr) 
+0.910267*CENTR_periods_HeatEx_Linde22C_300kW (0 Euro/yr): 
+Invest_costs_OperatUnits (-132.899 t/yr) => 
+  CENTR_Winter_HeatEx_Linde_22C_300kW (2621.57 t/yr) 
+  CENTR_Midterm_HeatEx_Linde_22C_300kW (2665.26 t/yr) 
+  CENTR_Summer_HeatEx_Linde_22C_300kW (2687.11 t/yr) 
+0.6*CENTR_periods_HeatEx_Stamag20C_300kW (0 Euro/yr): 
+Invest_costs_OperatUnits (-87.6 t/yr) => 
+  CENTR_Winter_HeatEx_Stamag_20C_300kW (1728 t/yr) 
+  CENTR_Midterm_HeatEx_Stamag_20C_300kW (1756.8 t/yr) 
+  CENTR_Summer_HeatEx_Stamag_20C_300kW (1771.2 t/yr) 
+0.982143*CENTR_periods_HeatEx_Stamag10C_300kW (0 Euro/yr): 
+Invest_costs_OperatUnits (-143.393 t/yr) => 
+  CENTR_Winter_HeatEx_Stamag_10C_300kW (2828.57 t/yr) 
+  CENTR_Midterm_HeatEx_Stamag_10C_300kW (2875.71 t/yr) 
+  CENTR_Summer_HeatEx_Stamag_10C_300kW (2899.29 t/yr) 
+1*Digging_LindeLech_to_KnotEast (0 Euro/yr): InvCostsDigging_1m (-162 t/yr) 
+dummy_digging_with_pipe_1m (-162 t/yr) => 
+  digging_LindeLech_to_KnotEast (10 t/yr) 
+1*Digging_Stamag_to_KnotNorth (0 Euro/yr): InvCostsDigging_1m (-443 t/yr) 
+dummy_digging_with_pipe_1m (-443 t/yr) => 
+  digging_Stamag_to_KnotNorth (10 t/yr) 
+1*Digging_GasNord_to_KnotNorth (0 Euro/yr): InvCostsDigging_1m (-963 t/yr) 
+dummy_digging_with_pipe_1m (-963 t/yr) => 
+  digging_GasNord_to_KnotNorth (10 t/yr) 
+1*Digging_KnotNorth_to_KnotEast (0 Euro/yr): InvCostsDigging_1m (-429 t/yr) 
+dummy_digging_with_pipe_1m (-429 t/yr) => 
+  digging_KnotNorth_to_KnotEast (10 t/yr) 
+1*Pipe_periods_Linde22C_to_KnotNorth (0 Euro/yr): 
+InvCostsPipe_1m (-684 t/yr) digging_LindeLech_to_KnotEast (-1 t/yr) 
+digging_KnotNorth_to_KnotEast (-1 t/yr) => 
+  Winter_Pipe_Linde22C_to_KnotNorth (2880 t/yr) 
+  Midterm_Pipe_Linde22C_to_KnotNorth (2928 t/yr) 
+  Summer_Pipe_Linde22C_to_KnotNorth (2952 t/yr) 
+0.00786471*Pipe_Linde22C_to_KnotNorth_w (0 Euro/yr): 
+ip_Linde_water22C_CENTR_w (-786.471 t/yr) 
+Winter_Pipe_Linde22C_to_KnotNorth (-68.8948 t/yr) => 
+  ip_water20C_KnotNorth_w (707.823 t/yr) 
+1*Pipe_periods_Stamag20C_to_KnotNorth (0 Euro/yr): 
+InvCostsPipe_1m (-443 t/yr) digging_Stamag_to_KnotNorth (-1 t/yr) => 
+  Winter_Pipe_Stamag20C_to_KnotNorth (2880 t/yr) 
+  Midterm_Pipe_Stamag20C_to_KnotNorth (2928 t/yr) 
+  Summer_Pipe_Stamag20C_to_KnotNorth (2952 t/yr) 
+0.00338*Pipe_Stamag20C_to_KnotNorth_w (0 Euro/yr): 
+ip_Stamag_water20C_CENTR_w (-338 t/yr) 
+Winter_Pipe_Stamag20C_to_KnotNorth (-29.6088 t/yr) => 
+  ip_water20C_KnotNorth_w (304.2 t/yr) 
+0.00338*Pipe_Stamag20C_to_KnotNorth_mt (0 Euro/yr): 
+ip_Stamag_water20C_CENTR_mt (-338 t/yr) 
+Midterm_Pipe_Stamag20C_to_KnotNorth (-29.6088 t/yr) => 
+  ip_water20C_KnotNorth_mt (304.2 t/yr) 
+1*Pipe_periods_Stamag10C_to_KnotNorth (0 Euro/yr): 
+InvCostsPipe_1m (-443 t/yr) digging_Stamag_to_KnotNorth (-1 t/yr) => 
+  Winter_Pipe_Stamag10C_to_KnotNorth (2880 t/yr) 
+  Midterm_Pipe_Stamag10C_to_KnotNorth (2928 t/yr) 
+  Summer_Pipe_Stamag10C_to_KnotNorth (2952 t/yr) 
+0.000590503*Pipe_Stamag10C_to_KnotNorth_mt (0 Euro/yr): 
+ip_Stamag_water10C_CENTR_mt (-59.0503 t/yr) 
+Midterm_Pipe_Stamag10C_to_KnotNorth (-5.17281 t/yr) => 
+  ip_water10C_KnotNorth_mt (53.1453 t/yr) 
+0.00869786*Pipe_Stamag10C_to_KnotNorth_s (0 Euro/yr): 
+ip_Stamag_water10C_CENTR_s (-869.786 t/yr) 
+Summer_Pipe_Stamag10C_to_KnotNorth (-76.1932 t/yr) => 
+  ip_water10C_KnotNorth_s (782.807 t/yr) 
+1*Pipe_periods_Gas_to_KnotNorth (0 Euro/yr): InvCostsPipe_1m (-963 t/yr) 
+digging_GasNord_to_KnotNorth (-1 t/yr) => 
+  Winter_Pipe_Gas_to_KnotNorth (2880 t/yr) 
+  Midterm_Pipe_Gas_to_KnotNorth (2928 t/yr) 
+  Summer_Pipe_Gas_to_KnotNorth (2952 t/yr) 
+0.012459*Pipe_Gas_to_KnotNorth_w (0 Euro/yr): r_gasfossil (-1245.9 t/yr) 
+Winter_Pipe_Gas_to_KnotNorth (-109.14 t/yr) => 
+  ip_gas_KnotNorth_w (1245.9 t/yr) 
+0.00519074*Pipe_Gas_to_KnotNorth_mt (0 Euro/yr): r_gasfossil (-519.074 t/yr) 
+Midterm_Pipe_Gas_to_KnotNorth (-45.4709 t/yr) => 
+  ip_gas_KnotNorth_mt (519.074 t/yr) 
+0.00559096*Pipe_Gas_to_KnotNorth_s (0 Euro/yr): r_gasfossil (-559.096 t/yr) 
+Summer_Pipe_Gas_to_KnotNorth (-48.9768 t/yr) => 
+  ip_gas_KnotNorth_s (559.096 t/yr) 
+1*A_Canalicer_heating_w (0 Euro/yr): A_heating65C_w (-630 t/yr) => 
+  Price_heating_w (630 t/yr) 
+1*A_Canalicer_heating_mt (0 Euro/yr): A_heating65C_mt (-44 t/yr) => 
+  Price_heating_mt (44 t/yr) 
+1*A_Canalicer_hotwater_w (0 Euro/yr): A_hotwater65C_w (-186 t/yr) => 
+  Price_hotwater_w (186 t/yr) 
+0.994595*A_Canalicer_hotwater_mt (0 Euro/yr): A_hotwater65C_mt (-184 t/yr) => 
+  Price_hotwater_mt (184 t/yr) 
+1*A_Canalicer_hotwater_s (0 Euro/yr): A_hotwater65C_s (-188 t/yr) => 
+  Price_hotwater_s (188 t/yr) 
+1*A_Canalicer_cooling_mt (0 Euro/yr): A_cool_mt (-190 t/yr) => 
+  Price_cool_mt (190 t/yr) 
+1*A_Canalicer_cooling_s (0 Euro/yr): A_cool_s (-624 t/yr) => 
+  Price_cool_s (624 t/yr) 
+1*E_Canalicer_heating_w (0 Euro/yr): E_heating65C_w (-912 t/yr) => 
+  Price_heating_w (912 t/yr) 
+1*E_Canalicer_heating_mt (0 Euro/yr): E_heating65C_mt (-69 t/yr) => 
+  Price_heating_mt (69 t/yr) 
+1*E_Canalicer_hotwater_w (0 Euro/yr): E_hotwater65C_w (-148 t/yr) => 
+  Price_hotwater_w (148 t/yr) 
+1*E_Canalicer_hotwater_mt (0 Euro/yr): E_hotwater65C_mt (-147 t/yr) => 
+  Price_hotwater_mt (147 t/yr) 
+1*E_Canalicer_hotwater_s (0 Euro/yr): E_hotwater65C_s (-149 t/yr) => 
+  Price_hotwater_s (149 t/yr) 
+1*E_Canalicer_cooling_mt (0 Euro/yr): E_cool_mt (-151 t/yr) => 
+  Price_cool_mt (151 t/yr) 
+0.997494*E_Canalicer_cooling_s (0 Euro/yr): E_cool_s (-398 t/yr) => 
+  Price_cool_s (398 t/yr) 
+0.6*A_periods_Gasfurnace_300kWth (0 Euro/yr): Operating_costs (-532.8 t/yr) 
+Invest_costs_OperatUnits (-1066.2 t/yr) => 
+  A_Winter_Gasfurnace_300kWth (1728 t/yr) 
+  A_Midterm_Gasfurnace_300kWth (1756.8 t/yr) 
+  A_Summer_Gasfurnace_300kWth (1771.2 t/yr) 
+0.832456*A_periods_PVroof_100kWel (0 Euro/yr): 
+Operating_costs (-2726.29 t/yr) Invest_costs_OperatUnits (-4362.07 t/yr) => 
+  A_Winter_PVroof_100kWel (2397.47 t/yr) 
+  A_Midterm_PVroof_100kWel (2437.43 t/yr) 
+  A_Summer_PVroof_100kWel (2457.41 t/yr) 
+0.6*A_periods_HP_Linde_400kW (0 Euro/yr): Operating_costs (-901.2 t/yr) 
+Invest_costs_OperatUnits (-1787.4 t/yr) => 
+  A_Winter_HP_Linde_22C__400kW (1728 t/yr) 
+  A_Midterm_HP_Linde_22C__400kW (1756.8 t/yr) 
+  A_Summer_HP_Linde_22C__400kW (1771.2 t/yr) 
+1.09976*A_periods_Cooling_Stamag_45kW (0 Euro/yr): 
+Invest_costs_OperatUnits (-25.2946 t/yr) => 
+  A_Midterm_Cooling_Stamag_10C__45kW (3220.11 t/yr) 
+  A_Summer_Cooling_Stamag_10C__45kW (3246.51 t/yr) 
+3.6*A_periods_Cooling_Stamag_150kW (0 Euro/yr): 
+Invest_costs_OperatUnits (-57.6 t/yr) => 
+  A_Midterm_Cooling_Stamag_10C__150kW (10540.8 t/yr) 
+  A_Summer_Cooling_Stamag_10C__150kW (10627.2 t/yr) 
+0.6*E_periods_CHP_300kWel (0 Euro/yr): Operating_costs (-16072.8 t/yr) 
+Invest_costs_OperatUnits (-13243.2 t/yr) => E_Winter_CHP_300kWel (1728 t/yr) 
+  E_Midterm_CHP_300kWel (1756.8 t/yr) E_Summer_CHP_300kWel (1771.2 t/yr) 
+0.640351*E_periods_PVroof_100kWel (0 Euro/yr): 
+Operating_costs (-2097.15 t/yr) Invest_costs_OperatUnits (-3355.44 t/yr) => 
+  E_Winter_PVroof_100kWel (1844.21 t/yr) 
+  E_Midterm_PVroof_100kWel (1874.95 t/yr) 
+  E_Summer_PVroof_100kWel (1890.32 t/yr) 
+0.6*E_periods_HP_Linde_400kW (0 Euro/yr): Operating_costs (-901.2 t/yr) 
+Invest_costs_OperatUnits (-1787.4 t/yr) => 
+  E_Winter_HP_Linde_22C__400kW (1728 t/yr) 
+  E_Midterm_HP_Linde_22C__400kW (1756.8 t/yr) 
+  E_Summer_HP_Linde_22C__400kW (1771.2 t/yr) 
+1.19608*E_periods_Cooling_Stamag_45kW (0 Euro/yr): 
+Invest_costs_OperatUnits (-27.5099 t/yr) => 
+  E_Midterm_Cooling_Stamag_10C__45kW (3502.13 t/yr) 
+  E_Summer_Cooling_Stamag_10C__45kW (3530.84 t/yr) 
+0.6*E_periods_AC_135kW (0 Euro/yr): Invest_costs_OperatUnits (-5191.2 t/yr) => 
+  E_Midterm_AC_135kW (1756.8 t/yr) E_Summer_AC_135kW (1771.2 t/yr) 
+0.299266*CENTR_HeatEx_Linde22C_300kW_w (0 Euro/yr): 
+r_water_Linde22C_w (-786.471 t/yr) 
+CENTR_Winter_HeatEx_Linde_22C_300kW (-2621.57 t/yr) => 
+  ip_Linde_water22C_CENTR_w (786.471 t/yr) 
+0.128615*CENTR_HeatEx_Stamag20C_300kW_w (0 Euro/yr): 
+r_water_Stamag20C_w (-338 t/yr) 
+CENTR_Winter_HeatEx_Stamag_20C_300kW (-1126.67 t/yr) => 
+  ip_Stamag_water20C_CENTR_w (338 t/yr) 
+0.128615*CENTR_HeatEx_Stamag20C_300kW_mt (0 Euro/yr): 
+r_water_Stamag20C_mt (-338 t/yr) 
+CENTR_Midterm_HeatEx_Stamag_20C_300kW (-1126.67 t/yr) => 
+  ip_Stamag_water20C_CENTR_mt (338 t/yr) 
+0.0224697*CENTR_HeatEx_Stamag10C_300kW_mt (0 Euro/yr): 
+r_water_Stamag10C_mt (-59.0503 t/yr) 
+CENTR_Midterm_HeatEx_Stamag_10C_300kW (-196.834 t/yr) => 
+  ip_Stamag_water10C_CENTR_mt (59.0503 t/yr) 
+0.330969*CENTR_HeatEx_Stamag10C_300kW_s (0 Euro/yr): 
+r_water_Stamag10C_s (-869.786 t/yr) 
+CENTR_Summer_HeatEx_Stamag_10C_300kW (-2899.29 t/yr) => 
+  ip_Stamag_water10C_CENTR_s (869.786 t/yr) 
+630*A_ip_heat_to_Heating_w (0 Euro/yr): ip_heat65C_w_A (-630 t/yr) => 
+  A_heating65C_w (630 t/yr) 
+186*A_ip_heat_to_Hotwater_w (0 Euro/yr): ip_heat65C_w_A (-186 t/yr) => 
+  A_hotwater65C_w (186 t/yr) 
+44*A_ip_heat_to_Heating_mt (0 Euro/yr): ip_heat65C_mt_A (-44 t/yr) => 
+  A_heating65C_mt (44 t/yr) 
+184*A_ip_heat_to_Hotwater_mt (0 Euro/yr): ip_heat65C_mt_A (-184 t/yr) => 
+  A_hotwater65C_mt (184 t/yr) 
+188*A_ip_heat_to_Hotwater_s (0 Euro/yr): ip_heat65C_s_A (-188 t/yr) => 
+  A_hotwater65C_s (188 t/yr) 
+912*E_ip_heat_to_Heating_w (0 Euro/yr): ip_heat65C_w_E (-912 t/yr) => 
+  E_heating65C_w (912 t/yr) 
+148*E_ip_heat_to_Hotwater_w (0 Euro/yr): ip_heat65C_w_E (-148 t/yr) => 
+  E_hotwater65C_w (148 t/yr) 
+69*E_ip_heat_to_Heating_mt (0 Euro/yr): ip_heat65C_mt_E (-69 t/yr) => 
+  E_heating65C_mt (69 t/yr) 
+147*E_ip_heat_to_Hotwater_mt (0 Euro/yr): ip_heat65C_mt_E (-147 t/yr) => 
+  E_hotwater65C_mt (147 t/yr) 
+149*E_ip_heat_to_Hotwater_s (0 Euro/yr): ip_heat65C_s_E (-149 t/yr) => 
+  E_hotwater65C_s (149 t/yr) 
+0.00185622*A_Gasfurnace_300kWth_mt (0 Euro/yr): 
+r_electricity (-0.00928111 t/yr) ip_gas_KnotNorth_mt (-4.84288 t/yr) 
+A_Midterm_Gasfurnace_300kWth (-16.2605 t/yr) => 
+  ip_heat65C_mt_A (4.45493 t/yr) 
+0.0783333*A_Gasfurnace_300kWth_s (0 Euro/yr): r_electricity (-0.391667 t/yr) 
+ip_gas_KnotNorth_s (-204.372 t/yr) A_Summer_Gasfurnace_300kWth (-686.2 t/yr) => 
+  ip_heat65C_s_A (188 t/yr) 
+0.273684*A_PVroof_100kWel_w (0 Euro/yr): r_solar_PV_w_A (-26 t/yr) 
+A_Winter_PVroof_100kWel (-2397.47 t/yr) => Price_PV_w (26 t/yr) 
+  ip_electricity_PV_w (26 t/yr) 
+0.278246*A_PVroof_100kWel_mt (0 Euro/yr): r_solar_PV_mt_A (-26.4333 t/yr) 
+A_Midterm_PVroof_100kWel (-2437.43 t/yr) => Price_PV_mt (26.4333 t/yr) 
+  ip_electricity_PV_mt (26.4333 t/yr) 
+0.280526*A_PVroof_100kWel_s (0 Euro/yr): r_solar_PV_s_A (-26.65 t/yr) 
+A_Summer_PVroof_100kWel (-2457.41 t/yr) => Price_PV_s (26.65 t/yr) 
+  ip_electricity_PV_s (26.65 t/yr) 
+0.157347*A_HP_Linde_20to65C__400kW_w (0 Euro/yr): 
+r_electricity (-205.337 t/yr) ip_water20C_KnotNorth_w (-610.505 t/yr) 
+A_Winter_HP_Linde_22C__400kW (-1378.36 t/yr) => ip_heat65C_w_A (816 t/yr) 
+0.0783819*A_HP_Linde_20to65C__400kW_mt (0 Euro/yr): 
+r_electricity (-102.288 t/yr) ip_water20C_KnotNorth_mt (-304.2 t/yr) 
+A_Midterm_HP_Linde_22C__400kW (-686.625 t/yr) => 
+  ip_heat65C_mt_A (223.545 t/yr) A_cool_mt (136.855 t/yr) 
+0.134886*A_Cooling_Stamag_10C__150kW_mt (0 Euro/yr): 
+ip_water10C_KnotNorth_mt (-53.1453 t/yr) 
+A_Midterm_Cooling_Stamag_10C__150kW (-1181.61 t/yr) => 
+  A_cool_mt (53.1453 t/yr) 
+0.370606*A_Cooling_Stamag_10C__45kW_s (0 Euro/yr): 
+ip_water10C_KnotNorth_s (-146.019 t/yr) 
+A_Summer_Cooling_Stamag_10C__45kW (-3246.51 t/yr) => A_cool_s (146.019 t/yr) 
+1.21315*A_Cooling_Stamag_10C__150kW_s (0 Euro/yr): 
+ip_water10C_KnotNorth_s (-477.981 t/yr) 
+A_Summer_Cooling_Stamag_10C__150kW (-10627.2 t/yr) => 
+  A_cool_s (477.981 t/yr) 
+0.19726*E_CHP_300kWel_w (0 Euro/yr): ip_gas_KnotNorth_w (-1245.9 t/yr) 
+E_Winter_CHP_300kWel (-1728 t/yr) => Price_CHP_w (473.425 t/yr) 
+  ip_electricity_CHP_w (473.425 t/yr) ip_heat65C_w_E (523.332 t/yr) 
+0.0814173*E_CHP_300kWel_mt (0 Euro/yr): ip_gas_KnotNorth_mt (-514.231 t/yr) 
+E_Midterm_CHP_300kWel (-713.215 t/yr) => Price_CHP_mt (195.401 t/yr) 
+  ip_electricity_CHP_mt (195.401 t/yr) ip_heat65C_mt_E (216 t/yr) 
+0.0561628*E_CHP_300kWel_s (0 Euro/yr): ip_gas_KnotNorth_s (-354.724 t/yr) 
+E_Summer_CHP_300kWel (-491.986 t/yr) => Price_CHP_s (134.791 t/yr) 
+  ip_electricity_CHP_s (134.791 t/yr) ip_heat65C_s_E (149 t/yr) 
+0.210526*E_PVroof_100kWel_w (0 Euro/yr): r_solar_PV_w_E (-20 t/yr) 
+E_Winter_PVroof_100kWel (-1844.21 t/yr) => Price_PV_w (20 t/yr) 
+  ip_electricity_PV_w (20 t/yr) 
+0.214035*E_PVroof_100kWel_mt (0 Euro/yr): r_solar_PV_mt_E (-20.3333 t/yr) 
+E_Midterm_PVroof_100kWel (-1874.95 t/yr) => Price_PV_mt (20.3333 t/yr) 
+  ip_electricity_PV_mt (20.3333 t/yr) 
+0.215789*E_PVroof_100kWel_s (0 Euro/yr): r_solar_PV_s_E (-20.5 t/yr) 
+E_Summer_PVroof_100kWel (-1890.32 t/yr) => Price_PV_s (20.5 t/yr) 
+  ip_electricity_PV_s (20.5 t/yr) 
+0.103484*E_HP_Linde_20to65C__400kW_w (0 Euro/yr): 
+r_electricity (-135.047 t/yr) ip_water20C_KnotNorth_w (-401.518 t/yr) 
+E_Winter_HP_Linde_22C__400kW (-906.521 t/yr) => 
+  ip_heat65C_w_E (536.668 t/yr) 
+0.403064*E_Cooling_Stamag_10C__45kW_s (0 Euro/yr): 
+ip_water10C_KnotNorth_s (-158.807 t/yr) 
+E_Summer_Cooling_Stamag_10C__45kW (-3530.84 t/yr) => E_cool_s (158.807 t/yr) 
+0.127642*E_AC_135kW_mt (0 Euro/yr): r_electricity (-33.825 t/yr) 
+E_Midterm_AC_135kW (-1118.14 t/yr) => E_cool_mt (151 t/yr) 
+0.202192*E_AC_135kW_s (0 Euro/yr): r_electricity (-53.5808 t/yr) 
+E_Summer_AC_135kW (-1771.2 t/yr) => E_cool_s (239.193 t/yr) 
+Total annual cost= -455.585 Euro/yr

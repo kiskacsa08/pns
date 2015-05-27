@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<PnsUserInterfaceTexts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PnsApplication>
+    <DefaultFileName>Untitled</DefaultFileName>
+    <ApplicationName>Pns Studio</ApplicationName>
+    <DefaultValueText>(default)</DefaultValueText>
+    <MessageBoxFileChanged Title="Warning">
+      <Message TextPart1="File has changed. Save changes?" />
+    </MessageBoxFileChanged>
+    <MessageBoxFileOpenError Title="File open error" />
+    <MessageBoxFatalError Title="Fatal error" />
+    <MessageBoxPnsClose Title="Confirmation">
+      <Message TextPart1="Do you really want to close Pns Studio?" />
+    </MessageBoxPnsClose>
+    <MessageBoxPnsDefaultsFileMissing Title="Warning">
+      <Message TextPart1="Defaults.xml file does not exist. Defaults.xml file has been created." />
+    </MessageBoxPnsDefaultsFileMissing>
+    <MessageBoxPnsUserInterfaceTextsFileMissing Title="Warning">
+      <Message TextPart1="PnsUserInterfaceTexts.xml file does not exist. PnsUserInterfaceTexts.xml file has been created." />
+    </MessageBoxPnsUserInterfaceTextsFileMissing>
+    <PathDelimiterSymbol>.</PathDelimiterSymbol>
+    <MessageTextLessOrEqual> must be &lt;= than </MessageTextLessOrEqual>
+    <MessageTextNoName>NO_NAME</MessageTextNoName>
+    <MessageBoxMultiFileDrop Title="Warning">
+      <Message TextPart1="Due to single document interface the first file will be opened." />
+    </MessageBoxMultiFileDrop>
+    <MessageBoxExcelExportError Title="Excel export error" />
+    <ProblemTabText>Problem</ProblemTabText>
+    <SolutionsTabText>Solutions</SolutionsTabText>
+  </PnsApplication>
+  <MaterialsMessages>
+    <MessageBoxCanNotClone>
+      <Message TextPart1="You can not clone temporary material!" />
+    </MessageBoxCanNotClone>
+    <MessageBoxMaterialIsInUse Title="Deleting material error">
+      <Message TextPart1="The material '" TextPart2="' is in use!" />
+    </MessageBoxMaterialIsInUse>
+    <MessageBoxMaterialExists Title="Invalid material name">
+      <Message TextPart1="The material '" TextPart2="' already exists!" />
+    </MessageBoxMaterialExists>
+  </MaterialsMessages>
+  <MaterialsExeptions>
+    <MessageBoxMaterialsCorrupted>
+      <Message TextPart1="The input file corrupted! Material '" TextPart2="' has more than 1 instance!" />
+    </MessageBoxMaterialsCorrupted>
+  </MaterialsExeptions>
+  <MaterialsTreeTexts MaterialsNode="Materials" RawsNode="Raw Materials" IntermediatesNode="Intermediates" ProductsNode="Products" NewNode="&lt;New&gt;" MaterialBaseName="Material" MaterialBaseConcatChar="" MaterialCloneConcatChar="_" />
+  <MaterialProperties>
+    <Category>Material properties</Category>
+    <Name DisplayName="Name" Description="Name of the material. It must be unique in the problem definition." />
+    <Type DisplayName="Type" Description="Material type." Value1="raw material" Value2="intermediate" Value3="product" />
+    <Quantity DisplayName="Quantity type" Description="Type of material quantity." />
+    <RawMin DisplayName="Required flow" Description="" />
+    <RawMinMU DisplayName="Required flow Mu" Description="Measurement unit of required flow." />
+    <RawMax DisplayName="Maximum available flow" Description="" />
+    <RawMaxMU DisplayName="Maximum flow Mu" Description="Measurement unit of maximum flow." />
+    <IntermediateMin DisplayName="Required flow" Description="" />
+    <IntermediateMinMU DisplayName="Flow Mu" Description="Measurement unit of flow." />
+    <IntermediateMax DisplayName="Maximum available flow" Description="" />
+    <IntermediateMaxMU DisplayName="Maximum flow Mu" Description="Measurement unit of maximum flow." />
+    <ProductMin DisplayName="Required flow" Description="" />
+    <ProductMinMU DisplayName="Required flow Mu" Description="Measurement unit of required flow." />
+    <ProductMax DisplayName="Maximum flow" Description="" />
+    <ProductMaxMU DisplayName="Maximum flow Mu" Description="Measurement unit of maximum flow." />
+    <Price DisplayName="Price" Description="" />
+    <PriceMU DisplayName="Price Mu" Description="Measurement unit of price." />
+    <Description DisplayName="Description" Description="Description" />
+  </MaterialProperties>
+  <MaterialPropertiesPanel Title=" - Material properties" TitlePart2NewMaterial=" (new)" UpdateButtonText="Update" CancelButtonText="Cancel" DeleteButtonText="Delete" UpdateButtonTextNewMaterial="Save" CancelButtonTextNewMaterial="Cancel" DeleteButtonTextNewMaterial="Delete" AutoConvertCheckBoxText="Convert values automatically" />
+  <MaterialPropertiesPanelMessages>
+    <MessageBoxDeleteMaterial Title="Confirmation">
+      <Message TextPart1="Delete material?" />
+    </MessageBoxDeleteMaterial>
+  </MaterialPropertiesPanelMessages>
+  <OperatingUnitsMessages>
+    <MessageBoxCanNotClone>
+      <Message TextPart1="You can not clone temporary operating unit!" />
+    </MessageBoxCanNotClone>
+    <MessageBoxOperatingUnitExists Title="Invalid operating unit name">
+      <Message TextPart1="The operating unit '" TextPart2="' already exists!" />
+    </MessageBoxOperatingUnitExists>
+  </OperatingUnitsMessages>
+  <OperatingUnitsExeptions>
+    <MessageBoxOperatingUnitsCorrupted>
+      <Message TextPart1="The input file corrupted! Operating unit '" TextPart2="' has more than 1 instance!" />
+    </MessageBoxOperatingUnitsCorrupted>
+  </OperatingUnitsExeptions>
+  <OperatingUnitsTreeTexts OperatingUnitsNode="Operating Units" InputMaterialsNode="Input Materials" OutputMaterialsNode="Output Materials" NewNode="&lt;New&gt;" OperatingUnitBaseName="OperatingUnit" OperatingUnitBaseConcatChar="" OperatingUnitCloneConcatChar="_" />
+  <FlowProperties>
+    <FlowRate DisplayName="Rate" Description="" />
+    <FlowRateMU DisplayName="Measurement unit" Description="" />
+  </FlowProperties>
+  <OperatingUnitProperties>
+    <BasicCategory>					Basic</BasicCategory>
+    <Name DisplayName="Name" Description="Name of the operating unit. It must be unique in the problem definition." />
+    <WorkingHoursPerYear DisplayName="Working hours per year" Description="" />
+    <PayoutPeriod DisplayName="Payout period" Description="" />
+    <IOStreamsCategory>		Input and output streams</IOStreamsCategory>
+    <InputStreams DisplayName="Input materials" Description="" />
+    <OutputStreams DisplayName="Output materials" Description="" />
+    <CostParamsCategory>			Cost parameters</CostParamsCategory>
+    <OperatingCost DisplayName="Operating cost" Description="" />
+    <OperatingFixCost DisplayName="Fixed charge" Description="" />
+    <OperatingFixCostMU DisplayName="Fixed charge Mu" Description="" />
+    <OperatingPropCost DisplayName="Proportionality constant" Description="" />
+    <OperatingPropCostMU DisplayName="Proportionality constant Mu" Description="" />
+    <InvestmentCost DisplayName="Investment cost" Description="" />
+    <InvestmentFixCost DisplayName="Fixed charge" Description="" />
+    <InvestmentFixCostMU DisplayName="Fixed charge Mu" Description="" />
+    <InvestmentPropCost DisplayName="Proportionality constant" Description="" />
+    <InvestmentPropCostMU DisplayName="Proportionality constant Mu" Description="" />
+    <OverallCost DisplayName="Overall cost" Description="" />
+    <OverallFixCost DisplayName="Fixed charge" Description="" />
+    <OverallFixCostMU DisplayName="Fixed charge Mu" Description="" />
+    <OverallPropCost DisplayName="Proportionality constant" Description="" />
+    <OverallPropCostMU DisplayName="Proportionality constant Mu" Description="" />
+    <CapacityCategory>				Capacity constraints</CapacityCategory>
+    <Bounds DisplayName="Capacity constraints" Description="" />
+    <LowerBound DisplayName="Lower bound" Description="" />
+    <UpperBound DisplayName="Upper bound" Description="" />
+    <DescriptionCategory>	Description</DescriptionCategory>
+    <Description DisplayName="Description" Description="Description" />
+  </OperatingUnitProperties>
+  <OperatingUnitPropertiesPanel Title=" - Operating Unit properties" TitlePart2NewMaterial=" (new)" UpdateButtonText="Update" CancelButtonText="Cancel" DeleteButtonText="Delete" UpdateButtonTextNewMaterial="Save" CancelButtonTextNewMaterial="Cancel" DeleteButtonTextNewMaterial="Delete" AutoConvertCheckBoxText="Convert values automatically" />
+  <OperatingUnitPropertiesPanelMessages>
+    <MessageBoxDeleteOperatingUnit Title="Confirmation">
+      <Message TextPart1="Delete operating unit?" />
+    </MessageBoxDeleteOperatingUnit>
+  </OperatingUnitPropertiesPanelMessages>
+  <MeasurementUnitsProperties>
+    <DefaultMUsCategory>					Default measurement units of available quantity types</DefaultMUsCategory>
+    <DefaultMUs Description="Selecting this quantity type item as material quantity type, item value will be used to generate default quantity based derived measurement units." />
+    <DefaultTimeRatiosCategory>				Default ratios of time units</DefaultTimeRatiosCategory>
+    <DefaultWorkingHoursPerYear DisplayName="Default working hour per year value" Description="This is the default annual operation time of the operating units. This ratio will be used when converting time based quantities.You can change this value individually in operating unit settings." />
+    <DefaultPayoutPeriod DisplayName="Default payout period value" Description="It is the length of investment payback period in year. It can be fraction number.This ratio will be used when converting time based quantities.You can change this value individually in operating unit settings." />
+    <DefaultQuantityCategory>			Default quantity type</DefaultQuantityCategory>
+    <DefaultQuantity DisplayName="Default quantity type" Description="When you create a new material, this quantity type will be selected automatically." />
+    <DefaultDerivedUnitsCategory>		Default derived units based on quantity, time and currency</DefaultDerivedUnitsCategory>
+    <DefaultQuantityFlowMU DisplayName="Default material flow MU" Description="Default measurement unit of material flow." />
+    <DefaultPriceMU DisplayName="Default price MU" Description="Default measurement unit of price." />
+    <DefaultInvestmentCostMU DisplayName="Default investment cost MU" Description="Default measurement unit of investment cost." />
+    <DefaultOperatingCostMU DisplayName="Default operating cost MU" Description="Default measurement unit of operating cost." />
+    <DefaultMUConversionCategory>	Default measurement unit conversion</DefaultMUConversionCategory>
+    <DefaultMUConversion DisplayName="Automatically convert values" Description="If true then change of measurement unit will convert the value automatically." />
+  </MeasurementUnitsProperties>
+  <DefaultMUsDialog Title="Default Measurement Units" UpdateButtonText="Update" CancelButtonText="Cancel" DefaultButtonText="Restore defaults" />
+  <DefaultValuesProperties>
+    <MaterialCategory>		Material</MaterialCategory>
+    <RequiredFlow DisplayName="Required flow" Description="" />
+    <MaximumFlow DisplayName="Maximum flow" Description="" />
+    <Price DisplayName="Price" Description="" />
+    <OperatingUnitCategory>	Operating unit</OperatingUnitCategory>
+    <FlowRate DisplayName="Flow rate" Description="" />
+    <OperatingCost DisplayName="Operating cost" Description="" />
+    <OperatingCostFix DisplayName="Fixed charge" Description="" />
+    <OperatingCostProp DisplayName="Proportionality constant" Description="" />
+    <InvestmentCost DisplayName="Investment cost" Description="" />
+    <InvestmentCostFix DisplayName="Fixed charge" Description="" />
+    <InvestmentCostProp DisplayName="Proportionality constant" Description="" />
+    <CapacityConstraints DisplayName="Capacity constraints" Description="" />
+    <LowerBound DisplayName="Lower bound" Description="" />
+    <UpperBound DisplayName="Upper bound" Description="" />
+    <SolverCategory>Solver numerical limits</SolverCategory>
+    <SolverUpperBound DisplayName="Upper limit" Description="" />
+    <MaximumNumberOfSolutions DisplayName="Maximum number of solutions" Description="" />
+  </DefaultValuesProperties>
+  <DefaultValuesDialog Title="Default Values" UpdateButtonText="Update" CancelButtonText="Cancel" DefaultButtonText="Restore defaults" />
+  <DoubleConverterMessages LowerBoundMessage="Value must be &gt;= " UpperBoundMessage="Value must be &lt;= " SolverUpperBoundMessage="Value must be &lt;= than " />
+  <MaterialQuantityTypeChanged Title="Material quantity type changed" OkButtonText="Ok" CancelButtonText="Cancel" MUSettingsGroupBoxText="Measurement unit settings of concerned flows" MatFlowMURadio="Set to measurement unit of the material flow" MatMinMURadio="Set to measurement unit of the material minimum flow" MatMaxMURadio="Set to measurement unit of the material maximum flow" MatDefMURadio="Set to default measurement unit" ValueSettingsGroupBoxText="Value settings of concerned flows" ActionNeededRadio="Set concerned flows to &quot;User action needed&quot; state" KeepCurrentRadio="Keep current values" DefFlowRadio="Set concerned flows to default flowrate value" />
+  <Solutions SolutionText="Solution #" TotalCostText="Total cost">
+    <MessageBoxSolutions>
+      <Message TextPart1="The solver calculated annual cost (" TextPart2=") and the GUI calculated annual cost (" TextPart3=") differ significantly." />
+    </MessageBoxSolutions>
+  </Solutions>
+  <SolutionTree ConsumedAmountText="consumed amount" ProducedAmountText="produced amount" BalancedText="balanced" SizeFactorText="Size factor" CostText="Cost" />
+  <SolutionExcel>
+    <ExtensionInfo>Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*</ExtensionInfo>
+    <DefaultXLSFileName TextPart1="Brief" TextPart2="Detailed" TextPart3=" result of solution" TextPart4=" of " TextPart5="Summary of results of " />
+    <MaterialBkColor Red="200" Green="225" Blue="250" />
+    <MaterialDarkBkColor Red="180" Green="202" Blue="225" />
+    <RateBkColor Red="240" Green="240" Blue="240" />
+    <RateDarkBkColor Red="220" Green="220" Blue="220" />
+    <OperatingUnitBkColor Red="210" Green="250" Blue="210" />
+    <OperatingUnitDarkBkColor Red="189" Green="225" Blue="189" />
+    <SizeBkColor Red="250" Green="250" Blue="200" />
+    <BorderColor Red="0" Green="0" Blue="0" />
+    <SolutionBkColor Red="250" Green="230" Blue="200" />
+    <SolutionDarkBkColor Red="225" Green="207" Blue="180" />
+    <MaterialsWorkSheetLabel>Materials</MaterialsWorkSheetLabel>
+    <MaterialsLabel>Materials</MaterialsLabel>
+    <MaterialNameLabel>Name</MaterialNameLabel>
+    <MaterialTypeLabel>Type</MaterialTypeLabel>
+    <MaterialQuantityTypeLabel>Quantity type</MaterialQuantityTypeLabel>
+    <MaterialMinFlowLabel>Min. flow</MaterialMinFlowLabel>
+    <MaterialMinFlowMULabel />
+    <MaterialMaxFlowLabel>Max. flow</MaterialMaxFlowLabel>
+    <MaterialMaxFlowMULabel />
+    <MaterialFlowLabel>Flow</MaterialFlowLabel>
+    <MaterialFlowMULabel />
+    <MaterialPriceLabel>Price</MaterialPriceLabel>
+    <MaterialPriceMULabel />
+    <MaterialCostLabel>Cost</MaterialCostLabel>
+    <MaterialsTotalCostLabel>Total cost of materials</MaterialsTotalCostLabel>
+    <OperatingUnitsWorkSheetLabel>Operating units</OperatingUnitsWorkSheetLabel>
+    <OperatingUnitsLabel>Operating units</OperatingUnitsLabel>
+    <OperatingUnitNameLabel>Name</OperatingUnitNameLabel>
+    <OperatingUnitSizeLabel>Size
+factor</OperatingUnitSizeLabel>
+    <OperatingUnitCostLabel>Cost</OperatingUnitCostLabel>
+    <OperatingUnitsTotalCostLabel>Total cost of operating units</OperatingUnitsTotalCostLabel>
+    <OperatingUnitWorkingHoursLabel>Working
+hours
+[h/yr]</OperatingUnitWorkingHoursLabel>
+    <OperatingUnitPayoutLabel>Payout
+period
+[yr]</OperatingUnitPayoutLabel>
+    <OperatingUnitCapacityLabel>Capacity</OperatingUnitCapacityLabel>
+    <OperatingUnitLowerBoundLabel>Lower
+bound</OperatingUnitLowerBoundLabel>
+    <OperatingUnitUpperBoundLabel>Upper
+bound</OperatingUnitUpperBoundLabel>
+    <OperatingUnitOperatingCostLabel>Operating cost</OperatingUnitOperatingCostLabel>
+    <OperatingUnitOperatingCostFixLabel>Fixed
+charge</OperatingUnitOperatingCostFixLabel>
+    <OperatingUnitOperatingCostFixMULabel />
+    <OperatingUnitOperatingCostPropLabel>Prop.
+constant</OperatingUnitOperatingCostPropLabel>
+    <OperatingUnitOperatingCostPropMULabel />
+    <OperatingUnitInvestmentCostLabel>Investment cost</OperatingUnitInvestmentCostLabel>
+    <OperatingUnitInvestmentCostFixLabel>Fixed
+charge</OperatingUnitInvestmentCostFixLabel>
+    <OperatingUnitInvestmentCostFixMULabel />
+    <OperatingUnitInvestmentCostPropLabel>Prop.
+constant</OperatingUnitInvestmentCostPropLabel>
+    <OperatingUnitInvestmentCostPropMULabel />
+    <OperatingUnitOverallCostLabel>Overall cost</OperatingUnitOverallCostLabel>
+    <OperatingUnitOverallCostFixLabel>Fixed
+charge</OperatingUnitOverallCostFixLabel>
+    <OperatingUnitOverallCostFixMULabel />
+    <OperatingUnitOverallCostPropLabel>Prop.
+constant</OperatingUnitOverallCostPropLabel>
+    <OperatingUnitOverallCostPropMULabel />
+    <FlowsWorkSheetLabel>Flows</FlowsWorkSheetLabel>
+    <FlowsRateAndFlowsLabel>Material rates and flows
+of operating units</FlowsRateAndFlowsLabel>
+    <FlowsOperatingUnitSizeLabel>Operating unit size factors</FlowsOperatingUnitSizeLabel>
+    <FlowsOverallFlowsLabel>Overall material flows</FlowsOverallFlowsLabel>
+    <FlowsRateLabel>rate</FlowsRateLabel>
+    <FlowsFlowLabel>flow</FlowsFlowLabel>
+    <SolutionSummaryLabel>Solution summary information</SolutionSummaryLabel>
+    <SolutionOverallCostLabel>Overall cost of solution</SolutionOverallCostLabel>
+    <SummaryWorkSheetLabel>Summary</SummaryWorkSheetLabel>
+    <RawMaterialsLabel>Raw materials</RawMaterialsLabel>
+    <ProductMaterialsLabel>Products</ProductMaterialsLabel>
+    <SolutionStructuresLabel>Solution
+structures</SolutionStructuresLabel>
+    <SummaryCostLabel>Cost</SummaryCostLabel>
+    <SummaryStructureLabel>Structure</SummaryStructureLabel>
+  </SolutionExcel>
+  <ProblemExcel>
+    <DefaultXLSFileName TextPart1="Excel export of " TextPart2="problem" />
+    <RatesWorkSheetLabel>Rates</RatesWorkSheetLabel>
+    <RatesLabel>Material rates
+of operating units</RatesLabel>
+  </ProblemExcel>
+</PnsUserInterfaceTexts>

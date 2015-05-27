@@ -1,0 +1,24 @@
+﻿using System.Xml.Serialization;
+
+namespace Pns.Xml_Serialization.PnsGUI.ExceptionMsgs
+{
+    public class def_ou_ex
+    {
+        #region Members
+        static public string Ex_more_inctance_p1 = "The input file corrupted! Operating unit '";
+        static public string Ex_more_inctance_p2 = "' has more than 1 instance!";
+        #endregion
+
+        #region Properties
+        public MessageBoxXMLTag MessageBoxOperatingUnitsCorrupted
+        {
+            get { return new MessageBoxXMLTag(new TextXMLTag(Ex_more_inctance_p1, Ex_more_inctance_p2)); }
+            set
+            {
+                Ex_more_inctance_p1 = value.Message.TextPart1;
+                Ex_more_inctance_p2 = value.Message.TextPart2;
+            }
+        }
+        #endregion
+    }
+}
