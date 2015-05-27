@@ -1285,20 +1285,19 @@ namespace PNSDraw
             else
             {
                 MessageBox.Show("Offline");
-                Pns.PnsStudio ps = new Pns.PnsStudio();
                 switch (toolStripComboBox2.SelectedIndex)
                 {
                     case 0:
-                        Console.WriteLine(ps.StartSolver(Solver_keys._KEY_MSG));
+                        Console.WriteLine(Adapter.StartSolver(Solver_keys._KEY_MSG, Graph));
                         break;
                     case 1:
-                        ps.StartSolver(Solver_keys._KEY_SSG);
+                        Adapter.StartSolver(Solver_keys._KEY_SSG, Graph);
                         break;
                     case 2:
-                        ps.StartSolver(Solver_keys._KEY_SSGLP);
+                        Adapter.StartSolver(Solver_keys._KEY_SSGLP, Graph);
                         break;
                     case 3:
-                        ps.StartSolver(Solver_keys._KEY_ABB);
+                        Adapter.StartSolver(Solver_keys._KEY_ABB, Graph);
                         break;
                     default:
                         break;
