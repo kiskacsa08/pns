@@ -69,6 +69,7 @@
     <Compile Include="AboutBox1.Designer.cs">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Adapter.cs" />
     <Compile Include="Canvas\Interfaces.cs" />
     <Compile Include="Canvas\PNSCanvas.cs">
       <SubType>UserControl</SubType>
@@ -182,7 +183,7 @@
     <None Include="Resources\green_check.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Desktop\asd\munka-veszprem\PnsStudio_20140529\PnsStudio_20140529\pns\Pns.csproj">
+    <ProjectReference Include="..\pns\Pns.csproj">
       <Project>{b00ff780-c041-4f4f-8086-4ea1c2b0f96d}</Project>
       <Name>Pns</Name>
     </ProjectReference>
