@@ -15,6 +15,9 @@ namespace PNSDraw.Entities
 
         public string Title = "";
 
+        public int optimalValue;
+        public string algorithmUsed;
+
         public Solution(int index, string title)
         {
             Materials = new Dictionary<string, double>();
