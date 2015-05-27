@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace PNSDraw
-{
+{ //KOMMENT
     static class Program
     {
         /// <summary>
