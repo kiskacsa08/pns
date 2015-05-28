@@ -15,8 +15,8 @@ namespace PNSDraw.Entities
 
         public string Title = "";
 
-        public int optimalValue;
-        public string algorithmUsed;
+        public int OptimalValue { get; set; }
+        public string AlgorithmUsed { get; set; }
 
         public Solution(int index, string title)
         {
