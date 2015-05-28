@@ -14,6 +14,7 @@ namespace PNSDraw
         public List<Material> Materials { get; set; }
         public List<OperatingUnit> OperatingUnits { get; set; }
         public List<Edge> Edges { get; set; }
+        public List<MutualExclusion> MutualExclusions { get; set; }
 
         List<Canvas.IGraphicsObject> GraphicsObjectList;
 
@@ -85,6 +86,7 @@ namespace PNSDraw
             Materials = new List<Material>();
             OperatingUnits = new List<OperatingUnit>();
             Edges = new List<Edge>();
+            MutualExclusions = new List<MutualExclusion>();
             Solutions = new List<Solution>();
             UniqueID = 0;
             CopiedStructure = new XMLPGraph();
@@ -431,6 +433,18 @@ namespace PNSDraw
             }
         }
 
+        public void AddMutualExclusion(MutualExclusion mutualexclusion)
+        {
+            if (MutualExclusions.Contains(mutualexclusion) == false)
+            {
+                if (mutualexclusion.ID > UniqueID)
+                {
+                    UniqueID = mutualexclusion.ID;
+                }
+                MutualExclusions.Add(mutualexclusion);
+            }
+        }
+
         public void RemoveEdge(Edge edge)
         {
             if (Edges.Contains(edge))
@@ -477,6 +491,14 @@ namespace PNSDraw
                 {
                     s.RemoveOperatingUnit(operatingunit.Name);
                 }
+            }
+        }
+
+        public void RemoveMutualExclusion(MutualExclusion mutualexclusion)
+        {
+            if (MutualExclusions.Contains(mutualexclusion))
+            {
+                MutualExclusions.Remove(mutualexclusion);
             }
         }
 
