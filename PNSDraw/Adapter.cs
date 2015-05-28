@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PNSDraw.Entities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,6 @@ namespace PNSDraw
     class Adapter
     {
         static Pns.PnsStudio ps = new Pns.PnsStudio();
-
-
-        // TODO: MutualExclusionOperatingUnits
 
         public static string StartSolver(string method, PGraph problem)
         {
@@ -48,9 +46,9 @@ namespace PNSDraw
 	            }
             }
 
-            rawMats.CopyTo(studioProblem.materials.rawMaterial);
-            intMats.CopyTo(studioProblem.materials.intermediateMaterial);
-            prodMats.CopyTo(studioProblem.materials.productMaterial);
+            studioProblem.materials.rawMaterial = (Pns.Xml_Serialization.PnsProblem.RawMaterial[]) rawMats.ToArray(typeof(Pns.Xml_Serialization.PnsProblem.RawMaterial));
+            studioProblem.materials.intermediateMaterial = (Pns.Xml_Serialization.PnsProblem.IntermediateMaterial[])intMats.ToArray(typeof(Pns.Xml_Serialization.PnsProblem.IntermediateMaterial));
+            studioProblem.materials.productMaterial = (Pns.Xml_Serialization.PnsProblem.ProductMaterial[])prodMats.ToArray(typeof(Pns.Xml_Serialization.PnsProblem.ProductMaterial));
 
             ArrayList opUnits = new ArrayList();
             foreach (OperatingUnit ou in problem.OperatingUnits)
@@ -58,7 +56,15 @@ namespace PNSDraw
                 opUnits.Add(DrawOpUnitToStudioOpUnit(ou));
             }
 
-            opUnits.CopyTo(studioProblem.operatingUnits);
+            studioProblem.operatingUnits = (Pns.Xml_Serialization.PnsProblem.OperatingUnit[])opUnits.ToArray(typeof(Pns.Xml_Serialization.PnsProblem.OperatingUnit));
+
+            ArrayList mutExcls = new ArrayList();
+            foreach (MutualExclusion mutExcl in problem.MutualExclusions)
+            {
+                mutExcls.Add(DrawMutualExclusionToStudioMutualExclusion(mutExcl));
+            }
+
+            studioProblem.mutualExclusionSets = (Pns.Xml_Serialization.PnsProblem.MutualExclusionSet[])mutExcls.ToArray(typeof(Pns.Xml_Serialization.PnsProblem.MutualExclusionSet));
         }
 
         private static Pns.Xml_Serialization.PnsProblem.RawMaterial DrawRMatToStudioRMat(Material rMat)
@@ -115,6 +121,28 @@ namespace PNSDraw
             opUnit.workingHoursPerYear = (int)ou.WorkingHourProp.Value;
 
             return opUnit;
+        }
+
+        private static Pns.Xml_Serialization.PnsProblem.MutualExclusionSet DrawMutualExclusionToStudioMutualExclusion(MutualExclusion mutExcl)
+        {
+            Pns.Xml_Serialization.PnsProblem.MutualExclusionSet mutExclSet = new Pns.Xml_Serialization.PnsProblem.MutualExclusionSet();
+            ArrayList OUs = new ArrayList();
+            foreach (OperatingUnit ou in mutExcl.OpUnits)
+            {
+                Pns.Xml_Serialization.PnsProblem.MutualExclusionOperatingUnit mutExclOU = DrawMutExclOUToStudioMutExclOU(ou);
+                OUs.Add(mutExclOU);
+            }
+
+            mutExclSet.mutualExclusionOperatingUnit = (Pns.Xml_Serialization.PnsProblem.MutualExclusionOperatingUnit[])OUs.ToArray(typeof(Pns.Xml_Serialization.PnsProblem.MutualExclusionOperatingUnit));
+
+            return mutExclSet;
+        }
+
+        private static Pns.Xml_Serialization.PnsProblem.MutualExclusionOperatingUnit DrawMutExclOUToStudioMutExclOU(OperatingUnit ou)
+        {
+            Pns.Xml_Serialization.PnsProblem.MutualExclusionOperatingUnit mutExclOu = new Pns.Xml_Serialization.PnsProblem.MutualExclusionOperatingUnit();
+            mutExclOu.name = ou.Name;
+            return mutExclOu;
         }
     }
 }
