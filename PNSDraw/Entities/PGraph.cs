@@ -8,7 +8,7 @@ using PNSDraw.Entities;
 
 namespace PNSDraw
 {
-    class PGraph : Canvas.IGraphicsStructure
+    public class PGraph : Canvas.IGraphicsStructure
     {
 
         public List<Material> Materials { get; set; }
