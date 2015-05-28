@@ -62,16 +62,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dialogs\AboutPnsEditor.cs">
+    <Compile Include="ExcelExport\Dialogs\AboutPnsEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\AboutPnsEditor.Designer.cs">
+    <Compile Include="ExcelExport\Dialogs\AboutPnsEditor.Designer.cs">
       <DependentUpon>AboutPnsEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Description.cs">
+    <Compile Include="ExcelExport\Dialogs\Description.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\Description.Designer.cs">
+    <Compile Include="ExcelExport\Dialogs\Description.Designer.cs">
       <DependentUpon>Description.cs</DependentUpon>
     </Compile>
     <Compile Include="ExcelExport\ResultsSummaryExcelExport.cs" />
@@ -101,44 +101,44 @@
     <Compile Include="SolutionsTab\PnsSolutions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\MaterialQuantityTypeChanged.cs">
+    <Compile Include="ExcelExport\Dialogs\MaterialQuantityTypeChanged.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\MaterialQuantityTypeChanged.Designer.cs">
+    <Compile Include="ExcelExport\Dialogs\MaterialQuantityTypeChanged.Designer.cs">
       <DependentUpon>MaterialQuantityTypeChanged.cs</DependentUpon>
     </Compile>
     <Compile Include="RecentFileList.cs" />
     <Compile Include="Globals\DefaultMUsAndValues.cs" />
     <Compile Include="Globals\CustomClass.cs" />
-    <Compile Include="Dialogs\DefaultMU.cs">
+    <Compile Include="ExcelExport\Dialogs\DefaultMU.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\DefaultMU.Designer.cs">
+    <Compile Include="ExcelExport\Dialogs\DefaultMU.Designer.cs">
       <DependentUpon>DefaultMU.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\DefaultValue.cs">
+    <Compile Include="ExcelExport\Dialogs\DefaultValue.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\DefaultValue.Designer.cs">
+    <Compile Include="ExcelExport\Dialogs\DefaultValue.Designer.cs">
       <DependentUpon>DefaultValue.cs</DependentUpon>
     </Compile>
     <Compile Include="Globals\Event.cs" />
     <Compile Include="Globals\Globals.cs">
     </Compile>
-    <Compile Include="Dialogs\MaterialProperties.cs">
+    <Compile Include="ExcelExport\Dialogs\MaterialProperties.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dialogs\MaterialProperties.designer.cs">
+    <Compile Include="ExcelExport\Dialogs\MaterialProperties.designer.cs">
       <DependentUpon>MaterialProperties.cs</DependentUpon>
     </Compile>
     <Compile Include="ProblemTab\Materials.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Globals\MUConverter.cs" />
-    <Compile Include="Dialogs\OperatingUnitProperties.cs">
+    <Compile Include="ExcelExport\Dialogs\OperatingUnitProperties.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dialogs\OperatingUnitProperties.Designer.cs">
+    <Compile Include="ExcelExport\Dialogs\OperatingUnitProperties.Designer.cs">
       <DependentUpon>OperatingUnitProperties.cs</DependentUpon>
     </Compile>
     <Compile Include="ProblemTab\OperatingUnits.cs">
@@ -183,19 +183,19 @@
     <Compile Include="Xml_Serialization\PnsProblem\PNSSchema_v5.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Dialogs\AboutPnsEditor.resx">
+    <EmbeddedResource Include="ExcelExport\Dialogs\AboutPnsEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutPnsEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\DefaultMU.resx">
+    <EmbeddedResource Include="ExcelExport\Dialogs\DefaultMU.resx">
       <DependentUpon>DefaultMU.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\DefaultValue.resx">
+    <EmbeddedResource Include="ExcelExport\Dialogs\DefaultValue.resx">
       <DependentUpon>DefaultValue.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Description.resx">
+    <EmbeddedResource Include="ExcelExport\Dialogs\Description.resx">
       <DependentUpon>Description.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -203,15 +203,15 @@
       <DependentUpon>TreeNodeGhost.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\MaterialProperties.resx">
+    <EmbeddedResource Include="ExcelExport\Dialogs\MaterialProperties.resx">
       <DependentUpon>MaterialProperties.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\MaterialQuantityTypeChanged.resx">
+    <EmbeddedResource Include="ExcelExport\Dialogs\MaterialQuantityTypeChanged.resx">
       <DependentUpon>MaterialQuantityTypeChanged.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OperatingUnitProperties.resx">
+    <EmbeddedResource Include="ExcelExport\Dialogs\OperatingUnitProperties.resx">
       <DependentUpon>OperatingUnitProperties.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -224,7 +224,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\SolverDialog.resx">
+    <EmbeddedResource Include="ExcelExport\Dialogs\SolverDialog.resx">
       <DependentUpon>SolverDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -243,10 +243,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Dialogs\SolverDialog.cs">
+    <Compile Include="ExcelExport\Dialogs\SolverDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\SolverDialog.Designer.cs">
+    <Compile Include="ExcelExport\Dialogs\SolverDialog.Designer.cs">
       <DependentUpon>SolverDialog.cs</DependentUpon>
     </Compile>
   </ItemGroup>
