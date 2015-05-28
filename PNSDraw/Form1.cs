@@ -1331,6 +1331,12 @@ namespace PNSDraw
             }
         }
 
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            MutualExclusionDialog med = new MutualExclusionDialog(Graph);
+            med.ShowDialog();
+        }
+
 
 
         //-------------------------------------------------------------------SOLVER-------------------------------------------------------------------------------------------
