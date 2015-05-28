@@ -90,10 +90,19 @@
       <DependentUpon>PNSCanvas.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\Default.cs" />
+    <Compile Include="Entities\MutualExclusion.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Entities\ObjectProperty.cs" />
     <Compile Include="Entities\Problem.cs" />
     <Compile Include="Entities\Solution.cs" />
     <Compile Include="Managers\PropertyManager.cs" />
+    <Compile Include="MutualExclusionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MutualExclusionDialog.Designer.cs">
+      <DependentUpon>MutualExclusionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyPropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -150,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MutualExclusionDialog.resx">
+      <DependentUpon>MutualExclusionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
