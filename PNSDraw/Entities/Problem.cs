@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pns.PnsSolver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,18 +25,30 @@ namespace PNSDraw
             limit = 10;
             status = "pending";
             timestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            name = timestamp.ToString();
+            name = "Graph_" + timestamp.ToString();
         }
 
-        public Problem(string pname, string palg, PGraph pgraph, int pthread = 4, int plimit=100)
+        public Problem(string palg, PGraph pgraph, int pthread = 4, int plimit=100)
         {
-            name = pname;
-            algorithm = palg;
+            Console.WriteLine(palg);
+            switch (palg)
+            {
+                case "INSIDEOUT":
+                    algorithm = "INSIDE_OUT";
+                    break;
+                case "SSG":
+                    algorithm = "SSG";
+                    break;
+                default:
+                    algorithm = "SSG";
+                    break;
+            }
             graph = pgraph;
             threadNum = pthread;
             limit = plimit;
             status = "pending";
             timestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            name = "Graph_" + timestamp.ToString();
          }
     }
 }

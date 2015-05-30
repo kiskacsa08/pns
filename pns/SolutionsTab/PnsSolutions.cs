@@ -20,8 +20,8 @@ namespace Pns
     {
         #region Members
         private bool m_result;
-        private Solutions m_solutions;
-        private StringBuilder m_result_string;
+        private volatile Solutions m_solutions;
+        private volatile StringBuilder m_result_string;
         private SolverDialog m_solver_dlg;
         private string m_method;
         private int m_startpos;
@@ -111,7 +111,7 @@ namespace Pns
             m_solver_dlg.Show();
             m_timer.Start();
             update = false;
-
+            Console.WriteLine("DDD: "+m_solutions.Count);
             return m_result_string.ToString();
         }
 

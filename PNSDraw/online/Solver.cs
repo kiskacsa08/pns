@@ -23,7 +23,7 @@ namespace PNSDraw.online
             socket = new SolverSocket();
         }
 
-        public Problem run()
+        public Problem Run()
         {
             try
             {

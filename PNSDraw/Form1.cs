@@ -11,6 +11,7 @@ using PNSDraw.Entities;
 using System.Threading;
 using System.Globalization;
 using Pns.PnsSolver;
+using PNSDraw.online;
 
 namespace PNSDraw
 {
@@ -1308,6 +1309,9 @@ namespace PNSDraw
                     int limit = int.Parse(toolStripTextBox2.Text);
                     //string algorithm tartalmazza az algoritmust (feljebb), int processes a folyamatok számát, int limit a megoldások limitjét
                     // TODO: Ide jön az online megoldó hívása
+                    Problem problem = new Problem(algorithm, Graph, processes, limit);
+                    Solver solver = new Solver(problem);
+                    problem = solver.Run();
                     MessageBox.Show("Online");
                 }
             }
