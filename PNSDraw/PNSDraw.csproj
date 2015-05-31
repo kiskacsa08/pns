@@ -213,12 +213,6 @@
     <Content Include="pnsdraw.ico" />
     <None Include="Resources\green_check.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\pns\Pns.csproj">
-      <Project>{b00ff780-c041-4f4f-8086-4ea1c2b0f96d}</Project>
-      <Name>Pns</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
