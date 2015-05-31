@@ -1281,16 +1281,16 @@ namespace PNSDraw
             switch (toolStripComboBox2.SelectedIndex)
             {
                 case 0:
-                    algorithm = Solver_keys._KEY_ABB;
+                    algorithm = "ABB";
                     break;
                 case 1:
-                    algorithm = Solver_keys._KEY_SSG;
+                    algorithm = "SSG";
                     break;
                 case 2:
-                    algorithm = Solver_keys._KEY_SSGLP;
+                    algorithm = "SSG+LP";
                     break;
                 case 3:
-                    algorithm = Solver_keys._KEY_MSG;
+                    algorithm = "MSG";
                     break;
                 default:
                     algorithm = "";
