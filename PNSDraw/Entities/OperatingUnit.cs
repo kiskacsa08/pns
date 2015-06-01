@@ -266,20 +266,20 @@ namespace PNSDraw
                 parameterlist[prop] = op;
             }
             parameterlist["caplower"].Prefix = "Capacity, lower bound: ";
-            parameterlist["caplower"].Value = -1;
+            parameterlist["caplower"].Value = Default.capacity_lower_bound;
             parameterlist["caplower"].NonValue = -1;
             parameterlist["capupper"].Prefix = "Capacity, upper bound: ";
-            parameterlist["capupper"].Value = -1;
+            parameterlist["capupper"].Value = Default.capacity_upper_bound;
             parameterlist["capupper"].NonValue = -1;
             parameterlist["investcostfix"].Prefix = "Investment cost, fix: ";
             parameterlist["investcostprop"].Prefix = "Investment cost, proportional: ";
             parameterlist["opercostfix"].Prefix = "Operating cost, fix: ";
             parameterlist["opercostprop"].Prefix = "Operating cost, proportional: ";
             parameterlist["payoutperiod"].Prefix = "Payout period: ";
-            parameterlist["payoutperiod"].Value = -1;
+            parameterlist["payoutperiod"].Value = Default.payout_period;
             parameterlist["payoutperiod"].NonValue = -1;
             parameterlist["workinghour"].Prefix = "Working hours per year: ";
-            parameterlist["workinghour"].Value = -1;
+            parameterlist["workinghour"].Value = Default.worging_hours_per_year;
             parameterlist["workinghour"].NonValue = -1;
         }
 
