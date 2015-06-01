@@ -18,7 +18,7 @@ namespace PNSDraw
 
         List<Canvas.IGraphicsObject> GraphicsObjectList;
 
-        List<Solution> Solutions;
+        public List<Solution> Solutions;
 
         XMLPGraph CopiedStructure;
 
@@ -995,17 +995,21 @@ namespace PNSDraw
             }
         }
 
-        public void ParseSolution(string t_str)
+        public void ParseSolution(string t_str, int limit)
         {
             Solutions.Clear();
 
             string t_rate_str, t_opunit_str, t_mat_str, t_amount_str;
-            int t_begin = 0, t_pos, t_opunits_pos, t_annual_pos, t_index=0;
+            int t_begin = 0, t_pos, t_opunits_pos, t_annual_pos, t_index = 0;
             double t_cost;
 
             //----------- Maximal Structure -------------
             Solution solution = new Solution(t_index++, "Maximal structure");
             t_begin = t_str.IndexOf("Maximal Structure", t_begin);
+            if (t_begin == -1)
+            {
+                return;
+            }
             t_begin = t_str.IndexOf("Materials", t_begin);
             t_begin = t_str.IndexOf("\n", t_begin);
             t_begin++;
@@ -1018,8 +1022,17 @@ namespace PNSDraw
             t_begin = t_str.IndexOf("Operating units", t_begin);
             t_begin = t_str.IndexOf("\n", t_begin);
             t_begin++;
-            t_pos = t_str.IndexOf("Feasible structure", t_begin);
-            string[] opunitlist = (t_str.Substring(t_begin, t_pos - t_begin)).Split(',');
+            t_pos = t_str.IndexOf("Solution structure", t_begin);
+            Console.WriteLine("t_pos: " + t_pos + ", t_begin: " + t_begin);
+            string[] opunitlist;
+            if (t_pos != -1)
+            {
+                opunitlist = (t_str.Substring(t_begin, t_pos - t_begin)).Split(',');
+            }
+            else
+            {
+                opunitlist = (t_str.Substring(t_begin, t_str.Length - 5 - t_begin)).Split(',');
+            }
             foreach (string item in opunitlist)
             {
                 solution.AddOperatingUnit(item.Trim(), 1);
@@ -1027,82 +1040,125 @@ namespace PNSDraw
             Solutions.Add(solution);
             //-------------------------------------------
 
-            while ((t_begin = t_str.IndexOf("Feasible structure", t_begin)) != -1)
+            //-----------------SSG----SSG+LP-------------
+            if (t_str.IndexOf("Feasible structure", 0) == -1)
             {
-                solution = new Solution(t_index, "Feasible structure #" + t_index.ToString());
-                t_index++;
-                t_pos = t_str.IndexOf("Materials", t_begin);
-                t_opunits_pos = t_str.IndexOf("Operating units", t_begin);
-                t_cost = 0;
-                if ((t_annual_pos = t_str.IndexOf("Total annual cost", t_begin)) != -1)
+                t_pos = t_str.IndexOf("Solution structure", 0);
+                int i = 1;
+                while (i <= limit && t_pos != t_str.Length && t_pos != -1)
                 {
-                    int t_bpos = t_str.IndexOf("= ", t_annual_pos) + 2;
-                    int t_epos = t_bpos - 1;
-                    while (t_str[++t_epos] == ' ') ;
-                    while (t_str[++t_epos] != ' ' && t_str[t_epos] != '\n') ;
-                    t_cost = Convert.ToDouble(t_str.Substring(t_bpos, t_epos - t_bpos));
-                }
-                t_begin = t_pos;
-                if (t_begin != -1)
-                {
-                    do
+                    solution = new Solution(t_index, "Solution structure #" + t_index.ToString());
+                    t_index++;
+                    t_begin = t_str.IndexOf("Solution structure #" + i.ToString(), 0);
+                    t_begin = t_str.IndexOf("Materials", t_begin);
+                    t_begin = t_str.IndexOf("\n", t_begin);
+                    t_begin++;
+                    t_opunits_pos = t_str.IndexOf("Operating units", t_begin);
+                    string[] solmatlist = (t_str.Substring(t_begin, t_opunits_pos - t_begin)).Split(',');
+                    foreach (string item in solmatlist)
                     {
-                        t_pos = t_begin;
-                        while (t_str.Length > t_pos && t_str[t_pos] != '\n') t_pos++;
-                        if (t_opunits_pos > t_pos + 1)
-                        {
-                            t_begin = t_pos + 1;
-                            int t_pos_colon = t_str.IndexOf(':', t_begin);
-                            t_pos = t_str.IndexOf('(', t_begin);
-                            if (t_pos == -1 || t_pos > t_pos_colon) t_pos = t_pos_colon + 1;
-                            t_mat_str = t_str.Substring(t_begin, t_pos - 1 - t_begin);
-                            t_begin = t_pos_colon + 2;
-                            t_pos = t_str.IndexOf('\n', t_begin);
-                            t_amount_str = t_str.Substring(t_begin, t_pos - t_begin);
-                            t_begin = t_pos;
-
-                            //t_solution.AddMaterial(PnsEditor.FindMaterial(t_mat_str), Convert.ToDouble(t_amount_str));
-                            
-                            if (GetMaterialByName(t_mat_str) != null)
-                            {
-                                if (t_amount_str == "balanced")
-                                {
-                                    t_amount_str = "0";
-                                }
-                                solution.AddMaterial(t_mat_str, ConvertManager.ToDouble(t_amount_str, false));
-                            }
-                            
-                        }
-                    } while (t_opunits_pos > t_pos + 1);
-                }
-                t_begin = t_opunits_pos;
-                if (t_begin != -1)
-                {
-                    do
+                        solution.AddMaterial(item.Trim(), 1);
+                    }
+                    t_begin = t_opunits_pos;
+                    t_begin = t_str.IndexOf("\n", t_begin);
+                    t_begin++;
+                    t_pos = t_str.IndexOf("Solution structure #" + (i + 1).ToString(), 0);
+                    if (i == limit || t_pos == -1)
                     {
-                        t_pos = t_begin;
-                        while (t_annual_pos > t_pos + 1 && !(t_str[t_pos] == '\n' && t_str[t_pos + 1] >= '0' && t_str[t_pos + 1] <= '9')) t_pos++;
-                        if (t_annual_pos > t_pos + 1)
-                        {
-                            t_begin = t_pos + 1;
-                            t_pos = t_str.IndexOf('*', t_begin);
-                            t_rate_str = t_str.Substring(t_begin, t_pos - t_begin);
-                            t_begin = t_pos + 1;
-                            t_pos = t_str.IndexOf('(', t_begin);
-                            t_opunit_str = t_str.Substring(t_begin, t_pos - 1 - t_begin);
-                            t_begin = t_pos + 1;
-                            //t_solution.AddOpUnit(PnsEditor.FindOperatingUnit(t_opunit_str), Convert.ToDouble(t_rate_str));
-                            
-                            if (GetOperatingUnitByName(t_opunit_str) != null)
-                            {
-                                solution.AddOperatingUnit(t_opunit_str, ConvertManager.ToDouble(t_rate_str, false));
-                            }
-                        }
-                    } while (t_annual_pos > t_pos + 1);
-                }
-                Solutions.Add(solution);
+                        t_pos = t_str.Length;
+                    }
+                    Console.WriteLine("t_pos: " + t_pos);
+                    string[] sol_opunitlist = (t_str.Substring(t_begin, t_pos - t_begin)).Split(',');
+                    foreach (string item in sol_opunitlist)
+                    {
+                        solution.AddOperatingUnit(item.Trim(), 1);
+                    }
+                    Solutions.Add(solution);
+                    i++;
+                } 
             }
-            
+            //-------------------------------------------
+
+            //-----------------MSG----ABB----------------
+            else
+            {
+                while ((t_begin = t_str.IndexOf("Feasible structure", t_begin)) != -1)
+                {
+                    solution = new Solution(t_index, "Feasible structure #" + t_index.ToString());
+                    t_index++;
+                    t_pos = t_str.IndexOf("Materials", t_begin);
+                    t_opunits_pos = t_str.IndexOf("Operating units", t_begin);
+                    t_cost = 0;
+                    if ((t_annual_pos = t_str.IndexOf("Total annual cost", t_begin)) != -1)
+                    {
+                        int t_bpos = t_str.IndexOf("= ", t_annual_pos) + 2;
+                        int t_epos = t_bpos - 1;
+                        while (t_str[++t_epos] == ' ') ;
+                        while (t_str[++t_epos] != ' ' && t_str[t_epos] != '\n') ;
+                        t_cost = Convert.ToDouble(t_str.Substring(t_bpos, t_epos - t_bpos));
+                    }
+                    t_begin = t_pos;
+                    if (t_begin != -1)
+                    {
+                        do
+                        {
+                            t_pos = t_begin;
+                            while (t_str.Length > t_pos && t_str[t_pos] != '\n') t_pos++;
+                            if (t_opunits_pos > t_pos + 1)
+                            {
+                                t_begin = t_pos + 1;
+                                int t_pos_colon = t_str.IndexOf(':', t_begin);
+                                t_pos = t_str.IndexOf('(', t_begin);
+                                if (t_pos == -1 || t_pos > t_pos_colon) t_pos = t_pos_colon + 1;
+                                t_mat_str = t_str.Substring(t_begin, t_pos - 1 - t_begin);
+                                t_begin = t_pos_colon + 2;
+                                t_pos = t_str.IndexOf('\n', t_begin);
+                                t_amount_str = t_str.Substring(t_begin, t_pos - t_begin);
+                                t_begin = t_pos;
+
+                                //t_solution.AddMaterial(PnsEditor.FindMaterial(t_mat_str), Convert.ToDouble(t_amount_str));
+
+                                if (GetMaterialByName(t_mat_str) != null)
+                                {
+                                    if (t_amount_str == "balanced")
+                                    {
+                                        t_amount_str = "0";
+                                    }
+                                    solution.AddMaterial(t_mat_str, ConvertManager.ToDouble(t_amount_str, false));
+                                }
+
+                            }
+                        } while (t_opunits_pos > t_pos + 1);
+                    }
+                    t_begin = t_opunits_pos;
+                    if (t_begin != -1)
+                    {
+                        do
+                        {
+                            t_pos = t_begin;
+                            while (t_annual_pos > t_pos + 1 && !(t_str[t_pos] == '\n' && t_str[t_pos + 1] >= '0' && t_str[t_pos + 1] <= '9')) t_pos++;
+                            if (t_annual_pos > t_pos + 1)
+                            {
+                                t_begin = t_pos + 1;
+                                t_pos = t_str.IndexOf('*', t_begin);
+                                t_rate_str = t_str.Substring(t_begin, t_pos - t_begin);
+                                t_begin = t_pos + 1;
+                                t_pos = t_str.IndexOf('(', t_begin);
+                                t_opunit_str = t_str.Substring(t_begin, t_pos - 1 - t_begin);
+                                t_begin = t_pos + 1;
+                                //t_solution.AddOpUnit(PnsEditor.FindOperatingUnit(t_opunit_str), Convert.ToDouble(t_rate_str));
+
+                                if (GetOperatingUnitByName(t_opunit_str) != null)
+                                {
+                                    solution.AddOperatingUnit(t_opunit_str, ConvertManager.ToDouble(t_rate_str, false));
+                                }
+                            }
+                        } while (t_annual_pos > t_pos + 1);
+                    }
+                    Solutions.Add(solution);
+                }
+            }
+            //-------------------------------------------
         }
     }
 }
