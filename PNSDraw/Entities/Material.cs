@@ -276,13 +276,13 @@ namespace PNSDraw
                 parameterlist[prop] = op;
             }
             parameterlist["price"].Prefix = "Price: ";
-            parameterlist["price"].Value = -1;
+            parameterlist["price"].Value = Default.price;
             parameterlist["price"].NonValue = -1;
             parameterlist["reqflow"].Prefix = "Required flow: ";
-            parameterlist["reqflow"].Value = -1;
+            parameterlist["reqflow"].Value = Default.flow_rate_lower_bound;
             parameterlist["reqflow"].NonValue = -1;
             parameterlist["maxflow"].Prefix = "Maximum flow: ";
-            parameterlist["maxflow"].Value = -1;
+            parameterlist["maxflow"].Value = Default.flow_rate_upper_bound;
             parameterlist["maxflow"].NonValue = -1;
             
         }
