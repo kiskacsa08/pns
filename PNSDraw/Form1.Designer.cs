@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Raw Materials");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Intermediates");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Products");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Materials", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7,
-            treeNode8});
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Operating Units");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Raw Materials");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Intermediates");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Products");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Materials", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Operating Units");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,7 +99,6 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.pnsCanvas1 = new PNSDraw.Canvas.PNSCanvas();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
@@ -118,7 +117,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBox_minimap = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.propertyGrid1 = new PNSDraw.MyPropertyGrid();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -127,6 +125,9 @@
             this.treeMaterials = new System.Windows.Forms.TreeView();
             this.treeOpUnits = new System.Windows.Forms.TreeView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnsCanvas1 = new PNSDraw.Canvas.PNSCanvas();
+            this.propertyGrid1 = new PNSDraw.MyPropertyGrid();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -143,6 +144,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -483,7 +485,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 1, 0);
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(932, 37);
+            this.toolStrip1.Size = new System.Drawing.Size(905, 37);
             this.toolStrip1.TabIndex = 2;
             // 
             // drawingmode_menuitem
@@ -689,7 +691,7 @@
             this.tableLayoutPanel2.Controls.Add(this.pnsCanvas1, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(374, 24);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(401, 24);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
@@ -697,23 +699,8 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(938, 603);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(911, 603);
             this.tableLayoutPanel2.TabIndex = 3;
-            // 
-            // pnsCanvas1
-            // 
-            this.pnsCanvas1.AddObjectMode = false;
-            this.pnsCanvas1.AllowDrop = true;
-            this.pnsCanvas1.BackColor = System.Drawing.Color.White;
-            this.pnsCanvas1.ConnectorMode = false;
-            this.pnsCanvas1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnsCanvas1.GridSize = 300;
-            this.pnsCanvas1.Location = new System.Drawing.Point(3, 83);
-            this.pnsCanvas1.Name = "pnsCanvas1";
-            this.pnsCanvas1.ShowGrid = true;
-            this.pnsCanvas1.Size = new System.Drawing.Size(932, 492);
-            this.pnsCanvas1.SnapToGrid = true;
-            this.pnsCanvas1.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
@@ -727,7 +714,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(932, 74);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(905, 74);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // toolStrip2
@@ -751,7 +738,7 @@
             this.toolStripButton4});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(932, 37);
+            this.toolStrip2.Size = new System.Drawing.Size(905, 37);
             this.toolStrip2.TabIndex = 6;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -841,7 +828,7 @@
             this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(87, 19);
+            this.toolStripButton4.Size = new System.Drawing.Size(87, 34);
             this.toolStripButton4.Text = "Solver settings";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
@@ -849,9 +836,9 @@
             // 
             this.groupBox2.Controls.Add(this.pictureBox_minimap);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(0, 382);
+            this.groupBox2.Location = new System.Drawing.Point(0, 378);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(360, 189);
+            this.groupBox2.Size = new System.Drawing.Size(401, 225);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Quick View";
@@ -861,7 +848,7 @@
             this.pictureBox_minimap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox_minimap.Location = new System.Drawing.Point(3, 16);
             this.pictureBox_minimap.Name = "pictureBox_minimap";
-            this.pictureBox_minimap.Size = new System.Drawing.Size(354, 170);
+            this.pictureBox_minimap.Size = new System.Drawing.Size(395, 206);
             this.pictureBox_minimap.TabIndex = 0;
             this.pictureBox_minimap.TabStop = false;
             this.pictureBox_minimap.SizeChanged += new System.EventHandler(this.pictureBox_minimap_SizeChanged);
@@ -874,31 +861,18 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(360, 571);
+            this.groupBox1.Size = new System.Drawing.Size(387, 346);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Object Properties";
             // 
-            // propertyGrid1
-            // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.HelpVisible = false;
-            this.propertyGrid1.Location = new System.Drawing.Point(3, 16);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.ReadOnly = false;
-            this.propertyGrid1.Size = new System.Drawing.Size(354, 552);
-            this.propertyGrid1.TabIndex = 1;
-            this.propertyGrid1.ToolbarVisible = false;
-            this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
-            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(360, 571);
+            this.panel1.Size = new System.Drawing.Size(387, 346);
             this.panel1.TabIndex = 4;
             // 
             // tabControl1
@@ -906,11 +880,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tabControl1.Location = new System.Drawing.Point(0, 24);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(374, 603);
+            this.tabControl1.Size = new System.Drawing.Size(401, 378);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -919,7 +893,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(366, 577);
+            this.tabPage1.Size = new System.Drawing.Size(393, 352);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Object Properties";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -930,7 +904,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(366, 577);
+            this.tabPage2.Size = new System.Drawing.Size(338, 388);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "TreeView";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -948,8 +922,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.treeOpUnits);
-            this.splitContainer1.Size = new System.Drawing.Size(360, 571);
-            this.splitContainer1.SplitterDistance = 166;
+            this.splitContainer1.Size = new System.Drawing.Size(332, 382);
+            this.splitContainer1.SplitterDistance = 153;
             this.splitContainer1.TabIndex = 0;
             // 
             // treeMaterials
@@ -957,17 +931,17 @@
             this.treeMaterials.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeMaterials.Location = new System.Drawing.Point(0, 0);
             this.treeMaterials.Name = "treeMaterials";
-            treeNode6.Name = "raw_materials";
-            treeNode6.Text = "Raw Materials";
-            treeNode7.Name = "intermediates";
-            treeNode7.Text = "Intermediates";
-            treeNode8.Name = "products";
-            treeNode8.Text = "Products";
-            treeNode9.Name = "materials";
-            treeNode9.Text = "Materials";
+            treeNode1.Name = "raw_materials";
+            treeNode1.Text = "Raw Materials";
+            treeNode2.Name = "intermediates";
+            treeNode2.Text = "Intermediates";
+            treeNode3.Name = "products";
+            treeNode3.Text = "Products";
+            treeNode4.Name = "materials";
+            treeNode4.Text = "Materials";
             this.treeMaterials.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode9});
-            this.treeMaterials.Size = new System.Drawing.Size(166, 571);
+            treeNode4});
+            this.treeMaterials.Size = new System.Drawing.Size(153, 382);
             this.treeMaterials.TabIndex = 0;
             this.treeMaterials.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeMaterials_NodeMouseClick);
             // 
@@ -976,11 +950,11 @@
             this.treeOpUnits.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeOpUnits.Location = new System.Drawing.Point(0, 0);
             this.treeOpUnits.Name = "treeOpUnits";
-            treeNode10.Name = "op_units";
-            treeNode10.Text = "Operating Units";
+            treeNode5.Name = "op_units";
+            treeNode5.Text = "Operating Units";
             this.treeOpUnits.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            this.treeOpUnits.Size = new System.Drawing.Size(190, 571);
+            treeNode5});
+            this.treeOpUnits.Size = new System.Drawing.Size(175, 382);
             this.treeOpUnits.TabIndex = 0;
             this.treeOpUnits.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeMaterials_NodeMouseClick);
             // 
@@ -988,10 +962,47 @@
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(366, 577);
+            this.tabPage3.Size = new System.Drawing.Size(338, 388);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Solutions";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.tabControl1);
+            this.panel2.Controls.Add(this.groupBox2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(0, 24);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(401, 603);
+            this.panel2.TabIndex = 2;
+            // 
+            // pnsCanvas1
+            // 
+            this.pnsCanvas1.AddObjectMode = false;
+            this.pnsCanvas1.AllowDrop = true;
+            this.pnsCanvas1.BackColor = System.Drawing.Color.White;
+            this.pnsCanvas1.ConnectorMode = false;
+            this.pnsCanvas1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnsCanvas1.GridSize = 300;
+            this.pnsCanvas1.Location = new System.Drawing.Point(3, 83);
+            this.pnsCanvas1.Name = "pnsCanvas1";
+            this.pnsCanvas1.ShowGrid = true;
+            this.pnsCanvas1.Size = new System.Drawing.Size(905, 492);
+            this.pnsCanvas1.SnapToGrid = true;
+            this.pnsCanvas1.TabIndex = 0;
+            // 
+            // propertyGrid1
+            // 
+            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid1.HelpVisible = false;
+            this.propertyGrid1.Location = new System.Drawing.Point(3, 16);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.ReadOnly = false;
+            this.propertyGrid1.Size = new System.Drawing.Size(381, 327);
+            this.propertyGrid1.TabIndex = 1;
+            this.propertyGrid1.ToolbarVisible = false;
+            this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
             // 
             // Form1
             // 
@@ -999,7 +1010,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1312, 627);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -1030,6 +1041,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1127,6 +1139,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.Panel panel2;
 
     }
 }

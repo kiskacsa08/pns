@@ -1042,7 +1042,7 @@ namespace PNSDraw
                     FileStream file = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
                     StreamReader sr = new StreamReader(file);
                     string solution = sr.ReadToEnd();
-                    Graph.ParseSolution(solution);
+                    Graph.ParseSolution(solution, 10);
                     UpdateViewList();
 
                     if (Graph.SolutionCount > 0)
@@ -1274,7 +1274,8 @@ namespace PNSDraw
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             string algorithm;
-            int limit = int.Parse(toolStripTextBox2.Text);
+            int limit;
+            
             switch (toolStripComboBox2.SelectedIndex)
             {
                 case 0:
@@ -1284,7 +1285,7 @@ namespace PNSDraw
                     algorithm = "SSG";
                     break;
                 case 2:
-                    algorithm = "SSG+LP";
+                    algorithm = "SSGLP";
                     break;
                 case 3:
                     algorithm = "MSG";
@@ -1294,31 +1295,34 @@ namespace PNSDraw
                     break;
             }
 
-            if (toolStripButton3.Checked)
+            if (toolStripTextBox2.Text == "")
             {
-                if (toolStripTextBox1.Text == "" || toolStripTextBox2.Text == "")
-                {
-                    MessageBox.Show("Please fill all fields!");
-                }
-                else
-                {
-                    int processes = int.Parse(toolStripTextBox1.Text);
-                    //string algorithm tartalmazza az algoritmust (feljebb), int processes a folyamatok számát, int limit a megoldások limitjét
-                    // TODO: Ide jön az online megoldó hívása
-                    Problem problem = new Problem(algorithm, Graph, processes, limit);
-                    Solver solver = new Solver(problem);
-                    problem = solver.Run();
-                    MessageBox.Show("Online");
-                }
+                MessageBox.Show("Please fill all fields!");
             }
             else
             {
-                if (toolStripTextBox2.Text == "")
+                limit = int.Parse(toolStripTextBox2.Text);
+
+                if (toolStripButton3.Checked)
                 {
-                    MessageBox.Show("Please fill all fields!");
+                    if (toolStripTextBox1.Text == "")
+                    {
+                        MessageBox.Show("Please fill all fields!");
+                    }
+                    else
+                    {
+                        int processes = int.Parse(toolStripTextBox1.Text);
+                        //string algorithm tartalmazza az algoritmust (feljebb), int processes a folyamatok számát, int limit a megoldások limitjét
+                        // TODO: Ide jön az online megoldó hívása
+                        Problem problem = new Problem(algorithm, Graph, processes, limit);
+                        Solver solver = new Solver(problem);
+                        problem = solver.Run();
+                        MessageBox.Show("Online");
+                    }
                 }
                 else
                 {
+
                     MessageBox.Show("Offline");
                     Problem p = new Problem(algorithm, Graph, 0, limit);
                     FileConnector.ProblemToSolverInput(p, p.name);
@@ -1353,16 +1357,24 @@ namespace PNSDraw
 
                     if (exitCode == 0)
                     {
-                        FileStream file = new FileStream(outPath, FileMode.Open, FileAccess.Read);
-                        StreamReader sr = new StreamReader(file);
-                        string solution = sr.ReadToEnd();
-                        Graph.ParseSolution(solution);
-                        UpdateViewList();
-
-                        if (Graph.SolutionCount > 0)
+                        try
                         {
-                            toolStripComboBox1.Visible = true;
+                            FileStream file = new FileStream(outPath, FileMode.Open, FileAccess.Read);
+                            StreamReader sr = new StreamReader(file);
+                            string solution = sr.ReadToEnd();
+                            Graph.ParseSolution(solution, limit);
+                            UpdateViewList();
+
+                            if (Graph.SolutionCount > 0)
+                            {
+                                toolStripComboBox1.Visible = true;
+                            }
                         }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
+
                     }
                 }
             }
@@ -1370,7 +1382,7 @@ namespace PNSDraw
 
         private void toolStripTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyValue < 48 || e.KeyValue > 57)
+            if ((e.KeyValue < 48 || e.KeyValue > 57) && e.KeyValue != 8)
             {
                 e.SuppressKeyPress = true;
             }
