@@ -10,8 +10,8 @@ using System.Reflection;
 using PNSDraw.Entities;
 using System.Threading;
 using System.Globalization;
-using Pns.PnsSolver;
 using PNSDraw.online;
+using System.Diagnostics;
 
 namespace PNSDraw
 {
@@ -1041,9 +1041,7 @@ namespace PNSDraw
                 {
                     FileStream file = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
                     StreamReader sr = new StreamReader(file);
-
                     string solution = sr.ReadToEnd();
-
                     Graph.ParseSolution(solution);
                     UpdateViewList();
 
@@ -1254,7 +1252,6 @@ namespace PNSDraw
                 Image check = PNSDraw.Properties.Resources.green_check;
                 toolStripButton3.Image = check;
                 toolStripTextBox1.Enabled = true;
-                toolStripTextBox2.Enabled = true;
                 toolStripComboBox2.Items.Clear();
                 toolStripComboBox2.Items.Add("ABB");
                 toolStripComboBox2.Items.Add("SSG");
@@ -1265,7 +1262,6 @@ namespace PNSDraw
                 Image check = PNSDraw.Properties.Resources.red_check;
                 toolStripButton3.Image = check;
                 toolStripTextBox1.Enabled = false;
-                toolStripTextBox2.Enabled = false;
                 toolStripComboBox2.Items.Clear();
                 toolStripComboBox2.Items.Add("ABB");
                 toolStripComboBox2.Items.Add("SSG");
@@ -1278,10 +1274,11 @@ namespace PNSDraw
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             string algorithm;
+            int limit = int.Parse(toolStripTextBox2.Text);
             switch (toolStripComboBox2.SelectedIndex)
             {
                 case 0:
-                    algorithm = "ABB";
+                    algorithm = "INSIDEOUT";
                     break;
                 case 1:
                     algorithm = "SSG";
@@ -1306,7 +1303,6 @@ namespace PNSDraw
                 else
                 {
                     int processes = int.Parse(toolStripTextBox1.Text);
-                    int limit = int.Parse(toolStripTextBox2.Text);
                     //string algorithm tartalmazza az algoritmust (feljebb), int processes a folyamatok számát, int limit a megoldások limitjét
                     // TODO: Ide jön az online megoldó hívása
                     Problem problem = new Problem(algorithm, Graph, processes, limit);
@@ -1317,8 +1313,58 @@ namespace PNSDraw
             }
             else
             {
-                MessageBox.Show("Offline");
-                Console.WriteLine(Adapter.StartSolver(algorithm, Graph));
+                if (toolStripTextBox2.Text == "")
+                {
+                    MessageBox.Show("Please fill all fields!");
+                }
+                else
+                {
+                    MessageBox.Show("Offline");
+                    Problem p = new Problem(algorithm, Graph, 0, limit);
+                    FileConnector.ProblemToSolverInput(p, p.name);
+                    string inPath = Path.GetTempPath() + p.name + ".in";
+                    string outPath = Path.GetTempPath() + p.name + ".out";
+                    string arguments = algorithm + " \"" + inPath + "\" " + "\"" + outPath + "\" " + limit.ToString();
+
+                    ProcessStartInfo pInfo = new ProcessStartInfo();
+                    pInfo.WorkingDirectory = Path.GetTempPath();
+                    pInfo.RedirectStandardError = true;
+                    pInfo.RedirectStandardOutput = true;
+                    pInfo.UseShellExecute = false;
+                    pInfo.Arguments = arguments;
+                    pInfo.FileName = "pns_depth.exe";
+                    pInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    pInfo.CreateNoWindow = true;
+                    int exitCode = 1;
+
+                    Process solver = new Process();
+                    try
+                    {
+                        solver.StartInfo = pInfo;
+                        solver.Start();
+                        solver.WaitForExit();
+                        exitCode = solver.ExitCode;
+                        MessageBox.Show(exitCode.ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
+
+                    if (exitCode == 0)
+                    {
+                        FileStream file = new FileStream(outPath, FileMode.Open, FileAccess.Read);
+                        StreamReader sr = new StreamReader(file);
+                        string solution = sr.ReadToEnd();
+                        Graph.ParseSolution(solution);
+                        UpdateViewList();
+
+                        if (Graph.SolutionCount > 0)
+                        {
+                            toolStripComboBox1.Visible = true;
+                        }
+                    }
+                }
             }
         }
 
@@ -1338,6 +1384,12 @@ namespace PNSDraw
         {
             MutualExclusionDialog med = new MutualExclusionDialog(Graph);
             med.ShowDialog();
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            SolverSettingsDialog ssd = new SolverSettingsDialog();
+            ssd.ShowDialog();
         }
     }
 }
