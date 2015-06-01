@@ -96,6 +96,7 @@
     <Compile Include="Entities\ObjectProperty.cs" />
     <Compile Include="Entities\Problem.cs" />
     <Compile Include="Entities\Solution.cs" />
+    <Compile Include="FileConnector.cs" />
     <Compile Include="Managers\PropertyManager.cs" />
     <Compile Include="MutualExclusionDialog.cs">
       <SubType>Form</SubType>
@@ -151,6 +152,12 @@
     <Compile Include="SolutionSettingsWindow.Designer.cs">
       <DependentUpon>SolutionSettingsWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="SolverSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SolverSettingsDialog.Designer.cs">
+      <DependentUpon>SolverSettingsDialog.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>
@@ -176,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SolutionSettingsWindow.resx">
       <DependentUpon>SolutionSettingsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SolverSettingsDialog.resx">
+      <DependentUpon>SolverSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
