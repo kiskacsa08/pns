@@ -126,6 +126,9 @@
             this.treeOpUnits = new System.Windows.Forms.TreeView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cmbSolutions = new System.Windows.Forms.ComboBox();
+            this.treeSolution = new System.Windows.Forms.TreeView();
             this.pnsCanvas1 = new PNSDraw.Canvas.PNSCanvas();
             this.propertyGrid1 = new PNSDraw.MyPropertyGrid();
             this.menuStrip1.SuspendLayout();
@@ -144,7 +147,9 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -904,7 +909,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(338, 388);
+            this.tabPage2.Size = new System.Drawing.Size(393, 352);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "TreeView";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -922,8 +927,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.treeOpUnits);
-            this.splitContainer1.Size = new System.Drawing.Size(332, 382);
-            this.splitContainer1.SplitterDistance = 153;
+            this.splitContainer1.Size = new System.Drawing.Size(387, 346);
+            this.splitContainer1.SplitterDistance = 178;
             this.splitContainer1.TabIndex = 0;
             // 
             // treeMaterials
@@ -941,7 +946,7 @@
             treeNode4.Text = "Materials";
             this.treeMaterials.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode4});
-            this.treeMaterials.Size = new System.Drawing.Size(153, 382);
+            this.treeMaterials.Size = new System.Drawing.Size(178, 346);
             this.treeMaterials.TabIndex = 0;
             this.treeMaterials.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeMaterials_NodeMouseClick);
             // 
@@ -954,15 +959,16 @@
             treeNode5.Text = "Operating Units";
             this.treeOpUnits.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode5});
-            this.treeOpUnits.Size = new System.Drawing.Size(175, 382);
+            this.treeOpUnits.Size = new System.Drawing.Size(205, 346);
             this.treeOpUnits.TabIndex = 0;
             this.treeOpUnits.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeMaterials_NodeMouseClick);
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.panel3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(338, 388);
+            this.tabPage3.Size = new System.Drawing.Size(393, 352);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Solutions";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -976,6 +982,35 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(401, 603);
             this.panel2.TabIndex = 2;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.treeSolution);
+            this.panel3.Controls.Add(this.cmbSolutions);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(393, 352);
+            this.panel3.TabIndex = 0;
+            // 
+            // cmbSolutions
+            // 
+            this.cmbSolutions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cmbSolutions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSolutions.FormattingEnabled = true;
+            this.cmbSolutions.Location = new System.Drawing.Point(0, 0);
+            this.cmbSolutions.Name = "cmbSolutions";
+            this.cmbSolutions.Size = new System.Drawing.Size(393, 21);
+            this.cmbSolutions.TabIndex = 0;
+            this.cmbSolutions.SelectedIndexChanged += new System.EventHandler(this.cmbSolutions_SelectedIndexChanged);
+            // 
+            // treeSolution
+            // 
+            this.treeSolution.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeSolution.Location = new System.Drawing.Point(0, 21);
+            this.treeSolution.Name = "treeSolution";
+            this.treeSolution.Size = new System.Drawing.Size(393, 331);
+            this.treeSolution.TabIndex = 1;
             // 
             // pnsCanvas1
             // 
@@ -1041,7 +1076,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1140,6 +1177,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ComboBox cmbSolutions;
+        private System.Windows.Forms.TreeView treeSolution;
 
     }
 }

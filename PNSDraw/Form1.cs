@@ -1044,6 +1044,7 @@ namespace PNSDraw
                     string solution = sr.ReadToEnd();
                     Graph.ParseSolution(solution, 10);
                     UpdateViewList();
+                    UpdateSolutionsTab();
 
                     if (Graph.SolutionCount > 0)
                     {
@@ -1054,9 +1055,10 @@ namespace PNSDraw
                     sr.Close();
                     file.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Bad solution file format.");
+                    Console.WriteLine(ex.ToString());
                 }
             }
             redoToolStripMenuItem.Enabled = false;
@@ -1364,6 +1366,7 @@ namespace PNSDraw
                             string solution = sr.ReadToEnd();
                             Graph.ParseSolution(solution, limit);
                             UpdateViewList();
+                            UpdateSolutionsTab();
 
                             if (Graph.SolutionCount > 0)
                             {
@@ -1378,6 +1381,41 @@ namespace PNSDraw
                     }
                 }
             }
+        }
+
+        // TODO: Befejezni a treeview feltöltését, mértékegységek!
+        private void UpdateSolutionsTab()
+        {
+            foreach (Solution sol in Graph.Solutions)
+            {
+                cmbSolutions.Items.Add(sol.Title + ": Total cost: " + sol.OptimalValue);
+            }
+            cmbSolutions.SelectedIndex = 0;
+
+            UpdateSolutionTreeView(0);
+        }
+
+        private void UpdateSolutionTreeView(int solution)
+        {
+            treeSolution.Nodes.Clear();
+            Solution sol = Graph.Solutions[solution];
+            //----------Materials ág---------------
+            treeSolution.Nodes.Add("Materials");
+            int i = 0;
+            foreach (KeyValuePair<string, double> mat in sol.Materials)
+            {
+                treeSolution.Nodes[0].Nodes.Add(mat.Key + ": " + mat.Value);
+                //Material m = Graph.GetMaterialByName(mat.Key);
+                //treeSolution.Nodes[0].Nodes[i].Nodes.Add("Type: " + m.TypeProp);
+                //treeSolution.Nodes[0].Nodes[i].Nodes.Add("Price: " + m.PriceProp);
+                //treeSolution.Nodes[0].Nodes[i].Nodes.Add("Min: " + m.ReqFlowProp);
+                //treeSolution.Nodes[0].Nodes[i].Nodes.Add("Max: " + m.MaxFlowProp);
+                //i++;
+            }
+            //-------------------------------------
+
+            //----------Operating Units ág---------
+            treeSolution.Nodes.Add("Operating Units");
         }
 
         private void toolStripTextBox1_KeyDown(object sender, KeyEventArgs e)
@@ -1402,6 +1440,11 @@ namespace PNSDraw
         {
             SolverSettingsDialog ssd = new SolverSettingsDialog();
             ssd.ShowDialog();
+        }
+
+        private void cmbSolutions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateSolutionTreeView(cmbSolutions.SelectedIndex);
         }
     }
 }
