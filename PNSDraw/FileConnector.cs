@@ -95,9 +95,9 @@ namespace PNSDraw
                     default:
                         break;
                 }
-                file_str.Append(mat.ReqFlowProp.Value != Default.flow_rate_lower_bound ? ", flow_rate_lower_bound=" + mat.ReqFlowProp : "");
-                file_str.Append(mat.MaxFlowProp.Value != Default.flow_rate_upper_bound && mat.MaxFlowProp.Value != 0 ? ", flow_rate_upper_bound=" + mat.MaxFlowProp : "");
-                file_str.Append(mat.PriceProp.Value != Default.price ? ", price=" + mat.MaxFlowProp : "");
+                file_str.Append(mat.ReqFlowProp.Value != Default.flow_rate_lower_bound && mat.ReqFlowProp.Value != -1? ", flow_rate_lower_bound=" + mat.ReqFlowProp : "");
+                file_str.Append(mat.MaxFlowProp.Value != Default.flow_rate_upper_bound && mat.MaxFlowProp.Value != -1 ? ", flow_rate_upper_bound=" + mat.MaxFlowProp : "");
+                file_str.Append(mat.PriceProp.Value != Default.price && mat.PriceProp.Value != -1 ? ", price=" + mat.MaxFlowProp : "");
                 file_str.Append("\n");
             }
             file_str.Append("\n");
