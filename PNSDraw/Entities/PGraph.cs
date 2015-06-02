@@ -5,6 +5,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 using PNSDraw.Entities;
+using System.Globalization;
 
 namespace PNSDraw
 {
@@ -1002,42 +1003,54 @@ namespace PNSDraw
             string t_rate_str, t_opunit_str, t_mat_str, t_amount_str;
             int t_begin = 0, t_pos, t_opunits_pos, t_annual_pos, t_index = 0;
             double t_cost;
+            Solution solution;
 
             //----------- Maximal Structure -------------
-            Solution solution = new Solution(t_index++, "Maximal structure");
-            t_begin = t_str.IndexOf("Maximal Structure", t_begin);
-            if (t_begin == -1)
+            if (t_str.IndexOf("Maximal Structure", t_begin) != -1)
             {
-                return;
+                solution = new Solution(t_index++, "Maximal structure");
+                t_begin = t_str.IndexOf("Maximal Structure", t_begin);
+                if (t_begin == -1)
+                {
+                    return;
+                }
+                t_begin = t_str.IndexOf("Materials", t_begin);
+                t_begin = t_str.IndexOf("\n", t_begin);
+                t_begin++;
+                t_pos = t_str.IndexOf("Operating units", t_begin);
+                string[] matlist = (t_str.Substring(t_begin, t_pos - t_begin)).Split(',');
+                foreach (string item in matlist)
+                {
+                    solution.AddMaterial(item.Trim(), 1);
+                }
+                t_begin = t_str.IndexOf("Operating units", t_begin);
+                t_begin = t_str.IndexOf("\n", t_begin);
+                t_begin++;
+                t_pos = t_str.IndexOf("Solution structure", t_begin);
+                Console.WriteLine("t_pos: " + t_pos + ", t_begin: " + t_begin);
+                string[] opunitlist;
+                if (t_pos != -1)
+                {
+                    opunitlist = (t_str.Substring(t_begin, t_pos - t_begin)).Split(',');
+                }
+                else
+                {
+                    t_pos = t_str.IndexOf("Feasible structure", t_begin);
+                    if (t_pos != -1)
+                    {
+                        opunitlist = (t_str.Substring(t_begin, t_pos - t_begin)).Split(',');
+                    }
+                    else
+                    {
+                        opunitlist = (t_str.Substring(t_begin, t_str.Length - 6 - t_begin)).Split(',');
+                    }
+                }
+                foreach (string item in opunitlist)
+                {
+                    solution.AddOperatingUnit(item.Trim(), 1);
+                }
+                Solutions.Add(solution); 
             }
-            t_begin = t_str.IndexOf("Materials", t_begin);
-            t_begin = t_str.IndexOf("\n", t_begin);
-            t_begin++;
-            t_pos = t_str.IndexOf("Operating units", t_begin);
-            string[] matlist = (t_str.Substring(t_begin, t_pos - t_begin)).Split(',');
-            foreach (string item in matlist)
-            {
-                solution.AddMaterial(item.Trim(), 1);
-            }
-            t_begin = t_str.IndexOf("Operating units", t_begin);
-            t_begin = t_str.IndexOf("\n", t_begin);
-            t_begin++;
-            t_pos = t_str.IndexOf("Solution structure", t_begin);
-            Console.WriteLine("t_pos: " + t_pos + ", t_begin: " + t_begin);
-            string[] opunitlist;
-            if (t_pos != -1)
-            {
-                opunitlist = (t_str.Substring(t_begin, t_pos - t_begin)).Split(',');
-            }
-            else
-            {
-                opunitlist = (t_str.Substring(t_begin, t_str.Length - 5 - t_begin)).Split(',');
-            }
-            foreach (string item in opunitlist)
-            {
-                solution.AddOperatingUnit(item.Trim(), 1);
-            }
-            Solutions.Add(solution);
             //-------------------------------------------
 
             //-----------------SSG----SSG+LP-------------
@@ -1045,27 +1058,28 @@ namespace PNSDraw
             {
                 t_pos = t_str.IndexOf("Solution structure", 0);
                 int i = 1;
-                while (i <= limit && t_pos != t_str.Length && t_pos != -1)
+                while (i <= limit && t_pos < t_str.Length - 6 && t_pos != -1)
                 {
                     solution = new Solution(t_index, "Solution structure #" + t_index.ToString());
                     t_index++;
+                    Console.WriteLine("Hanyadik: " + i);
                     t_begin = t_str.IndexOf("Solution structure #" + i.ToString(), 0);
                     t_begin = t_str.IndexOf("Materials", t_begin);
                     t_begin = t_str.IndexOf("\n", t_begin);
                     t_begin++;
                     t_opunits_pos = t_str.IndexOf("Operating units", t_begin);
-                    string[] solmatlist = (t_str.Substring(t_begin, t_opunits_pos - t_begin)).Split(',');
-                    foreach (string item in solmatlist)
-                    {
-                        solution.AddMaterial(item.Trim(), 1);
-                    }
+                        string[] solmatlist = (t_str.Substring(t_begin, t_opunits_pos - t_begin)).Split(',');
+                        foreach (string item in solmatlist)
+                        {
+                            solution.AddMaterial(item.Trim(), 1);
+                        }
                     t_begin = t_opunits_pos;
                     t_begin = t_str.IndexOf("\n", t_begin);
                     t_begin++;
                     t_pos = t_str.IndexOf("Solution structure #" + (i + 1).ToString(), 0);
                     if (i == limit || t_pos == -1)
                     {
-                        t_pos = t_str.Length;
+                        t_pos = t_str.Length - 6;
                     }
                     Console.WriteLine("t_pos: " + t_pos);
                     string[] sol_opunitlist = (t_str.Substring(t_begin, t_pos - t_begin)).Split(',');
@@ -1091,11 +1105,11 @@ namespace PNSDraw
                     t_cost = 0;
                     if ((t_annual_pos = t_str.IndexOf("Total annual cost", t_begin)) != -1)
                     {
-                        int t_bpos = t_str.IndexOf("= ", t_annual_pos) + 2;
-                        int t_epos = t_bpos - 1;
-                        while (t_str[++t_epos] == ' ') ;
-                        while (t_str[++t_epos] != ' ' && t_str[t_epos] != '\n') ;
-                        t_cost = Convert.ToDouble(t_str.Substring(t_bpos, t_epos - t_bpos));
+                        int pos = t_str.IndexOf("= ", t_annual_pos);
+                        pos = pos + 2;
+                        int endpos = t_str.IndexOf(" ", pos);
+                        string value = t_str.Substring(pos, endpos - pos);
+                        t_cost = Convert.ToDouble(value, CultureInfo.GetCultureInfo("en-GB"));
                     }
                     t_begin = t_pos;
                     if (t_begin != -1)
