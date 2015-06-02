@@ -32,6 +32,11 @@ namespace PNSDraw
 
         ContextMenuStrip contMenu;
 
+        PleaseWaitDialog pwd;
+        string algorithm;
+        int limit;
+        bool isProblemExists;
+
         bool LockedMode
         {
             get
@@ -49,7 +54,7 @@ namespace PNSDraw
             InitializeComponent();
             Graph = new PGraph();
             pnsCanvas1.GraphicsStructure = Graph;
-            
+            isProblemExists = false;
         }
 
         void pnsCanvas1_DataChanged(object sender, Canvas.CanvasEventArgs e)
@@ -185,6 +190,7 @@ namespace PNSDraw
                 default:
                     break;
             }
+            isProblemExists = true;
         }
 
         private void propertyGrid1_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -240,6 +246,7 @@ namespace PNSDraw
                     RefreshTreeViews();
                     sr.Close();
                     file.Close();
+                    isProblemExists = true;
                 }
                 catch (Exception ex)
                 {
@@ -736,6 +743,7 @@ namespace PNSDraw
             m.Type = Globals.MaterialTypes.Raw;
             this.DoDragDrop(m, DragDropEffects.Move);
             pnsCanvas1.Focus();
+            isProblemExists = true;
         }
 
         private void button_intermediatematerial_MouseDown(object sender, MouseEventArgs e)
@@ -744,6 +752,7 @@ namespace PNSDraw
             m.Type = Globals.MaterialTypes.Intermediate;
             this.DoDragDrop(m, DragDropEffects.Move);
             pnsCanvas1.Focus();
+            isProblemExists = true;
         }
 
         private void button_productmaterial_MouseDown(object sender, MouseEventArgs e)
@@ -752,6 +761,7 @@ namespace PNSDraw
             m.Type = Globals.MaterialTypes.Product;
             this.DoDragDrop(m, DragDropEffects.Move);
             pnsCanvas1.Focus();
+            isProblemExists = true;
         }
 
         private void button_operatingunit_MouseDown(object sender, MouseEventArgs e)
@@ -759,6 +769,7 @@ namespace PNSDraw
             OperatingUnit op = new OperatingUnit(Graph);
             this.DoDragDrop(op, DragDropEffects.Move);
             pnsCanvas1.Focus();
+            isProblemExists = true;
         }
 
         private void SetState(CanvasMode state)
@@ -1173,6 +1184,10 @@ namespace PNSDraw
                     RefreshMinimap();
                 }
             }
+            if (cmbSolutions.Items.Count > 0 && toolStripComboBox1.SelectedIndex >= 3)
+            {
+                cmbSolutions.SelectedIndex = toolStripComboBox1.SelectedIndex - 3;
+            }
         }
 
         private void settingsToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1275,9 +1290,12 @@ namespace PNSDraw
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            string algorithm;
-            int limit;
-            
+            if (!isProblemExists)
+            {
+                MessageBox.Show("There is no problem!");
+                return;
+            }
+
             switch (toolStripComboBox2.SelectedIndex)
             {
                 case 0:
@@ -1304,6 +1322,11 @@ namespace PNSDraw
             else
             {
                 limit = int.Parse(toolStripTextBox2.Text);
+                if (limit < 1)
+                {
+                    MessageBox.Show("Limit must be greater than zero!");
+                    return;
+                }
 
                 if (toolStripButton3.Checked)
                 {
@@ -1314,8 +1337,22 @@ namespace PNSDraw
                     else
                     {
                         int processes = int.Parse(toolStripTextBox1.Text);
-                        //string algorithm tartalmazza az algoritmust (feljebb), int processes a folyamatok számát, int limit a megoldások limitjét
-                        // TODO: Ide jön az online megoldó hívása
+                        if (processes < 1 || processes > 64)
+                        {
+                            MessageBox.Show("The number of processes must be between 1 and 64!");
+                            return;
+                        }
+                        // TODO: Az UpdateSolutionTab() metódust hívd meg, ha már bent vannak a megoldások a gráf Solutions listájában
+                        // TODO: Az UpdateViewList() metódust is hívd meg az előző után
+                        // TODO: Ezt is írd be utána: tabControl1.SelectedTab = tabPage3
+                        // TODO: Még ezt is írd utána:
+                        /*
+                            if (Graph.SolutionCount > 0)
+                            {
+                                toolStripComboBox1.Visible = true;
+                            }
+                         */
+                        // TODO: Ezek berendezik a Solutions tabra és a gráf fölötti listába a megoldásokat
                         Problem problem = new Problem(algorithm, Graph, processes, limit);
                         Solver solver = new Solver(problem);
                         problem = solver.Run();
@@ -1324,75 +1361,42 @@ namespace PNSDraw
                 }
                 else
                 {
-
-                    MessageBox.Show("Offline");
-                    Problem p = new Problem(algorithm, Graph, 0, limit);
-                    FileConnector.ProblemToSolverInput(p, p.name);
-                    string inPath = Path.GetTempPath() + p.name + ".in";
-                    string outPath = Path.GetTempPath() + p.name + ".out";
-                    string arguments = algorithm + " \"" + inPath + "\" " + "\"" + outPath + "\" " + limit.ToString();
-
-                    ProcessStartInfo pInfo = new ProcessStartInfo();
-                    pInfo.WorkingDirectory = Path.GetTempPath();
-                    pInfo.RedirectStandardError = true;
-                    pInfo.RedirectStandardOutput = true;
-                    pInfo.UseShellExecute = false;
-                    pInfo.Arguments = arguments;
-                    pInfo.FileName = "pns_depth.exe";
-                    pInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    pInfo.CreateNoWindow = true;
-                    int exitCode = 1;
-
-                    Process solver = new Process();
-                    try
+                    if (backgroundWorker1.IsBusy != true)
                     {
-                        solver.StartInfo = pInfo;
-                        solver.Start();
-                        solver.WaitForExit();
-                        exitCode = solver.ExitCode;
-                        MessageBox.Show(exitCode.ToString());
+                        // create a new instance of the PleaseWaitDialog
+                        pwd = new PleaseWaitDialog();
+                        // event handler for the Cancel button in PleaseWaitDialog
+                        pwd.Canceled += new EventHandler<EventArgs>(cancelAsyncButton_Click);
+                        pwd.Show();
+                        // Start the asynchronous operation.
+                        backgroundWorker1.RunWorkerAsync();
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.ToString());
-                    }
-
-                    if (exitCode == 0)
-                    {
-                        try
-                        {
-                            FileStream file = new FileStream(outPath, FileMode.Open, FileAccess.Read);
-                            StreamReader sr = new StreamReader(file);
-                            string solution = sr.ReadToEnd();
-                            Graph.ParseSolution(solution, limit);
-                            UpdateViewList();
-                            UpdateSolutionsTab();
-
-                            if (Graph.SolutionCount > 0)
-                            {
-                                toolStripComboBox1.Visible = true;
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.ToString());
-                        }
-
-                    }
-                }
+                 }
             }
         }
 
-        // TODO: Befejezni a treeview feltöltését, mértékegységek!
+        private void cancelAsyncButton_Click(object sender, EventArgs e)
+        {
+            if (backgroundWorker1.WorkerSupportsCancellation == true)
+            {
+                // Cancel the asynchronous operation.
+                backgroundWorker1.CancelAsync();
+                // Close the PleaseWaitDialog
+                pwd.Close();
+            }
+        }
+
         private void UpdateSolutionsTab()
         {
+            cmbSolutions.Items.Clear();
             foreach (Solution sol in Graph.Solutions)
             {
-                cmbSolutions.Items.Add(sol.Title + ": Total cost: " + sol.OptimalValue);
+                cmbSolutions.Items.Add(sol.Title + ": Total cost: " + sol.OptimalValue + " " + Default.money_mu + "/" + Default.time_mu);
             }
-            cmbSolutions.SelectedIndex = 0;
-
-            UpdateSolutionTreeView(0);
+            if (cmbSolutions.Items.Count != 0)
+            {
+                cmbSolutions.SelectedIndex = 0;
+            }
         }
 
         private void UpdateSolutionTreeView(int solution)
@@ -1402,20 +1406,55 @@ namespace PNSDraw
             //----------Materials ág---------------
             treeSolution.Nodes.Add("Materials");
             int i = 0;
+            Console.WriteLine("Materials number: " + sol.Materials.Count);
             foreach (KeyValuePair<string, double> mat in sol.Materials)
             {
-                treeSolution.Nodes[0].Nodes.Add(mat.Key + ": " + mat.Value);
-                //Material m = Graph.GetMaterialByName(mat.Key);
-                //treeSolution.Nodes[0].Nodes[i].Nodes.Add("Type: " + m.TypeProp);
-                //treeSolution.Nodes[0].Nodes[i].Nodes.Add("Price: " + m.PriceProp);
-                //treeSolution.Nodes[0].Nodes[i].Nodes.Add("Min: " + m.ReqFlowProp);
-                //treeSolution.Nodes[0].Nodes[i].Nodes.Add("Max: " + m.MaxFlowProp);
-                //i++;
+                treeSolution.Nodes[0].Nodes.Add(mat.Key + ": " + mat.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                Material m = Graph.GetMaterialByName(mat.Key);
+                if (m != null)
+                {
+                    treeSolution.Nodes[0].Nodes[i].Nodes.Add("Type: " + m.TypeProp);
+                    treeSolution.Nodes[0].Nodes[i].Nodes.Add("Price: " + m.PriceProp);
+                    treeSolution.Nodes[0].Nodes[i].Nodes.Add("Min: " + m.ReqFlowProp);
+                    treeSolution.Nodes[0].Nodes[i].Nodes.Add("Max: " + m.MaxFlowProp);
+                }
+                i++;
             }
             //-------------------------------------
 
             //----------Operating Units ág---------
             treeSolution.Nodes.Add("Operating Units");
+            i = 0;
+            foreach (KeyValuePair<string, double> ou in sol.OperatingUnits)
+            {
+                treeSolution.Nodes[1].Nodes.Add(ou.Key + ": " + ou.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                OperatingUnit opUnit = Graph.GetOperatingUnitByName(ou.Key);
+                if (opUnit != null)
+                {
+                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity lower bound: " + opUnit.CapacityLowerProp.Value);
+                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity upper bound: " + opUnit.CapacityUpperProp.Value);
+                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment fix cost: " + opUnit.InvestmentCostFixProp.Value);
+                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment proportional cost: " + opUnit.InvestmentCostPropProp.Value);
+                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating fix cost: " + opUnit.OperatingCostFixProp.Value);
+                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating proportional cost: " + opUnit.OperatingCostPropProp.Value);
+                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Input materials");
+                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Output materials");
+                    Dictionary<Material, double> inMats = FileConnector.GetOpUnitBeginEnd(opUnit, Graph)["input"];
+                    Dictionary<Material, double> outMats = FileConnector.GetOpUnitBeginEnd(opUnit, Graph)["output"];
+                    foreach (KeyValuePair<Material, double> inMat in inMats)
+                    {
+                        treeSolution.Nodes[1].Nodes[i].Nodes[6].Nodes.Add(inMat.Key.Name + ": " + inMat.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                    }
+                    foreach (KeyValuePair<Material, double> outMat in outMats)
+                    {
+                        treeSolution.Nodes[1].Nodes[i].Nodes[7].Nodes.Add(outMat.Key.Name + ": " + outMat.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                    }
+                }
+                i++;
+            }
+
+            treeSolution.Nodes[0].Expand();
+            treeSolution.Nodes[1].Expand();
         }
 
         private void toolStripTextBox1_KeyDown(object sender, KeyEventArgs e)
@@ -1444,7 +1483,102 @@ namespace PNSDraw
 
         private void cmbSolutions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateSolutionTreeView(cmbSolutions.SelectedIndex);
+            if (Graph.Solutions.Count > 0)
+            {
+                UpdateSolutionTreeView(cmbSolutions.SelectedIndex);
+                toolStripComboBox1.SelectedIndex = cmbSolutions.SelectedIndex + 3; 
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            Problem p = new Problem(algorithm, Graph, 0, limit);
+            FileConnector.ProblemToSolverInput(p, p.name);
+            string inPath = Path.GetTempPath() + p.name + ".in";
+            string outPath = Path.GetTempPath() + p.name + ".out";
+            string arguments = algorithm + " \"" + inPath + "\" " + "\"" + outPath + "\" " + limit.ToString();
+
+            worker.ReportProgress(10);
+            ProcessStartInfo pInfo = new ProcessStartInfo();
+            pInfo.WorkingDirectory = Path.GetTempPath();
+            pInfo.RedirectStandardError = true;
+            pInfo.RedirectStandardOutput = true;
+            pInfo.UseShellExecute = false;
+            pInfo.Arguments = arguments;
+            pInfo.FileName = "pns_depth.exe";
+            pInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            pInfo.CreateNoWindow = true;
+            int exitCode = 1;
+
+            Process solver = new Process();
+            try
+            {
+                solver.StartInfo = pInfo;
+                solver.Start();
+                solver.WaitForExit();
+                exitCode = solver.ExitCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            worker.ReportProgress(70);
+
+            if (exitCode == 0)
+            {
+                try
+                {
+                    FileStream file = new FileStream(outPath, FileMode.Open, FileAccess.Read);
+                    StreamReader sr = new StreamReader(file);
+                    string solution = sr.ReadToEnd();
+                    Graph.ParseSolution(solution, limit);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            worker.ReportProgress(100);
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            labelResult.Text = (e.ProgressPercentage.ToString() + "%");
+            // Pass the progress to PleaseWaitDialog label and progressbar
+            pwd.Message = "In progress, please wait... " + e.ProgressPercentage.ToString() + "%";
+            pwd.ProgressValue = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled == true)
+            {
+                labelResult.Text = "Canceled!";
+            }
+            else if (e.Error != null)
+            {
+                labelResult.Text = "Error: " + e.Error.Message;
+            }
+            else
+            {
+                labelResult.Text = "Done!";
+            }
+            // Close the PleaseWaitDialog
+            pwd.Close();
+
+            UpdateViewList();
+            UpdateSolutionsTab();
+            tabControl1.SelectedTab = tabPage3;
+
+            if (Graph.SolutionCount > 0)
+            {
+                toolStripComboBox1.Visible = true;
+            } 
         }
     }
 }
+
+
+// TODO: Solution megnyitásnál a limit kérdést megoldani
