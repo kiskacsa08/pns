@@ -12,7 +12,7 @@ namespace PNSDraw.Entities
         public Dictionary<string, double> OperatingUnits;
 
         public int Index = 0;
-
+        
         public string Title = "";
 
         public int OptimalValue { get; set; }
