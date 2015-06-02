@@ -95,9 +95,10 @@ namespace PNSDraw
                     default:
                         break;
                 }
-                file_str.Append(mat.ReqFlowProp.Value != Default.flow_rate_lower_bound && mat.ReqFlowProp.Value != -1? ", flow_rate_lower_bound=" + mat.ReqFlowProp : "");
-                file_str.Append(mat.MaxFlowProp.Value != Default.flow_rate_upper_bound && mat.MaxFlowProp.Value != -1 ? ", flow_rate_upper_bound=" + mat.MaxFlowProp : "");
-                file_str.Append(mat.PriceProp.Value != Default.price && mat.PriceProp.Value != -1 ? ", price=" + mat.MaxFlowProp : "");
+                file_str.Append(mat.ReqFlowProp.Value != Default.flow_rate_lower_bound && mat.ReqFlowProp.Value != -1? ", flow_rate_lower_bound=" + mat.ReqFlowProp.Value : "");
+                file_str.Append(mat.MaxFlowProp.Value != Default.flow_rate_upper_bound && mat.MaxFlowProp.Value != -1 ? ", flow_rate_upper_bound=" + mat.MaxFlowProp.Value : "");
+                file_str.Append(mat.PriceProp.Value != Default.price && mat.PriceProp.Value != -1 ? ", price=" + mat.PriceProp.Value : "");
+
                 file_str.Append("\n");
             }
             file_str.Append("\n");
@@ -114,7 +115,7 @@ namespace PNSDraw
                 double fix_cost = ou.InvestmentCostFixProp.Value + ou.OperatingCostFixProp.Value;
                 file_str.Append(fix_cost != Default.fix_cost ? " fix_cost=" + fix_cost + "," : "");
                 double prop_cost = ou.InvestmentCostPropProp.Value + ou.OperatingCostPropProp.Value;
-                file_str.Append(prop_cost != Default.prop_cost ? " prop_cost=" + prop_cost + "," : "");
+                file_str.Append(prop_cost != Default.prop_cost ? " proportional_cost=" + prop_cost + "," : "");
                 file_str.Remove(file_str.Length - 1, 1);
                 file_str.Append("\n");
             }
