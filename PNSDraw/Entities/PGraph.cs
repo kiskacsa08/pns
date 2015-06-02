@@ -1155,6 +1155,7 @@ namespace PNSDraw
                             }
                         } while (t_annual_pos > t_pos + 1);
                     }
+                    solution.OptimalValue = t_cost;
                     Solutions.Add(solution);
                 }
             }
