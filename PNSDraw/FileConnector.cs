@@ -110,12 +110,12 @@ namespace PNSDraw
             {
                 file_str.Append(ou.Name);
                 file_str.Append(":");
-                file_str.Append(ou.CapacityLowerProp.Value != Default.capacity_lower_bound ? " capacity_lower_bound=" + ou.CapacityLowerProp.Value + "," : "");
-                file_str.Append(ou.CapacityUpperProp.Value != Default.capacity_upper_bound ? " capacity_upper_bound=" + ou.CapacityUpperProp.Value + "," : "");
+                file_str.Append(ou.CapacityLowerProp.Value != Default.capacity_lower_bound && ou.CapacityLowerProp.Value != -1 ? " capacity_lower_bound=" + ou.CapacityLowerProp.Value + "," : "");
+                file_str.Append(ou.CapacityUpperProp.Value != Default.capacity_upper_bound && ou.CapacityUpperProp.Value != -1 ? " capacity_upper_bound=" + ou.CapacityUpperProp.Value + "," : "");
                 double fix_cost = ou.InvestmentCostFixProp.Value + ou.OperatingCostFixProp.Value;
-                file_str.Append(fix_cost != Default.fix_cost ? " fix_cost=" + fix_cost + "," : "");
+                file_str.Append(fix_cost != Default.fix_cost ? " fix_cost=" + DoubleToGBString(fix_cost) + "," : "");
                 double prop_cost = ou.InvestmentCostPropProp.Value + ou.OperatingCostPropProp.Value;
-                file_str.Append(prop_cost != Default.prop_cost ? " proportional_cost=" + prop_cost + "," : "");
+                file_str.Append(prop_cost != Default.prop_cost ? " proportional_cost=" + DoubleToGBString(prop_cost) + "," : "");
                 file_str.Remove(file_str.Length - 1, 1);
                 file_str.Append("\n");
             }
@@ -192,7 +192,7 @@ namespace PNSDraw
         }
 
         //Egy Operating Unitnak az input és az output materialjait adja vissza
-        private static Dictionary<string, Dictionary<Material, double>> GetOpUnitBeginEnd(OperatingUnit ou, PGraph graph)
+        public static Dictionary<string, Dictionary<Material, double>> GetOpUnitBeginEnd(OperatingUnit ou, PGraph graph)
         {
             Dictionary<string, Dictionary<Material, double>> beginEnd = new Dictionary<string, Dictionary<Material, double>>();
             Dictionary<Material, double> inputMats = new Dictionary<Material, double>();
