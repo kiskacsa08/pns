@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PNSDraw.Properties {
+namespace PNSDraw {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace PNSDraw.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class Resource1 {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Resource1() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PNSDraw.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PNSDraw.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PNSDraw.Resource1", typeof(Resource1).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,7 @@ namespace PNSDraw.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap green_check {
-            get {
-                object obj = ResourceManager.GetObject("green_check", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap red_check {
-            get {
-                object obj = ResourceManager.GetObject("red_check", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
-        ///&lt;pns_defaults xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
-        ///  &lt;default_measurement_units&gt;
-        ///    &lt;unit group_id=&quot;3&quot; item_id=&quot;1&quot; /&gt;
-        ///    &lt;unit group_id=&quot;11&quot; item_id=&quot;1&quot; /&gt;
-        ///    &lt;unit group_id=&quot;7&quot; item_id=&quot;2&quot; /&gt;
-        ///    &lt;unit group_id=&quot;18&quot; item_id=&quot;8&quot; /&gt;
-        ///    &lt;unit group_id=&quot;4&quot; item_id=&quot;3&quot; /&gt;
-        ///    &lt;unit group_id=&quot;9&quot; item_id=&quot;1&quot; /&gt;
-        ///    &lt;unit group_id=&quot;1&quot; item_id=&quot;1&quot; /&gt;
-        ///    &lt;unit group_id=&quot;1&quot; item_id=&quot;4&quot; /&gt;
-        ///    &lt;unit group_id=&quot;10&quot; item_ [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to ../Resources/Units.xml.
         /// </summary>
         internal static string Units {
             get {

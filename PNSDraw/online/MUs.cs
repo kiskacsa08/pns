@@ -11,12 +11,12 @@ namespace PNSDraw.online
     class MUs
     {
         private static XmlDocument doc;
-
         private static void Read(){
-            string XMLText = File.ReadAllText(@"Units.xml");
-
+            //Console.WriteLine(Path.GetFullPath(PNSDraw.Properties.Resources.Units));
+            //string XMLText = File.ReadAllText(PNSDraw.Properties.Resources.Units);
+            
             doc = new XmlDocument();
-            doc.LoadXml(XMLText);
+            doc.LoadXml(PNSDraw.Properties.Resources.Units);
         }
 
         public static string GetBaseQuantity(string quantity)

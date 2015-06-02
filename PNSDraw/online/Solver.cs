@@ -81,6 +81,9 @@ namespace PNSDraw.online
             List<Edge> connections = problem.graph.Edges;
 
             BsonArray materialArray = new BsonArray();
+            List<BsonDocument> raw = new List<BsonDocument>();
+            List<BsonDocument> product = new List<BsonDocument>();
+            List<BsonDocument> intermediate = new List<BsonDocument>();
 
             //type, name, Parameters["reqflow"], Parameters["maxflow"], Parameters["price"]
 
@@ -89,9 +92,9 @@ namespace PNSDraw.online
                 BsonDocument item = new BsonDocument();
                 item["name"] = mat.Name;
                 item["type"] = GetTypeByInt(mat.Type);
-                item["flow_rate_lower_bound"] = mat.ParameterList["reqflow"].Value;
-                item["flow_rate_upper_bound"] = mat.ParameterList["maxflow"].Value;
-                item["price"] = mat.ParameterList["price"].Value;
+                item["flow_rate_lower_bound"] = mat.ParameterList["reqflow"].Value != -1 ? mat.ParameterList["reqflow"].Value : Default.flow_rate_lower_bound;
+                item["flow_rate_upper_bound"] = mat.ParameterList["maxflow"].Value != -1 ? mat.ParameterList["maxflow"].Value : Default.flow_rate_upper_bound;
+                item["price"] = mat.ParameterList["price"].Value != -1 ? mat.ParameterList["price"].Value : Default.price;
 
                 materialArray.Add(item);
             }
@@ -106,10 +109,13 @@ namespace PNSDraw.online
             {
                 BsonDocument item = new BsonDocument();
                 item["name"] = op.Name;
-                item["capacity_lower_bound"] = op.ParameterList["caplower"].Value;
-                item["capacity_upper_bound"] = op.ParameterList["capupper"].Value;
-                item["fix_cost"] = op.ParameterList["investcostfix"].Value + op.ParameterList["opercostfix"].Value;
-                item["proportional_cost"] = op.ParameterList["investcostprop"].Value + op.ParameterList["opercostprop"].Value;
+                item["capacity_lower_bound"] = op.ParameterList["caplower"].Value != -1 ? op.ParameterList["caplower"].Value : Default.capacity_lower_bound;
+                item["capacity_upper_bound"] = op.ParameterList["capupper"].Value != -1 ? op.ParameterList["capupper"].Value : Default.capacity_upper_bound;
+                double fix_cost = op.ParameterList["investcostfix"].Value + op.ParameterList["opercostfix"].Value;
+                item["fix_cost"] = fix_cost != -1 ? fix_cost : Default.fix_cost;
+                double prop_cost = op.ParameterList["investcostprop"].Value + op.ParameterList["opercostprop"].Value;
+                item["proportional_cost"] = prop_cost != -1 ? prop_cost : Default.prop_cost;
+
                 operatingArray.Add(item);
 
                 BsonDocument conn = new BsonDocument(new BsonElement("name", op.Name));
@@ -138,8 +144,6 @@ namespace PNSDraw.online
                     mat = (Material)conn.begin;
                     inputIsMaterial = true;
                 }
-
-
 
                 item["name"] = op.Name;
                 item = GetElemByName(connectionArray, item);
@@ -201,8 +205,6 @@ namespace PNSDraw.online
             convertedGraph["material_to_operating_unit_flow_rates"] = connectionArray;
             convertedGraph["mutually_exlcusive_sets_of_operating_units"] = new BsonArray();
 
-            //Console.WriteLine("FG: " + convertedGraph.ToString());
-
             Dictionary<string, BsonValue> query = new Dictionary<string, BsonValue>();
             query.Add("hash_to_pns_draw", convertedGraph["hash_to_pns_draw"]);
             List<BsonDocument> exist = mh.Find("convertedProblems", query, 1);
@@ -223,8 +225,6 @@ namespace PNSDraw.online
             query.Add("converted", new ObjectId(convertedGraphID));
 
             exist = mh.Find("graphs", query, 1);
-
-            //Console.WriteLine(exist.Count);
 
             if (exist.Count > 0)
             {
@@ -315,11 +315,46 @@ namespace PNSDraw.online
             query.Add("_id", new ObjectId(mongoID));
 
             List<BsonDocument> exist = mh.Find("solutions", query, 1);
+            List<Entities.Solution> Solutions = problem.graph.Solutions;
+            Solutions.Clear();
+            BsonArray sol = new BsonArray();
 
-            foreach (BsonDocument d in exist)
+            if (exist.Count == 0)
             {
-                Console.WriteLine(d["solutionNumber"].ToString());
+                return;
             }
+            else
+            {
+                sol = exist[0]["solves"].AsBsonArray;
+            }
+
+            for(int i=0;i<sol.Count;i++){
+                string title = "";
+                if (sol[i]["max"].AsBoolean)
+                {
+                    title = "Maximal structure";
+                }
+                else if (problem.algorithm == "SSG")
+                {
+                    title = "Solution structure #" + i.ToString();
+                }
+                else if(problem.algorithm == "INSIDE_OUT")
+                {
+                    title = "Feasible structure #" + i.ToString();
+                }
+                else
+                {
+                    title = "Unknown structure #" + i.ToString();
+                }
+
+                Entities.Solution solution = new Entities.Solution(i, title);
+
+                Console.WriteLine(i + ". solution: " + sol[i].ToString());
+
+                Solutions.Add(solution);
+            }
+
+            //Console.WriteLine(problem.graph.SolutionCount);
         }
     }
 }

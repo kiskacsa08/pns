@@ -35,9 +35,9 @@ namespace PNSDraw
 
         #region Values
         static public double flow_rate_lower_bound = 0; //flow_rate_lower_bound
-        static public double flow_rate_upper_bound = 100000000; //flow_rate_upper_bound
+        static public double flow_rate_upper_bound = 1000000000; //flow_rate_upper_bound
         static public double price = 0; //price
-        static public int type = Globals.MaterialTypes.Raw; //type
+        static public int type = Globals.MaterialTypes.Intermediate; //type
 
         static private double o_fix = 0; //fix_cost
         static private double i_fix = 0; //fix_cost
@@ -50,7 +50,7 @@ namespace PNSDraw
         public static double prop_cost = o_prop + i_prop;
 
         static public double capacity_lower_bound = 0; //capacity_lower_bound
-        static public double capacity_upper_bound = 100000000; //capacity_upper_bound
+        static public double capacity_upper_bound = 1000000000; //capacity_upper_bound
 
         static public double io_flowrate = 1; //flow rate
 
