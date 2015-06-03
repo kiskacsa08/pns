@@ -54,6 +54,9 @@
     <ApplicationIcon>pnsdraw.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="MongoDB.Bson">
       <HintPath>..\mongo\MongoDB.Bson.dll</HintPath>
     </Reference>
@@ -96,6 +99,11 @@
     <Compile Include="Entities\ObjectProperty.cs" />
     <Compile Include="Entities\Problem.cs" />
     <Compile Include="Entities\Solution.cs" />
+    <Compile Include="Excel export\ColorXMLTag.cs" />
+    <Compile Include="Excel export\def_Problem_Excel.cs" />
+    <Compile Include="Excel export\def_Solution_Excel.cs" />
+    <Compile Include="Excel export\MessageBoxText.cs" />
+    <Compile Include="Excel export\ProblemToExcel.cs" />
     <Compile Include="FileConnector.cs" />
     <Compile Include="KeepFilesDialog.cs">
       <SubType>Form</SubType>
