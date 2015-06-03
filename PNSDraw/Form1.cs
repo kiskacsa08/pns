@@ -36,6 +36,9 @@ namespace PNSDraw
         string algorithm;
         int limit;
         bool isProblemExists;
+        string inPath;
+        string outPath;
+        DialogResult res;
 
         bool LockedMode
         {
@@ -1053,7 +1056,7 @@ namespace PNSDraw
                     FileStream file = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
                     StreamReader sr = new StreamReader(file);
                     string solution = sr.ReadToEnd();
-                    Graph.ParseSolution(solution, 10);
+                    FileConnector.ParseSolution(solution, Graph);
                     UpdateViewList();
                     UpdateSolutionsTab();
 
@@ -1541,8 +1544,8 @@ namespace PNSDraw
 
             Problem p = new Problem(algorithm, Graph, 0, limit);
             FileConnector.ProblemToSolverInput(p, p.name);
-            string inPath = Path.GetTempPath() + p.name + ".in";
-            string outPath = Path.GetTempPath() + p.name + ".out";
+            inPath = Path.GetTempPath() + p.name + ".in";
+            outPath = Path.GetTempPath() + p.name + ".out";
             string arguments = algorithm + " \"" + inPath + "\" " + "\"" + outPath + "\" " + limit.ToString();
 
             worker.ReportProgress(10);
@@ -1578,7 +1581,7 @@ namespace PNSDraw
                     FileStream file = new FileStream(outPath, FileMode.Open, FileAccess.Read);
                     StreamReader sr = new StreamReader(file);
                     string solution = sr.ReadToEnd();
-                    Graph.ParseSolution(solution, limit);
+                    FileConnector.ParseSolution(solution, Graph);
                 }
                 catch (Exception ex)
                 {
@@ -1609,21 +1612,25 @@ namespace PNSDraw
             else
             {
                 labelResult.Text = "Done!";
+                UpdateViewList();
+                UpdateSolutionsTab();
+                tabControl1.SelectedTab = tabPage3;
+
+                if (Graph.SolutionCount > 0)
+                {
+                    toolStripComboBox1.Visible = true;
+                }
             }
             // Close the PleaseWaitDialog
             pwd.Close();
 
-            UpdateViewList();
-            UpdateSolutionsTab();
-            tabControl1.SelectedTab = tabPage3;
-
-            if (Graph.SolutionCount > 0)
+            KeepFilesDialog kfd = new KeepFilesDialog(inPath, outPath);
+            res = kfd.ShowDialog();
+            if (res == DialogResult.No)
             {
-                toolStripComboBox1.Visible = true;
-            } 
+                File.Delete(inPath);
+                File.Delete(outPath);
+            }
         }
     }
 }
-
-
-// TODO: Solution megnyitásnál a limit kérdést megoldani
