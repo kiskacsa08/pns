@@ -97,6 +97,12 @@
     <Compile Include="Entities\Problem.cs" />
     <Compile Include="Entities\Solution.cs" />
     <Compile Include="FileConnector.cs" />
+    <Compile Include="KeepFilesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KeepFilesDialog.Designer.cs">
+      <DependentUpon>KeepFilesDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Managers\PropertyManager.cs" />
     <Compile Include="MutualExclusionDialog.cs">
       <SubType>Form</SubType>
@@ -177,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeepFilesDialog.resx">
+      <DependentUpon>KeepFilesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MutualExclusionDialog.resx">
       <DependentUpon>MutualExclusionDialog.cs</DependentUpon>
