@@ -1487,12 +1487,12 @@ namespace PNSDraw
 
                     foreach (MaterialProperty m in ou.Value.Input)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes[6].Nodes.Add(m.Name + ": " + m.Flow + " " + Default.mass_mu + "/" + Default.time_mu);
+                        treeSolution.Nodes[1].Nodes[i].Nodes[treeSolution.Nodes[1].Nodes[i].Nodes.Count - 2].Nodes.Add(m.Name + ": " + m.Flow + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
 
                     foreach (MaterialProperty m in ou.Value.Output)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes[7].Nodes.Add(m.Name + ": " + m.Flow + " " + Default.mass_mu + "/" + Default.time_mu);
+                        treeSolution.Nodes[1].Nodes[i].Nodes[treeSolution.Nodes[1].Nodes[i].Nodes.Count - 1].Nodes.Add(m.Name + ": " + m.Flow + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
                 }
                 i++;

@@ -350,8 +350,8 @@ namespace PNSDraw.online
                     solution.Title = "Unknown structure #" + i.ToString();
                 }
 
-                Console.WriteLine(i + ". solution: " + solBsonArray[i].ToString());
-                Console.WriteLine(solution.AlgorithmUsed);
+                //Console.WriteLine(i + ". solution: " + solBsonArray[i].ToString());
+                //Console.WriteLine(solution.AlgorithmUsed);
                 Solutions.Add(solution);
             }
 
@@ -391,7 +391,22 @@ namespace PNSDraw.online
             {
                 BsonArray consumed = d["consumed"].AsBsonArray;
                 BsonArray produced = d["produced"].AsBsonArray;
-                //List<MaterialProperty> 
+                List<MaterialProperty> input = new List<MaterialProperty>();
+                List<MaterialProperty> output = new List<MaterialProperty>();
+
+                foreach (BsonDocument inDoc in consumed)
+                {
+                    MaterialProperty prop = new MaterialProperty(inDoc["name"].AsString, inDoc["flow"].AsDouble, 0);
+                    input.Add(prop);
+                }
+
+                foreach (BsonDocument outDoc in produced)
+                {
+                    MaterialProperty prop = new MaterialProperty(outDoc["name"].AsString, outDoc["flow"].AsDouble, 0);
+                    output.Add(prop);
+                }
+
+                solution.AddOperatingUnit(d["name"].AsString, d["capacity"].AsDouble, d["cost"].AsDouble, input, output);
             }
         }
     }
