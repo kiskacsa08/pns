@@ -684,11 +684,11 @@ namespace PNSDraw
                     PaintSolutionInit(s);
                     foreach (string materialname in s.Materials.Keys)
                     {
-                        PaintSolutionItem(materialname, s.Materials[materialname]);
+                        PaintSolutionItem(materialname, s.Materials[materialname].Flow);
                     }
                     foreach (string operatingunitname in s.OperatingUnits.Keys)
                     {
-                        PaintSolutionItem(operatingunitname, s.OperatingUnits[operatingunitname]);
+                        PaintSolutionItem(operatingunitname, s.OperatingUnits[operatingunitname].Size);
                     }
                 }
             }

@@ -1357,6 +1357,13 @@ namespace PNSDraw
                         Solver solver = new Solver(problem);
                         problem = solver.Run();
                         MessageBox.Show("Online");
+                        UpdateViewList();
+                        UpdateSolutionsTab();
+                        tabControl1.SelectedTab = tabPage3;
+                        if (Graph.SolutionCount > 0)
+                        {
+                            toolStripComboBox1.Visible = true;
+                        }
                     }
                 }
                 else
@@ -1407,16 +1414,32 @@ namespace PNSDraw
             treeSolution.Nodes.Add("Materials");
             int i = 0;
             Console.WriteLine("Materials number: " + sol.Materials.Count);
-            foreach (KeyValuePair<string, double> mat in sol.Materials)
+            //TODO a double helyett MaterialProperty lett a párnak az értéke
+            foreach (KeyValuePair<string, MaterialProperty> mat in sol.Materials)
             {
-                treeSolution.Nodes[0].Nodes.Add(mat.Key + ": " + mat.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                //TODO hozzáadtam a költségét is a materialnak
+                treeSolution.Nodes[0].Nodes.Add(mat.Key + ": " + mat.Value.Flow + " " + Default.mass_mu + "/" + Default.time_mu +
+                    ", Cost: " + mat.Value.Cost + " " + Default.money_mu + "/" + Default.time_mu);
                 Material m = Graph.GetMaterialByName(mat.Key);
                 if (m != null)
                 {
                     treeSolution.Nodes[0].Nodes[i].Nodes.Add("Type: " + m.TypeProp);
-                    treeSolution.Nodes[0].Nodes[i].Nodes.Add("Price: " + m.PriceProp);
-                    treeSolution.Nodes[0].Nodes[i].Nodes.Add("Min: " + m.ReqFlowProp);
-                    treeSolution.Nodes[0].Nodes[i].Nodes.Add("Max: " + m.MaxFlowProp);
+                    //TODO javítottam az értékek kiírását a fában, hogy helyesen írja ki, és csak akkor, ha nem -1 az értéke a tulajdonságnak
+                    if(m.PriceProp.Value != -1)
+                    {
+                        treeSolution.Nodes[0].Nodes[i].Nodes.Add("Price: " + m.PriceProp.Value.ToString() + " " + Default.money_mu + "/" + Default.time_mu);
+                    }
+                    if (m.ReqFlowProp.Value != -1)
+                    {
+                        treeSolution.Nodes[0].Nodes[i].Nodes.Add("Min: " + m.ReqFlowProp.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                    }
+                    if (m.MaxFlowProp.Value != -1)
+                    {
+                        treeSolution.Nodes[0].Nodes[i].Nodes.Add("Max: " + m.MaxFlowProp.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                    }
+                    //TODO hozzáadtam a címkéjét a materialnak, így könnyebb visszanézni a gráfban
+                    treeSolution.Nodes[0].Nodes[i].Nodes.Add("Title: " + m.DisplayedText);
+
                 }
                 i++;
             }
@@ -1425,29 +1448,51 @@ namespace PNSDraw
             //----------Operating Units ág---------
             treeSolution.Nodes.Add("Operating Units");
             i = 0;
-            foreach (KeyValuePair<string, double> ou in sol.OperatingUnits)
+            foreach (KeyValuePair<string, OperatingUnitProperty> ou in sol.OperatingUnits)
             {
-                treeSolution.Nodes[1].Nodes.Add(ou.Key + ": " + ou.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                //TODO hozzáadtam ,hogy írja ki a költséget is
+                treeSolution.Nodes[1].Nodes.Add(ou.Key + ": " + ou.Value.Size + " " + Default.mass_mu + "/" + Default.time_mu +
+                    ", Cost: " + ou.Value.Cost + " " + Default.money_mu + "/" + Default.time_mu);
                 OperatingUnit opUnit = Graph.GetOperatingUnitByName(ou.Key);
                 if (opUnit != null)
                 {
-                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity lower bound: " + opUnit.CapacityLowerProp.Value);
-                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity upper bound: " + opUnit.CapacityUpperProp.Value);
-                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment fix cost: " + opUnit.InvestmentCostFixProp.Value);
-                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment proportional cost: " + opUnit.InvestmentCostPropProp.Value);
-                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating fix cost: " + opUnit.OperatingCostFixProp.Value);
-                    treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating proportional cost: " + opUnit.OperatingCostPropProp.Value);
+                    if (opUnit.CapacityLowerProp.Value != -1)
+                    {
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity lower bound: " + opUnit.CapacityLowerProp.Value);
+                    }
+                    if (opUnit.CapacityUpperProp.Value != -1)
+                    {
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity upper bound: " + opUnit.CapacityUpperProp.Value);
+                    }
+                    if (opUnit.InvestmentCostFixProp.Value != -1)
+                    {
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment fix cost: " + opUnit.InvestmentCostFixProp.Value);
+                    }
+                    if (opUnit.InvestmentCostPropProp.Value != -1)
+                    {
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment proportional cost: " + opUnit.InvestmentCostPropProp.Value);
+                    }
+                    if (opUnit.OperatingCostFixProp.Value != -1)
+                    {
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating fix cost: " + opUnit.OperatingCostFixProp.Value);
+                    }
+                    if (opUnit.OperatingCostPropProp.Value != -1)
+                    {
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating proportional cost: " + opUnit.OperatingCostPropProp.Value);
+                    }
+
+                    //TODO ezt javítottam, a megoldásból jönnek ezek az adatok, mert lehet akár kieső node is a megoldásnál
                     treeSolution.Nodes[1].Nodes[i].Nodes.Add("Input materials");
                     treeSolution.Nodes[1].Nodes[i].Nodes.Add("Output materials");
-                    Dictionary<Material, double> inMats = FileConnector.GetOpUnitBeginEnd(opUnit, Graph)["input"];
-                    Dictionary<Material, double> outMats = FileConnector.GetOpUnitBeginEnd(opUnit, Graph)["output"];
-                    foreach (KeyValuePair<Material, double> inMat in inMats)
+
+                    foreach (MaterialProperty m in ou.Value.Input)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes[6].Nodes.Add(inMat.Key.Name + ": " + inMat.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                        treeSolution.Nodes[1].Nodes[i].Nodes[6].Nodes.Add(m.Name + ": " + m.Flow + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
-                    foreach (KeyValuePair<Material, double> outMat in outMats)
+
+                    foreach (MaterialProperty m in ou.Value.Output)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes[7].Nodes.Add(outMat.Key.Name + ": " + outMat.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                        treeSolution.Nodes[1].Nodes[i].Nodes[7].Nodes.Add(m.Name + ": " + m.Flow + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
                 }
                 i++;

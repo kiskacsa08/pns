@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PNSDraw.Entities
+namespace PNSDraw
 {
     public class Solution
     {
-        public Dictionary<string, double> Materials;
-        public Dictionary<string, double> OperatingUnits;
+        public Dictionary<string, MaterialProperty> Materials;
+        public Dictionary<string, OperatingUnitProperty> OperatingUnits;
 
         public int Index = 0;
         
@@ -20,18 +20,36 @@ namespace PNSDraw.Entities
 
         public Solution(int index, string title)
         {
-            Materials = new Dictionary<string, double>();
-            OperatingUnits = new Dictionary<string, double>();
+            Materials = new Dictionary<string, MaterialProperty>();
+            OperatingUnits = new Dictionary<string, OperatingUnitProperty>();
             Index = index;
             Title = title;
         }
 
+        public Solution(int index)
+        {
+            Materials = new Dictionary<string, MaterialProperty>();
+            OperatingUnits = new Dictionary<string, OperatingUnitProperty>();
+            Index = index;
+            Title = "Unknown solution #" + index;
+        }
 
         public void AddMaterial(string name, double flow)
         {
             if (Materials.ContainsKey(name) == false)
             {
-                Materials[name] = flow;
+                MaterialProperty prop = new MaterialProperty(name, flow, 0);
+                Materials[name] = prop;
+            }
+        }
+
+        //TODO ezt kell majd használni a végén
+        public void AddMaterial(string name, double flow, double cost)
+        {
+            if (Materials.ContainsKey(name) == false)
+            {
+                MaterialProperty prop = new MaterialProperty(name, flow, cost);
+                Materials[name] = prop;
             }
         }
 
@@ -48,7 +66,18 @@ namespace PNSDraw.Entities
         {
             if (OperatingUnits.ContainsKey(name) == false)
             {
-                OperatingUnits[name] = size;
+                OperatingUnitProperty prop = new OperatingUnitProperty(name, size, 0, new List<MaterialProperty>(), new List<MaterialProperty>());
+                OperatingUnits[name] = prop;
+            }
+        }
+
+        //TODO ezt kell majd használni a végén
+        public void AddOperatingUnit(string name, double size, double cost, List<MaterialProperty> input, List<MaterialProperty> output)
+        {
+            if (OperatingUnits.ContainsKey(name) == false)
+            {
+                OperatingUnitProperty prop = new OperatingUnitProperty(name, size, cost, input, output);
+                OperatingUnits[name] = prop;
             }
         }
 
@@ -64,4 +93,36 @@ namespace PNSDraw.Entities
     }
 
     class Solutions : List<Solution> { }
+
+    public class MaterialProperty
+    {
+        public string Name { get; set; }
+        public double Flow { get; set; }
+        public double Cost { get; set; }
+
+        public MaterialProperty(string name, double flow, double cost)
+        {
+            this.Name = name;
+            this.Flow = flow;
+            this.Cost = cost;
+        }
+    }
+
+    public class OperatingUnitProperty
+    {
+        public string Name { get; set; }
+        public double Size { get; set; }
+        public double Cost { get; set; }
+        public List<MaterialProperty> Input { get; set; }
+        public List<MaterialProperty> Output { get; set; }
+
+        public OperatingUnitProperty(string name, double size, double cost, List<MaterialProperty> input, List<MaterialProperty> output)
+        {
+            this.Name = name;
+            this.Size = size;
+            this.Cost = cost;
+            this.Input = input;
+            this.Output = output;
+        }
+    }
 }

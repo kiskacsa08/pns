@@ -111,9 +111,9 @@ namespace PNSDraw.online
                 item["name"] = op.Name;
                 item["capacity_lower_bound"] = op.ParameterList["caplower"].Value != -1 ? op.ParameterList["caplower"].Value : Default.capacity_lower_bound;
                 item["capacity_upper_bound"] = op.ParameterList["capupper"].Value != -1 ? op.ParameterList["capupper"].Value : Default.capacity_upper_bound;
-                double fix_cost = op.ParameterList["investcostfix"].Value + op.ParameterList["opercostfix"].Value;
+                double fix_cost = op.ParameterList["investcostfix"].Value / (op.WorkingHourProp.Value * op.PayoutPeriodProp.Value) + op.ParameterList["opercostfix"].Value;
                 item["fix_cost"] = fix_cost != -1 ? fix_cost : Default.fix_cost;
-                double prop_cost = op.ParameterList["investcostprop"].Value + op.ParameterList["opercostprop"].Value;
+                double prop_cost = op.ParameterList["investcostprop"].Value / (op.WorkingHourProp.Value * op.PayoutPeriodProp.Value) + op.ParameterList["opercostprop"].Value;
                 item["proportional_cost"] = prop_cost != -1 ? prop_cost : Default.prop_cost;
 
                 operatingArray.Add(item);
@@ -163,7 +163,6 @@ namespace PNSDraw.online
             }
 
             BsonDocument convertedGraph = new BsonDocument();
-
             
             convertedGraph["type"] = "PNS_problem_v1";
 
@@ -315,9 +314,9 @@ namespace PNSDraw.online
             query.Add("_id", new ObjectId(mongoID));
 
             List<BsonDocument> exist = mh.Find("solutions", query, 1);
-            List<Entities.Solution> Solutions = problem.graph.Solutions;
+            List<Solution> Solutions = problem.graph.Solutions;
             Solutions.Clear();
-            BsonArray sol = new BsonArray();
+            BsonArray solBsonArray = new BsonArray();
 
             if (exist.Count == 0)
             {
@@ -325,36 +324,75 @@ namespace PNSDraw.online
             }
             else
             {
-                sol = exist[0]["solves"].AsBsonArray;
+                solBsonArray = exist[0]["solves"].AsBsonArray;
             }
 
-            for(int i=0;i<sol.Count;i++){
-                string title = "";
-                if (sol[i]["max"].AsBoolean)
+            for(int i=0;i<solBsonArray.Count;i++){                
+                Solution solution = new Solution(i);
+
+                if (solBsonArray[i]["max"].AsBoolean)
                 {
-                    title = "Maximal structure";
+                    solution.Title = "Maximal structure";
+                    ParseMSGSolution(solBsonArray[i], solution);
                 }
                 else if (problem.algorithm == "SSG")
                 {
-                    title = "Solution structure #" + i.ToString();
+                    solution.Title = "Solution structure #" + i.ToString();
+                    ParseSSGSolution(solBsonArray[i], solution);
                 }
                 else if(problem.algorithm == "INSIDE_OUT")
                 {
-                    title = "Feasible structure #" + i.ToString();
+                    solution.Title = "Feasible structure #" + i.ToString();
+                    ParseInsideOutSolution(solBsonArray[i], solution);
                 }
                 else
                 {
-                    title = "Unknown structure #" + i.ToString();
+                    solution.Title = "Unknown structure #" + i.ToString();
                 }
 
-                Entities.Solution solution = new Entities.Solution(i, title);
-
-                Console.WriteLine(i + ". solution: " + sol[i].ToString());
-
+                Console.WriteLine(i + ". solution: " + solBsonArray[i].ToString());
+                Console.WriteLine(solution.AlgorithmUsed);
                 Solutions.Add(solution);
             }
 
             //Console.WriteLine(problem.graph.SolutionCount);
+        }
+
+        private void ParseMSGSolution(BsonValue bsonValue, Solution solution)
+        {
+            solution.AlgorithmUsed = "MSG";
+        }
+
+        private void ParseSSGSolution(BsonValue bsonValue, Solution solution)
+        {
+            solution.AlgorithmUsed = "SSG";
+
+        }
+
+        private void ParseInsideOutSolution(BsonValue solBson, Solution solution)
+        {
+            solution.AlgorithmUsed = "ABB";
+            BsonArray materials = solBson["complete"]["materials"].AsBsonArray;
+            BsonArray opunits = solBson["complete"]["operatings"].AsBsonArray;
+
+            foreach (BsonDocument d in materials)
+            {
+                if (d["balanced"].AsBoolean)
+                {
+                    solution.AddMaterial(d["name"].AsString, 0, 0);
+                }
+                else
+                {
+                    solution.AddMaterial(d["name"].AsString, d["flow"].AsDouble, d["cost"].AsDouble);
+                }
+            }
+
+            foreach (BsonDocument d in opunits)
+            {
+                BsonArray consumed = d["consumed"].AsBsonArray;
+                BsonArray produced = d["produced"].AsBsonArray;
+                //List<MaterialProperty> 
+            }
         }
     }
 }

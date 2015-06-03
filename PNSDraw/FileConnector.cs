@@ -112,9 +112,9 @@ namespace PNSDraw
                 file_str.Append(":");
                 file_str.Append(ou.CapacityLowerProp.Value != Default.capacity_lower_bound && ou.CapacityLowerProp.Value != -1 ? " capacity_lower_bound=" + ou.CapacityLowerProp.Value + "," : "");
                 file_str.Append(ou.CapacityUpperProp.Value != Default.capacity_upper_bound && ou.CapacityUpperProp.Value != -1 ? " capacity_upper_bound=" + ou.CapacityUpperProp.Value + "," : "");
-                double fix_cost = ou.InvestmentCostFixProp.Value + ou.OperatingCostFixProp.Value;
+                double fix_cost = ou.InvestmentCostFixProp.Value / (ou.PayoutPeriodProp.Value * ou.WorkingHourProp.Value) + ou.OperatingCostFixProp.Value;
                 file_str.Append(fix_cost != Default.fix_cost ? " fix_cost=" + DoubleToGBString(fix_cost) + "," : "");
-                double prop_cost = ou.InvestmentCostPropProp.Value + ou.OperatingCostPropProp.Value;
+                double prop_cost = ou.InvestmentCostPropProp.Value / (ou.PayoutPeriodProp.Value * ou.WorkingHourProp.Value) + ou.OperatingCostPropProp.Value;
                 file_str.Append(prop_cost != Default.prop_cost ? " proportional_cost=" + DoubleToGBString(prop_cost) + "," : "");
                 file_str.Remove(file_str.Length - 1, 1);
                 file_str.Append("\n");
