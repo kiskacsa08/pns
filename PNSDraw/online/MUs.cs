@@ -5,16 +5,70 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.IO;
+using System.Globalization;
 
 namespace PNSDraw.online
 {
     class MUs
     {
         private static XmlDocument doc;
-        private static void Read(){
-            //Console.WriteLine(Path.GetFullPath(PNSDraw.Properties.Resources.Units));
-            //string XMLText = File.ReadAllText(PNSDraw.Properties.Resources.Units);
+
+        public static double ConvertToUnifiedUnit(string fromUnit, double value)
+        {
+            if (fromUnit.Length == 0)
+            {
+                return value;
+            }
+
+            string toUnit = GetBaseUnit(fromUnit);
+
+            return UnitConvert(fromUnit, toUnit, value);
+        }
+
+        public static double ConvertToSpecialUnit(string toUnit, double value)
+        {
+            if (toUnit.Length == 0)
+            {
+                return value;
+            }
+
+            string fromUnit = GetBaseUnit(toUnit);
+
+            return UnitConvert(fromUnit, toUnit, value);
+        }
+
+        private static double UnitConvert(string fromUnit, string toUnit, double value)
+        {
+            double factor = GetFactorByQuantity(fromUnit);
+            double convertedValue = value;
+
+            if (factor > 0)
+            {
+                convertedValue *= factor;
+            }
+            else
+            {
+                //throw new Exception("From unit not found or null!");
+                return value;
+            }
             
+            factor = GetFactorByQuantity(toUnit);
+
+
+
+            if (factor > 0)
+            {
+                convertedValue /= factor;
+            }
+            else
+            {
+                //throw new Exception("To unit not found or null!");
+                return value;
+            }
+            return convertedValue;
+        }
+
+        private static void Read(){            
             doc = new XmlDocument();
             doc.LoadXml(PNSDraw.Properties.Resources.Units);
         }
@@ -36,7 +90,7 @@ namespace PNSDraw.online
             return "";
         }
 
-        public static double GetFactorByQuantity(string unit, string quantity)
+        private static double GetFactorByQuantity(string unit, string quantity)
         {
             if (doc == null)
             {
@@ -77,7 +131,7 @@ namespace PNSDraw.online
             return Convert.ToDouble(XMLUnit.Attributes["factor"].Value);
         }
 
-        public static double GetFactorByQuantity(string unit)
+        private static double GetFactorByQuantity(string unit)
         {
             if (doc == null)
             {
@@ -99,7 +153,34 @@ namespace PNSDraw.online
                 return 1;
             }
 
-            return Convert.ToDouble(XMLUnit.Attributes["factor"].Value);
+            return Convert.ToDouble(XMLUnit.Attributes["factor"].Value, CultureInfo.InvariantCulture);
+        }
+
+        private static string GetBaseUnit(string unit)
+        {
+            if (doc == null)
+            {
+                Read();
+            }
+
+            XmlNode XMLUnit = null;
+
+            foreach (XmlNode node in doc.SelectNodes("//derived_quantity/units/unit"))
+            {
+                if (node.Attributes["symbol"].Value.ToUpper().Equals(unit.ToUpper()))
+                {
+                    XMLUnit = node;
+                }
+            }
+
+            if (XMLUnit == null)
+            {
+                return unit;
+            }
+
+            string quantity = XMLUnit.ParentNode.ParentNode.Attributes["quantity"].Value;
+
+            return GetBaseQuantity(quantity);
         }
     }
 }
