@@ -243,7 +243,7 @@ namespace PNSDraw
                 string[] mats = (str.Substring(begin, pos-begin)).Split(',');
                 foreach (string mat in mats)
                 {
-                    sol.AddMaterial(mat.Trim(), 1);
+                    sol.AddMaterial(mat.Trim(), 0);
                 }
                 // Operating units
                 begin = pos;
@@ -266,7 +266,7 @@ namespace PNSDraw
 
                 foreach (string op in ops)
                 {
-                    sol.AddOperatingUnit(op.Trim(), 1);
+                    sol.AddOperatingUnit(op.Trim(), 0);
                 }
                 graph.Solutions.Add(sol);
             }
@@ -285,7 +285,7 @@ namespace PNSDraw
                     string[] mats = (str.Substring(begin, pos - begin)).Split(',');
                     foreach (string mat in mats)
                     {
-                        sol.AddMaterial(mat.Trim(), 1);
+                        sol.AddMaterial(mat.Trim(), 0);
                     }
                     // Operating units
                     begin = pos;
@@ -304,7 +304,7 @@ namespace PNSDraw
 
                     foreach (string op in ops)
                     {
-                        sol.AddOperatingUnit(op.Trim(), 1);
+                        sol.AddOperatingUnit(op.Trim(), 0);
                     }
                     graph.Solutions.Add(sol);
                 }
