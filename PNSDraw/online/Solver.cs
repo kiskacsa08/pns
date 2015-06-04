@@ -90,12 +90,18 @@ namespace PNSDraw.online
             foreach (Material mat in materials)
             {
                 BsonDocument item = new BsonDocument();
+
                 item["name"] = mat.Name;
                 item["type"] = GetTypeByInt(mat.Type);
-                item["flow_rate_lower_bound"] = mat.ParameterList["reqflow"].Value != -1 ? mat.ParameterList["reqflow"].Value : Default.flow_rate_lower_bound;
-                item["flow_rate_upper_bound"] = mat.ParameterList["maxflow"].Value != -1 ? mat.ParameterList["maxflow"].Value : Default.flow_rate_upper_bound;
-                item["price"] = mat.ParameterList["price"].Value != -1 ? mat.ParameterList["price"].Value : Default.price;
+                
+                double flow_rate_lower_bound = mat.ParameterList["reqflow"].Value != -1 ? mat.ParameterList["reqflow"].Value : Default.flow_rate_lower_bound;
+                double flow_rate_upper_bound = mat.ParameterList["maxflow"].Value != -1 ? mat.ParameterList["maxflow"].Value : Default.flow_rate_upper_bound;
+                double price = mat.ParameterList["price"].Value != -1 ? mat.ParameterList["price"].Value : Default.price;
 
+                item["flow_rate_lower_bound"] = MUs.ConvertToUnifiedUnit(mat.ParameterList["reqflow"].MU, flow_rate_lower_bound);
+                item["flow_rate_upper_bound"] = MUs.ConvertToUnifiedUnit(mat.ParameterList["maxflow"].MU, flow_rate_upper_bound);
+                item["price"] = MUs.ConvertToUnifiedUnit(mat.ParameterList["price"].MU, price);
+                
                 materialArray.Add(item);
             }
 
@@ -108,13 +114,48 @@ namespace PNSDraw.online
             foreach (OperatingUnit op in operatings)
             {
                 BsonDocument item = new BsonDocument();
+
                 item["name"] = op.Name;
-                item["capacity_lower_bound"] = op.ParameterList["caplower"].Value != -1 ? op.ParameterList["caplower"].Value : Default.capacity_lower_bound;
-                item["capacity_upper_bound"] = op.ParameterList["capupper"].Value != -1 ? op.ParameterList["capupper"].Value : Default.capacity_upper_bound;
-                double fix_cost = op.ParameterList["investcostfix"].Value / (op.WorkingHourProp.Value * op.PayoutPeriodProp.Value) + op.ParameterList["opercostfix"].Value;
-                item["fix_cost"] = fix_cost != -1 ? fix_cost : Default.fix_cost;
-                double prop_cost = op.ParameterList["investcostprop"].Value / (op.WorkingHourProp.Value * op.PayoutPeriodProp.Value) + op.ParameterList["opercostprop"].Value;
-                item["proportional_cost"] = prop_cost != -1 ? prop_cost : Default.prop_cost;
+
+                double capacity_lower_bound = op.ParameterList["caplower"].Value != -1 ? op.ParameterList["caplower"].Value : Default.capacity_lower_bound;
+                double capacity_upper_bound = op.ParameterList["capupper"].Value != -1 ? op.ParameterList["capupper"].Value : Default.capacity_upper_bound;
+
+                double working_hour = MUs.ConvertToUnifiedUnit(op.WorkingHourProp.MU, op.WorkingHourProp.Value);
+                double payout_period = MUs.ConvertToUnifiedUnit(op.PayoutPeriodProp.MU, op.PayoutPeriodProp.Value);
+
+                double invest_fix_cost = MUs.ConvertToUnifiedUnit(op.ParameterList["investcostfix"].MU, op.ParameterList["investcostfix"].Value);
+                double oper_fix_cost = MUs.ConvertToUnifiedUnit(op.ParameterList["opercostfix"].MU, op.ParameterList["opercostfix"].Value);
+                double fix_cost;
+                
+                try
+                {
+                    fix_cost = invest_fix_cost / (working_hour * payout_period) + oper_fix_cost;
+                }
+                catch (Exception e)
+                {
+                    fix_cost = 0;
+                }
+
+                double invest_prop_cost = MUs.ConvertToUnifiedUnit(op.ParameterList["investcostprop"].MU, op.ParameterList["investcostprop"].Value);
+                double oper_prop_cost = MUs.ConvertToUnifiedUnit(op.ParameterList["opercostprop"].MU, op.ParameterList["opercostprop"].Value);
+
+                double prop_cost;
+
+                try
+                {
+                    prop_cost = invest_prop_cost / (working_hour * payout_period) + oper_prop_cost;
+                }
+                catch (Exception e)
+                {
+                    prop_cost = 0;
+                }
+
+                item["capacity_lower_bound"] = MUs.ConvertToUnifiedUnit(op.ParameterList["caplower"].MU, capacity_lower_bound);
+                item["capacity_upper_bound"] = MUs.ConvertToUnifiedUnit(op.ParameterList["capupper"].MU, capacity_upper_bound);
+
+                item["fix_cost"] = fix_cost >= 0 ? fix_cost : Default.fix_cost;
+                
+                item["proportional_cost"] = prop_cost >= 0 ? prop_cost : Default.prop_cost;
 
                 operatingArray.Add(item);
 
@@ -350,28 +391,52 @@ namespace PNSDraw.online
                     solution.Title = "Unknown structure #" + i.ToString();
                 }
 
-                //Console.WriteLine(i + ". solution: " + solBsonArray[i].ToString());
-                //Console.WriteLine(solution.AlgorithmUsed);
                 Solutions.Add(solution);
             }
 
             //Console.WriteLine(problem.graph.SolutionCount);
         }
 
-        private void ParseMSGSolution(BsonValue bsonValue, Solution solution)
+        private void ParseMSGSolution(BsonValue solBson, Solution solution)
         {
             solution.AlgorithmUsed = "MSG";
+            solution.OptimalValue = solBson["result"]["value"].AsDouble;
+
+            BsonArray materials = solBson["materials"].AsBsonArray;
+            BsonArray opunits = solBson["operating_units"].AsBsonArray;
+
+            foreach (string d in materials)
+            {
+                solution.AddMaterial(d, 0, 0);
+            }
+
+            foreach (string d in opunits)
+            {
+                solution.AddOperatingUnit(d, 0, 0, new List<MaterialProperty>(), new List<MaterialProperty>());
+            }
         }
 
-        private void ParseSSGSolution(BsonValue bsonValue, Solution solution)
+        private void ParseSSGSolution(BsonValue solBson, Solution solution)
         {
             solution.AlgorithmUsed = "SSG";
+            BsonArray materials = solBson["materials"].AsBsonArray;
+            BsonArray opunits = solBson["operating_units"].AsBsonArray;
 
+            foreach (string d in materials)
+            {
+                solution.AddMaterial(d, 0, 0);
+            }
+
+            foreach (string d in opunits)
+            {
+                solution.AddOperatingUnit(d, 0, 0, new List<MaterialProperty>(), new List<MaterialProperty>());
+            }
         }
 
         private void ParseInsideOutSolution(BsonValue solBson, Solution solution)
         {
             solution.AlgorithmUsed = "ABB";
+            solution.OptimalValue = Math.Round(solBson["result"]["value"].AsDouble, 2);
             BsonArray materials = solBson["complete"]["materials"].AsBsonArray;
             BsonArray opunits = solBson["complete"]["operatings"].AsBsonArray;
 
@@ -383,7 +448,7 @@ namespace PNSDraw.online
                 }
                 else
                 {
-                    solution.AddMaterial(d["name"].AsString, d["flow"].AsDouble, d["cost"].AsDouble);
+                    solution.AddMaterial(d["name"].AsString, Math.Round(d["flow"].AsDouble, 4), Math.Round(d["cost"].AsDouble, 2));
                 }
             }
 
@@ -396,17 +461,17 @@ namespace PNSDraw.online
 
                 foreach (BsonDocument inDoc in consumed)
                 {
-                    MaterialProperty prop = new MaterialProperty(inDoc["name"].AsString, inDoc["flow"].AsDouble, 0);
+                    MaterialProperty prop = new MaterialProperty(inDoc["name"].AsString, Math.Round(inDoc["flow"].AsDouble, 4), 0);
                     input.Add(prop);
                 }
 
                 foreach (BsonDocument outDoc in produced)
                 {
-                    MaterialProperty prop = new MaterialProperty(outDoc["name"].AsString, outDoc["flow"].AsDouble, 0);
+                    MaterialProperty prop = new MaterialProperty(outDoc["name"].AsString, Math.Round(outDoc["flow"].AsDouble, 4), 0);
                     output.Add(prop);
                 }
 
-                solution.AddOperatingUnit(d["name"].AsString, d["capacity"].AsDouble, d["cost"].AsDouble, input, output);
+                solution.AddOperatingUnit(d["name"].AsString, Math.Round(d["capacity"].AsDouble, 4), Math.Round(d["cost"].AsDouble, 2), input, output);
             }
         }
     }

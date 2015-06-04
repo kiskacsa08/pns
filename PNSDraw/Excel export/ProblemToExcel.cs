@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace PNSDraw.Excel_export
 {
-    class ProblemToExcel
+    /*class ProblemToExcel
     {
         public void PNSProblemToExcel(bool t_visible, string filename)
         {
@@ -516,5 +516,5 @@ namespace PNSDraw.Excel_export
             Thread.CurrentThread.CurrentCulture = t_original_culture;
             #endregion
         }
-    }
+    }*/
 }
