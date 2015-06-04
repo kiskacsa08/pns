@@ -1628,7 +1628,7 @@ namespace PNSDraw
 
             KeepFilesDialog kfd = new KeepFilesDialog(inPath, outPath);
             res = kfd.ShowDialog();
-            if (res == DialogResult.No)
+            if (res == DialogResult.Yes)
             {
                 File.Delete(inPath);
                 File.Delete(outPath);
