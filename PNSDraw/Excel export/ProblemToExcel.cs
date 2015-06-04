@@ -1,6 +1,7 @@
 ﻿using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ using System.Windows.Forms;
 
 namespace PNSDraw.Excel_export
 {
-    /*class ProblemToExcel
+    class ProblemToExcel
     {
-        public void PNSProblemToExcel(bool t_visible, string filename)
+        public static void PNSProblemToExcel(bool t_visible, string filename, PGraph graph)
         {
             #region Excel initialisation
             string t_path = "";
@@ -25,7 +26,7 @@ namespace PNSDraw.Excel_export
                 t_dialog.InitialDirectory = t_path;
                 t_dialog.Filter = def_Solution_Excel.excel_extension;
                 t_dialog.FileName = Converters.ToNameString(def_Problem_Excel.excel_filename_p1 +
-                Path.GetFileName(PnsStudio.s_pns_editor.m_filename) + def_Problem_Excel.excel_filename_p2);
+                Path.GetFileName(filename) + def_Problem_Excel.excel_filename_p2);
                 if (t_dialog.ShowDialog() != DialogResult.OK) return;
                 t_path = t_dialog.FileName;
             }
@@ -55,7 +56,7 @@ namespace PNSDraw.Excel_export
             #endregion
 
             #region Materials Sheet
-            if (m_materials.Count > 0)
+            if (graph.Materials.Count > 0)
             {
                 ((_Worksheet)t_xlsx.WSMaterials).Activate();
 
@@ -68,13 +69,13 @@ namespace PNSDraw.Excel_export
                 j = t_h_offset;
                 #endregion
 
-                object[,] t_mats_data = new object[t_top + t_v_offset + m_materials.Count, t_left + t_h_offset + 8];
+                object[,] t_mats_data = new object[t_top + t_v_offset + graph.Materials.Count, t_left + t_h_offset + 8];
                 #region Materials table header labels
                 t_mats_data[t_top + i - 2, t_left - 1] = def_Solution_Excel.text_materials;
                 t_cells = t_xlsx.Cells(t_top + i - 1, t_left, 1, 9);
                 t_cells.Merge(false);
 
-                t_cells = t_xlsx.Cells(t_top + i - 1, t_left, m_materials.Count + 2, 9);
+                t_cells = t_xlsx.Cells(t_top + i - 1, t_left, graph.Materials.Count + 2, 9);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.center, def_Solution_Excel.VAlign.center);
                 t_cells.Interior.Color = color_mat;
 
@@ -105,101 +106,109 @@ namespace PNSDraw.Excel_export
                 #endregion
 
                 #region Material table
-                foreach (MaterialProperties mat in m_materials.m_rawlist)
+                foreach (Material mat in graph.Materials)
                 {
-                    j = t_h_offset;
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.currname;
-                    t_cells = t_xlsx.Cells(t_top + i, t_left + j - 1, 1, 1);
-                    t_cells.AddComment(mat.description.description);
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.typename;
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.dprice.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.DefaultPriceMU.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.dmin.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.DefaultFlowMU.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.dmax.ToString();
-                    t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = mat.DefaultFlowMU.ToString();
-
-                    if ((t_top + i - t_v_offset) % 2 == 0)
+                    if (mat.Type == Globals.MaterialTypes.Raw)
                     {
-                        t_cells = t_xlsx.Cells(t_top + i - 1, t_left, 1, j);
-                        t_cells.Interior.Color = color_mat_dark;
+                        j = t_h_offset;
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.Name;
+                        t_cells = t_xlsx.Cells(t_top + i, t_left + j - 1, 1, 1);
+                        t_cells.AddComment(mat.DisplayedText);
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = "Raw material";
+                        //t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = "category";
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.PriceProp.Value == -1 ? Default.price.ToString() : mat.PriceProp.Value.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.money_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ReqFlowProp.Value == -1 ? Default.flow_rate_lower_bound.ToString() : mat.ReqFlowProp.Value.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.MaxFlowProp.Value == -1 ? Default.flow_rate_upper_bound.ToString() : mat.MaxFlowProp.Value.ToString();
+                        t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+
+                        if ((t_top + i - t_v_offset) % 2 == 0)
+                        {
+                            t_cells = t_xlsx.Cells(t_top + i - 1, t_left, 1, j);
+                            t_cells.Interior.Color = color_mat_dark;
+                        }
                     }
-                }
-                foreach (MaterialProperties mat in m_materials.m_intermediatelist)
-                {
-                    j = t_h_offset;
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.currname;
-                    t_cells = t_xlsx.Cells(t_top + i, t_left + j - 1, 1, 1);
-                    t_cells.AddComment(mat.description.description);
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.typename;
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.dprice.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.DefaultPriceMU.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.dmin.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.DefaultFlowMU.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.dmax.ToString();
-                    t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = mat.DefaultFlowMU.ToString();
 
-                    if ((t_top + i - t_v_offset) % 2 == 0)
+                    if (mat.Type == Globals.MaterialTypes.Intermediate)
                     {
-                        t_cells = t_xlsx.Cells(t_top + i - 1, t_left, 1, j);
-                        t_cells.Interior.Color = color_mat_dark;
+                        j = t_h_offset;
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.Name;
+                        t_cells = t_xlsx.Cells(t_top + i, t_left + j - 1, 1, 1);
+                        t_cells.AddComment(mat.DisplayedText);
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = "Intermediate material";
+                        //t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = "category";
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.PriceProp.Value == -1 ? Default.price.ToString() : mat.PriceProp.Value.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.money_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ReqFlowProp.Value == -1 ? Default.flow_rate_lower_bound.ToString() : mat.ReqFlowProp.Value.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.MaxFlowProp.Value == -1 ? Default.flow_rate_upper_bound.ToString() : mat.MaxFlowProp.Value.ToString();
+                        t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+
+                        if ((t_top + i - t_v_offset) % 2 == 0)
+                        {
+                            t_cells = t_xlsx.Cells(t_top + i - 1, t_left, 1, j);
+                            t_cells.Interior.Color = color_mat_dark;
+                        }
                     }
-                }
-                foreach (MaterialProperties mat in m_materials.m_productlist)
-                {
-                    j = t_h_offset;
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.currname;
-                    t_cells = t_xlsx.Cells(t_top + i, t_left + j - 1, 1, 1);
-                    t_cells.AddComment(mat.description.description);
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.typename;
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.dprice.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.DefaultPriceMU.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.dmin.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.DefaultFlowMU.ToString();
-                    t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.dmax.ToString();
-                    t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = mat.DefaultFlowMU.ToString();
 
-                    if ((t_top + i - t_v_offset) % 2 == 0)
+                    if (mat.Type == Globals.MaterialTypes.Product)
                     {
-                        t_cells = t_xlsx.Cells(t_top + i - 1, t_left, 1, j);
-                        t_cells.Interior.Color = color_mat_dark;
+                        j = t_h_offset;
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.Name;
+                        t_cells = t_xlsx.Cells(t_top + i, t_left + j - 1, 1, 1);
+                        t_cells.AddComment(mat.DisplayedText);
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = "Product material";
+                        //t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = "category";
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.PriceProp.Value == -1 ? Default.price.ToString() : mat.PriceProp.Value.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.money_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ReqFlowProp.Value == -1 ? Default.flow_rate_lower_bound.ToString() : mat.ReqFlowProp.Value.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.MaxFlowProp.Value == -1 ? Default.flow_rate_upper_bound.ToString() : mat.MaxFlowProp.Value.ToString();
+                        t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+
+                        if ((t_top + i - t_v_offset) % 2 == 0)
+                        {
+                            t_cells = t_xlsx.Cells(t_top + i - 1, t_left, 1, j);
+                            t_cells.Interior.Color = color_mat_dark;
+                        }
                     }
                 }
                 #endregion
 
                 #region Material table format
-                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left, m_materials.Count + 1, 3);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left, graph.Materials.Count + 1, 3);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.left, def_Solution_Excel.VAlign.center);
                 int t_h = 3;
-                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h, m_materials.Count, 1);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h, graph.Materials.Count, 1);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.right, def_Solution_Excel.VAlign.center);
                 t_cells.NumberFormat = "#,##0.00";
-                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h + 1, m_materials.Count, 1);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h + 1, graph.Materials.Count, 1);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.left, def_Solution_Excel.VAlign.center);
 
-                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h + 2, m_materials.Count, 1);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h + 2, graph.Materials.Count, 1);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.right, def_Solution_Excel.VAlign.center);
                 t_cells.NumberFormat = "#,##0.00";
-                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h + 3, m_materials.Count, 1);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h + 3, graph.Materials.Count, 1);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.left, def_Solution_Excel.VAlign.center);
 
-                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h + 4, m_materials.Count, 1);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h + 4, graph.Materials.Count, 1);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.right, def_Solution_Excel.VAlign.center);
                 t_cells.NumberFormat = "#,##0.00";
-                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h + 5, m_materials.Count, 1);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset + 1, t_left + t_h + 5, graph.Materials.Count, 1);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.left, def_Solution_Excel.VAlign.center);
                 #endregion
 
                 #region Materials table borders
-                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left, m_materials.Count + 1, t_h + 1);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left, graph.Materials.Count + 1, t_h + 1);
                 t_cells.Borders[XlBordersIndex.xlInsideVertical].Color = color_border;
-                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left + t_h + 2, m_materials.Count + 1, 2);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left + t_h + 2, graph.Materials.Count + 1, 2);
                 t_cells.Borders[XlBordersIndex.xlEdgeLeft].Color = color_border;
                 t_cells.Borders[XlBordersIndex.xlEdgeRight].Color = color_border;
-                t_cells = t_xlsx.Cells(t_top + t_v_offset - 1, t_left, m_materials.Count + 2, j);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset - 1, t_left, graph.Materials.Count + 2, j);
                 t_cells.Borders[XlBordersIndex.xlEdgeTop].Color = color_border;
                 t_cells.Borders[XlBordersIndex.xlEdgeBottom].Color = color_border;
                 t_cells.Borders[XlBordersIndex.xlEdgeLeft].Color = color_border;
@@ -208,16 +217,16 @@ namespace PNSDraw.Excel_export
                 t_cells.Borders[XlBordersIndex.xlEdgeTop].Color = color_border;
                 #endregion
 
-                t_xlsx.WSMaterials.get_Range("A1", t_xlsx.CellName(t_mattop + m_materials.Count + 1,
+                t_xlsx.WSMaterials.get_Range("A1", t_xlsx.CellName(t_mattop + graph.Materials.Count + 1,
                     t_matleft + 8)).Value2 = t_mats_data;
             }
             #endregion
 
             #region Operating Units Sheet
-            if (m_operatingunitlist.Count > 0)
+            if (graph.OperatingUnits.Count > 0)
             {
                 ((_Worksheet)t_xlsx.WSOpUnits).Activate();
-                object[,] t_ous_data = new object[t_outop + t_v_ous_offset + m_operatingunitlist.Count + 2, t_ouleft + t_h_ous_offset + 10];
+                object[,] t_ous_data = new object[t_outop + t_v_ous_offset + graph.OperatingUnits.Count + 2, t_ouleft + t_h_ous_offset + 10];
                 t_top = t_outop;
                 t_left = t_ouleft;
                 i = t_v_ous_offset;
@@ -253,48 +262,48 @@ namespace PNSDraw.Excel_export
                 t_cells.Merge(false);
 
                 c_ofix = t_left + j;
-                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_ofix + "\n[" + DefaultMUsAndValues.MUs.DefaultCostMU + "]";
+                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_ofix + "\n[" + Default.money_mu.ToString() + "]";
                 c_oprop = t_left + j;
-                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_oprop + "\n[" + DefaultMUsAndValues.MUs.DefaultCostMU + "]";
+                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_oprop + "\n[" + Default.money_mu.ToString() + "]";
 
                 t_ous_data[t_top + i - 1, t_left + j - 1] = def_Solution_Excel.text_invcost;
                 t_cells = t_xlsx.Cells(t_top + i, t_left + j, 1, 2);
                 t_cells.Merge(false);
 
                 c_ifix = t_left + j;
-                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_ifix + "\n[" + DefaultMUsAndValues.MUs.DefaultCurrencyMU + "]";
+                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_ifix + "\n[" + Default.money_mu.ToString() + "]";
                 c_iprop = t_left + j;
-                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_iprop + "\n[" + DefaultMUsAndValues.MUs.DefaultCurrencyMU + "]";
+                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_iprop + "\n[" + Default.money_mu.ToString() + "]";
                 t_ous_data[t_top + i - 1, t_left + j - 1] = def_Solution_Excel.text_overallcost;
                 t_cells = t_xlsx.Cells(t_top + i, t_left + j, 1, 2);
                 t_cells.Merge(false);
 
                 int c_fix = t_left + j;
-                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_fix + "\n[" + DefaultMUsAndValues.MUs.DefaultCostMU + "]";
+                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_fix + "\n[" + Default.money_mu.ToString() + "]";
                 int c_prop = t_left + j;
-                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_prop + "\n[" + DefaultMUsAndValues.MUs.DefaultCostMU + "]";
+                t_ous_data[t_top + i, t_left + j++ - 1] = def_Solution_Excel.text_prop + "\n[" + Default.money_mu.ToString() + "]";
 
                 t_cells = t_xlsx.Cells(t_top, t_left, 3, 11);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.center, def_Solution_Excel.VAlign.center);
                 t_cells.Interior.Color = color_ou;
 
-                t_cells = t_xlsx.Cells(t_top + 3, t_left + 1, m_operatingunitlist.Count, 10);
+                t_cells = t_xlsx.Cells(t_top + 3, t_left + 1, graph.OperatingUnits.Count, 10);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.right, def_Solution_Excel.VAlign.center);
                 t_cells.NumberFormat = "#,##0.00";
                 t_cells.Interior.Color = color_ou;
 
-                t_cells = t_xlsx.Cells(t_top + 3, t_left, m_operatingunitlist.Count, 1);
+                t_cells = t_xlsx.Cells(t_top + 3, t_left, graph.OperatingUnits.Count, 1);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.left, def_Solution_Excel.VAlign.center);
                 t_cells.Interior.Color = color_ou;
 
-                t_cells = t_xlsx.Cells(t_top + 3, t_left + 1, m_operatingunitlist.Count, 1);
+                t_cells = t_xlsx.Cells(t_top + 3, t_left + 1, graph.OperatingUnits.Count, 1);
                 t_cells.NumberFormat = "#,##0";
 
-                t_cells = t_xlsx.Cells(t_top + 1, t_left, m_operatingunitlist.Count + 2, 11);
+                t_cells = t_xlsx.Cells(t_top + 1, t_left, graph.OperatingUnits.Count + 2, 11);
                 t_cells.Borders[XlBordersIndex.xlInsideVertical].Color = color_border;
                 t_cells.Borders[XlBordersIndex.xlEdgeBottom].Color = color_border;
 
-                t_cells = t_xlsx.Cells(t_top, t_left, m_operatingunitlist.Count + 3, 11);
+                t_cells = t_xlsx.Cells(t_top, t_left, graph.OperatingUnits.Count + 3, 11);
                 t_cells.Borders[XlBordersIndex.xlEdgeTop].Color = color_border;
                 t_cells.Borders[XlBordersIndex.xlEdgeLeft].Color = color_border;
                 t_cells.Borders[XlBordersIndex.xlEdgeRight].Color = color_border;
@@ -302,7 +311,7 @@ namespace PNSDraw.Excel_export
                 t_cells = t_xlsx.Cells(t_top + 2, t_left, 1, 11);
                 t_cells.Borders[XlBordersIndex.xlEdgeBottom].Color = color_border;
                 i += 2;
-                foreach (OperatingUnitProperties ou in m_operatingunitlist)
+                foreach (OperatingUnit ou in graph.OperatingUnits)
                 {
                     if ((t_top + i) % 2 == 1)
                     {
@@ -310,17 +319,17 @@ namespace PNSDraw.Excel_export
                         t_cells.Interior.Color = color_ou_dark;
                     }
                     j = 0;
-                    t_ous_data[t_top + i - 1, t_left + j - 1] = ou.currname;
+                    t_ous_data[t_top + i - 1, t_left + j - 1] = ou.Name;
                     t_cells = t_xlsx.Cells(t_top + i, t_left + j++, 1, 1);
-                    t_cells.AddComment(ou.description.description);
-                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.i_WorkingHoursPerYear.ToString();
-                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.d_PayoutPeriod.ToString();
-                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.bounds.d_lb.ToString();
-                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.bounds.d_ub.ToString();
-                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.ocost.d_fix.ToString();
-                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.ocost.d_prop.ToString();
-                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.icost.d_fix.ToString();
-                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.icost.d_prop.ToString();
+                    t_cells.AddComment(ou.DisplayedText);
+                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.WorkingHourProp.Value == -1 ? Default.worging_hours_per_year.ToString() : ou.WorkingHourProp.Value.ToString();
+                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.PayoutPeriodProp.Value == -1 ? Default.payout_period.ToString() : ou.PayoutPeriodProp.Value.ToString();
+                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.CapacityLowerProp.Value == -1 ? Default.capacity_lower_bound.ToString() : ou.CapacityLowerProp.Value.ToString();
+                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.CapacityUpperProp.Value == -1 ? Default.capacity_upper_bound.ToString() : ou.CapacityUpperProp.Value.ToString();
+                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.OperatingCostFixProp.Value.ToString();
+                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.OperatingCostPropProp.Value.ToString();
+                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.InvestmentCostFixProp.Value.ToString();
+                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.InvestmentCostPropProp.Value.ToString();
                     t_ous_data[t_top + i - 1, t_left + j++ - 1] = "=" + t_xlsx.CellName(t_top + i, c_ofix) +
                         "+" + t_xlsx.CellName(t_top + i, c_ifix) + "/" + t_xlsx.CellName(t_top + i, c_payout);
                     t_ous_data[t_top + i - 1, t_left + j++ - 1] = "=" + t_xlsx.CellName(t_top + i, c_oprop) +
@@ -328,16 +337,16 @@ namespace PNSDraw.Excel_export
                     i++;
                 }
 
-                t_xlsx.WSOpUnits.get_Range("A1", t_xlsx.CellName(t_outop + t_v_ous_offset + m_operatingunitlist.Count + 2, t_ouleft +
+                t_xlsx.WSOpUnits.get_Range("A1", t_xlsx.CellName(t_outop + t_v_ous_offset + graph.OperatingUnits.Count + 2, t_ouleft +
                     t_h_ous_offset + 10)).Value2 = t_ous_data;
             }
             #endregion
 
             #region Flows Sheet
-            if (m_materials.Count > 0 && m_operatingunitlist.Count > 0)
+            if (graph.Materials.Count > 0 && graph.OperatingUnits.Count > 0)
             {
                 ((_Worksheet)t_xlsx.WSFlows).Activate();
-                object[,] t_flows_data = new object[t_flowtop + t_v_flows_offset + m_materials.Count - 1, t_flowleft + t_h_flows_offset + m_operatingunitlist.Count - 1];
+                object[,] t_flows_data = new object[t_flowtop + t_v_flows_offset + graph.Materials.Count - 1, t_flowleft + t_h_flows_offset + graph.OperatingUnits.Count - 1];
 
                 #region Positions
                 t_top = t_flowtop;
@@ -349,11 +358,11 @@ namespace PNSDraw.Excel_export
                 #endregion
 
                 #region Rates and Operating Units label
-                t_cells = t_xlsx.Cells(t_top, t_left, m_materials.Count + t_v_offset, t_h_offset);
+                t_cells = t_xlsx.Cells(t_top, t_left, graph.Materials.Count + t_v_offset, t_h_offset);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.center, def_Solution_Excel.VAlign.center);
                 t_cells.Interior.Color = color_mat;
 
-                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left + t_h_offset, m_materials.Count, m_operatingunitlist.Count);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left + t_h_offset, graph.Materials.Count, graph.OperatingUnits.Count);
                 t_cells.Interior.Color = color_rate;
 
                 t_flows_data[t_top - 1, t_left - 1] = def_Problem_Excel.text_rates_label;
@@ -361,146 +370,123 @@ namespace PNSDraw.Excel_export
                 t_cells.Merge(false);
 
                 t_flows_data[t_top - 1, t_left + t_h_offset - 1] = def_Solution_Excel.text_opunits;
-                t_cells = t_xlsx.Cells(t_top, t_left + t_h_offset, 1, m_operatingunitlist.Count);
+                t_cells = t_xlsx.Cells(t_top, t_left + t_h_offset, 1, graph.OperatingUnits.Count);
                 t_cells.Merge(false);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.center, def_Solution_Excel.VAlign.center);
                 t_cells.Interior.Color = color_ou;
                 #endregion
 
                 #region Material flows, FlowMUs
-                foreach (MaterialProperties mat in m_materials.m_rawlist)
+                foreach (Material mat in graph.Materials)
                 {
-                    t_flows_data[t_top + i - 1, t_left - 1] = mat.currname;
-                    t_flows_data[t_top + i - 1, t_left] = "[" + mat.DefaultFlowMU + "]";
-                    if ((i - t_v_offset) % 2 == 0)
+                    if (mat.Type == Globals.MaterialTypes.Raw)
                     {
-                        t_cells = t_xlsx.Cells(t_top + i, t_left, 1, t_h_offset);
-                        t_cells.Interior.Color = color_mat_dark;
+                        t_flows_data[t_top + i - 1, t_left - 1] = mat.Name;
+                        t_flows_data[t_top + i - 1, t_left] = "[" + Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() + "]";
+                        if ((i - t_v_offset) % 2 == 0)
+                        {
+                            t_cells = t_xlsx.Cells(t_top + i, t_left, 1, t_h_offset);
+                            t_cells.Interior.Color = color_mat_dark;
 
-                        t_cells = t_xlsx.Cells(t_top + i, t_left + t_h_offset, 1, m_operatingunitlist.Count);
-                        t_cells.Interior.Color = color_rate_dark;
+                            t_cells = t_xlsx.Cells(t_top + i, t_left + t_h_offset, 1, graph.OperatingUnits.Count);
+                            t_cells.Interior.Color = color_rate_dark;
+                        }
+                        i++;
                     }
-                    i++;
-                }
-                foreach (MaterialProperties mat in m_materials.m_intermediatelist)
-                {
-                    t_flows_data[t_top + i - 1, t_left - 1] = mat.currname;
-                    t_flows_data[t_top + i - 1, t_left] = "[" + mat.DefaultFlowMU + "]";
-                    if ((i - t_v_offset) % 2 == 0)
+
+                    if (mat.Type == Globals.MaterialTypes.Intermediate)
                     {
-                        t_cells = t_xlsx.Cells(t_top + i, t_left, 1, t_h_offset);
-                        t_cells.Interior.Color = color_mat_dark;
+                        t_flows_data[t_top + i - 1, t_left - 1] = mat.Name;
+                        t_flows_data[t_top + i - 1, t_left] = "[" + Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() + "]";
+                        if ((i - t_v_offset) % 2 == 0)
+                        {
+                            t_cells = t_xlsx.Cells(t_top + i, t_left, 1, t_h_offset);
+                            t_cells.Interior.Color = color_mat_dark;
 
-                        t_cells = t_xlsx.Cells(t_top + i, t_left + t_h_offset, 1, m_operatingunitlist.Count);
-                        t_cells.Interior.Color = color_rate_dark;
+                            t_cells = t_xlsx.Cells(t_top + i, t_left + t_h_offset, 1, graph.OperatingUnits.Count);
+                            t_cells.Interior.Color = color_rate_dark;
+                        }
+                        i++;
                     }
-                    i++;
-                }
-                foreach (MaterialProperties mat in m_materials.m_productlist)
-                {
-                    t_flows_data[t_top + i - 1, t_left - 1] = mat.currname;
-                    t_flows_data[t_top + i - 1, t_left] = "[" + mat.DefaultFlowMU + "]";
-                    if ((i - t_v_offset) % 2 == 0)
+
+                    if (mat.Type == Globals.MaterialTypes.Product)
                     {
-                        t_cells = t_xlsx.Cells(t_top + i, t_left, 1, t_h_offset);
-                        t_cells.Interior.Color = color_mat_dark;
+                        t_flows_data[t_top + i - 1, t_left - 1] = mat.Name;
+                        t_flows_data[t_top + i - 1, t_left] = "[" + Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() + "]";
+                        if ((i - t_v_offset) % 2 == 0)
+                        {
+                            t_cells = t_xlsx.Cells(t_top + i, t_left, 1, t_h_offset);
+                            t_cells.Interior.Color = color_mat_dark;
 
-                        t_cells = t_xlsx.Cells(t_top + i, t_left + t_h_offset, 1, m_operatingunitlist.Count);
-                        t_cells.Interior.Color = color_rate_dark;
+                            t_cells = t_xlsx.Cells(t_top + i, t_left + t_h_offset, 1, graph.OperatingUnits.Count);
+                            t_cells.Interior.Color = color_rate_dark;
+                        }
+                        i++;
                     }
-                    i++;
                 }
 
-                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left, m_materials.Count, 1);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left, graph.Materials.Count, 1);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.left, def_Solution_Excel.VAlign.center);
 
-                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left + 1, m_materials.Count, 1);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left + 1, graph.Materials.Count, 1);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.right, def_Solution_Excel.VAlign.center);
                 #endregion
 
                 #region Opunit name, rates matrix
-                foreach (OperatingUnitProperties ou in m_operatingunitlist)
+                foreach (OperatingUnit ou in graph.OperatingUnits)
                 {
-                    t_flows_data[t_top, t_left + j - 1] = ou.name;
-                    foreach (CustomProp t_prop in ou.imats.list)
+                    t_flows_data[t_top, t_left + j - 1] = ou.Name;
+                    foreach (KeyValuePair<Material, double> t_mat in FileConnector.GetOpUnitBeginEnd(ou, graph)["input"])
                     {
-                        IOMaterial t_mat = (IOMaterial)t_prop.Value;
                         i = t_v_offset;
                         bool t_found = false;
-                        foreach (MaterialProperties mat in m_materials.m_rawlist)
+                        foreach (Material mat in graph.Materials)
                         {
-                            if (t_found = mat.currname == t_mat.Name) break;
+                            if (t_found = mat.Name == t_mat.Key.Name) break;
                             i++;
                         }
-                        if (!t_found)
-                            foreach (MaterialProperties mat in m_materials.m_intermediatelist)
-                            {
-                                if (t_found = mat.currname == t_mat.Name) break;
-                                i++;
-                            }
-                        if (!t_found)
-                            foreach (MaterialProperties mat in m_materials.m_productlist)
-                            {
-                                if (mat.currname == t_mat.Name) break;
-                                i++;
-                            }
-
-                        t_flows_data[t_top + i - 1, t_left + j - 1] = (-t_mat.g_rate).ToString();
+                        t_flows_data[t_top + i - 1, t_left + j - 1] = (-t_mat.Value).ToString();
                     }
-                    foreach (CustomProp t_prop in ou.omats.list)
+                    foreach (KeyValuePair<Material, double> t_mat in FileConnector.GetOpUnitBeginEnd(ou, graph)["output"])
                     {
-                        IOMaterial t_mat = (IOMaterial)t_prop.Value;
                         i = t_v_offset;
                         bool t_found = false;
-                        foreach (MaterialProperties mat in m_materials.m_rawlist)
+                        foreach (Material mat in graph.Materials)
                         {
-                            if (t_found = mat.currname == t_mat.Name) break;
+                            if (t_found = mat.Name == t_mat.Key.Name) break;
                             i++;
                         }
-                        if (!t_found)
-                            foreach (MaterialProperties mat in m_materials.m_intermediatelist)
-                            {
-                                if (t_found = mat.currname == t_mat.Name) break;
-                                i++;
-                            }
-                        if (!t_found)
-                            foreach (MaterialProperties mat in m_materials.m_productlist)
-                            {
-                                if (mat.currname == t_mat.Name) break;
-                                i++;
-                            }
-
-                        t_flows_data[t_top + i - 1, t_left + j - 1] = (t_mat.g_rate).ToString();
+                        t_flows_data[t_top + i - 1, t_left + j - 1] = (t_mat.Value).ToString();
                     }
                     j++;
                 }
 
-                t_cells = t_xlsx.Cells(t_top + 1, t_left + t_h_offset, 1, m_operatingunitlist.Count);
+                t_cells = t_xlsx.Cells(t_top + 1, t_left + t_h_offset, 1, graph.OperatingUnits.Count);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.center, def_Solution_Excel.VAlign.bottom);
                 t_cells.Interior.Color = color_ou;
                 t_cells.Orientation = 90;
 
-                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left + t_h_offset, m_materials.Count, m_operatingunitlist.Count);
+                t_cells = t_xlsx.Cells(t_top + t_v_offset, t_left + t_h_offset, graph.Materials.Count, graph.OperatingUnits.Count);
                 t_xlsx.Align(t_cells, def_Solution_Excel.HAlign.right, def_Solution_Excel.VAlign.center);
                 t_cells.NumberFormat = "#,##0.00";
                 #endregion
 
                 #region Flow matrix borders
-                t_cells = t_xlsx.Cells(t_top, t_left + t_h_offset - 1, t_v_offset + m_materials.Count, m_operatingunitlist.Count + 1);
+                t_cells = t_xlsx.Cells(t_top, t_left + t_h_offset - 1, t_v_offset + graph.Materials.Count, graph.OperatingUnits.Count + 1);
                 t_cells.Borders[XlBordersIndex.xlInsideVertical].Color = color_border;
 
-                t_cells = t_xlsx.Cells(t_top, t_left, t_v_offset + m_materials.Count, t_h_offset + m_operatingunitlist.Count);
+                t_cells = t_xlsx.Cells(t_top, t_left, t_v_offset + graph.Materials.Count, t_h_offset + graph.OperatingUnits.Count);
                 t_cells.Borders[XlBordersIndex.xlEdgeTop].Color = color_border;
                 t_cells.Borders[XlBordersIndex.xlEdgeBottom].Color = color_border;
                 t_cells.Borders[XlBordersIndex.xlEdgeLeft].Color = color_border;
                 t_cells.Borders[XlBordersIndex.xlEdgeRight].Color = color_border;
 
-                t_cells = t_xlsx.Cells(t_top + 1, t_left + t_h_offset, 1, m_operatingunitlist.Count);
+                t_cells = t_xlsx.Cells(t_top + 1, t_left + t_h_offset, 1, graph.OperatingUnits.Count);
                 t_cells.Borders[XlBordersIndex.xlEdgeBottom].Color = color_border;
                 #endregion
 
-                t_xlsx.WSFlows.get_Range("A1", t_xlsx.CellName(t_flowtop + t_v_flows_offset + m_materials.Count - 1,
-                    t_flowleft + t_h_flows_offset + m_operatingunitlist.Count - 1)).Value2 = t_flows_data;
+                t_xlsx.WSFlows.get_Range("A1", t_xlsx.CellName(t_flowtop + t_v_flows_offset + graph.Materials.Count - 1,
+                    t_flowleft + t_h_flows_offset + graph.OperatingUnits.Count - 1)).Value2 = t_flows_data;
             }
             #endregion
 
@@ -516,5 +502,5 @@ namespace PNSDraw.Excel_export
             Thread.CurrentThread.CurrentCulture = t_original_culture;
             #endregion
         }
-    }*/
+    }
 }
