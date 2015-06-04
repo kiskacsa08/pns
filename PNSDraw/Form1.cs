@@ -1641,5 +1641,90 @@ namespace PNSDraw
             ProblemToExcel.PNSProblemToExcel(false, "excel", Graph);
             //Console.WriteLine("Ide írtam: " + Graph.Materials[0].ParameterList["price"].MU);
         }
+
+        private void exportToJPGToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        {
+            int sizelimit = 6000 * 6000;
+
+            Rectangle rect = pnsCanvas1.GetCanvasBoundary();
+            Size s = new Size(rect.Size.Width, rect.Size.Height);
+            largeJPGToolStripMenuItem.Text = "Large (" + s.Width + "x" + s.Height + ")";
+            mediumJPGToolStripMenuItem.Text = "Medium (" + (s.Width / 2) + "x" + (s.Height / 2) + ")";
+            smallJPGToolStripMenuItem.Text = "Small (" + (s.Width / 4) + "x" + (s.Height / 4) + ")";
+
+            int bmpsize = s.Height * s.Width;
+
+            if (bmpsize > sizelimit)
+            {
+                largeJPGToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                largeJPGToolStripMenuItem.Enabled = true;
+            }
+
+            if (bmpsize / 4 > sizelimit)
+            {
+                mediumJPGToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                mediumJPGToolStripMenuItem.Enabled = true;
+            }
+
+            if (bmpsize / 16 > sizelimit)
+            {
+                smallJPGToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                smallJPGToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private void smallJPGToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "JPEG file|*.jpg";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Rectangle rect = pnsCanvas1.GetCanvasBoundary();
+                Size s = new Size(rect.Size.Width / 4, rect.Size.Height / 4);
+                Bitmap bmp = new Bitmap(s.Width, s.Height);
+                Graphics g = Graphics.FromImage(bmp);
+                pnsCanvas1.Export(g, s);
+                bmp.Save(sfd.FileName);
+            }
+        }
+
+        private void mediumJPGToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "JPEG file|*.jpg";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Rectangle rect = pnsCanvas1.GetCanvasBoundary();
+                Size s = new Size(rect.Size.Width / 2, rect.Size.Height / 2);
+                Bitmap bmp = new Bitmap(s.Width, s.Height);
+                Graphics g = Graphics.FromImage(bmp);
+                pnsCanvas1.Export(g, s);
+                bmp.Save(sfd.FileName);
+            }
+        }
+
+        private void largeJPGToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "JPEG file|*.jpg";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Rectangle rect = pnsCanvas1.GetCanvasBoundary();
+                Size s = new Size(rect.Size.Width, rect.Size.Height);
+                Bitmap bmp = new Bitmap(s.Width, s.Height);
+                Graphics g = Graphics.FromImage(bmp);
+                pnsCanvas1.Export(g, s);
+                bmp.Save(sfd.FileName);
+            }
+        }
     }
 }
