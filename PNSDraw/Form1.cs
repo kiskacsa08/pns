@@ -1555,7 +1555,7 @@ namespace PNSDraw
             pInfo.RedirectStandardOutput = true;
             pInfo.UseShellExecute = false;
             pInfo.Arguments = arguments;
-            pInfo.FileName = "pns_depth.exe";
+            pInfo.FileName = "Solver/pns_depth.exe";
             pInfo.WindowStyle = ProcessWindowStyle.Hidden;
             pInfo.CreateNoWindow = true;
             int exitCode = 1;
@@ -1582,6 +1582,8 @@ namespace PNSDraw
                     StreamReader sr = new StreamReader(file);
                     string solution = sr.ReadToEnd();
                     FileConnector.ParseSolution(solution, Graph);
+                    sr.Close();
+                    file.Close();
                 }
                 catch (Exception ex)
                 {
