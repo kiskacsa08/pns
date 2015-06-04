@@ -12,6 +12,7 @@ using System.Threading;
 using System.Globalization;
 using PNSDraw.online;
 using System.Diagnostics;
+using PNSDraw.Excel_export;
 
 namespace PNSDraw
 {
@@ -1637,7 +1638,8 @@ namespace PNSDraw
 
         private void exportToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ProblemToExcel.PNSProblemToExcel(false, "excel", Graph);
+            //Console.WriteLine("Ide írtam: " + Graph.Materials[0].ParameterList["price"].MU);
         }
     }
 }
