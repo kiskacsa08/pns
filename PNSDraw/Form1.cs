@@ -1431,15 +1431,18 @@ namespace PNSDraw
                     //TODO javítottam az értékek kiírását a fában, hogy helyesen írja ki, és csak akkor, ha nem -1 az értéke a tulajdonságnak
                     if(m.PriceProp.Value != -1)
                     {
-                        treeSolution.Nodes[0].Nodes[i].Nodes.Add("Price: " + m.PriceProp.Value.ToString() + " " + Default.money_mu + "/" + Default.time_mu);
+                        double price = MUs.UnitConvert(m.PriceProp.MU, Default.money_mu.ToString(), m.PriceProp.Value, "currency");
+                        treeSolution.Nodes[0].Nodes[i].Nodes.Add("Price: " + Math.Round(price, 2) + " " + Default.money_mu + "/" + Default.time_mu);
                     }
                     if (m.ReqFlowProp.Value != -1)
                     {
-                        treeSolution.Nodes[0].Nodes[i].Nodes.Add("Min: " + m.ReqFlowProp.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                        double reqflow = MUs.UnitConvert(m.ReqFlowProp.MU, Default.mass_mu.ToString(), m.ReqFlowProp.Value, "mass");
+                        treeSolution.Nodes[0].Nodes[i].Nodes.Add("Min: " + Math.Round(reqflow, 4) + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
                     if (m.MaxFlowProp.Value != -1)
                     {
-                        treeSolution.Nodes[0].Nodes[i].Nodes.Add("Max: " + m.MaxFlowProp.Value + " " + Default.mass_mu + "/" + Default.time_mu);
+                        double maxflow = MUs.UnitConvert(m.MaxFlowProp.MU, Default.mass_mu.ToString(), m.MaxFlowProp.Value, "mass");
+                        treeSolution.Nodes[0].Nodes[i].Nodes.Add("Max: " + Math.Round(maxflow, 4) + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
                     //TODO hozzáadtam a címkéjét a materialnak, így könnyebb visszanézni a gráfban
                     treeSolution.Nodes[0].Nodes[i].Nodes.Add("Title: " + m.DisplayedText);
@@ -1462,27 +1465,33 @@ namespace PNSDraw
                 {
                     if (opUnit.CapacityLowerProp.Value != -1)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity lower bound: " + opUnit.CapacityLowerProp.Value);
+                        double caplower = MUs.UnitConvert(opUnit.CapacityLowerProp.MU, Default.mass_mu.ToString(), opUnit.CapacityLowerProp.Value, "mass");
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity lower bound: " + Math.Round(caplower, 4) + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
                     if (opUnit.CapacityUpperProp.Value != -1)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity upper bound: " + opUnit.CapacityUpperProp.Value);
+                        double capupper = MUs.UnitConvert(opUnit.CapacityUpperProp.MU, Default.mass_mu.ToString(), opUnit.CapacityUpperProp.Value, "mass");
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity upper bound: " + Math.Round(capupper, 4) + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
                     if (opUnit.InvestmentCostFixProp.Value != -1)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment fix cost: " + opUnit.InvestmentCostFixProp.Value);
+                        double investfix = MUs.UnitConvert(opUnit.InvestmentCostFixProp.MU, Default.money_mu.ToString(), opUnit.InvestmentCostFixProp.Value, "currency");
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment fix cost: " + Math.Round(investfix, 2) + " " + Default.money_mu + "/" + Default.time_mu);
                     }
                     if (opUnit.InvestmentCostPropProp.Value != -1)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment proportional cost: " + opUnit.InvestmentCostPropProp.Value);
+                        double investprop = MUs.UnitConvert(opUnit.InvestmentCostPropProp.MU, Default.money_mu.ToString(), opUnit.InvestmentCostPropProp.Value, "currency");
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment proportional cost: " + Math.Round(investprop, 2) + " " + Default.money_mu + "/" + Default.time_mu);
                     }
                     if (opUnit.OperatingCostFixProp.Value != -1)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating fix cost: " + opUnit.OperatingCostFixProp.Value);
+                        double operfix = MUs.UnitConvert(opUnit.OperatingCostFixProp.MU, Default.money_mu.ToString(), opUnit.OperatingCostFixProp.Value, "currency");
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating fix cost: " + Math.Round(operfix, 2) + " " + Default.money_mu + "/" + Default.time_mu);
                     }
                     if (opUnit.OperatingCostPropProp.Value != -1)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating proportional cost: " + opUnit.OperatingCostPropProp.Value);
+                        double operprop = MUs.UnitConvert(opUnit.OperatingCostPropProp.MU, Default.money_mu.ToString(), opUnit.OperatingCostPropProp.Value, "currency");
+                        treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating proportional cost: " + Math.Round(operprop, 2) + " " + Default.money_mu + "/" + Default.time_mu);
                     }
 
                     //TODO ezt javítottam, a megoldásból jönnek ezek az adatok, mert lehet akár kieső node is a megoldásnál
@@ -1491,12 +1500,12 @@ namespace PNSDraw
 
                     foreach (MaterialProperty m in ou.Value.Input)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes[treeSolution.Nodes[1].Nodes[i].Nodes.Count - 2].Nodes.Add(m.Name + ": " + m.Flow + " " + Default.mass_mu + "/" + Default.time_mu);
+                        treeSolution.Nodes[1].Nodes[i].Nodes[treeSolution.Nodes[1].Nodes[i].Nodes.Count - 2].Nodes.Add(m.Name + ": " + Math.Round(m.Flow, 4) + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
 
                     foreach (MaterialProperty m in ou.Value.Output)
                     {
-                        treeSolution.Nodes[1].Nodes[i].Nodes[treeSolution.Nodes[1].Nodes[i].Nodes.Count - 1].Nodes.Add(m.Name + ": " + m.Flow + " " + Default.mass_mu + "/" + Default.time_mu);
+                        treeSolution.Nodes[1].Nodes[i].Nodes[treeSolution.Nodes[1].Nodes[i].Nodes.Count - 1].Nodes.Add(m.Name + ": " + Math.Round(m.Flow, 4) + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
                 }
                 i++;

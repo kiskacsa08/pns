@@ -21,8 +21,9 @@ namespace PNSDraw.online
             }
 
             string toUnit = GetBaseUnit(fromUnit);
+            string quantity = GetQuantity(toUnit);
 
-            return UnitConvert(fromUnit, toUnit, value);
+            return UnitConvert(fromUnit, toUnit, value, quantity);
         }
 
         public static double ConvertToSpecialUnit(string toUnit, double value)
@@ -33,13 +34,14 @@ namespace PNSDraw.online
             }
 
             string fromUnit = GetBaseUnit(toUnit);
+            string quantity = GetQuantity(fromUnit);
 
-            return UnitConvert(fromUnit, toUnit, value);
+            return UnitConvert(fromUnit, toUnit, value, quantity);
         }
 
-        private static double UnitConvert(string fromUnit, string toUnit, double value)
+        public static double UnitConvert(string fromUnit, string toUnit, double value, string quantity)
         {
-            double factor = GetFactorByQuantity(fromUnit);
+            double factor = GetFactorByQuantity(fromUnit, quantity);
             double convertedValue = value;
 
             if (factor > 0)
@@ -51,10 +53,8 @@ namespace PNSDraw.online
                 //throw new Exception("From unit not found or null!");
                 return value;
             }
-            
-            factor = GetFactorByQuantity(toUnit);
 
-
+            factor = GetFactorByQuantity(toUnit, quantity);
 
             if (factor > 0)
             {
@@ -92,6 +92,25 @@ namespace PNSDraw.online
 
         private static double GetFactorByQuantity(string unit, string quantity)
         {
+            if (unit.Length == 0)
+            {
+                switch (quantity)
+                {
+                    case "mass":
+                        unit = Default.mass_mu.ToString();
+                        break;
+                    case "currency":
+                        unit = Default.money_mu.ToString();
+                        break;
+                    case "time":
+                        unit = Default.time_mu.ToString();
+                        break;
+                    default:
+                        unit = Default.mass_mu.ToString();
+                        break;
+                }
+            }
+
             if (doc == null)
             {
                 Read();
@@ -128,10 +147,10 @@ namespace PNSDraw.online
                 return 1;
             }
 
-            return Convert.ToDouble(XMLUnit.Attributes["factor"].Value);
+            return Convert.ToDouble(XMLUnit.Attributes["factor"].Value, CultureInfo.InvariantCulture);
         }
 
-        private static double GetFactorByQuantity(string unit)
+        /*private static double GetFactorByQuantity(string unit)
         {
             if (doc == null)
             {
@@ -154,7 +173,7 @@ namespace PNSDraw.online
             }
 
             return Convert.ToDouble(XMLUnit.Attributes["factor"].Value, CultureInfo.InvariantCulture);
-        }
+        }*/
 
         private static string GetBaseUnit(string unit)
         {

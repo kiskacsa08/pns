@@ -188,9 +188,19 @@
               <item group_id="1" id="8" factor="307.845013" exponent="1" />
             </derivation>
           </unit>
+          <unit id="1" name="euro" symbol="EUR">
+            <derivation>
+              <item group_id="1" id="9" factor="307.845013" exponent="1" />
+            </derivation>
+          </unit>
           <unit id="2" name="dollar" symbol="$">
             <derivation>
-              <item group_id="1" id="8" factor="269.541779" exponent="1" />
+              <item group_id="1" id="10" factor="269.541779" exponent="1" />
+            </derivation>
+          </unit>
+          <unit id="2" name="dollar" symbol="USD">
+            <derivation>
+              <item group_id="1" id="11" factor="269.541779" exponent="1" />
             </derivation>
           </unit>
         </units>

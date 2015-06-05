@@ -101,7 +101,7 @@ namespace PNSDraw.online
                 item["flow_rate_lower_bound"] = MUs.ConvertToUnifiedUnit(mat.ParameterList["reqflow"].MU, flow_rate_lower_bound);
                 item["flow_rate_upper_bound"] = MUs.ConvertToUnifiedUnit(mat.ParameterList["maxflow"].MU, flow_rate_upper_bound);
                 item["price"] = MUs.ConvertToUnifiedUnit(mat.ParameterList["price"].MU, price);
-                
+                Console.WriteLine(item["name"].AsString + ": " + item["flow_rate_upper_bound"].AsDouble);
                 materialArray.Add(item);
             }
 
@@ -215,9 +215,9 @@ namespace PNSDraw.online
             convertedGraph["hash_to_pns_draw"] = problem.graph.GetHashCode();
 
             BsonDocument mu = new BsonDocument();
-            mu["mass_unit"] = MUs.GetBaseQuantity("mass");
-            mu["time_unit"] = MUs.GetBaseQuantity("time");
-            mu["money_unit"] = MUs.GetBaseQuantity("currency");
+            mu["mass_unit"] = Default.mass_mu.ToString();//MUs.GetBaseQuantity("mass");
+            mu["time_unit"] = Default.time_mu.ToString();//MUs.GetBaseQuantity("time");
+            mu["money_unit"] = Default.money_mu.ToString();//MUs.GetBaseQuantity("currency");
 
             convertedGraph["measurement_units"] = mu;
 
@@ -448,7 +448,10 @@ namespace PNSDraw.online
                 }
                 else
                 {
-                    solution.AddMaterial(d["name"].AsString, Math.Round(d["flow"].AsDouble, 4), Math.Round(d["cost"].AsDouble, 2));
+                    double flow = MUs.ConvertToSpecialUnit(Default.mass_mu.ToString(), d["flow"].AsDouble);
+                    double cost = MUs.ConvertToSpecialUnit(Default.money_mu.ToString(), d["cost"].AsDouble);
+
+                    solution.AddMaterial(d["name"].AsString, Math.Round(flow, 4), Math.Round(cost, 2));
                 }
             }
 
@@ -461,17 +464,22 @@ namespace PNSDraw.online
 
                 foreach (BsonDocument inDoc in consumed)
                 {
-                    MaterialProperty prop = new MaterialProperty(inDoc["name"].AsString, Math.Round(inDoc["flow"].AsDouble, 4), 0);
+                    double flow = MUs.ConvertToSpecialUnit(Default.mass_mu.ToString(), inDoc["flow"].AsDouble);
+                    MaterialProperty prop = new MaterialProperty(inDoc["name"].AsString, Math.Round(flow, 4), 0);
                     input.Add(prop);
                 }
 
                 foreach (BsonDocument outDoc in produced)
                 {
-                    MaterialProperty prop = new MaterialProperty(outDoc["name"].AsString, Math.Round(outDoc["flow"].AsDouble, 4), 0);
+                    double flow = MUs.ConvertToSpecialUnit(Default.mass_mu.ToString(), outDoc["flow"].AsDouble);
+                    MaterialProperty prop = new MaterialProperty(outDoc["name"].AsString, Math.Round(flow, 4), 0);
                     output.Add(prop);
                 }
 
-                solution.AddOperatingUnit(d["name"].AsString, Math.Round(d["capacity"].AsDouble, 4), Math.Round(d["cost"].AsDouble, 2), input, output);
+                double capacity = MUs.ConvertToSpecialUnit(Default.mass_mu.ToString(), d["capacity"].AsDouble);
+                double cost = MUs.ConvertToSpecialUnit(Default.money_mu.ToString(), d["cost"].AsDouble);
+
+                solution.AddOperatingUnit(d["name"].AsString, Math.Round(capacity, 4), Math.Round(cost, 2), input, output);
             }
         }
     }
