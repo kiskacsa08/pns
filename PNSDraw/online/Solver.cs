@@ -101,7 +101,7 @@ namespace PNSDraw.online
                 item["flow_rate_lower_bound"] = MUs.ConvertToUnifiedUnit(mat.ParameterList["reqflow"].MU, flow_rate_lower_bound);
                 item["flow_rate_upper_bound"] = MUs.ConvertToUnifiedUnit(mat.ParameterList["maxflow"].MU, flow_rate_upper_bound);
                 item["price"] = MUs.ConvertToUnifiedUnit(mat.ParameterList["price"].MU, price);
-                Console.WriteLine(item["name"].AsString + ": " + item["flow_rate_upper_bound"].AsDouble);
+
                 materialArray.Add(item);
             }
 
@@ -436,7 +436,7 @@ namespace PNSDraw.online
         private void ParseInsideOutSolution(BsonValue solBson, Solution solution)
         {
             solution.AlgorithmUsed = "ABB";
-            solution.OptimalValue = Math.Round(solBson["result"]["value"].AsDouble, 2);
+            solution.OptimalValue = Math.Round(MUs.ConvertToSpecialUnit(Default.money_mu.ToString(), solBson["result"]["value"].AsDouble), 2);
             BsonArray materials = solBson["complete"]["materials"].AsBsonArray;
             BsonArray opunits = solBson["complete"]["operatings"].AsBsonArray;
 
@@ -479,7 +479,7 @@ namespace PNSDraw.online
                 double capacity = MUs.ConvertToSpecialUnit(Default.mass_mu.ToString(), d["capacity"].AsDouble);
                 double cost = MUs.ConvertToSpecialUnit(Default.money_mu.ToString(), d["cost"].AsDouble);
 
-                solution.AddOperatingUnit(d["name"].AsString, Math.Round(capacity, 4), Math.Round(cost, 2), input, output);
+                solution.AddOperatingUnit(d["name"].AsString, Math.Round(capacity, 4), Math.Round(d["cost"].AsDouble, 2), input, output);
             }
         }
     }

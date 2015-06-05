@@ -183,6 +183,11 @@
       </derived_quantity>
       <derived_quantity group_id="9" quantity="currency">
         <units>
+          <unit id="1" name="forint" symbol="HUF">
+            <derivation>
+              <item group_id="1" id="7" factor="1" exponent="1" />
+            </derivation>
+          </unit>
           <unit id="1" name="euro" symbol="€">
             <derivation>
               <item group_id="1" id="8" factor="307.845013" exponent="1" />

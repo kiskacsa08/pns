@@ -230,6 +230,8 @@ namespace PNSDraw.online
             }
 
             string quantity = XMLUnit.ParentNode.ParentNode.Attributes["quantity"].Value;
+            
+
             return quantity;
         }
     }
