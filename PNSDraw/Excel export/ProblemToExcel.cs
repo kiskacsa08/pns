@@ -116,14 +116,13 @@ namespace PNSDraw.Excel_export
                         t_cells = t_xlsx.Cells(t_top + i, t_left + j - 1, 1, 1);
                         t_cells.AddComment(mat.DisplayedText);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = "Raw material";
-                        //t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = MUs.GetQuantity(mat.ParameterList["reqflow"].MU);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.PriceProp.Value == -1 ? Default.price.ToString() : mat.PriceProp.Value.ToString();
-                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.money_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ParameterList["price"].MU.Length == 0 ? Default.money_mu.ToString() : mat.ParameterList["price"].MU;
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ReqFlowProp.Value == -1 ? Default.flow_rate_lower_bound.ToString() : mat.ReqFlowProp.Value.ToString();
-                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ParameterList["reqflow"].MU.Length == 0 ? Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() : mat.ParameterList["reqflow"].MU;
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.MaxFlowProp.Value == -1 ? Default.flow_rate_upper_bound.ToString() : mat.MaxFlowProp.Value.ToString();
-                        t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+                        t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = mat.ParameterList["maxflow"].MU.Length == 0 ? Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() : mat.ParameterList["maxflow"].MU;
 
                         if ((t_top + i - t_v_offset) % 2 == 0)
                         {
@@ -139,14 +138,13 @@ namespace PNSDraw.Excel_export
                         t_cells = t_xlsx.Cells(t_top + i, t_left + j - 1, 1, 1);
                         t_cells.AddComment(mat.DisplayedText);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = "Intermediate material";
-                        //t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = MUs.GetQuantity(mat.ParameterList["reqflow"].MU);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.PriceProp.Value == -1 ? Default.price.ToString() : mat.PriceProp.Value.ToString();
-                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.money_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ParameterList["price"].MU.Length == 0 ? Default.money_mu.ToString() : mat.ParameterList["price"].MU;
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ReqFlowProp.Value == -1 ? Default.flow_rate_lower_bound.ToString() : mat.ReqFlowProp.Value.ToString();
-                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ParameterList["reqflow"].MU.Length == 0 ? Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() : mat.ParameterList["reqflow"].MU;
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.MaxFlowProp.Value == -1 ? Default.flow_rate_upper_bound.ToString() : mat.MaxFlowProp.Value.ToString();
-                        t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+                        t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = mat.ParameterList["maxflow"].MU.Length == 0 ? Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() : mat.ParameterList["maxflow"].MU;
 
                         if ((t_top + i - t_v_offset) % 2 == 0)
                         {
@@ -162,14 +160,13 @@ namespace PNSDraw.Excel_export
                         t_cells = t_xlsx.Cells(t_top + i, t_left + j - 1, 1, 1);
                         t_cells.AddComment(mat.DisplayedText);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = "Product material";
-                        //t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = MUs.GetQuantity(mat.ParameterList["reqflow"].MU);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.PriceProp.Value == -1 ? Default.price.ToString() : mat.PriceProp.Value.ToString();
-                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.money_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ParameterList["price"].MU.Length == 0 ? Default.money_mu.ToString() : mat.ParameterList["price"].MU;
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ReqFlowProp.Value == -1 ? Default.flow_rate_lower_bound.ToString() : mat.ReqFlowProp.Value.ToString();
-                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ParameterList["reqflow"].MU.Length == 0 ? Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() : mat.ParameterList["reqflow"].MU;
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.MaxFlowProp.Value == -1 ? Default.flow_rate_upper_bound.ToString() : mat.MaxFlowProp.Value.ToString();
-                        t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = Default.mass_mu.ToString() + "/" + Default.time_mu.ToString();
+                        t_mats_data[t_top + i++ - 1, t_left + j++ - 1] = mat.ParameterList["maxflow"].MU.Length == 0 ? Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() : mat.ParameterList["maxflow"].MU;
 
                         if ((t_top + i - t_v_offset) % 2 == 0)
                         {
@@ -383,7 +380,7 @@ namespace PNSDraw.Excel_export
                     if (mat.Type == Globals.MaterialTypes.Raw)
                     {
                         t_flows_data[t_top + i - 1, t_left - 1] = mat.Name;
-                        t_flows_data[t_top + i - 1, t_left] = "[" + Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() + "]";
+                        t_flows_data[t_top + i - 1, t_left] = "[" + (mat.ParameterList["reqflow"].MU.Length == 0 ? Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() : mat.ParameterList["reqflow"].MU) + "]";
                         if ((i - t_v_offset) % 2 == 0)
                         {
                             t_cells = t_xlsx.Cells(t_top + i, t_left, 1, t_h_offset);
@@ -398,7 +395,7 @@ namespace PNSDraw.Excel_export
                     if (mat.Type == Globals.MaterialTypes.Intermediate)
                     {
                         t_flows_data[t_top + i - 1, t_left - 1] = mat.Name;
-                        t_flows_data[t_top + i - 1, t_left] = "[" + Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() + "]";
+                        t_flows_data[t_top + i - 1, t_left] = "[" + (mat.ParameterList["reqflow"].MU.Length == 0 ? Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() : mat.ParameterList["reqflow"].MU) + "]";
                         if ((i - t_v_offset) % 2 == 0)
                         {
                             t_cells = t_xlsx.Cells(t_top + i, t_left, 1, t_h_offset);
@@ -413,7 +410,7 @@ namespace PNSDraw.Excel_export
                     if (mat.Type == Globals.MaterialTypes.Product)
                     {
                         t_flows_data[t_top + i - 1, t_left - 1] = mat.Name;
-                        t_flows_data[t_top + i - 1, t_left] = "[" + Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() + "]";
+                        t_flows_data[t_top + i - 1, t_left] = "[" + (mat.ParameterList["reqflow"].MU.Length == 0 ? Default.mass_mu.ToString() + "/" + Default.time_mu.ToString() : mat.ParameterList["reqflow"].MU) + "]";
                         if ((i - t_v_offset) % 2 == 0)
                         {
                             t_cells = t_xlsx.Cells(t_top + i, t_left, 1, t_h_offset);
