@@ -13,6 +13,7 @@ using System.Globalization;
 using PNSDraw.online;
 using System.Diagnostics;
 using PNSDraw.Excel_export;
+using PNSDraw.ZIMPL_export;
 
 namespace PNSDraw
 {
@@ -1806,6 +1807,11 @@ namespace PNSDraw
         private void menuSummaryView_Click(object sender, EventArgs e)
         {
             ExportToExcel(sender, ExcelExportType.view_summary_of_results);
+        }
+
+        private void exportToZIMPLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProblemToZimpl.ProblemToZIMPL(CurrentFile, Graph);
         }
     }
 }
