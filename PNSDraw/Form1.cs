@@ -21,6 +21,7 @@ namespace PNSDraw
         enum CanvasMode { Pointer, Link, Raw, Intermediate, Product, OperatingUnit }
 
         enum ObjectType { Raw, Intermediate, Product, OperatingUnit }
+        public enum ExcelExportType { brief_export, brief_view, detailed_export, detailed_view, export_summary_of_results, view_summary_of_results }
 
         PGraph Graph;
 
@@ -1647,7 +1648,7 @@ namespace PNSDraw
 
         private void exportToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProblemToExcel.PNSProblemToExcel(false, "excel", Graph);
+            ProblemToExcel.PNSProblemToExcel(false, CurrentFile, Graph);
             //Console.WriteLine("Ide írtam: " + Graph.Materials[0].ParameterList["price"].MU);
         }
 
@@ -1734,6 +1735,77 @@ namespace PNSDraw
                 pnsCanvas1.Export(g, s);
                 bmp.Save(sfd.FileName);
             }
+        }
+
+        private void treeSolution_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                contextSolutions.Show((Control)treeSolution, e.Location);
+            }
+        }
+
+        public void ExportToExcel(object sender, ExcelExportType t_export_type)
+        {
+            //ComboBox t_combobox = (ComboBox)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            if (cmbSolutions.SelectedIndex != -1)
+            {
+                ResultExcelExport t_export = new ResultExcelExport(Graph.Solutions[cmbSolutions.SelectedIndex]);
+                ResultsSummaryExcelExport t_summary = new ResultsSummaryExcelExport(Graph.Materials, Graph.OperatingUnits, Graph.Solutions);
+                switch (t_export_type)
+                {
+                    case ExcelExportType.brief_export:
+                        t_export.ResultToExcel(true, false, CurrentFile, Graph);
+                        break;
+                    case ExcelExportType.brief_view:
+                        t_export.ResultToExcel(true, true, CurrentFile, Graph);
+                        break;
+                    case ExcelExportType.detailed_export:
+                        t_export.ResultToExcel(false, false, CurrentFile, Graph);
+                        break;
+                    case ExcelExportType.detailed_view:
+                        t_export.ResultToExcel(false, true, CurrentFile, Graph);
+                        break;
+                    case ExcelExportType.export_summary_of_results:
+                        t_summary.ResultsToExcel(false, CurrentFile);
+                        break;
+                    case ExcelExportType.view_summary_of_results:
+                        t_summary.ResultsToExcel(true, CurrentFile);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void menuBriefExport_Click(object sender, EventArgs e)
+        {
+            ExportToExcel(sender, ExcelExportType.brief_export);
+        }
+
+        private void menuBriefView_Click(object sender, EventArgs e)
+        {
+            ExportToExcel(sender, ExcelExportType.brief_view);
+        }
+
+        private void menuDetailedExport_Click(object sender, EventArgs e)
+        {
+            ExportToExcel(sender, ExcelExportType.detailed_export);
+        }
+
+        private void menuDetailedView_Click(object sender, EventArgs e)
+        {
+            ExportToExcel(sender, ExcelExportType.detailed_view);
+        }
+
+        private void menuSummaryExport_Click(object sender, EventArgs e)
+        {
+            ExportToExcel(sender, ExcelExportType.export_summary_of_results);
+        }
+
+        private void menuSummaryView_Click(object sender, EventArgs e)
+        {
+            ExportToExcel(sender, ExcelExportType.view_summary_of_results);
         }
     }
 }
