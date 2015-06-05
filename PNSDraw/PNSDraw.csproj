@@ -104,6 +104,8 @@
     <Compile Include="Excel export\Converters.cs" />
     <Compile Include="Excel export\def_Problem_Excel.cs" />
     <Compile Include="Excel export\def_Solution_Excel.cs" />
+    <Compile Include="Excel export\ResultExcelExport.cs" />
+    <Compile Include="Excel export\ResultsSummaryExcelExport.cs" />
     <Compile Include="Excel export\TextXMLTag.cs" />
     <Compile Include="Excel export\ProblemToExcel.cs" />
     <Compile Include="Excel export\Xlsx.cs" />
@@ -267,15 +269,6 @@
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
       <VersionMajor>2</VersionMajor>
       <VersionMinor>5</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Excel1">
-      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>7</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
