@@ -39,13 +39,13 @@ namespace PNSDraw
         static public double price = 0; //price
         static public int type = Globals.MaterialTypes.Intermediate; //type
 
-        static private double o_fix = 0; //fix_cost
-        static private double i_fix = 0; //fix_cost
+        static public double o_fix = 0; //fix_cost
+        static public double i_fix = 0; //fix_cost
 
         public static double fix_cost = o_fix + i_fix;
 
-        static private double o_prop = 0; //proportional_cost
-        static private double i_prop = 0; //proportional_cost
+        static public double o_prop = 0; //proportional_cost
+        static public double i_prop = 0; //proportional_cost
 
         public static double prop_cost = o_prop + i_prop;
 
