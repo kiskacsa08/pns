@@ -1,4 +1,5 @@
 ﻿using Microsoft.Office.Interop.Excel;
+using PNSDraw.online;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -116,7 +117,7 @@ namespace PNSDraw.Excel_export
                         t_cells.AddComment(mat.DisplayedText);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = "Raw material";
                         //t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
-                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = "category";
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = MUs.GetQuantity(mat.ParameterList["reqflow"].MU);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.PriceProp.Value == -1 ? Default.price.ToString() : mat.PriceProp.Value.ToString();
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.money_mu.ToString();
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ReqFlowProp.Value == -1 ? Default.flow_rate_lower_bound.ToString() : mat.ReqFlowProp.Value.ToString();
@@ -139,7 +140,7 @@ namespace PNSDraw.Excel_export
                         t_cells.AddComment(mat.DisplayedText);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = "Intermediate material";
                         //t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
-                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = "category";
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = MUs.GetQuantity(mat.ParameterList["reqflow"].MU);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.PriceProp.Value == -1 ? Default.price.ToString() : mat.PriceProp.Value.ToString();
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.money_mu.ToString();
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ReqFlowProp.Value == -1 ? Default.flow_rate_lower_bound.ToString() : mat.ReqFlowProp.Value.ToString();
@@ -162,7 +163,7 @@ namespace PNSDraw.Excel_export
                         t_cells.AddComment(mat.DisplayedText);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = "Product material";
                         //t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.material_category.Category;
-                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = "category";
+                        t_mats_data[t_top + i - 1, t_left + j++ - 1] = MUs.GetQuantity(mat.ParameterList["reqflow"].MU);
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.PriceProp.Value == -1 ? Default.price.ToString() : mat.PriceProp.Value.ToString();
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = Default.money_mu.ToString();
                         t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.ReqFlowProp.Value == -1 ? Default.flow_rate_lower_bound.ToString() : mat.ReqFlowProp.Value.ToString();
