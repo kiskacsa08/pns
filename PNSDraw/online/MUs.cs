@@ -182,5 +182,36 @@ namespace PNSDraw.online
 
             return GetBaseQuantity(quantity);
         }
+
+        public static string GetQuantity(string unit)
+        {
+            if (unit.Length == 0)
+            {
+                return "mass";
+            }
+
+            if (doc == null)
+            {
+                Read();
+            }
+
+            XmlNode XMLUnit = null;
+
+            foreach (XmlNode node in doc.SelectNodes("//derived_quantity/units/unit"))
+            {
+                if (node.Attributes["symbol"].Value.ToUpper().Equals(unit.ToUpper()))
+                {
+                    XMLUnit = node;
+                }
+            }
+
+            if (XMLUnit == null)
+            {
+                return unit;
+            }
+
+            string quantity = XMLUnit.ParentNode.ParentNode.Attributes["quantity"].Value;
+            return quantity;
+        }
     }
 }
