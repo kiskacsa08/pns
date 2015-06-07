@@ -14,6 +14,7 @@ using PNSDraw.online;
 using System.Diagnostics;
 using PNSDraw.Excel_export;
 using PNSDraw.ZIMPL_export;
+using System.Drawing.Printing;
 
 namespace PNSDraw
 {
@@ -351,6 +352,7 @@ namespace PNSDraw
             pnsCanvas1.Copy += new Canvas.CanvasEventHandler(pnsCanvas1_Copy);
             pnsCanvas1.Paste += new Canvas.CanvasEventHandler(pnsCanvas1_Paste);
             pnsCanvas1.Duplicate += new Canvas.CanvasEventHandler(pnsCanvas1_Duplicate);
+            leftToolStripMenuItem.Checked = true;
 
             CreateUndo();
             LastGraphXML = Graph.ExportToXML();
@@ -1431,17 +1433,17 @@ namespace PNSDraw
                 {
                     treeSolution.Nodes[0].Nodes[i].Nodes.Add("Type: " + m.TypeProp);
                     //TODO javítottam az értékek kiírását a fában, hogy helyesen írja ki, és csak akkor, ha nem -1 az értéke a tulajdonságnak
-                    if(m.PriceProp.Value != -1)
+                    if(m.PriceProp.Value != m.ParameterList["price"].NonValue)
                     {
                         double price = MUs.UnitConvert(m.PriceProp.MU, Default.money_mu.ToString(), m.PriceProp.Value, "currency");
                         treeSolution.Nodes[0].Nodes[i].Nodes.Add("Price: " + Math.Round(price, 2) + " " + Default.money_mu + "/" + Default.time_mu);
                     }
-                    if (m.ReqFlowProp.Value != -1)
+                    if (m.ReqFlowProp.Value != m.ParameterList["reqflow"].NonValue)
                     {
                         double reqflow = MUs.UnitConvert(m.ReqFlowProp.MU, Default.mass_mu.ToString(), m.ReqFlowProp.Value, "mass");
                         treeSolution.Nodes[0].Nodes[i].Nodes.Add("Min: " + Math.Round(reqflow, 4) + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
-                    if (m.MaxFlowProp.Value != -1)
+                    if (m.MaxFlowProp.Value != m.ParameterList["maxflow"].NonValue)
                     {
                         double maxflow = MUs.UnitConvert(m.MaxFlowProp.MU, Default.mass_mu.ToString(), m.MaxFlowProp.Value, "mass");
                         treeSolution.Nodes[0].Nodes[i].Nodes.Add("Max: " + Math.Round(maxflow, 4) + " " + Default.mass_mu + "/" + Default.time_mu);
@@ -1465,32 +1467,32 @@ namespace PNSDraw
                 OperatingUnit opUnit = Graph.GetOperatingUnitByName(ou.Key);
                 if (opUnit != null)
                 {
-                    if (opUnit.CapacityLowerProp.Value != -1)
+                    if (opUnit.CapacityLowerProp.Value != opUnit.ParameterList["caplower"].NonValue)
                     {
                         double caplower = MUs.UnitConvert(opUnit.CapacityLowerProp.MU, Default.mass_mu.ToString(), opUnit.CapacityLowerProp.Value, "mass");
                         treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity lower bound: " + Math.Round(caplower, 4) + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
-                    if (opUnit.CapacityUpperProp.Value != -1)
+                    if (opUnit.CapacityUpperProp.Value != opUnit.ParameterList["capupper"].NonValue)
                     {
                         double capupper = MUs.UnitConvert(opUnit.CapacityUpperProp.MU, Default.mass_mu.ToString(), opUnit.CapacityUpperProp.Value, "mass");
                         treeSolution.Nodes[1].Nodes[i].Nodes.Add("Capacity upper bound: " + Math.Round(capupper, 4) + " " + Default.mass_mu + "/" + Default.time_mu);
                     }
-                    if (opUnit.InvestmentCostFixProp.Value != -1)
+                    if (opUnit.InvestmentCostFixProp.Value != opUnit.ParameterList["investcostfix"].NonValue)
                     {
                         double investfix = MUs.UnitConvert(opUnit.InvestmentCostFixProp.MU, Default.money_mu.ToString(), opUnit.InvestmentCostFixProp.Value, "currency");
                         treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment fix cost: " + Math.Round(investfix, 2) + " " + Default.money_mu + "/" + Default.time_mu);
                     }
-                    if (opUnit.InvestmentCostPropProp.Value != -1)
+                    if (opUnit.InvestmentCostPropProp.Value != opUnit.ParameterList["investcostprop"].NonValue)
                     {
                         double investprop = MUs.UnitConvert(opUnit.InvestmentCostPropProp.MU, Default.money_mu.ToString(), opUnit.InvestmentCostPropProp.Value, "currency");
                         treeSolution.Nodes[1].Nodes[i].Nodes.Add("Investment proportional cost: " + Math.Round(investprop, 2) + " " + Default.money_mu + "/" + Default.time_mu);
                     }
-                    if (opUnit.OperatingCostFixProp.Value != -1)
+                    if (opUnit.OperatingCostFixProp.Value != opUnit.ParameterList["opercostfix"].NonValue)
                     {
                         double operfix = MUs.UnitConvert(opUnit.OperatingCostFixProp.MU, Default.money_mu.ToString(), opUnit.OperatingCostFixProp.Value, "currency");
                         treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating fix cost: " + Math.Round(operfix, 2) + " " + Default.money_mu + "/" + Default.time_mu);
                     }
-                    if (opUnit.OperatingCostPropProp.Value != -1)
+                    if (opUnit.OperatingCostPropProp.Value != opUnit.ParameterList["opercostprop"].NonValue)
                     {
                         double operprop = MUs.UnitConvert(opUnit.OperatingCostPropProp.MU, Default.money_mu.ToString(), opUnit.OperatingCostPropProp.Value, "currency");
                         treeSolution.Nodes[1].Nodes[i].Nodes.Add("Operating proportional cost: " + Math.Round(operprop, 2) + " " + Default.money_mu + "/" + Default.time_mu);
@@ -1812,6 +1814,62 @@ namespace PNSDraw
         private void exportToZIMPLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProblemToZimpl.ProblemToZIMPL(CurrentFile, Graph);
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintDocument pd = new PrintDocument();
+            pd.PrintPage += pd_PrintPage;
+            PrintDialog dialog = new PrintDialog();
+            dialog.Document = pd;
+            pd.DefaultPageSettings.Landscape = true;
+            pd.DocumentName = Path.GetFileNameWithoutExtension(CurrentFile);
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                pd.Print();
+            }
+        }
+
+        void pd_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Rectangle rect = pnsCanvas1.GetCanvasBoundary();
+            Point p = new Point(rect.Size.Width-1, rect.Size.Height-1);
+            Size s = new Size(rect.Size.Width, rect.Size.Height);
+            Bitmap bmp = new Bitmap(s.Width, s.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            pnsCanvas1.Export(g, s);
+            
+            e.Graphics.DrawImage(bmp, e.MarginBounds);
+        }
+
+        private void rightToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            panel2.Dock = DockStyle.Right;
+            panel2.SendToBack();
+            menuStrip1.SendToBack();
+            tableLayoutPanel1.BringToFront();
+            CheckMenuItem(positionOfTabsToolStripMenuItem, rightToolStripMenuItem1);
+        }
+
+        private void leftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel2.Dock = DockStyle.Left;
+            panel2.SendToBack();
+            menuStrip1.SendToBack();
+            tableLayoutPanel1.BringToFront();
+            CheckMenuItem(positionOfTabsToolStripMenuItem, leftToolStripMenuItem);
+        }
+
+        private void CheckMenuItem(ToolStripMenuItem mnu, ToolStripMenuItem checked_item)
+        {
+            foreach (ToolStripItem item in mnu.DropDownItems)
+            {
+                if (item is ToolStripMenuItem)
+                {
+                    ToolStripMenuItem menu_item = item as ToolStripMenuItem;
+                    menu_item.Checked = (menu_item == checked_item);
+                }
+            }
         }
     }
 }
