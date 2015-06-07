@@ -272,9 +272,17 @@ namespace PNSDraw
             parameterlist["capupper"].Value = Default.capacity_upper_bound;
             parameterlist["capupper"].NonValue = -1;
             parameterlist["investcostfix"].Prefix = "Investment cost, fix: ";
+            parameterlist["investcostfix"].Value = Default.i_fix;
+            parameterlist["investcostfix"].NonValue = -1;
             parameterlist["investcostprop"].Prefix = "Investment cost, proportional: ";
+            parameterlist["investcostprop"].Value = Default.i_prop;
+            parameterlist["investcostprop"].NonValue = -1;
             parameterlist["opercostfix"].Prefix = "Operating cost, fix: ";
+            parameterlist["opercostfix"].Value = Default.o_fix;
+            parameterlist["opercostfix"].NonValue = -1;
             parameterlist["opercostprop"].Prefix = "Operating cost, proportional: ";
+            parameterlist["opercostprop"].Value = Default.o_prop;
+            parameterlist["opercostprop"].NonValue = -1;
             parameterlist["payoutperiod"].Prefix = "Payout period: ";
             parameterlist["payoutperiod"].Value = Default.payout_period;
             parameterlist["payoutperiod"].NonValue = -1;
