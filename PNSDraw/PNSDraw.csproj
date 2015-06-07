@@ -188,6 +188,8 @@
     <Compile Include="SolverSettingsDialog.Designer.cs">
       <DependentUpon>SolverSettingsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="ZIMPL export\ProblemToZimpl.cs" />
+    <Compile Include="ZIMPL export\ZIMPLKeywords.cs" />
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>
