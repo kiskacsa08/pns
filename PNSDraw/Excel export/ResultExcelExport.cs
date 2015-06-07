@@ -134,10 +134,16 @@ namespace PNSDraw.Excel_export
             foreach (KeyValuePair<string, MaterialProperty> matProp in f_solution.Materials)
             {
                 Material mat = graph.GetMaterialByName(matProp.Value.Name);
+                if (mat == null)
+                {
+                    MessageBox.Show("Cannot export solution to Excel! Materials or Operating units are not the same in the problem and in the solution.");
+                    return;
+                }
                 j = t_h_offset;
                 t_mats_data[t_top + i - 1, t_left + j++ - 1] = matProp.Value.Name;
+                Console.WriteLine("Ide írtam: " + matProp.Value.Name);
                 t_cells = t_xlsx.Cells(t_top + i, t_left + j - 1, 1, 1);
-                t_cells.AddComment(mat.CommentText);
+                t_cells.AddComment(mat.CommentText != null ? mat.CommentText : "");
                 if (!t_brief)
                 {
                     t_mats_data[t_top + i - 1, t_left + j++ - 1] = mat.TypeProp;
@@ -342,6 +348,11 @@ namespace PNSDraw.Excel_export
             foreach (KeyValuePair<string, OperatingUnitProperty> ouProp in f_solution.OperatingUnits)
             {
                 OperatingUnit ou = graph.GetOperatingUnitByName(ouProp.Value.Name);
+                if (ou == null)
+                {
+                    MessageBox.Show("Cannot export solution to Excel! Materials or Operating units are not the same in the problem and in the solution.");
+                    return;
+                }
                 if ((t_top + i) % 2 == 1)
                 {
                     t_cells = t_xlsx.Cells(t_top + i, t_left, 1, t_brief ? 5 : 13);
@@ -350,6 +361,7 @@ namespace PNSDraw.Excel_export
                 j = 0;
                 t_ous_data[t_top + i - 1, t_left + j - 1] = ouProp.Value.Name;
                 t_cells = t_xlsx.Cells(t_top + i, t_left + j++, 1, 1);
+                Console.WriteLine("OU név: " + ouProp.Value.Name);
                 t_cells.AddComment(ou.CommentText);
                 if (!t_brief)
                 {
@@ -439,6 +451,11 @@ namespace PNSDraw.Excel_export
                 foreach (KeyValuePair<string, MaterialProperty> matProp in f_solution.Materials)
                 {
                     Material mat = graph.GetMaterialByName(matProp.Value.Name);
+                    if (mat == null)
+                    {
+                        MessageBox.Show("Cannot export solution to Excel! Materials or Operating units are not the same in the problem and in the solution.");
+                        return;
+                    }
                     t_flows_data[t_top + i - 1, t_left - 1] = matProp.Value.Name;
                     t_cells = t_xlsx.Cells(t_top + i, t_left, 2, 1);
                     t_cells.Merge(false);
@@ -481,6 +498,11 @@ namespace PNSDraw.Excel_export
                     foreach (MaterialProperty t_prop in ouProp.Value.Input)
                     {
                         Material t_mat = graph.GetMaterialByName(t_prop.Name);
+                        if (t_mat == null)
+                        {
+                            MessageBox.Show("Cannot export solutin to Excel! Materials or Operating units are not the same in the problem and in the solution.");
+                            return;
+                        }
                         i = t_v_offset;
                         bool t_found = false;
                         foreach (KeyValuePair<string, MaterialProperty> matProp in f_solution.Materials)
@@ -504,6 +526,11 @@ namespace PNSDraw.Excel_export
                     foreach (MaterialProperty t_prop in ouProp.Value.Output)
                     {
                         Material t_mat = graph.GetMaterialByName(t_prop.Name);
+                        if (t_mat == null)
+                        {
+                            MessageBox.Show("Cannot export solutin to Excel! Materials or Operating units are not the same in the problem and in the solution.");
+                            return;
+                        }
                         i = t_v_offset;
                         bool t_found = false;
                         foreach (KeyValuePair<string, MaterialProperty> matProp in f_solution.Materials)
