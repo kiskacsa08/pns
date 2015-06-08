@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
 using MongoDB.Bson;
+using System.ComponentModel;
 
 namespace PNSDraw.online
 {
@@ -23,7 +24,7 @@ namespace PNSDraw.online
             socket = new SolverSocket();
         }
 
-        public Problem Run()
+        public Problem Run(BackgroundWorker worker)
         {
             try
             {
@@ -34,9 +35,13 @@ namespace PNSDraw.online
                 throw e;
             }
 
+            worker.ReportProgress(10);
+
             BsonDocument document = socket.ToBson("{\"HEAD\":{\"status\":\"LOGIN\"},\"BODY\":{\"data\":{\"request\":{\"query\":\"LOGIN\",\"params\":{\"password\":\"Kepler-37b\",\"username\":\"Jaffa\"}}}}}");
 
             string resp = socket.Send(document.ToString());
+
+            worker.ReportProgress(30);
 
             if (resp.Contains("LOGGEDIN"))
             {
@@ -45,10 +50,14 @@ namespace PNSDraw.online
 
             BsonDocument response = socket.ToBson(resp);
 
+            worker.ReportProgress(70);
+
             if (response["HEAD"]["status"].Equals("DONE"))
             {
                 ParseSolution(response["BODY"]["data"]["response"]["body"]["mongoID"].ToString());
             }
+
+            worker.ReportProgress(100);
 
             return problem;
         }
