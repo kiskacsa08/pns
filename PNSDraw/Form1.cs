@@ -39,6 +39,7 @@ namespace PNSDraw
         PleaseWaitDialog pwd;
         string algorithm;
         int limit;
+        int processes;
         bool isProblemExists;
         string inPath;
         string outPath;
@@ -1344,33 +1345,18 @@ namespace PNSDraw
                     }
                     else
                     {
-                        int processes = int.Parse(toolStripTextBox1.Text);
+                        processes = int.Parse(toolStripTextBox1.Text);
                         if (processes < 1 || processes > 64)
                         {
                             MessageBox.Show("The number of processes must be between 1 and 64!");
                             return;
                         }
-                        // TODO: Az UpdateSolutionTab() metódust hívd meg, ha már bent vannak a megoldások a gráf Solutions listájában
-                        // TODO: Az UpdateViewList() metódust is hívd meg az előző után
-                        // TODO: Ezt is írd be utána: tabControl1.SelectedTab = tabPage3
-                        // TODO: Még ezt is írd utána:
-                        /*
-                            if (Graph.SolutionCount > 0)
-                            {
-                                toolStripComboBox1.Visible = true;
-                            }
-                         */
-                        // TODO: Ezek berendezik a Solutions tabra és a gráf fölötti listába a megoldásokat
-                        Problem problem = new Problem(algorithm, Graph, processes, limit);
-                        Solver solver = new Solver(problem);
-                        problem = solver.Run();
-                        MessageBox.Show("Online");
-                        UpdateViewList();
-                        UpdateSolutionsTab();
-                        tabControl1.SelectedTab = tabPage3;
-                        if (Graph.SolutionCount > 0)
+                        if (backgroundWorker2.IsBusy != true)
                         {
-                            toolStripComboBox1.Visible = true;
+                            pwd = new PleaseWaitDialog();
+                            pwd.Canceled += new EventHandler<EventArgs>(cancelAsyncButton_Click);
+                            pwd.Show();
+                            backgroundWorker2.RunWorkerAsync();
                         }
                     }
                 }
@@ -1378,12 +1364,9 @@ namespace PNSDraw
                 {
                     if (backgroundWorker1.IsBusy != true)
                     {
-                        // create a new instance of the PleaseWaitDialog
                         pwd = new PleaseWaitDialog();
-                        // event handler for the Cancel button in PleaseWaitDialog
                         pwd.Canceled += new EventHandler<EventArgs>(cancelAsyncButton_Click);
                         pwd.Show();
-                        // Start the asynchronous operation.
                         backgroundWorker1.RunWorkerAsync();
                     }
                  }
@@ -1394,9 +1377,7 @@ namespace PNSDraw
         {
             if (backgroundWorker1.WorkerSupportsCancellation == true)
             {
-                // Cancel the asynchronous operation.
                 backgroundWorker1.CancelAsync();
-                // Close the PleaseWaitDialog
                 pwd.Close();
             }
         }
@@ -1610,7 +1591,6 @@ namespace PNSDraw
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             labelResult.Text = (e.ProgressPercentage.ToString() + "%");
-            // Pass the progress to PleaseWaitDialog label and progressbar
             pwd.Message = "In progress, please wait... " + e.ProgressPercentage.ToString() + "%";
             pwd.ProgressValue = e.ProgressPercentage;
         }
@@ -1637,7 +1617,6 @@ namespace PNSDraw
                     toolStripComboBox1.Visible = true;
                 }
             }
-            // Close the PleaseWaitDialog
             pwd.Close();
 
             KeepFilesDialog kfd = new KeepFilesDialog(inPath, outPath);
@@ -1652,7 +1631,6 @@ namespace PNSDraw
         private void exportToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProblemToExcel.PNSProblemToExcel(false, CurrentFile, Graph);
-            //Console.WriteLine("Ide írtam: " + Graph.Materials[0].ParameterList["price"].MU);
         }
 
         private void exportToJPGToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
@@ -1750,7 +1728,6 @@ namespace PNSDraw
 
         public void ExportToExcel(object sender, ExcelExportType t_export_type)
         {
-            //ComboBox t_combobox = (ComboBox)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             if (cmbSolutions.SelectedIndex != -1)
             {
                 ResultExcelExport t_export = new ResultExcelExport(Graph.Solutions[cmbSolutions.SelectedIndex]);
@@ -1870,6 +1847,47 @@ namespace PNSDraw
                     menu_item.Checked = (menu_item == checked_item);
                 }
             }
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            Problem problem = new Problem(algorithm, Graph, processes, limit);
+            Solver solver = new Solver(problem);
+            problem = solver.Run(worker);
+        }
+
+        private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            labelResult.Text = (e.ProgressPercentage.ToString() + "%");
+            pwd.Message = "In progress, please wait... " + e.ProgressPercentage.ToString() + "%";
+            pwd.ProgressValue = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled == true)
+            {
+                labelResult.Text = "Canceled!";
+            }
+            else if (e.Error != null)
+            {
+                labelResult.Text = "Error: " + e.Error.Message;
+            }
+            else
+            {
+                labelResult.Text = "Done!";
+                UpdateViewList();
+                UpdateSolutionsTab();
+                tabControl1.SelectedTab = tabPage3;
+
+                if (Graph.SolutionCount > 0)
+                {
+                    toolStripComboBox1.Visible = true;
+                }
+            }
+            pwd.Close();
         }
     }
 }
