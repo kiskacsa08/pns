@@ -1175,5 +1175,84 @@ namespace PNSDraw
             }
             //-------------------------------------------
         }
+
+        public override int GetHashCode()
+        {
+            int code = 0;
+
+            for (int i = 0; i < Default.mass_mu.ToString().Length; i++)
+            {
+                code += Char.ConvertToUtf32(Default.mass_mu.ToString(), i);
+            }
+
+            for (int i = 0; i < Default.money_mu.ToString().Length; i++)
+            {
+                code += Char.ConvertToUtf32(Default.money_mu.ToString(), i);
+            }
+
+            for (int i = 0; i < Default.time_mu.ToString().Length; i++)
+            {
+                code += Char.ConvertToUtf32(Default.time_mu.ToString(), i);
+            }
+
+            code += Materials.Count;
+            code += OperatingUnits.Count;
+            code += Edges.Count;
+
+            code = code << 2;
+
+            for (int i = 0; i < Materials.Count; i++)
+            {
+                code += Materials[i].Name.Length;
+                code += Materials[i].Type;
+                code += (int)Materials[i].ParameterList["price"].Value;
+                code += (int)Materials[i].ParameterList["maxflow"].Value;
+                code += (int)Materials[i].ParameterList["reqflow"].Value;
+
+                code += GetMUASCII(Materials[i].ParameterList["price"]);
+                code += GetMUASCII(Materials[i].ParameterList["maxflow"]);
+                code += GetMUASCII(Materials[i].ParameterList["reqflow"]);
+            }
+
+            code = code << 4;
+
+            for (int i = 0; i < OperatingUnits.Count; i++)
+            {
+                code += OperatingUnits[i].Name.Length;
+                code += (int)OperatingUnits[i].ParameterList["caplower"].Value;
+                code += (int)OperatingUnits[i].ParameterList["capupper"].Value;
+                code += (int)(OperatingUnits[i].ParameterList["investcostfix"].Value + OperatingUnits[i].ParameterList["opercostfix"].Value);
+                code += (int)(OperatingUnits[i].ParameterList["investcostprop"].Value + OperatingUnits[i].ParameterList["opercostprop"].Value);
+
+                code += GetMUASCII(OperatingUnits[i].ParameterList["caplower"]);
+                code += GetMUASCII(OperatingUnits[i].ParameterList["capupper"]);
+                code += GetMUASCII(OperatingUnits[i].ParameterList["investcostfix"]);
+                code += GetMUASCII(OperatingUnits[i].ParameterList["opercostfix"]);
+                code += GetMUASCII(OperatingUnits[i].ParameterList["investcostprop"]);
+                code += GetMUASCII(OperatingUnits[i].ParameterList["opercostprop"]);
+            }
+
+            code = code << 2;
+
+            for (int i = 0; i < Edges.Count; i++)
+            {
+                code += (int)Edges[i].Rate;
+            }
+
+            code = code << 4;
+
+            return code;
+        }
+
+        public int GetMUASCII(ObjectProperty prop)
+        {
+            int code = 0;
+            for (int i = 0; i < prop.MU.Length; i++)
+            {
+                code += Char.ConvertToUtf32(prop.MU, i);
+            }
+
+            return code;
+        }
     }
 }

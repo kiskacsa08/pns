@@ -20,7 +20,7 @@ namespace PNSDraw.online
                 return value;
             }
 
-            string toUnit = GetBaseUnit(fromUnit);
+            string toUnit = GetBaseUnit(fromUnit, false);
             string quantity = GetQuantity(toUnit);
 
             return UnitConvert(fromUnit, toUnit, value, quantity);
@@ -33,7 +33,7 @@ namespace PNSDraw.online
                 return value;
             }
 
-            string fromUnit = GetBaseUnit(toUnit);
+            string fromUnit = GetBaseUnit(toUnit, false);
             string quantity = GetQuantity(fromUnit);
 
             return UnitConvert(fromUnit, toUnit, value, quantity);
@@ -88,6 +88,24 @@ namespace PNSDraw.online
                 }
             }
             return "";
+        }
+
+        private static string GetDefaultUnit(string quantity)
+        {
+            string unit = Default.mass_mu.ToString();
+            switch (quantity)
+            {
+                case "mass":
+                    unit = Default.mass_mu.ToString();
+                    break;
+                case "currency":
+                    unit = Default.money_mu.ToString();
+                    break;
+                case "time":
+                    unit = Default.time_mu.ToString();
+                    break;
+            }
+            return unit;
         }
 
         private static double GetFactorByQuantity(string unit, string quantity)
@@ -175,8 +193,9 @@ namespace PNSDraw.online
             return Convert.ToDouble(XMLUnit.Attributes["factor"].Value, CultureInfo.InvariantCulture);
         }*/
 
-        private static string GetBaseUnit(string unit)
+        private static string GetBaseUnit(string unit, bool fromXML = true)
         {
+            
             if (doc == null)
             {
                 Read();
@@ -199,7 +218,27 @@ namespace PNSDraw.online
 
             string quantity = XMLUnit.ParentNode.ParentNode.Attributes["quantity"].Value;
 
-            return GetBaseQuantity(quantity);
+            if (fromXML)
+            {
+                return GetBaseQuantity(quantity);
+            }
+            else
+            {
+                string ret = Default.mass_mu.ToString();
+                switch (quantity)
+                {
+                    case "mass":
+                        ret = Default.mass_mu.ToString();
+                        break;
+                    case "currency":
+                        ret = Default.money_mu.ToString();
+                        break;
+                    case "time":
+                        ret = Default.time_mu.ToString();
+                        break;
+                }
+                return ret;
+            }
         }
 
         public static string GetQuantity(string unit)
