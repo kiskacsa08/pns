@@ -248,8 +248,9 @@ namespace PNSDraw
                     CreateUndo();
                     UpdateTitle();
 
-                    
 
+                    UpdateSolutionsTab();
+                    tabControl1.SelectedTab = tabPage1;
                     ResetViewList();
                     RefreshTreeViews();
                     sr.Close();
@@ -584,6 +585,7 @@ namespace PNSDraw
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "pns file|*.pns";
+            sfd.FileName = Path.GetFileNameWithoutExtension(CurrentFile);
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -1378,6 +1380,10 @@ namespace PNSDraw
             if (backgroundWorker1.WorkerSupportsCancellation == true)
             {
                 backgroundWorker1.CancelAsync();
+                foreach (var process in Process.GetProcessesByName("pns_depth"))
+                {
+                    process.Kill();
+                }
                 pwd.Close();
             }
         }
@@ -1385,6 +1391,7 @@ namespace PNSDraw
         private void UpdateSolutionsTab()
         {
             cmbSolutions.Items.Clear();
+            treeSolution.Nodes.Clear();
             foreach (Solution sol in Graph.Solutions)
             {
                 cmbSolutions.Items.Add(sol.Title + ": Total cost: " + sol.OptimalValue + " " + Default.money_mu + "/" + Default.time_mu);
@@ -1863,6 +1870,10 @@ namespace PNSDraw
             labelResult.Text = (e.ProgressPercentage.ToString() + "%");
             pwd.Message = "In progress, please wait... " + e.ProgressPercentage.ToString() + "%";
             pwd.ProgressValue = e.ProgressPercentage;
+            //if (e.ProgressPercentage == )
+            //{
+                
+            //}
         }
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
