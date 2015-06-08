@@ -50,7 +50,7 @@ namespace PNSDraw.online
 
             BsonDocument response = socket.ToBson(resp);
 
-            worker.ReportProgress(70);
+            worker.ReportProgress(80);
 
             if (response["HEAD"]["status"].Equals("DONE"))
             {
