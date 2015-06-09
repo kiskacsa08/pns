@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Windows.Forms;
 
 namespace PNSDraw
 {
@@ -18,7 +19,62 @@ namespace PNSDraw
     * */
     public class PropertySorter : ExpandableObjectConverter
     {
+        string oldString;
+
         #region Methods
+
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            if (destinationType == typeof(ObjectProperty))
+            {
+                return true;
+            }
+
+            return base.CanConvertTo(context, destinationType);
+        }
+
+        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        {
+            if (destinationType == typeof(System.String) && value is ObjectProperty)
+            {
+
+                ObjectProperty so = (ObjectProperty)value;
+                oldString = so.ToString();
+                return so.ToString();
+            }
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
+
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            if (sourceType == typeof(string))
+                return true;
+
+            return base.CanConvertFrom(context, sourceType);
+        }
+
+        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        {
+            ObjectProperty op;
+            //TODO: oldStringből kiszedni Splittel az értékeket, és megvizsgálni, hogy az újban 3 space-van-e, ha nem, akkor az oldString alapján létrehozott op-ot adom vissza
+            if ((((string)value).Split(' ').Length - 1) == 2)
+            {
+                string[] oldValues = ((string)value).Split(' ');
+                op = new ObjectProperty(oldValues[0] + " ");
+                op.Value = double.Parse(oldValues[1]);
+                op.MU = oldValues[2];
+                return op;
+            }
+            else
+            {
+                string[] oldValues = oldString.Split(' ');
+                op = new ObjectProperty(oldValues[0] + " ");
+                op.Value = double.Parse(oldValues[1]);
+                op.MU = oldValues[2];
+                return op;
+            }
+        }
+
         public override bool GetPropertiesSupported(ITypeDescriptorContext context)
         {
             return true;
