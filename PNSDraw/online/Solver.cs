@@ -33,7 +33,7 @@ namespace PNSDraw.online
             }
             catch (Exception e)
             {
-                MessageBox.Show("Failed to established connection to online solver, please use the offline solver!", "ERROR",
+                MessageBox.Show("Failed to establish connection to online solver, please use the offline solver!", "ERROR",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return problem;
             }
