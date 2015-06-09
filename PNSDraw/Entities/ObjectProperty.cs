@@ -86,28 +86,29 @@ namespace PNSDraw
         {
             get
             {
-                if (Visible)
-                {
-                    if (NonValue != null && Value == NonValue)
-                    {
-                        if (Globals.DefaultParameters.ContainsKey(Name))
-                        {
-                            return Prefix + Globals.DefaultParameters[Name] + MU;
-                        }
-                        else
-                        {
-                            return Prefix + "-";
-                        }
-                    }
-                    else
-                    {
-                        return Prefix + Value.ToString() + " " + MU;
-                    }
-                }
-                else
-                {
-                    return "";
-                }
+                //if (Visible)
+                //{
+                //    if (NonValue != null && Value == NonValue)
+                //    {
+                //        if (Globals.DefaultParameters.ContainsKey(Name))
+                //        {
+                //            return Prefix + Globals.DefaultParameters[Name] + MU;
+                //        }
+                //        else
+                //        {
+                //            return Prefix + "-";
+                //        }
+                //    }
+                //    else
+                //    {
+                //        return Prefix + Value.ToString() + " " + MU;
+                //    }
+                //}
+                //else
+                //{
+                    //return "";
+                //}
+                return Prefix.ToString() + Value.ToString() + " " + MU.ToString();
             }
         }
 
@@ -137,11 +138,18 @@ namespace PNSDraw
             Prefix = this.name + ": ";
         }
 
-        
+        public ObjectProperty(string prefix)
+        {
+            Visible = false;
+            Value = 0.0;
+            MU = "";
+            Prefix = prefix;
+        }
 
         public override string ToString()
         {
             return DisplayedText;
+            //return Value + " " + MU;
         }
 
         public string ToPNSValue()
