@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 
 using MongoDB.Bson;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace PNSDraw.online
 {
@@ -32,7 +33,9 @@ namespace PNSDraw.online
             }
             catch (Exception e)
             {
-                throw e;
+                MessageBox.Show("Failed to established connection to online solver, please use the offline solver!", "ERROR",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return problem;
             }
 
             worker.ReportProgress(10);
@@ -45,24 +48,34 @@ namespace PNSDraw.online
 
             if (resp.Contains("LOGGEDIN"))
             {
-                resp = Work();
+                resp = Work(worker);
             }
-
             BsonDocument response = socket.ToBson(resp);
 
             worker.ReportProgress(80);
-
-            if (response["HEAD"]["status"].Equals("DONE"))
+            try
             {
-                ParseSolution(response["BODY"]["data"]["response"]["body"]["mongoID"].ToString());
+                if (response["HEAD"]["status"].Equals("DONE"))
+                {
+                    ParseSolution(response["BODY"]["data"]["response"]["body"]["mongoID"].ToString());
+                }
+                else if (response["HEAD"]["status"].Equals("ERROR"))
+                {
+                    MessageBox.Show(response["HEAD"]["statusNote"].AsString, "ERROR",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                worker.ReportProgress(100);
             }
-
-            worker.ReportProgress(100);
-
+            catch (KeyNotFoundException ex)
+            {
+                MessageBox.Show("Something went wrong!\nThe solver connection is broken!", "ERROR",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             return problem;
         }
 
-        private string Work()
+        private string Work(BackgroundWorker worker)
         {
             string problemID = SaveGraph();
 
@@ -70,12 +83,10 @@ namespace PNSDraw.online
 
             string resp = socket.Send(document.ToJson());
 
-            Console.WriteLine(resp);
-
             if (resp.Contains("SUCCESS"))
             {
+                worker.ReportProgress(40);
                 resp = socket.Done();
-                Console.WriteLine(resp);
             }
 
             socket.Close();
@@ -359,9 +370,10 @@ namespace PNSDraw.online
 
         private void ParseSolution(string mongoID)
         {
-            //megoldást bele kell parzolni a problem.graphba
             Dictionary<string,BsonValue> query = new Dictionary<string,BsonValue>();
             query.Add("_id", new ObjectId(mongoID));
+
+            System.Threading.Thread.Sleep(problem.limit/100);
 
             List<BsonDocument> exist = mh.Find("solutions", query, 1);
             List<Solution> Solutions = problem.graph.Solutions;

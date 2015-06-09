@@ -1353,6 +1353,16 @@ namespace PNSDraw
                             MessageBox.Show("The number of processes must be between 1 and 64!");
                             return;
                         }
+
+                        //TODO hack, hogy ne szálljon el az online megoldó a solution objektum mérete miatt (mongo)
+                        if (limit > 5000)
+                        {
+                            MessageBox.Show("Online solver maximum solution limit: 5.000!", "WARNING",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            toolStripTextBox2.Text = "5000";
+                            limit = 5000;
+                        }
+
                         if (backgroundWorker2.IsBusy != true)
                         {
                             pwd = new PleaseWaitDialog();
