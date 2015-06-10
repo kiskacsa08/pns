@@ -40,7 +40,9 @@ namespace PNSDraw
 
                 ObjectProperty so = (ObjectProperty)value;
                 oldString = so.ToString();
-                return so.ToString();
+                string[] values = oldString.Split(';');
+                double objValue = double.Parse(values[2]);
+                return objValue.ToString();
             }
             return base.ConvertTo(context, culture, value, destinationType);
         }
@@ -56,21 +58,27 @@ namespace PNSDraw
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
         {
             ObjectProperty op;
-            //TODO: oldStringből kiszedni Splittel az értékeket, és megvizsgálni, hogy az újban 3 space-van-e, ha nem, akkor az oldString alapján létrehozott op-ot adom vissza
-            if ((((string)value).Split(' ').Length - 1) == 2)
+            double newValue;
+            if (double.TryParse((string)value, out newValue))
             {
-                string[] oldValues = ((string)value).Split(' ');
-                op = new ObjectProperty(oldValues[0] + " ");
-                op.Value = double.Parse(oldValues[1]);
-                op.MU = oldValues[2];
+                string[] oldProperties = oldString.Split(';');
+                op = new ObjectProperty(oldProperties[1]);
+                bool oldVisible = bool.Parse(oldProperties[0]);
+                string oldMU = oldProperties[3];
+                op.Visible = oldVisible;
+                op.Value = newValue;
+                op.MU = oldMU;
                 return op;
             }
             else
             {
-                string[] oldValues = oldString.Split(' ');
-                op = new ObjectProperty(oldValues[0] + " ");
-                op.Value = double.Parse(oldValues[1]);
-                op.MU = oldValues[2];
+                string[] oldProperties = oldString.Split(';');
+                op = new ObjectProperty(oldProperties[1]);
+                bool oldVisible = bool.Parse(oldProperties[0]);
+                string oldMU = oldProperties[3];
+                op.Visible = oldVisible;
+                op.Value = double.Parse(oldProperties[2]);
+                op.MU = oldMU;
                 return op;
             }
         }
