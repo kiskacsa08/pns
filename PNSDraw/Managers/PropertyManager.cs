@@ -19,7 +19,7 @@ namespace PNSDraw
     * */
     public class PropertySorter : ExpandableObjectConverter
     {
-        string oldString;
+        ObjectProperty oldOP;
 
         #region Methods
 
@@ -35,16 +35,9 @@ namespace PNSDraw
 
         public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
         {
-            if (destinationType == typeof(System.String) && value is ObjectProperty)
-            {
-
-                ObjectProperty so = (ObjectProperty)value;
-                oldString = so.ToString();
-                string[] values = oldString.Split(';');
-                double objValue = double.Parse(values[2]);
-                return objValue.ToString();
-            }
-            return base.ConvertTo(context, culture, value, destinationType);
+            ObjectProperty op = (ObjectProperty)value;
+            oldOP = op;
+            return op.ValueProp.ToString();
         }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
@@ -61,24 +54,13 @@ namespace PNSDraw
             double newValue;
             if (double.TryParse((string)value, out newValue))
             {
-                string[] oldProperties = oldString.Split(';');
-                op = new ObjectProperty(oldProperties[1]);
-                bool oldVisible = bool.Parse(oldProperties[0]);
-                string oldMU = oldProperties[3];
-                op.Visible = oldVisible;
-                op.Value = newValue;
-                op.MU = oldMU;
+                op = oldOP;
+                op.ValueProp = newValue;
                 return op;
             }
             else
             {
-                string[] oldProperties = oldString.Split(';');
-                op = new ObjectProperty(oldProperties[1]);
-                bool oldVisible = bool.Parse(oldProperties[0]);
-                string oldMU = oldProperties[3];
-                op.Visible = oldVisible;
-                op.Value = double.Parse(oldProperties[2]);
-                op.MU = oldMU;
+                op = oldOP;
                 return op;
             }
         }
