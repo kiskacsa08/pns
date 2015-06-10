@@ -1359,15 +1359,15 @@ namespace PNSDraw
                         {
                             MessageBox.Show("Online solver maximum solution limit: 5.000!", "WARNING",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            toolStripTextBox2.Text = "5000";
-                            limit = 5000;
+                            return;
                         }
 
                         if (backgroundWorker2.IsBusy != true)
                         {
                             pwd = new PleaseWaitDialog();
                             pwd.Canceled += new EventHandler<EventArgs>(cancelAsyncButton_Click);
-                            pwd.Show();
+                            //pwd.StartPosition = FormStartPosition.CenterScreen;
+                            pwd.Show(this);
                             backgroundWorker2.RunWorkerAsync();
                         }
                     }
@@ -1378,7 +1378,8 @@ namespace PNSDraw
                     {
                         pwd = new PleaseWaitDialog();
                         pwd.Canceled += new EventHandler<EventArgs>(cancelAsyncButton_Click);
-                        pwd.Show();
+                        //pwd.StartPosition = FormStartPosition.CenterScreen;
+                        pwd.Show(this);
                         backgroundWorker1.RunWorkerAsync();
                     }
                  }
