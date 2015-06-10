@@ -141,7 +141,7 @@ namespace PNSDraw.Excel_export
                 }
                 j = t_h_offset;
                 t_mats_data[t_top + i - 1, t_left + j++ - 1] = matProp.Value.Name;
-                Console.WriteLine("Ide írtam: " + matProp.Value.Name);
+                //Console.WriteLine("Ide írtam: " + matProp.Value.Name);
                 t_cells = t_xlsx.Cells(t_top + i, t_left + j - 1, 1, 1);
                 t_cells.AddComment(mat.CommentText != null ? mat.CommentText : "");
                 if (!t_brief)
@@ -361,7 +361,7 @@ namespace PNSDraw.Excel_export
                 j = 0;
                 t_ous_data[t_top + i - 1, t_left + j - 1] = ouProp.Value.Name;
                 t_cells = t_xlsx.Cells(t_top + i, t_left + j++, 1, 1);
-                Console.WriteLine("OU név: " + ouProp.Value.Name);
+                //Console.WriteLine("OU név: " + ouProp.Value.Name);
                 t_cells.AddComment(ou.CommentText);
                 if (!t_brief)
                 {
