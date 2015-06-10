@@ -1609,6 +1609,15 @@ namespace PNSDraw
         {
             labelResult.Text = (e.ProgressPercentage.ToString() + "%");
             pwd.Message = "In progress, please wait... " + e.ProgressPercentage.ToString() + "%";
+            pwd.ProgressMessage = "Creating .in file...";
+            if (e.ProgressPercentage == 10)
+            {
+                pwd.ProgressMessage = "Solver is working...";
+            }
+            if (e.ProgressPercentage == 70)
+            {
+                pwd.ProgressMessage = "Reading from .out file...";
+            }
             pwd.ProgressValue = e.ProgressPercentage;
         }
 
@@ -1880,10 +1889,15 @@ namespace PNSDraw
             labelResult.Text = (e.ProgressPercentage.ToString() + "%");
             pwd.Message = "In progress, please wait... " + e.ProgressPercentage.ToString() + "%";
             pwd.ProgressValue = e.ProgressPercentage;
-            //if (e.ProgressPercentage == )
-            //{
-                
-            //}
+            pwd.ProgressMessage = "Connecting to server...";
+            if (e.ProgressPercentage == 10)
+            {
+                pwd.ProgressMessage = "Sending problem to server...";
+            }
+            if (e.ProgressPercentage == 80)
+            {
+                pwd.ProgressMessage = "Retrieving solution...";
+            }
         }
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
