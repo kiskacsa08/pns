@@ -108,7 +108,7 @@ namespace PNSDraw
                 //{
                     //return "";
                 //}
-                return Prefix.ToString() + Value.ToString() + " " + MU.ToString();
+                return Visible.ToString() + ";" + Prefix.ToString() + ";" + Value.ToString() + ";" + MU.ToString();
             }
         }
 
