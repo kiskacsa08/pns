@@ -1062,7 +1062,7 @@ namespace PNSDraw
                 {
                     solution = new Solution(t_index, "Solution structure #" + t_index.ToString());
                     t_index++;
-                    Console.WriteLine("Hanyadik: " + i);
+                    //Console.WriteLine("Hanyadik: " + i);
                     t_begin = t_str.IndexOf("Solution structure #" + i.ToString(), 0);
                     t_begin = t_str.IndexOf("Materials", t_begin);
                     t_begin = t_str.IndexOf("\n", t_begin);
@@ -1081,7 +1081,7 @@ namespace PNSDraw
                     {
                         t_pos = t_str.Length - 6;
                     }
-                    Console.WriteLine("t_pos: " + t_pos);
+                    //Console.WriteLine("t_pos: " + t_pos);
                     string[] sol_opunitlist = (t_str.Substring(t_begin, t_pos - t_begin)).Split(',');
                     foreach (string item in sol_opunitlist)
                     {
