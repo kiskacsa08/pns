@@ -27,6 +27,11 @@ namespace PNSDraw
             set { progressBar1.Value = value; }
         }
 
+        public string ProgressMessage
+        {
+            set { labelTask.Text = value; }
+        }
+
         public event EventHandler<EventArgs> Canceled;
 
         private void buttonCancel_Click(object sender, EventArgs e)

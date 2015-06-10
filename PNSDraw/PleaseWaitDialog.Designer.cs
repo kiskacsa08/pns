@@ -31,6 +31,7 @@
             this.labelMessage = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.labelTask = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelMessage
@@ -60,11 +61,21 @@
             this.progressBar1.Size = new System.Drawing.Size(400, 23);
             this.progressBar1.TabIndex = 2;
             // 
+            // labelTask
+            // 
+            this.labelTask.AutoSize = true;
+            this.labelTask.Location = new System.Drawing.Point(12, 87);
+            this.labelTask.Name = "labelTask";
+            this.labelTask.Size = new System.Drawing.Size(35, 13);
+            this.labelTask.TabIndex = 3;
+            this.labelTask.Text = "label1";
+            // 
             // PleaseWaitDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(429, 129);
+            this.Controls.Add(this.labelTask);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelMessage);
@@ -80,5 +91,6 @@
         private System.Windows.Forms.Label labelMessage;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label labelTask;
     }
 }
