@@ -159,7 +159,7 @@ namespace PNSDraw
             if (problem.graph.MutualExclusions.Count != 0)
             {
                 file_str.Append("\n");
-                file_str.Append("mutually_exclusive_sets_of_operating_units:");
+                file_str.Append("mutually_exlcusive_sets_of_operating_units:");
                 file_str.Append("\n");
                 foreach (MutualExclusion me in problem.graph.MutualExclusions)
                 {
