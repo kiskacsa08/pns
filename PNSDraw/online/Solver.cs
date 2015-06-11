@@ -99,6 +99,7 @@ namespace PNSDraw.online
             List<Material> materials = problem.graph.Materials;
             List<OperatingUnit> operatings = problem.graph.OperatingUnits;
             List<Edge> connections = problem.graph.Edges;
+            List<MutualExclusion> mutualExclusions = problem.graph.MutualExclusions;
 
             BsonArray materialArray = new BsonArray();
             List<BsonDocument> raw = new List<BsonDocument>();
@@ -223,6 +224,23 @@ namespace PNSDraw.online
                 }
             }
 
+            BsonArray mutually = new BsonArray();
+
+            foreach (MutualExclusion me in mutualExclusions)
+            {
+                BsonDocument elem = new BsonDocument();
+                elem["name"] = me.Name;
+                BsonArray set = new BsonArray();
+                foreach (OperatingUnit op in me.OpUnits)
+                {
+                    set.Add(op.Name);
+                }
+                elem["operating_units"] = set;
+
+                mutually.Add(elem);
+            }
+
+
             BsonDocument convertedGraph = new BsonDocument();
             
             convertedGraph["type"] = "PNS_problem_v1";
@@ -263,7 +281,7 @@ namespace PNSDraw.online
             convertedGraph["materials"] = materialArray;
             convertedGraph["operating_units"] = operatingArray;
             convertedGraph["material_to_operating_unit_flow_rates"] = connectionArray;
-            convertedGraph["mutually_exlcusive_sets_of_operating_units"] = new BsonArray();
+            convertedGraph["mutually_exlcusive_sets_of_operating_units"] = mutually;
 
             Dictionary<string, BsonValue> query = new Dictionary<string, BsonValue>();
             query.Add("hash_to_pns_draw", convertedGraph["hash_to_pns_draw"]);

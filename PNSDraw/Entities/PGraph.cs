@@ -4,7 +4,6 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
-using PNSDraw.Entities;
 using System.Globalization;
 
 namespace PNSDraw
@@ -1198,6 +1197,7 @@ namespace PNSDraw
             code += Materials.Count;
             code += OperatingUnits.Count;
             code += Edges.Count;
+            code += MutualExclusions.Count;
 
             code = code << 2;
 
@@ -1240,6 +1240,16 @@ namespace PNSDraw
             }
 
             code = code << 4;
+
+            for (int i = 0; i < MutualExclusions.Count; i++)
+            {
+                for (int j = 0; j < MutualExclusions[i].Name.Length; j++)
+                {
+                    code += Char.ConvertToUtf32(MutualExclusions[i].Name, j);
+                }
+            }
+
+            code = code << 2;
 
             return code;
         }

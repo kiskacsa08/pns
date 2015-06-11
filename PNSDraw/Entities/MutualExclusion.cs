@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PNSDraw.Entities
+namespace PNSDraw
 {
     public class MutualExclusion
     {
