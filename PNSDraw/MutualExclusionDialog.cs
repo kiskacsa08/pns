@@ -27,7 +27,7 @@ namespace PNSDraw
             int i = 0;
             foreach (MutualExclusion mutExcl in graph.MutualExclusions)
             {
-                treeMutExclusions.Nodes.Add(mutExcl.Name);
+                treeMutExclusions.Nodes.Add(mutExcl.Label);
                 foreach (OperatingUnit ou in mutExcl.OpUnits)
                 {
                     treeMutExclusions.Nodes[i].Nodes.Add(ou.Name);
@@ -80,7 +80,7 @@ namespace PNSDraw
             string selectedName = treeMutExclusions.SelectedNode.Text;
             foreach (MutualExclusion mutExcl in graph.MutualExclusions)
             {
-                if (selectedName.Equals(mutExcl.Name))
+                if (selectedName.Equals(mutExcl.Label))
                 {
                     graph.RemoveMutualExclusion(mutExcl);
                     break;
