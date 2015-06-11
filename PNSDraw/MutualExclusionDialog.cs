@@ -73,6 +73,11 @@ namespace PNSDraw
                 graph.AddMutualExclusion(me);
                 RefreshTree();
             }
+
+            foreach (int i in lstOpUnits.CheckedIndices)
+	        {
+		        lstOpUnits.SetItemCheckState(i, CheckState.Unchecked);
+	        }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
