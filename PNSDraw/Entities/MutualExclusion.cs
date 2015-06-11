@@ -24,14 +24,14 @@ namespace PNSDraw
             ID = 0;
             this.OpUnits = opUnits;
             StringBuilder sb = new StringBuilder();
-            sb.Append("[");
+            //sb.Append("[");
             int i = 0;
             foreach (OperatingUnit ou in this.OpUnits)
             {
                 if (i < 3)
                 {
                     sb.Append(ou.Name);
-                    sb.Append(";");
+                    sb.Append("-");
                 }
                 i++;
             }
@@ -40,7 +40,7 @@ namespace PNSDraw
             {
                 sb.Append(";...");
             }
-            sb.Append("]");
+            //sb.Append("]");
 
             this.Name = sb.ToString();
             
