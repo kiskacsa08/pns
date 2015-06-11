@@ -9,6 +9,7 @@ namespace PNSDraw
     public class MutualExclusion
     {
         public string Name { get; set; }
+        public string Label { get; set; }
         public List<OperatingUnit> OpUnits { get; set; }
         public int ID { get; set; }
 
@@ -31,7 +32,26 @@ namespace PNSDraw
                 if (i < 3)
                 {
                     sb.Append(ou.Name);
-                    sb.Append("-");
+                    sb.Append("");
+                }
+                i++;
+            }
+            sb.Remove(sb.Length - 1, 1);
+            Int32 timestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            sb.Append(timestamp.ToString());
+            //sb.Append("]");
+
+            this.Name = sb.ToString();
+
+            sb.Clear();
+            sb.Append("[");
+            i = 0;
+            foreach (OperatingUnit ou in this.OpUnits)
+            {
+                if (i < 3)
+                {
+                    sb.Append(ou.Name);
+                    sb.Append(";");
                 }
                 i++;
             }
@@ -40,10 +60,9 @@ namespace PNSDraw
             {
                 sb.Append(";...");
             }
-            //sb.Append("]");
+            sb.Append("]");
 
-            this.Name = sb.ToString();
-            
+            this.Label = sb.ToString();
         }
     }
 }
