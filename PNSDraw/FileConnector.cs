@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PNSDraw.online;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -94,9 +95,9 @@ namespace PNSDraw
                     default:
                         break;
                 }
-                file_str.Append(mat.ReqFlowProp.Value != Default.flow_rate_lower_bound && mat.ReqFlowProp.Value != mat.ParameterList["reqflow"].NonValue? ", flow_rate_lower_bound=" + mat.ReqFlowProp.Value : "");
-                file_str.Append(mat.MaxFlowProp.Value != Default.flow_rate_upper_bound && mat.MaxFlowProp.Value != mat.ParameterList["maxflow"].NonValue ? ", flow_rate_upper_bound=" + mat.MaxFlowProp.Value : "");
-                file_str.Append(mat.PriceProp.Value != Default.price && mat.PriceProp.Value != mat.ParameterList["price"].NonValue ? ", price=" + mat.PriceProp.Value : "");
+                file_str.Append(mat.ReqFlowProp.Value != Default.flow_rate_lower_bound && mat.ReqFlowProp.Value != mat.ParameterList["reqflow"].NonValue ? ", flow_rate_lower_bound=" + MUs.ConvertToUnifiedUnit(mat.ReqFlowProp.MU, mat.ReqFlowProp.Value) : "");
+                file_str.Append(mat.MaxFlowProp.Value != Default.flow_rate_upper_bound && mat.MaxFlowProp.Value != mat.ParameterList["maxflow"].NonValue ? ", flow_rate_upper_bound=" + MUs.ConvertToUnifiedUnit(mat.MaxFlowProp.MU, mat.MaxFlowProp.Value) : "");
+                file_str.Append(mat.PriceProp.Value != Default.price && mat.PriceProp.Value != mat.ParameterList["price"].NonValue ? ", price=" + MUs.ConvertToUnifiedUnit(mat.PriceProp.MU, mat.PriceProp.Value) : "");
 
                 file_str.Append("\n");
             }
@@ -109,12 +110,12 @@ namespace PNSDraw
             {
                 file_str.Append(ou.Name);
                 file_str.Append(":");
-                file_str.Append(ou.CapacityLowerProp.Value != Default.capacity_lower_bound && ou.CapacityLowerProp.Value != ou.ParameterList["caplower"].NonValue ? " capacity_lower_bound=" + ou.CapacityLowerProp.Value + "," : "");
-                file_str.Append(ou.CapacityUpperProp.Value != Default.capacity_upper_bound && ou.CapacityUpperProp.Value != ou.ParameterList["capupper"].NonValue ? " capacity_upper_bound=" + ou.CapacityUpperProp.Value + "," : "");
+                file_str.Append(ou.CapacityLowerProp.Value != Default.capacity_lower_bound && ou.CapacityLowerProp.Value != ou.ParameterList["caplower"].NonValue ? " capacity_lower_bound=" + MUs.ConvertToUnifiedUnit(ou.CapacityLowerProp.MU, ou.CapacityLowerProp.Value) + "," : "");
+                file_str.Append(ou.CapacityUpperProp.Value != Default.capacity_upper_bound && ou.CapacityUpperProp.Value != ou.ParameterList["capupper"].NonValue ? " capacity_upper_bound=" + MUs.ConvertToUnifiedUnit(ou.CapacityUpperProp.MU, ou.CapacityUpperProp.Value) + "," : "");
                 double fix_cost = ou.InvestmentCostFixProp.Value / (ou.PayoutPeriodProp.Value * ou.WorkingHourProp.Value) + ou.OperatingCostFixProp.Value;
-                file_str.Append(fix_cost != Default.fix_cost ? " fix_cost=" + DoubleToGBString(fix_cost) + "," : "");
+                file_str.Append(fix_cost != Default.fix_cost ? " fix_cost=" + DoubleToGBString(MUs.ConvertToUnifiedUnit(ou.InvestmentCostFixProp.MU, fix_cost)) + "," : "");
                 double prop_cost = ou.InvestmentCostPropProp.Value / (ou.PayoutPeriodProp.Value * ou.WorkingHourProp.Value) + ou.OperatingCostPropProp.Value;
-                file_str.Append(prop_cost != Default.prop_cost ? " proportional_cost=" + DoubleToGBString(prop_cost) + "," : "");
+                file_str.Append(prop_cost != Default.prop_cost ? " proportional_cost=" + DoubleToGBString(MUs.ConvertToUnifiedUnit(ou.InvestmentCostPropProp.MU, prop_cost)) + "," : "");
                 file_str.Remove(file_str.Length - 1, 1);
                 file_str.Append("\n");
             }
@@ -372,11 +373,11 @@ namespace PNSDraw
                         //Console.WriteLine(matStr);
                         if (costSpecified)
                         {
-                            sol.AddMaterial(name, rate, cost);
+                            sol.AddMaterial(name, MUs.ConvertToSpecialUnit(Default.mass_mu.ToString(), rate), MUs.ConvertToSpecialUnit(Default.money_mu.ToString(), cost));
                         }
                         else
                         {
-                            sol.AddMaterial(name, rate);
+                            sol.AddMaterial(name, MUs.ConvertToSpecialUnit(Default.mass_mu.ToString(), rate));
                         }
                     }
                     //Operating units
@@ -452,7 +453,7 @@ namespace PNSDraw
                                         double matCost = Convert.ToDouble(opsInMats.Substring(matBegin, matPos - matBegin), CultureInfo.GetCultureInfo("en-GB"));
                                         //Console.WriteLine(matCost);
                                         matPos = opsInMats.IndexOf(")", matPos);
-                                        inputMats.Add(new MaterialProperty(matName, matCost, 0));
+                                        inputMats.Add(new MaterialProperty(matName, MUs.ConvertToSpecialUnit(Default.money_mu.ToString(), matCost), 0));
                                     }
                                 }
                                 //Console.WriteLine(opsLine);
@@ -478,10 +479,10 @@ namespace PNSDraw
                                         double matCost = Convert.ToDouble(opsOutMats.Substring(matBegin, matPos - matBegin), CultureInfo.GetCultureInfo("en-GB"));
                                         //Console.WriteLine(matCost);
                                         matPos = opsOutMats.IndexOf(")", matPos);
-                                        outputMats.Add(new MaterialProperty(matName, matCost, 0));
+                                        outputMats.Add(new MaterialProperty(matName, MUs.ConvertToSpecialUnit(Default.money_mu.ToString(), matCost), 0));
                                     }
                                 }
-                                sol.AddOperatingUnit(name, size, cost, inputMats, outputMats);
+                                sol.AddOperatingUnit(name, MUs.ConvertToSpecialUnit(Default.mass_mu.ToString(), size), MUs.ConvertToSpecialUnit(Default.money_mu.ToString(), cost), inputMats, outputMats);
                             }
                         }
                         
@@ -492,7 +493,7 @@ namespace PNSDraw
                     begin = begin + 2;
                     pos = str.IndexOf(" ", begin);
                     double totalCost = Convert.ToDouble(str.Substring(begin, pos - begin), CultureInfo.GetCultureInfo("en-GB"));
-                    sol.OptimalValue = totalCost;
+                    sol.OptimalValue = MUs.ConvertToSpecialUnit(Default.money_mu.ToString(), totalCost);
 
                     graph.Solutions.Add(sol);
                 }
