@@ -62,6 +62,7 @@ namespace PNSDraw
             Graph = new PGraph();
             pnsCanvas1.GraphicsStructure = Graph;
             isProblemExists = false;
+            UpdateListOfMUs();
         }
 
         void pnsCanvas1_DataChanged(object sender, Canvas.CanvasEventArgs e)
@@ -1923,6 +1924,53 @@ namespace PNSDraw
                 }
             }
             pwd.Close();
+        }
+
+        private void treeMaterials_DoubleClick(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = ((TreeView)sender).SelectedNode;
+            Canvas.IGraphicsObject obj = null;
+            bool found = false;
+
+            foreach (Material mat in Graph.Materials)
+            {
+                if (mat.Name.Equals(selectedNode.Text))
+                {
+                    found = true;
+                    obj = (Canvas.IGraphicsObject)mat;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                foreach (OperatingUnit ou in Graph.OperatingUnits)
+                {
+                    if (ou.Name.Equals(selectedNode.Text))
+                    {
+                        found = true;
+                        obj = (Canvas.IGraphicsObject)ou;
+                        break;
+                    }
+                }
+            }
+
+            if (obj != null)
+            {
+                propertyGrid1.SelectedObject = obj.GetParentObject();
+                copy_toolStripMenuItem.Enabled = false;
+                duplicate_toolStripMenuItem.Enabled = false;
+                tabControl1.SelectedTab = tabPage1;
+            }
+        }
+
+        //TODO: Ezt átírni úgy, hogy a megfelelő típusú MU-kal töltse fel a listát
+        private void UpdateListOfMUs()
+        {
+            MeasurementUnits.listOfMUs = new string[3];
+            MeasurementUnits.listOfMUs[0] = "EUR";
+            MeasurementUnits.listOfMUs[1] = "HUF";
+            MeasurementUnits.listOfMUs[2] = "USD";
         }
     }
 }

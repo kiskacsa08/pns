@@ -30,14 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Raw Materials");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Intermediates");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Products");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Materials", new System.Windows.Forms.TreeNode[] {
-            treeNode11,
-            treeNode12,
-            treeNode13});
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Operating Units");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Raw Materials");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Intermediates");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Products");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Materials", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Operating Units");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,7 +110,6 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.pnsCanvas1 = new PNSDraw.Canvas.PNSCanvas();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
@@ -131,7 +130,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBox_minimap = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.propertyGrid1 = new PNSDraw.MyPropertyGrid();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -155,6 +153,8 @@
             this.menuSummaryExport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSummaryView = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.pnsCanvas1 = new PNSDraw.Canvas.PNSCanvas();
+            this.propertyGrid1 = new PNSDraw.MyPropertyGrid();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -823,21 +823,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(911, 603);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
-            // pnsCanvas1
-            // 
-            this.pnsCanvas1.AddObjectMode = false;
-            this.pnsCanvas1.AllowDrop = true;
-            this.pnsCanvas1.BackColor = System.Drawing.Color.White;
-            this.pnsCanvas1.ConnectorMode = false;
-            this.pnsCanvas1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnsCanvas1.GridSize = 300;
-            this.pnsCanvas1.Location = new System.Drawing.Point(3, 83);
-            this.pnsCanvas1.Name = "pnsCanvas1";
-            this.pnsCanvas1.ShowGrid = true;
-            this.pnsCanvas1.Size = new System.Drawing.Size(905, 492);
-            this.pnsCanvas1.SnapToGrid = true;
-            this.pnsCanvas1.TabIndex = 0;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -1019,18 +1004,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Object Properties";
             // 
-            // propertyGrid1
-            // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.HelpVisible = false;
-            this.propertyGrid1.Location = new System.Drawing.Point(3, 16);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.ReadOnly = false;
-            this.propertyGrid1.Size = new System.Drawing.Size(381, 327);
-            this.propertyGrid1.TabIndex = 1;
-            this.propertyGrid1.ToolbarVisible = false;
-            this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.groupBox1);
@@ -1096,32 +1069,34 @@
             this.treeMaterials.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeMaterials.Location = new System.Drawing.Point(0, 0);
             this.treeMaterials.Name = "treeMaterials";
-            treeNode11.Name = "raw_materials";
-            treeNode11.Text = "Raw Materials";
-            treeNode12.Name = "intermediates";
-            treeNode12.Text = "Intermediates";
-            treeNode13.Name = "products";
-            treeNode13.Text = "Products";
-            treeNode14.Name = "materials";
-            treeNode14.Text = "Materials";
+            treeNode1.Name = "raw_materials";
+            treeNode1.Text = "Raw Materials";
+            treeNode2.Name = "intermediates";
+            treeNode2.Text = "Intermediates";
+            treeNode3.Name = "products";
+            treeNode3.Text = "Products";
+            treeNode4.Name = "materials";
+            treeNode4.Text = "Materials";
             this.treeMaterials.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode14});
+            treeNode4});
             this.treeMaterials.Size = new System.Drawing.Size(178, 346);
             this.treeMaterials.TabIndex = 0;
             this.treeMaterials.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeMaterials_NodeMouseClick);
+            this.treeMaterials.DoubleClick += new System.EventHandler(this.treeMaterials_DoubleClick);
             // 
             // treeOpUnits
             // 
             this.treeOpUnits.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeOpUnits.Location = new System.Drawing.Point(0, 0);
             this.treeOpUnits.Name = "treeOpUnits";
-            treeNode15.Name = "op_units";
-            treeNode15.Text = "Operating Units";
+            treeNode5.Name = "op_units";
+            treeNode5.Text = "Operating Units";
             this.treeOpUnits.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode15});
+            treeNode5});
             this.treeOpUnits.Size = new System.Drawing.Size(205, 346);
             this.treeOpUnits.TabIndex = 0;
             this.treeOpUnits.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeMaterials_NodeMouseClick);
+            this.treeOpUnits.DoubleClick += new System.EventHandler(this.treeMaterials_DoubleClick);
             // 
             // tabPage3
             // 
@@ -1254,6 +1229,33 @@
             this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
             this.backgroundWorker2.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker2_ProgressChanged);
             this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
+            // 
+            // pnsCanvas1
+            // 
+            this.pnsCanvas1.AddObjectMode = false;
+            this.pnsCanvas1.AllowDrop = true;
+            this.pnsCanvas1.BackColor = System.Drawing.Color.White;
+            this.pnsCanvas1.ConnectorMode = false;
+            this.pnsCanvas1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnsCanvas1.GridSize = 300;
+            this.pnsCanvas1.Location = new System.Drawing.Point(3, 83);
+            this.pnsCanvas1.Name = "pnsCanvas1";
+            this.pnsCanvas1.ShowGrid = true;
+            this.pnsCanvas1.Size = new System.Drawing.Size(905, 492);
+            this.pnsCanvas1.SnapToGrid = true;
+            this.pnsCanvas1.TabIndex = 0;
+            // 
+            // propertyGrid1
+            // 
+            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid1.HelpVisible = false;
+            this.propertyGrid1.Location = new System.Drawing.Point(3, 16);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.ReadOnly = false;
+            this.propertyGrid1.Size = new System.Drawing.Size(381, 327);
+            this.propertyGrid1.TabIndex = 1;
+            this.propertyGrid1.ToolbarVisible = false;
+            this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
             // 
             // Form1
             // 
