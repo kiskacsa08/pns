@@ -5,6 +5,8 @@ using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Windows.Forms;
+using System.Windows.Forms.Design;
+using System.Drawing.Design;
 
 namespace PNSDraw
 {
@@ -37,7 +39,7 @@ namespace PNSDraw
         {
             ObjectProperty op = (ObjectProperty)value;
             oldOP = op;
-            return op.ValueProp.ToString();
+            return op.ValueProp.ToString() + " " + op.MUProp.ToString();
         }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
@@ -189,4 +191,26 @@ namespace PNSDraw
     }
     #endregion
 
+    internal class MeasurementUnits
+    {
+        internal static string[] listOfMUs;
+    }
+
+    public class MUConverter : StringConverter
+    {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            return true;
+        }
+
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            return true;
+        }
+
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            return new StandardValuesCollection(MeasurementUnits.listOfMUs);
+        }
+    }
 }
