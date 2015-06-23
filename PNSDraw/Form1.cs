@@ -2015,7 +2015,7 @@ namespace PNSDraw
 
         private void layoutSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            // Adrián
         }
     }
 }
