@@ -90,6 +90,12 @@
     <Compile Include="Canvas\PNSCanvas.Designer.cs">
       <DependentUpon>PNSCanvas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\SolverSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SolverSettingsDialog.Designer.cs">
+      <DependentUpon>SolverSettingsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Default.cs" />
     <Compile Include="Entities\MutualExclusion.cs">
       <SubType>Code</SubType>
@@ -192,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Canvas\PNSCanvas.resx">
       <DependentUpon>PNSCanvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SolverSettingsDialog.resx">
+      <DependentUpon>SolverSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
