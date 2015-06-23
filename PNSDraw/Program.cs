@@ -12,7 +12,6 @@ namespace PNSDraw
         [STAThread]
         static void Main()
         {
-            Console.WriteLine("BV");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
