@@ -153,6 +153,12 @@
             this.menuSummaryExport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSummaryView = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.solverSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.graphSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.problemSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.solutionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.layoutSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnsCanvas1 = new PNSDraw.Canvas.PNSCanvas();
             this.propertyGrid1 = new PNSDraw.MyPropertyGrid();
             this.menuStrip1.SuspendLayout();
@@ -188,7 +194,8 @@
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.solutionsToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.preferencesToolStripMenuItem});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -1230,6 +1237,53 @@
             this.backgroundWorker2.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker2_ProgressChanged);
             this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
             // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.solverSettingsToolStripMenuItem,
+            this.graphSettingsToolStripMenuItem,
+            this.problemSettingsToolStripMenuItem,
+            this.solutionSettingsToolStripMenuItem,
+            this.layoutSettingsToolStripMenuItem});
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.preferencesToolStripMenuItem.Text = "Preferences";
+            // 
+            // solverSettingsToolStripMenuItem
+            // 
+            this.solverSettingsToolStripMenuItem.Name = "solverSettingsToolStripMenuItem";
+            this.solverSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.solverSettingsToolStripMenuItem.Text = "Solver settings";
+            this.solverSettingsToolStripMenuItem.Click += new System.EventHandler(this.solverSettingsToolStripMenuItem_Click);
+            // 
+            // graphSettingsToolStripMenuItem
+            // 
+            this.graphSettingsToolStripMenuItem.Name = "graphSettingsToolStripMenuItem";
+            this.graphSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.graphSettingsToolStripMenuItem.Text = "Graph settings";
+            this.graphSettingsToolStripMenuItem.Click += new System.EventHandler(this.graphSettingsToolStripMenuItem_Click);
+            // 
+            // problemSettingsToolStripMenuItem
+            // 
+            this.problemSettingsToolStripMenuItem.Name = "problemSettingsToolStripMenuItem";
+            this.problemSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.problemSettingsToolStripMenuItem.Text = "Problem settings";
+            this.problemSettingsToolStripMenuItem.Click += new System.EventHandler(this.problemSettingsToolStripMenuItem_Click);
+            // 
+            // solutionSettingsToolStripMenuItem
+            // 
+            this.solutionSettingsToolStripMenuItem.Name = "solutionSettingsToolStripMenuItem";
+            this.solutionSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.solutionSettingsToolStripMenuItem.Text = "Solution settings";
+            this.solutionSettingsToolStripMenuItem.Click += new System.EventHandler(this.solutionSettingsToolStripMenuItem_Click);
+            // 
+            // layoutSettingsToolStripMenuItem
+            // 
+            this.layoutSettingsToolStripMenuItem.Name = "layoutSettingsToolStripMenuItem";
+            this.layoutSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.layoutSettingsToolStripMenuItem.Text = "Layout settings";
+            this.layoutSettingsToolStripMenuItem.Click += new System.EventHandler(this.layoutSettingsToolStripMenuItem_Click);
+            // 
             // pnsCanvas1
             // 
             this.pnsCanvas1.AddObjectMode = false;
@@ -1424,6 +1478,12 @@
         private System.Windows.Forms.ToolStripMenuItem leftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rightToolStripMenuItem1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem solverSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem graphSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem problemSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem solutionSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem layoutSettingsToolStripMenuItem;
 
     }
 }

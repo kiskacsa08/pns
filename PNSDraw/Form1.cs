@@ -1975,5 +1975,47 @@ namespace PNSDraw
             MeasurementUnits.listOfMUs[1] = "HUF";
             MeasurementUnits.listOfMUs[2] = "USD";
         }
+
+        private void solverSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /*
+             * ide jön a
+             * solution limit
+             * proccess number
+             * offline/online
+             * temp mappa beállítása (vizsgálat hogy van-e joga a kiválasztott mappába írni)
+             * online solver paraméterei
+             *  host
+             *  port
+             */
+        }
+
+        private void graphSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /*
+             * Edit -> Settings
+             */
+        }
+
+        private void problemSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /*
+             * Solver settings
+             * kiegészíteni a studio szerinti default értékekkel
+             * kiegésziíteni, hogy itt is lehessen volume unitot választani
+             */
+        }
+
+        private void solutionSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /*
+             * Solutions -> Settings
+             */
+        }
+
+        private void layoutSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
