@@ -2006,25 +2006,41 @@ namespace PNSDraw
 
         private void graphSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /*
-             * Edit -> Settings
-             */
+            SettingsWindow sw = new SettingsWindow();
+
+            sw.ShowDialog();
+
+            if (sw.Changed)
+            {
+                if (LockedMode)
+                {
+                    toolStripComboBox1_SelectedIndexChanged(this, EventArgs.Empty);
+                }
+                else
+                {
+                    pnsCanvas1.GridSize = Globals.GridSize;
+                    pnsCanvas1.Refresh();
+                    propertyGrid1.Refresh();
+                }
+            }
         }
 
         private void problemSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /*
-             * Solver settings
-             * kiegészíteni a studio szerinti default értékekkel
-             * kiegésziíteni, hogy itt is lehessen volume unitot választani
-             */
+            SolverSettingsDialog ssd = new SolverSettingsDialog();
+            ssd.ShowDialog();
         }
 
         private void solutionSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /*
-             * Solutions -> Settings
-             */
+            SolutionSettingsWindow sw = new SolutionSettingsWindow();
+
+            sw.ShowDialog();
+
+            if (sw.Changed)
+            {
+                toolStripComboBox1_SelectedIndexChanged(this, EventArgs.Empty);
+            }
         }
 
         private void layoutSettingsToolStripMenuItem_Click(object sender, EventArgs e)

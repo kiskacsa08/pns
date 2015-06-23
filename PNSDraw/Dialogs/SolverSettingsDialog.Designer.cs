@@ -34,18 +34,26 @@
             this.btnApply = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cmbQuantity = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbMoneyUnit = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbTimeUnit = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbMassUnit = new System.Windows.Forms.ComboBox();
+            this.cmbDefUnit = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.numOUPropCost = new System.Windows.Forms.NumericUpDown();
-            this.numOUFixCost = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.numIProp = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.numIFixed = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.numOProp = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.numOFixed = new System.Windows.Forms.NumericUpDown();
+            this.numFlowRate = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.numOUCapacityUpper = new System.Windows.Forms.NumericUpDown();
             this.numOUCapacityLower = new System.Windows.Forms.NumericUpDown();
@@ -58,20 +66,26 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cmbDefMat = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.numFlowRate = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.numWorkingHour = new System.Windows.Forms.NumericUpDown();
+            this.numPayoutPeriod = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numOUPropCost)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numOUFixCost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numIProp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numIFixed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOProp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOFixed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numFlowRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOUCapacityUpper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOUCapacityLower)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMatPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMatFlowRateUpper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMatFlowRateLower)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numFlowRate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numWorkingHour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPayoutPeriod)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -80,9 +94,9 @@
             this.panel1.Controls.Add(this.btnOk);
             this.panel1.Controls.Add(this.btnApply);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 413);
+            this.panel1.Location = new System.Drawing.Point(0, 482);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(409, 46);
+            this.panel1.Size = new System.Drawing.Size(452, 46);
             this.panel1.TabIndex = 0;
             // 
             // btnCancel
@@ -124,25 +138,68 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(409, 413);
+            this.tabControl1.Size = new System.Drawing.Size(452, 482);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.numPayoutPeriod);
+            this.tabPage1.Controls.Add(this.label13);
+            this.tabPage1.Controls.Add(this.numWorkingHour);
+            this.tabPage1.Controls.Add(this.label12);
+            this.tabPage1.Controls.Add(this.cmbQuantity);
+            this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.cmbMoneyUnit);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.cmbTimeUnit);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.cmbMassUnit);
+            this.tabPage1.Controls.Add(this.cmbDefUnit);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(401, 387);
+            this.tabPage1.Size = new System.Drawing.Size(444, 456);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Measurement Units";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // cmbQuantity
+            // 
+            this.cmbQuantity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbQuantity.FormattingEnabled = true;
+            this.cmbQuantity.Items.AddRange(new object[] {
+            "Mass",
+            "Volume",
+            "Amount of substance",
+            "Energy, work, heat",
+            "Length",
+            "Electric current",
+            "Area",
+            "Speed",
+            "Acceleration",
+            "Mass density",
+            "Thermodinamic temperature",
+            "Luminous intensity",
+            "Concentration",
+            "Force",
+            "Pressure",
+            "Power",
+            "Capacity"});
+            this.cmbQuantity.Location = new System.Drawing.Point(183, 53);
+            this.cmbQuantity.Name = "cmbQuantity";
+            this.cmbQuantity.Size = new System.Drawing.Size(185, 21);
+            this.cmbQuantity.TabIndex = 8;
+            this.cmbQuantity.SelectionChangeCommitted += new System.EventHandler(this.cmbQuantity_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(22, 56);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 13);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Quantity type";
             // 
             // label4
             // 
@@ -160,16 +217,16 @@
             this.cmbMoneyUnit.Items.AddRange(new object[] {
             "EUR",
             "HUF"});
-            this.cmbMoneyUnit.Location = new System.Drawing.Point(87, 163);
+            this.cmbMoneyUnit.Location = new System.Drawing.Point(183, 238);
             this.cmbMoneyUnit.Name = "cmbMoneyUnit";
-            this.cmbMoneyUnit.Size = new System.Drawing.Size(121, 21);
+            this.cmbMoneyUnit.Size = new System.Drawing.Size(185, 21);
             this.cmbMoneyUnit.TabIndex = 5;
             this.cmbMoneyUnit.SelectedIndexChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 166);
+            this.label3.Location = new System.Drawing.Point(22, 241);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 4;
@@ -186,52 +243,56 @@
             "week",
             "month",
             "year"});
-            this.cmbTimeUnit.Location = new System.Drawing.Point(87, 97);
+            this.cmbTimeUnit.Location = new System.Drawing.Point(183, 172);
             this.cmbTimeUnit.Name = "cmbTimeUnit";
-            this.cmbTimeUnit.Size = new System.Drawing.Size(121, 21);
+            this.cmbTimeUnit.Size = new System.Drawing.Size(185, 21);
             this.cmbTimeUnit.TabIndex = 3;
             this.cmbTimeUnit.SelectedIndexChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 100);
+            this.label2.Location = new System.Drawing.Point(22, 175);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Time unit";
             // 
-            // cmbMassUnit
+            // cmbDefUnit
             // 
-            this.cmbMassUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMassUnit.FormattingEnabled = true;
-            this.cmbMassUnit.Items.AddRange(new object[] {
+            this.cmbDefUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDefUnit.FormattingEnabled = true;
+            this.cmbDefUnit.Items.AddRange(new object[] {
             "gram",
             "kilogram",
             "ton"});
-            this.cmbMassUnit.Location = new System.Drawing.Point(87, 40);
-            this.cmbMassUnit.Name = "cmbMassUnit";
-            this.cmbMassUnit.Size = new System.Drawing.Size(121, 21);
-            this.cmbMassUnit.TabIndex = 1;
-            this.cmbMassUnit.SelectedIndexChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
+            this.cmbDefUnit.Location = new System.Drawing.Point(183, 114);
+            this.cmbDefUnit.Name = "cmbDefUnit";
+            this.cmbDefUnit.Size = new System.Drawing.Size(185, 21);
+            this.cmbDefUnit.TabIndex = 1;
+            this.cmbDefUnit.SelectionChangeCommitted += new System.EventHandler(this.cmbDefUnit_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 43);
+            this.label1.Location = new System.Drawing.Point(22, 117);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Mass unit";
+            this.label1.Text = "Default unit";
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.label13);
+            this.tabPage2.Controls.Add(this.label18);
+            this.tabPage2.Controls.Add(this.label16);
+            this.tabPage2.Controls.Add(this.numIProp);
+            this.tabPage2.Controls.Add(this.label17);
+            this.tabPage2.Controls.Add(this.numIFixed);
+            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Controls.Add(this.numOProp);
+            this.tabPage2.Controls.Add(this.label15);
+            this.tabPage2.Controls.Add(this.numOFixed);
             this.tabPage2.Controls.Add(this.numFlowRate);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.numOUPropCost);
-            this.tabPage2.Controls.Add(this.numOUFixCost);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.numOUCapacityUpper);
             this.tabPage2.Controls.Add(this.numOUCapacityLower);
@@ -247,56 +308,125 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(401, 387);
+            this.tabPage2.Size = new System.Drawing.Size(444, 456);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Default Values";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label12
+            // label18
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(19, 289);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(154, 13);
-            this.label12.TabIndex = 17;
-            this.label12.Text = "Operating unit proportional cost";
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(19, 399);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(50, 13);
+            this.label18.TabIndex = 38;
+            this.label18.Text = "Flow rate";
             // 
-            // label11
+            // label16
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(19, 253);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(109, 13);
-            this.label11.TabIndex = 16;
-            this.label11.Text = "Operating unit fix cost";
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(19, 363);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(194, 13);
+            this.label16.TabIndex = 32;
+            this.label16.Text = "Investment cost proportionality constant";
             // 
-            // numOUPropCost
+            // numIProp
             // 
-            this.numOUPropCost.DecimalPlaces = 2;
-            this.numOUPropCost.Location = new System.Drawing.Point(228, 287);
-            this.numOUPropCost.Maximum = new decimal(new int[] {
+            this.numIProp.DecimalPlaces = 2;
+            this.numIProp.Location = new System.Drawing.Point(229, 361);
+            this.numIProp.Maximum = new decimal(new int[] {
             1000000000,
             0,
             0,
             0});
-            this.numOUPropCost.Name = "numOUPropCost";
-            this.numOUPropCost.Size = new System.Drawing.Size(120, 20);
-            this.numOUPropCost.TabIndex = 15;
-            this.numOUPropCost.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
+            this.numIProp.Name = "numIProp";
+            this.numIProp.Size = new System.Drawing.Size(120, 20);
+            this.numIProp.TabIndex = 31;
+            this.numIProp.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
             // 
-            // numOUFixCost
+            // label17
             // 
-            this.numOUFixCost.DecimalPlaces = 2;
-            this.numOUFixCost.Location = new System.Drawing.Point(227, 251);
-            this.numOUFixCost.Maximum = new decimal(new int[] {
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(19, 327);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(143, 13);
+            this.label17.TabIndex = 30;
+            this.label17.Text = "Investment cost fixed charge";
+            // 
+            // numIFixed
+            // 
+            this.numIFixed.DecimalPlaces = 2;
+            this.numIFixed.Location = new System.Drawing.Point(228, 325);
+            this.numIFixed.Maximum = new decimal(new int[] {
             1000000000,
             0,
             0,
             0});
-            this.numOUFixCost.Name = "numOUFixCost";
-            this.numOUFixCost.Size = new System.Drawing.Size(120, 20);
-            this.numOUFixCost.TabIndex = 14;
-            this.numOUFixCost.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
+            this.numIFixed.Name = "numIFixed";
+            this.numIFixed.Size = new System.Drawing.Size(120, 20);
+            this.numIFixed.TabIndex = 28;
+            this.numIFixed.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(19, 291);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(188, 13);
+            this.label14.TabIndex = 26;
+            this.label14.Text = "Operating cost proportionality constant";
+            // 
+            // numOProp
+            // 
+            this.numOProp.DecimalPlaces = 2;
+            this.numOProp.Location = new System.Drawing.Point(229, 289);
+            this.numOProp.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numOProp.Name = "numOProp";
+            this.numOProp.Size = new System.Drawing.Size(120, 20);
+            this.numOProp.TabIndex = 25;
+            this.numOProp.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(19, 255);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(137, 13);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "Operating cost fixed charge";
+            // 
+            // numOFixed
+            // 
+            this.numOFixed.DecimalPlaces = 2;
+            this.numOFixed.Location = new System.Drawing.Point(228, 253);
+            this.numOFixed.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numOFixed.Name = "numOFixed";
+            this.numOFixed.Size = new System.Drawing.Size(120, 20);
+            this.numOFixed.TabIndex = 22;
+            this.numOFixed.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
+            // 
+            // numFlowRate
+            // 
+            this.numFlowRate.DecimalPlaces = 2;
+            this.numFlowRate.Location = new System.Drawing.Point(229, 397);
+            this.numFlowRate.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numFlowRate.Name = "numFlowRate";
+            this.numFlowRate.Size = new System.Drawing.Size(120, 20);
+            this.numFlowRate.TabIndex = 19;
+            this.numFlowRate.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -436,33 +566,55 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Default material type";
             // 
-            // numFlowRate
+            // label12
             // 
-            this.numFlowRate.DecimalPlaces = 2;
-            this.numFlowRate.Location = new System.Drawing.Point(229, 323);
-            this.numFlowRate.Maximum = new decimal(new int[] {
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(22, 307);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(146, 13);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "Default working hour per year";
+            // 
+            // numWorkingHour
+            // 
+            this.numWorkingHour.Location = new System.Drawing.Point(183, 305);
+            this.numWorkingHour.Maximum = new decimal(new int[] {
             1000000000,
             0,
             0,
             0});
-            this.numFlowRate.Name = "numFlowRate";
-            this.numFlowRate.Size = new System.Drawing.Size(120, 20);
-            this.numFlowRate.TabIndex = 19;
+            this.numWorkingHour.Name = "numWorkingHour";
+            this.numWorkingHour.Size = new System.Drawing.Size(120, 20);
+            this.numWorkingHour.TabIndex = 10;
+            this.numWorkingHour.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
+            // 
+            // numPayoutPeriod
+            // 
+            this.numPayoutPeriod.Location = new System.Drawing.Point(183, 371);
+            this.numPayoutPeriod.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numPayoutPeriod.Name = "numPayoutPeriod";
+            this.numPayoutPeriod.Size = new System.Drawing.Size(120, 20);
+            this.numPayoutPeriod.TabIndex = 14;
+            this.numPayoutPeriod.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(19, 325);
+            this.label13.Location = new System.Drawing.Point(22, 373);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(50, 13);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "Flow rate";
+            this.label13.Size = new System.Drawing.Size(137, 13);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "Default payout period (year)";
             // 
             // SolverSettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(409, 459);
+            this.ClientSize = new System.Drawing.Size(452, 528);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -475,14 +627,18 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numOUPropCost)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numOUFixCost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numIProp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numIFixed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOProp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numOFixed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numFlowRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOUCapacityUpper)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numOUCapacityLower)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMatPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMatFlowRateUpper)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMatFlowRateLower)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numFlowRate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numWorkingHour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPayoutPeriod)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -498,7 +654,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ComboBox cmbTimeUnit;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbMassUnit;
+        private System.Windows.Forms.ComboBox cmbDefUnit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbMoneyUnit;
         private System.Windows.Forms.Label label3;
@@ -511,15 +667,25 @@
         private System.Windows.Forms.NumericUpDown numMatFlowRateLower;
         private System.Windows.Forms.NumericUpDown numMatPrice;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.NumericUpDown numOUPropCost;
-        private System.Windows.Forms.NumericUpDown numOUFixCost;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown numOUCapacityUpper;
         private System.Windows.Forms.NumericUpDown numOUCapacityLower;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown numFlowRate;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown numOProp;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown numOFixed;
+        private System.Windows.Forms.ComboBox cmbQuantity;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.NumericUpDown numIProp;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown numIFixed;
+        private System.Windows.Forms.NumericUpDown numPayoutPeriod;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown numWorkingHour;
+        private System.Windows.Forms.Label label12;
     }
 }
