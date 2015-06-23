@@ -1541,7 +1541,7 @@ namespace PNSDraw
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            SolverSettingsDialog ssd = new SolverSettingsDialog();
+            ProblemSettingsDialog ssd = new ProblemSettingsDialog();
             ssd.ShowDialog();
         }
 
@@ -2027,8 +2027,8 @@ namespace PNSDraw
 
         private void problemSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SolverSettingsDialog ssd = new SolverSettingsDialog();
-            ssd.ShowDialog();
+            ProblemSettingsDialog psd = new ProblemSettingsDialog();
+            psd.ShowDialog();
         }
 
         private void solutionSettingsToolStripMenuItem_Click(object sender, EventArgs e)
