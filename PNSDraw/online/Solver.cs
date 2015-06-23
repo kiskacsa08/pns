@@ -29,7 +29,7 @@ namespace PNSDraw.online
         {
             try
             {
-                socket.Connect("193.6.33.141", 51000);
+                socket.Connect(Default.host, Default.port);
             }
             catch (Exception e)
             {
