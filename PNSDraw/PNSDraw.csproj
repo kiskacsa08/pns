@@ -76,10 +76,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBox1.cs">
+    <Compile Include="Dialogs\AboutBox1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutBox1.Designer.cs">
+    <Compile Include="Dialogs\AboutBox1.Designer.cs">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </Compile>
     <Compile Include="Adapter.cs" />
@@ -107,17 +107,17 @@
     <Compile Include="Excel export\ProblemToExcel.cs" />
     <Compile Include="Excel export\Xlsx.cs" />
     <Compile Include="FileConnector.cs" />
-    <Compile Include="KeepFilesDialog.cs">
+    <Compile Include="Dialogs\KeepFilesDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KeepFilesDialog.Designer.cs">
+    <Compile Include="Dialogs\KeepFilesDialog.Designer.cs">
       <DependentUpon>KeepFilesDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Managers\PropertyManager.cs" />
-    <Compile Include="MutualExclusionDialog.cs">
+    <Compile Include="Dialogs\MutualExclusionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MutualExclusionDialog.Designer.cs">
+    <Compile Include="Dialogs\MutualExclusionDialog.Designer.cs">
       <DependentUpon>MutualExclusionDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="MyPropertyGrid.cs">
@@ -143,10 +143,10 @@
     <Compile Include="online\MUs.cs" />
     <Compile Include="online\Socket.cs" />
     <Compile Include="online\Solver.cs" />
-    <Compile Include="PleaseWaitDialog.cs">
+    <Compile Include="Dialogs\PleaseWaitDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PleaseWaitDialog.Designer.cs">
+    <Compile Include="Dialogs\PleaseWaitDialog.Designer.cs">
       <DependentUpon>PleaseWaitDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -156,10 +156,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RenameDialog.cs">
+    <Compile Include="Dialogs\RenameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RenameDialog.Designer.cs">
+    <Compile Include="Dialogs\RenameDialog.Designer.cs">
       <DependentUpon>RenameDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Resource1.Designer.cs">
@@ -167,27 +167,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
-    <Compile Include="SettingsWindow.cs">
+    <Compile Include="Dialogs\SettingsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsWindow.Designer.cs">
+    <Compile Include="Dialogs\SettingsWindow.Designer.cs">
       <DependentUpon>SettingsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="SolutionSettingsWindow.cs">
+    <Compile Include="Dialogs\SolutionSettingsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SolutionSettingsWindow.Designer.cs">
+    <Compile Include="Dialogs\SolutionSettingsWindow.Designer.cs">
       <DependentUpon>SolutionSettingsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="SolverSettingsDialog.cs">
+    <Compile Include="Dialogs\SolverSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SolverSettingsDialog.Designer.cs">
+    <Compile Include="Dialogs\SolverSettingsDialog.Designer.cs">
       <DependentUpon>SolverSettingsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ZIMPL export\ProblemToZimpl.cs" />
     <Compile Include="ZIMPL export\ZIMPLKeywords.cs" />
-    <EmbeddedResource Include="AboutBox1.resx">
+    <EmbeddedResource Include="Dialogs\AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Canvas\PNSCanvas.resx">
@@ -196,13 +196,13 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KeepFilesDialog.resx">
+    <EmbeddedResource Include="Dialogs\KeepFilesDialog.resx">
       <DependentUpon>KeepFilesDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MutualExclusionDialog.resx">
+    <EmbeddedResource Include="Dialogs\MutualExclusionDialog.resx">
       <DependentUpon>MutualExclusionDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PleaseWaitDialog.resx">
+    <EmbeddedResource Include="Dialogs\PleaseWaitDialog.resx">
       <DependentUpon>PleaseWaitDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -210,20 +210,20 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="RenameDialog.resx">
+    <EmbeddedResource Include="Dialogs\RenameDialog.resx">
       <DependentUpon>RenameDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resource1.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsWindow.resx">
+    <EmbeddedResource Include="Dialogs\SettingsWindow.resx">
       <DependentUpon>SettingsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SolutionSettingsWindow.resx">
+    <EmbeddedResource Include="Dialogs\SolutionSettingsWindow.resx">
       <DependentUpon>SolutionSettingsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SolverSettingsDialog.resx">
+    <EmbeddedResource Include="Dialogs\SolverSettingsDialog.resx">
       <DependentUpon>SolverSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
