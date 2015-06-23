@@ -1,6 +1,6 @@
 ﻿namespace PNSDraw
 {
-    partial class SolverSettingsDialog
+    partial class ProblemSettingsDialog
     {
         /// <summary>
         /// Required designer variable.

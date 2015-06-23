@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace PNSDraw
 {
-    public partial class SolverSettingsDialog : Form
+    public partial class ProblemSettingsDialog : Form
     {
         private string[] massUnits = new string[] { "gram", "kilogram", "ton" };
         private string[] volumeUnits = new string[] { "cubic meter", "cubic decimeter", "cubic centimeter" };
@@ -48,7 +48,7 @@ namespace PNSDraw
         private int selectedPowerUnit;
         private int selectedCapacityUnit;
 
-        public SolverSettingsDialog()
+        public ProblemSettingsDialog()
         {
             InitializeComponent();
         }
