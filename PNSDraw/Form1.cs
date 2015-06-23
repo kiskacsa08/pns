@@ -1937,11 +1937,18 @@ namespace PNSDraw
 
             foreach (Material mat in Graph.Materials)
             {
-                if (mat.Name.Equals(selectedNode.Text))
+                try
                 {
-                    found = true;
-                    obj = (Canvas.IGraphicsObject)mat;
-                    break;
+                    if (mat.Name.Equals(selectedNode.Text))
+                    {
+                        found = true;
+                        obj = (Canvas.IGraphicsObject)mat;
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message + " (" + ex.Source + ")");
                 }
             }
 
@@ -1949,11 +1956,18 @@ namespace PNSDraw
             {
                 foreach (OperatingUnit ou in Graph.OperatingUnits)
                 {
-                    if (ou.Name.Equals(selectedNode.Text))
+                    try
                     {
-                        found = true;
-                        obj = (Canvas.IGraphicsObject)ou;
-                        break;
+                        if (ou.Name.Equals(selectedNode.Text))
+                        {
+                            found = true;
+                            obj = (Canvas.IGraphicsObject)ou;
+                            break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message + " (" + ex.Source + ")");
                     }
                 }
             }
