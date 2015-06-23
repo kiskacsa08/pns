@@ -186,7 +186,7 @@ namespace PNSDraw
         [Category("Other"), PropertyOrder(12)]
         [DisplayName("Mu")]
         //[EditorAttribute(typeof(EditorUI), typeof(System.Drawing.Design.UITypeEditor))]
-        [TypeConverter(typeof(MUConverter))]
+        //[TypeConverter(typeof(MUConverter))]
         public string MUProp
         {
             get
