@@ -16,6 +16,119 @@ namespace PNSDraw
             t
         }
 
+        public enum VolumeUnit
+        {
+            m3,
+            dm3,
+            cm3
+        }
+
+        public enum SubstanceUnit
+        {
+            mol,
+            mmol,
+            kmol
+        }
+
+        public enum EnergyUnit
+        {
+            J,
+            kJ,
+            MJ,
+            GJ,
+            TJ,
+            Wh,
+            kWh,
+            MWh,
+            GWh,
+            TWh
+        }
+
+        public enum LengthUnit
+        {
+            m,
+            km,
+            dm,
+            cm,
+            mm,
+            coll
+        }
+
+        public enum CurrentUnit
+        {
+            A,
+            mA,
+            kA
+        }
+
+        public enum AreaUnit
+        {
+            m2,
+            km2,
+            cm2,
+            ha
+        }
+
+        public enum SpeedUnit
+        {
+            mps,
+            kmph,
+            Mph
+        }
+
+        public enum AccelerationUnit
+        {
+            mps2
+        }
+
+        public enum MassDensityUnit
+        {
+            kgpm3,
+            tpm3
+        }
+
+        public enum ThermoTempUnit
+        {
+            K
+        }
+
+        public enum LuminIntensUnit
+        {
+            cd
+        }
+
+        public enum ConcentrationUnit
+        {
+            molpm3,
+            molpdm3
+        }
+
+        public enum ForceUnit
+        {
+            N
+        }
+
+        public enum PressureUnit
+        {
+            Pa,
+            kPa,
+            MPa
+        }
+
+        public enum PowerUnit
+        {
+            W,
+            kW,
+            MW,
+            GW,
+            TW
+        }
+
+        public enum CapacityUnit
+        {
+            unit
+        }
+
         public enum TimeUnit
         {
             s,
@@ -55,6 +168,22 @@ namespace PNSDraw
         static public double io_flowrate = 1; //flow rate
 
         static public MassUnit mass_mu = MassUnit.t;
+        static public VolumeUnit vol_mu = VolumeUnit.m3;
+        static public SubstanceUnit sub_mu = SubstanceUnit.mol;
+        static public EnergyUnit energy_mu = EnergyUnit.J;
+        static public LengthUnit length_mu = LengthUnit.m;
+        static public CurrentUnit curr_mu = CurrentUnit.A;
+        static public AreaUnit area_mu = AreaUnit.m2;
+        static public SpeedUnit speed_mu = SpeedUnit.mps;
+        static public AccelerationUnit acc_mu = AccelerationUnit.mps2;
+        static public MassDensityUnit mdens_mu = MassDensityUnit.tpm3;
+        static public ThermoTempUnit temp_mu = ThermoTempUnit.K;
+        static public LuminIntensUnit lum_mu = LuminIntensUnit.cd;
+        static public ConcentrationUnit conc_mu = ConcentrationUnit.molpm3;
+        static public ForceUnit force_mu = ForceUnit.N;
+        static public PressureUnit press_mu = PressureUnit.Pa;
+        static public PowerUnit power_mu = PowerUnit.W;
+        static public CapacityUnit cap_mu = CapacityUnit.unit;
         static public TimeUnit time_mu = TimeUnit.y;
         static public MoneyUnit money_mu = MoneyUnit.EUR;
 
