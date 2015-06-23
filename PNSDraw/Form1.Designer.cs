@@ -30,14 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Raw Materials");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Intermediates");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Products");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Materials", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Operating Units");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Raw Materials");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Intermediates");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Products");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Materials", new System.Windows.Forms.TreeNode[] {
+            treeNode16,
+            treeNode17,
+            treeNode18});
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Operating Units");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,8 +68,6 @@
             this.copy_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paste_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicate_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,9 +79,12 @@
             this.positionOfTabsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rightToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.solutionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadASolutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.solverSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.graphSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.problemSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.solutionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.layoutSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -110,26 +111,20 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.pnsCanvas1 = new PNSDraw.Canvas.PNSCanvas();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripComboBox2 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.labelResult = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBox_minimap = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.propertyGrid1 = new PNSDraw.MyPropertyGrid();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -153,14 +148,6 @@
             this.menuSummaryExport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSummaryView = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.solverSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.graphSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.problemSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.solutionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.layoutSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnsCanvas1 = new PNSDraw.Canvas.PNSCanvas();
-            this.propertyGrid1 = new PNSDraw.MyPropertyGrid();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -193,9 +180,8 @@
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
-            this.solutionsToolStripMenuItem,
-            this.helpToolStripMenuItem,
-            this.preferencesToolStripMenuItem});
+            this.preferencesToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -390,9 +376,7 @@
             this.toolStripSeparator11,
             this.copy_toolStripMenuItem,
             this.paste_toolStripMenuItem,
-            this.duplicate_toolStripMenuItem,
-            this.toolStripSeparator9,
-            this.settingsToolStripMenuItem});
+            this.duplicate_toolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "&Edit";
@@ -443,18 +427,6 @@
             this.duplicate_toolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.duplicate_toolStripMenuItem.Text = "Duplicate";
             this.duplicate_toolStripMenuItem.Click += new System.EventHandler(this.duplicate_toolStripMenuItem_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(141, 6);
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -547,28 +519,52 @@
             this.rightToolStripMenuItem1.Text = "Right";
             this.rightToolStripMenuItem1.Click += new System.EventHandler(this.rightToolStripMenuItem1_Click);
             // 
-            // solutionsToolStripMenuItem
+            // preferencesToolStripMenuItem
             // 
-            this.solutionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadASolutionToolStripMenuItem,
-            this.settingsToolStripMenuItem1});
-            this.solutionsToolStripMenuItem.Name = "solutionsToolStripMenuItem";
-            this.solutionsToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.solutionsToolStripMenuItem.Text = "&Solutions";
+            this.preferencesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.solverSettingsToolStripMenuItem,
+            this.graphSettingsToolStripMenuItem,
+            this.problemSettingsToolStripMenuItem,
+            this.solutionSettingsToolStripMenuItem,
+            this.layoutSettingsToolStripMenuItem});
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.preferencesToolStripMenuItem.Text = "&Preferences";
             // 
-            // loadASolutionToolStripMenuItem
+            // solverSettingsToolStripMenuItem
             // 
-            this.loadASolutionToolStripMenuItem.Name = "loadASolutionToolStripMenuItem";
-            this.loadASolutionToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.loadASolutionToolStripMenuItem.Text = "Load a solution";
-            this.loadASolutionToolStripMenuItem.Click += new System.EventHandler(this.loadASolutionToolStripMenuItem_Click);
+            this.solverSettingsToolStripMenuItem.Name = "solverSettingsToolStripMenuItem";
+            this.solverSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.solverSettingsToolStripMenuItem.Text = "Solver settings";
+            this.solverSettingsToolStripMenuItem.Click += new System.EventHandler(this.solverSettingsToolStripMenuItem_Click);
             // 
-            // settingsToolStripMenuItem1
+            // graphSettingsToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(155, 22);
-            this.settingsToolStripMenuItem1.Text = "Settings";
-            this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.settingsToolStripMenuItem1_Click);
+            this.graphSettingsToolStripMenuItem.Name = "graphSettingsToolStripMenuItem";
+            this.graphSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.graphSettingsToolStripMenuItem.Text = "Graph settings";
+            this.graphSettingsToolStripMenuItem.Click += new System.EventHandler(this.graphSettingsToolStripMenuItem_Click);
+            // 
+            // problemSettingsToolStripMenuItem
+            // 
+            this.problemSettingsToolStripMenuItem.Name = "problemSettingsToolStripMenuItem";
+            this.problemSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.problemSettingsToolStripMenuItem.Text = "Problem settings";
+            this.problemSettingsToolStripMenuItem.Click += new System.EventHandler(this.problemSettingsToolStripMenuItem_Click);
+            // 
+            // solutionSettingsToolStripMenuItem
+            // 
+            this.solutionSettingsToolStripMenuItem.Name = "solutionSettingsToolStripMenuItem";
+            this.solutionSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.solutionSettingsToolStripMenuItem.Text = "Solution settings";
+            this.solutionSettingsToolStripMenuItem.Click += new System.EventHandler(this.solutionSettingsToolStripMenuItem_Click);
+            // 
+            // layoutSettingsToolStripMenuItem
+            // 
+            this.layoutSettingsToolStripMenuItem.Name = "layoutSettingsToolStripMenuItem";
+            this.layoutSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.layoutSettingsToolStripMenuItem.Text = "Layout settings";
+            this.layoutSettingsToolStripMenuItem.Click += new System.EventHandler(this.layoutSettingsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -830,6 +826,21 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(911, 603);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
+            // pnsCanvas1
+            // 
+            this.pnsCanvas1.AddObjectMode = false;
+            this.pnsCanvas1.AllowDrop = true;
+            this.pnsCanvas1.BackColor = System.Drawing.Color.White;
+            this.pnsCanvas1.ConnectorMode = false;
+            this.pnsCanvas1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnsCanvas1.GridSize = 300;
+            this.pnsCanvas1.Location = new System.Drawing.Point(3, 83);
+            this.pnsCanvas1.Name = "pnsCanvas1";
+            this.pnsCanvas1.ShowGrid = true;
+            this.pnsCanvas1.Size = new System.Drawing.Size(905, 492);
+            this.pnsCanvas1.SnapToGrid = true;
+            this.pnsCanvas1.TabIndex = 0;
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -851,41 +862,16 @@
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton3,
-            this.toolStripSeparator12,
             this.toolStripLabel1,
             this.toolStripComboBox2,
             this.toolStripSeparator13,
-            this.toolStripLabel2,
-            this.toolStripTextBox1,
-            this.toolStripSeparator14,
-            this.toolStripLabel3,
-            this.toolStripTextBox2,
             this.toolStripButton2,
-            this.toolStripSeparator17,
-            this.toolStripButton4});
+            this.toolStripSeparator17});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(905, 37);
             this.toolStrip2.TabIndex = 6;
             this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.Checked = true;
-            this.toolStripButton3.CheckOnClick = true;
-            this.toolStripButton3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripButton3.Image = global::PNSDraw.Properties.Resources.green_check;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(116, 34);
-            this.toolStripButton3.Text = "Use online solver";
-            this.toolStripButton3.CheckedChanged += new System.EventHandler(this.toolStripButton1_CheckedChanged);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 37);
             // 
             // toolStripLabel1
             // 
@@ -907,35 +893,6 @@
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             this.toolStripSeparator13.Size = new System.Drawing.Size(6, 37);
             // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(119, 34);
-            this.toolStripLabel2.Text = "Number of processes";
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 37);
-            this.toolStripTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
-            // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 37);
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(78, 34);
-            this.toolStripLabel3.Text = "Solution limit";
-            // 
-            // toolStripTextBox2
-            // 
-            this.toolStripTextBox2.Name = "toolStripTextBox2";
-            this.toolStripTextBox2.Size = new System.Drawing.Size(100, 37);
-            this.toolStripTextBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
-            // 
             // toolStripButton2
             // 
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
@@ -949,16 +906,6 @@
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
             this.toolStripSeparator17.Size = new System.Drawing.Size(6, 37);
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(87, 19);
-            this.toolStripButton4.Text = "Solver settings";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // panel4
             // 
@@ -1010,6 +957,18 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Object Properties";
+            // 
+            // propertyGrid1
+            // 
+            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid1.HelpVisible = false;
+            this.propertyGrid1.Location = new System.Drawing.Point(3, 16);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.ReadOnly = false;
+            this.propertyGrid1.Size = new System.Drawing.Size(381, 327);
+            this.propertyGrid1.TabIndex = 1;
+            this.propertyGrid1.ToolbarVisible = false;
+            this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
             // 
             // panel1
             // 
@@ -1076,16 +1035,16 @@
             this.treeMaterials.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeMaterials.Location = new System.Drawing.Point(0, 0);
             this.treeMaterials.Name = "treeMaterials";
-            treeNode1.Name = "raw_materials";
-            treeNode1.Text = "Raw Materials";
-            treeNode2.Name = "intermediates";
-            treeNode2.Text = "Intermediates";
-            treeNode3.Name = "products";
-            treeNode3.Text = "Products";
-            treeNode4.Name = "materials";
-            treeNode4.Text = "Materials";
+            treeNode16.Name = "raw_materials";
+            treeNode16.Text = "Raw Materials";
+            treeNode17.Name = "intermediates";
+            treeNode17.Text = "Intermediates";
+            treeNode18.Name = "products";
+            treeNode18.Text = "Products";
+            treeNode19.Name = "materials";
+            treeNode19.Text = "Materials";
             this.treeMaterials.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode19});
             this.treeMaterials.Size = new System.Drawing.Size(178, 346);
             this.treeMaterials.TabIndex = 0;
             this.treeMaterials.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeMaterials_NodeMouseClick);
@@ -1096,10 +1055,10 @@
             this.treeOpUnits.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeOpUnits.Location = new System.Drawing.Point(0, 0);
             this.treeOpUnits.Name = "treeOpUnits";
-            treeNode5.Name = "op_units";
-            treeNode5.Text = "Operating Units";
+            treeNode20.Name = "op_units";
+            treeNode20.Text = "Operating Units";
             this.treeOpUnits.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5});
+            treeNode20});
             this.treeOpUnits.Size = new System.Drawing.Size(205, 346);
             this.treeOpUnits.TabIndex = 0;
             this.treeOpUnits.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeMaterials_NodeMouseClick);
@@ -1237,80 +1196,6 @@
             this.backgroundWorker2.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker2_ProgressChanged);
             this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
             // 
-            // preferencesToolStripMenuItem
-            // 
-            this.preferencesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.solverSettingsToolStripMenuItem,
-            this.graphSettingsToolStripMenuItem,
-            this.problemSettingsToolStripMenuItem,
-            this.solutionSettingsToolStripMenuItem,
-            this.layoutSettingsToolStripMenuItem});
-            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
-            this.preferencesToolStripMenuItem.Text = "Preferences";
-            // 
-            // solverSettingsToolStripMenuItem
-            // 
-            this.solverSettingsToolStripMenuItem.Name = "solverSettingsToolStripMenuItem";
-            this.solverSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.solverSettingsToolStripMenuItem.Text = "Solver settings";
-            this.solverSettingsToolStripMenuItem.Click += new System.EventHandler(this.solverSettingsToolStripMenuItem_Click);
-            // 
-            // graphSettingsToolStripMenuItem
-            // 
-            this.graphSettingsToolStripMenuItem.Name = "graphSettingsToolStripMenuItem";
-            this.graphSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.graphSettingsToolStripMenuItem.Text = "Graph settings";
-            this.graphSettingsToolStripMenuItem.Click += new System.EventHandler(this.graphSettingsToolStripMenuItem_Click);
-            // 
-            // problemSettingsToolStripMenuItem
-            // 
-            this.problemSettingsToolStripMenuItem.Name = "problemSettingsToolStripMenuItem";
-            this.problemSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.problemSettingsToolStripMenuItem.Text = "Problem settings";
-            this.problemSettingsToolStripMenuItem.Click += new System.EventHandler(this.problemSettingsToolStripMenuItem_Click);
-            // 
-            // solutionSettingsToolStripMenuItem
-            // 
-            this.solutionSettingsToolStripMenuItem.Name = "solutionSettingsToolStripMenuItem";
-            this.solutionSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.solutionSettingsToolStripMenuItem.Text = "Solution settings";
-            this.solutionSettingsToolStripMenuItem.Click += new System.EventHandler(this.solutionSettingsToolStripMenuItem_Click);
-            // 
-            // layoutSettingsToolStripMenuItem
-            // 
-            this.layoutSettingsToolStripMenuItem.Name = "layoutSettingsToolStripMenuItem";
-            this.layoutSettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.layoutSettingsToolStripMenuItem.Text = "Layout settings";
-            this.layoutSettingsToolStripMenuItem.Click += new System.EventHandler(this.layoutSettingsToolStripMenuItem_Click);
-            // 
-            // pnsCanvas1
-            // 
-            this.pnsCanvas1.AddObjectMode = false;
-            this.pnsCanvas1.AllowDrop = true;
-            this.pnsCanvas1.BackColor = System.Drawing.Color.White;
-            this.pnsCanvas1.ConnectorMode = false;
-            this.pnsCanvas1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnsCanvas1.GridSize = 300;
-            this.pnsCanvas1.Location = new System.Drawing.Point(3, 83);
-            this.pnsCanvas1.Name = "pnsCanvas1";
-            this.pnsCanvas1.ShowGrid = true;
-            this.pnsCanvas1.Size = new System.Drawing.Size(905, 492);
-            this.pnsCanvas1.SnapToGrid = true;
-            this.pnsCanvas1.TabIndex = 0;
-            // 
-            // propertyGrid1
-            // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.HelpVisible = false;
-            this.propertyGrid1.Location = new System.Drawing.Point(3, 16);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.ReadOnly = false;
-            this.propertyGrid1.Size = new System.Drawing.Size(381, 327);
-            this.propertyGrid1.TabIndex = 1;
-            this.propertyGrid1.ToolbarVisible = false;
-            this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1406,16 +1291,11 @@
         private System.Windows.Forms.ToolStripMenuItem lockToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smallPNGToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mediumPNGToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem largePNGToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem solutionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadASolutionToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem copy_toolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paste_toolStripMenuItem;
@@ -1431,26 +1311,18 @@
         private Canvas.PNSCanvas pnsCanvas1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox2;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView treeMaterials;
         private System.Windows.Forms.TreeView treeOpUnits;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ComboBox cmbSolutions;

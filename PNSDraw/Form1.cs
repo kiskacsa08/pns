@@ -14,6 +14,7 @@ using System.Diagnostics;
 using PNSDraw.Excel_export;
 using PNSDraw.ZIMPL_export;
 using System.Drawing.Printing;
+using PNSDraw.Dialogs;
 
 namespace PNSDraw
 {
@@ -559,7 +560,17 @@ namespace PNSDraw
             {
                 name = "*" + name;
             }
-            Text = "PNS Draw (" + name + ")";
+            string online;
+            if (Default.online)
+            {
+                online = "Online";
+            }
+            else
+            {
+                online = "Offline";
+            }
+
+            Text = "PNS Draw (" + name + ")" + " Solver: " + online;
         }
 
         private void exportToSVGToolStripMenuItem_Click(object sender, EventArgs e)
@@ -945,26 +956,26 @@ namespace PNSDraw
             ab.ShowDialog();
         }
 
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SettingsWindow sw = new SettingsWindow();
+        //private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    SettingsWindow sw = new SettingsWindow();
 
-            sw.ShowDialog();
+        //    sw.ShowDialog();
 
-            if (sw.Changed)
-            {
-                if (LockedMode)
-                {
-                    toolStripComboBox1_SelectedIndexChanged(this, EventArgs.Empty);
-                }
-                else
-                {
-                    pnsCanvas1.GridSize = Globals.GridSize;
-                    pnsCanvas1.Refresh();
-                    propertyGrid1.Refresh();
-                }   
-            }
-        }
+        //    if (sw.Changed)
+        //    {
+        //        if (LockedMode)
+        //        {
+        //            toolStripComboBox1_SelectedIndexChanged(this, EventArgs.Empty);
+        //        }
+        //        else
+        //        {
+        //            pnsCanvas1.GridSize = Globals.GridSize;
+        //            pnsCanvas1.Refresh();
+        //            propertyGrid1.Refresh();
+        //        }   
+        //    }
+        //}
 
         private void smallPNGToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1052,43 +1063,40 @@ namespace PNSDraw
         }
 
 
+        //private void loadASolutionToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    OpenFileDialog ofd = new OpenFileDialog();
+        //    ofd.Multiselect = false;
+        //    ofd.Filter = "all file|*.*";
+        //    if (ofd.ShowDialog() == DialogResult.OK)
+        //    {
+        //        try
+        //        {
+        //            FileStream file = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
+        //            StreamReader sr = new StreamReader(file);
+        //            string solution = sr.ReadToEnd();
+        //            FileConnector.ParseSolution(solution, Graph);
+        //            UpdateViewList();
+        //            UpdateSolutionsTab();
 
-        private void loadASolutionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
+        //            if (Graph.SolutionCount > 0)
+        //            {
+        //                toolStripComboBox1.Visible = true;
+        //            }
 
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Multiselect = false;
-            ofd.Filter = "all file|*.*";
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    FileStream file = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
-                    StreamReader sr = new StreamReader(file);
-                    string solution = sr.ReadToEnd();
-                    FileConnector.ParseSolution(solution, Graph);
-                    UpdateViewList();
-                    UpdateSolutionsTab();
 
-                    if (Graph.SolutionCount > 0)
-                    {
-                        toolStripComboBox1.Visible = true;
-                    }
-                    
-
-                    sr.Close();
-                    file.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Bad solution file format.");
-                    Console.WriteLine(ex.ToString());
-                }
-            }
-            redoToolStripMenuItem.Enabled = false;
-            undoToolStripMenuItem.Enabled = false;
-        }
+        //            sr.Close();
+        //            file.Close();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Bad solution file format.");
+        //            Console.WriteLine(ex.ToString());
+        //        }
+        //    }
+        //    redoToolStripMenuItem.Enabled = false;
+        //    undoToolStripMenuItem.Enabled = false;
+        //}
 
 
         public void UpdateViewList()
@@ -1204,17 +1212,17 @@ namespace PNSDraw
             }
         }
 
-        private void settingsToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            SolutionSettingsWindow sw = new SolutionSettingsWindow();
+        //private void settingsToolStripMenuItem1_Click(object sender, EventArgs e)
+        //{
+        //    SolutionSettingsWindow sw = new SolutionSettingsWindow();
 
-            sw.ShowDialog();
+        //    sw.ShowDialog();
 
-            if (sw.Changed)
-            {
-                toolStripComboBox1_SelectedIndexChanged(this, EventArgs.Empty);
-            }
-        }
+        //    if (sw.Changed)
+        //    {
+        //        toolStripComboBox1_SelectedIndexChanged(this, EventArgs.Empty);
+        //    }
+        //}
 
         private void DoCopy()
         {
@@ -1276,31 +1284,31 @@ namespace PNSDraw
             }
         }
 
-        private void toolStripButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (toolStripButton3.Checked)
-            {
-                Image check = PNSDraw.Properties.Resources.green_check;
-                toolStripButton3.Image = check;
-                toolStripTextBox1.Enabled = true;
-                toolStripComboBox2.Items.Clear();
-                toolStripComboBox2.Items.Add("ABB");
-                toolStripComboBox2.Items.Add("SSG");
-                toolStripComboBox2.SelectedIndex = 0;
-            }
-            else
-            {
-                Image check = PNSDraw.Properties.Resources.red_check;
-                toolStripButton3.Image = check;
-                toolStripTextBox1.Enabled = false;
-                toolStripComboBox2.Items.Clear();
-                toolStripComboBox2.Items.Add("ABB");
-                toolStripComboBox2.Items.Add("SSG");
-                toolStripComboBox2.Items.Add("SSG+LP");
-                toolStripComboBox2.Items.Add("MSG");
-                toolStripComboBox2.SelectedIndex = 0;
-            }
-        }
+        //private void toolStripButton1_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    //if (toolStripButton3.Checked)
+        //    //{
+        //    //    Image check = PNSDraw.Properties.Resources.green_check;
+        //    //    toolStripButton3.Image = check;
+        //    //    toolStripTextBox1.Enabled = true;
+        //    //    toolStripComboBox2.Items.Clear();
+        //    //    toolStripComboBox2.Items.Add("ABB");
+        //    //    toolStripComboBox2.Items.Add("SSG");
+        //    //    toolStripComboBox2.SelectedIndex = 0;
+        //    //}
+        //    //else
+        //    //{
+        //    //    Image check = PNSDraw.Properties.Resources.red_check;
+        //    //    toolStripButton3.Image = check;
+        //    //    toolStripTextBox1.Enabled = false;
+        //    //    toolStripComboBox2.Items.Clear();
+        //    //    toolStripComboBox2.Items.Add("ABB");
+        //    //    toolStripComboBox2.Items.Add("SSG");
+        //    //    toolStripComboBox2.Items.Add("SSG+LP");
+        //    //    toolStripComboBox2.Items.Add("MSG");
+        //    //    toolStripComboBox2.SelectedIndex = 0;
+        //    //}
+        //}
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
@@ -1329,63 +1337,27 @@ namespace PNSDraw
                     break;
             }
 
-            if (toolStripTextBox2.Text == "")
+            if (Default.online)
             {
-                MessageBox.Show("Please fill all fields!");
+                if (backgroundWorker2.IsBusy != true)
+                {
+                    pwd = new PleaseWaitDialog();
+                    pwd.Canceled += new EventHandler<EventArgs>(cancelAsyncButton_Click);
+                    //pwd.StartPosition = FormStartPosition.CenterScreen;
+                    pwd.Show(this);
+                    backgroundWorker2.RunWorkerAsync();
+                }
             }
             else
             {
-                limit = int.Parse(toolStripTextBox2.Text);
-                if (limit < 1)
+                if (backgroundWorker1.IsBusy != true)
                 {
-                    MessageBox.Show("Limit must be greater than zero!");
-                    return;
+                    pwd = new PleaseWaitDialog();
+                    pwd.Canceled += new EventHandler<EventArgs>(cancelAsyncButton_Click);
+                    //pwd.StartPosition = FormStartPosition.CenterScreen;
+                    pwd.Show(this);
+                    backgroundWorker1.RunWorkerAsync();
                 }
-
-                if (toolStripButton3.Checked)
-                {
-                    if (toolStripTextBox1.Text == "")
-                    {
-                        MessageBox.Show("Please fill all fields!");
-                    }
-                    else
-                    {
-                        processes = int.Parse(toolStripTextBox1.Text);
-                        if (processes < 1 || processes > 64)
-                        {
-                            MessageBox.Show("The number of processes must be between 1 and 64!");
-                            return;
-                        }
-
-                        //TODO hack, hogy ne szálljon el az online megoldó a solution objektum mérete miatt (mongo)
-                        if (limit > 5000)
-                        {
-                            MessageBox.Show("Online solver maximum solution limit: 5.000!", "WARNING",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        if (backgroundWorker2.IsBusy != true)
-                        {
-                            pwd = new PleaseWaitDialog();
-                            pwd.Canceled += new EventHandler<EventArgs>(cancelAsyncButton_Click);
-                            //pwd.StartPosition = FormStartPosition.CenterScreen;
-                            pwd.Show(this);
-                            backgroundWorker2.RunWorkerAsync();
-                        }
-                    }
-                }
-                else
-                {
-                    if (backgroundWorker1.IsBusy != true)
-                    {
-                        pwd = new PleaseWaitDialog();
-                        pwd.Canceled += new EventHandler<EventArgs>(cancelAsyncButton_Click);
-                        //pwd.StartPosition = FormStartPosition.CenterScreen;
-                        pwd.Show(this);
-                        backgroundWorker1.RunWorkerAsync();
-                    }
-                 }
             }
         }
 
@@ -1558,11 +1530,12 @@ namespace PNSDraw
         {
             BackgroundWorker worker = sender as BackgroundWorker;
 
-            Problem p = new Problem(algorithm, Graph, 0, limit);
+            Problem p = new Problem(algorithm, Graph, 0, Default.limit);
             FileConnector.ProblemToSolverInput(p, p.name);
-            inPath = Path.GetTempPath() + p.name + ".in";
-            outPath = Path.GetTempPath() + p.name + ".out";
-            string arguments = algorithm + " \"" + inPath + "\" " + "\"" + outPath + "\" " + limit.ToString();
+            inPath = Default.tempFolder + p.name + ".in";
+            outPath = Default.tempFolder + p.name + ".out";
+            Console.WriteLine("InPath: " + inPath);
+            string arguments = algorithm + " \"" + inPath + "\" " + "\"" + outPath + "\" " + Default.limit.ToString();
 
             worker.ReportProgress(10);
             ProcessStartInfo pInfo = new ProcessStartInfo();
@@ -1883,7 +1856,7 @@ namespace PNSDraw
         {
             BackgroundWorker worker = sender as BackgroundWorker;
 
-            Problem problem = new Problem(algorithm, Graph, processes, limit);
+            Problem problem = new Problem(algorithm, Graph, Default.processes, Default.limit);
             Solver solver = new Solver(problem);
             problem = solver.Run(worker);
         }
@@ -2002,6 +1975,26 @@ namespace PNSDraw
              *  host
              *  port
              */
+
+            SolverSettingsDialog ssd = new SolverSettingsDialog();
+            ssd.ShowDialog();
+            UpdateTitle();
+            if (Default.online)
+            {
+                toolStripComboBox2.Items.Clear();
+                toolStripComboBox2.Items.Add("ABB");
+                toolStripComboBox2.Items.Add("SSG");
+                toolStripComboBox2.SelectedIndex = 0;
+            }
+            else
+            {
+                toolStripComboBox2.Items.Clear();
+                toolStripComboBox2.Items.Add("ABB");
+                toolStripComboBox2.Items.Add("SSG");
+                toolStripComboBox2.Items.Add("SSG+LP");
+                toolStripComboBox2.Items.Add("MSG");
+                toolStripComboBox2.SelectedIndex = 0;
+            }
         }
 
         private void graphSettingsToolStripMenuItem_Click(object sender, EventArgs e)
