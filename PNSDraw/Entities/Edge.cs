@@ -67,7 +67,22 @@ namespace PNSDraw
                 rate = value;
                 if (Title == "")
                 {
-                    Label.Text = rate.ToString();
+                    //Label.Text = rate.ToString();
+                    if (begin != null && end != null)
+                    {
+                        if (begin.GetType() == typeof(Material))
+                        {
+                            Label.Text = rate.ToString() + " " + ((Material)begin).ParameterList["reqflow"].MUProp.ToString();
+                        }
+                        else
+                        {
+                            Label.Text = rate.ToString() + " " + ((Material)end).ParameterList["reqflow"].MUProp.ToString();
+                        }
+                    }
+                    else
+                    {
+                        Label.Text = rate.ToString();
+                    }
                 }
             }
         }
@@ -81,7 +96,23 @@ namespace PNSDraw
                 title = value;
                 if (title == "")
                 {
-                    Label.Text = rate.ToString();
+
+                    if (begin != null && end != null)
+                    {
+                        if (begin.GetType() == typeof(Material))
+                        {
+                            Label.Text = rate.ToString() + " " + ((Material)begin).ParameterList["reqflow"].MUProp.ToString();
+                        }
+                        else
+                        {
+                            Label.Text = rate.ToString() + " " + ((Material)end).ParameterList["reqflow"].MUProp.ToString();
+                        }
+                    }
+                    else
+                    {
+                        Label.Text = rate.ToString();
+                    }
+                    //Label.Text = rate.ToString();
                 }
                 else
                 {
@@ -207,7 +238,7 @@ namespace PNSDraw
             Label.Text = "1";
             Label.SetCoords(new Point(5, 0));
 
-            Title = "";
+            //Title = "";
         }
 
         
