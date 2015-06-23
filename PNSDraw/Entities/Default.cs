@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -151,6 +152,15 @@ namespace PNSDraw
         static public double flow_rate_upper_bound = 1000000000; //flow_rate_upper_bound
         static public double price = 0; //price
         static public int type = Globals.MaterialTypes.Intermediate; //type
+
+        static public string tempFolder = Path.GetTempPath(); //temporary folder
+
+        static public int limit = 10;
+        static public int processes = 1;
+        static public bool online = true;
+
+        static public string host = "193.6.33.141";
+        static public int port = 51000;
 
         static public double o_fix = 0; //fix_cost
         static public double i_fix = 0; //fix_cost
