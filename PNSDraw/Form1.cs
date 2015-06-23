@@ -129,8 +129,11 @@ namespace PNSDraw
             {
                 return;
             }
+            edge.Title = "";
             edge.begin = conn.Begin;
+            Console.WriteLine("Begin: " + edge.begin.GetType());
             edge.end = conn.End;
+            Console.WriteLine("End: " + edge.end.GetType());
             pnsCanvas1.AddObject(edge);
             edge.end.AddConnection(edge.begin);
             e.Handled = true;
