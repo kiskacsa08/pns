@@ -178,7 +178,7 @@ namespace PNSDraw
             //file_str.Remove(file_str.Length - 1, 1);
 
             // Fájlba írás
-            string path = Path.GetTempPath() + filename + ".in";
+            string path = Default.tempFolder + filename + ".in";
             //Console.WriteLine(path);
             StreamWriter outfile = new StreamWriter(path);
             outfile.Write(file_str.ToString());
