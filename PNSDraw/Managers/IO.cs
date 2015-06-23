@@ -262,7 +262,6 @@ namespace PNSDraw
             e.LabelColorProp = Label.ObjectColor;
             e.LabelOffsetProp = Label.Offset;
             e.LabelFontSize = Label.FontSize;
-            e.Title = Title;
             e.RateProp = Rate;
             Nodes.Sort();
             List<EdgeNode> enodes = new List<EdgeNode>();
@@ -283,6 +282,7 @@ namespace PNSDraw
             Canvas.IGraphicsObject end = e.GetContainer().GetObjectByID(EndObjectID);
             e.begin = begin as Canvas.IConnectableObject;
             e.end = end as Canvas.IConnectableObject;
+            e.Title = Title;
             e.ArrowOnCenterProp = ArrowOnCenter;
             e.ArrowPositionProp = ArrowPosition;
         }
