@@ -179,11 +179,11 @@
     <Compile Include="Dialogs\SolutionSettingsWindow.Designer.cs">
       <DependentUpon>SolutionSettingsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\SolverSettingsDialog.cs">
+    <Compile Include="Dialogs\ProblemSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\SolverSettingsDialog.Designer.cs">
-      <DependentUpon>SolverSettingsDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\ProblemSettingsDialog.Designer.cs">
+      <DependentUpon>ProblemSettingsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ZIMPL export\ProblemToZimpl.cs" />
     <Compile Include="ZIMPL export\ZIMPLKeywords.cs" />
@@ -223,8 +223,8 @@
     <EmbeddedResource Include="Dialogs\SolutionSettingsWindow.resx">
       <DependentUpon>SolutionSettingsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\SolverSettingsDialog.resx">
-      <DependentUpon>SolverSettingsDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\ProblemSettingsDialog.resx">
+      <DependentUpon>ProblemSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
