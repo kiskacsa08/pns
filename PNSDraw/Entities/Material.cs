@@ -793,7 +793,7 @@ namespace PNSDraw
             }
         }
 
-        [Browsable(true)]
+        [Browsable(false)]
         [Category("\t\tLabel"), PropertyOrder(100)]
         [DisplayName("Text")]
         /* [Editor(typeof(MultilineStringEditor), typeof(System.Drawing.Design.UITypeEditor))] */
@@ -801,12 +801,13 @@ namespace PNSDraw
         {
             get
             {
-                return Title;
+                //return Title;
+                return Name;
             }
             set
             {
-                Title = value;
-                
+                Name = value;
+                //Title = value;
             }
         }
 

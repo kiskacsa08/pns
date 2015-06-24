@@ -687,23 +687,26 @@ namespace PNSDraw
             }
         }
 
-        [Browsable(true)]
+        [Browsable(false)]
         [Category("\t\tLabel"), PropertyOrder(100)]
         [DisplayName("Text")]
         public string LabelTextProp
         {
             get
             {
-                return Title;
+                //return Title;
+                return Name;
             }
             set
             {
-                Title = value;
+                //Title = value;
+                Name = value;
             }
         }
 
         [Browsable(true)]
         [Category("\t\t\tMain"), PropertyOrder(2)]
+        [DisplayName("Name")]
         public string NameProp
         {
             get
