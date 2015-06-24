@@ -16,6 +16,10 @@ using PNSDraw.ZIMPL_export;
 using System.Drawing.Printing;
 using PNSDraw.Dialogs;
 
+using GraphVizWrapper;
+using GraphVizWrapper.Commands;
+using GraphVizWrapper.Queries;
+
 namespace PNSDraw
 {
     public partial class Form1 : Form
@@ -2053,6 +2057,85 @@ namespace PNSDraw
                     propertyGrid1.Refresh();
                 }
             }
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            var getStartProcessQuery = new GetStartProcessQuery();
+            var getProcessStartInfoQuery = new GetProcessStartInfoQuery();
+            var registerLayoutPluginCommand = new RegisterLayoutPluginCommand(getProcessStartInfoQuery, getStartProcessQuery);
+            var wrapper = new GraphGeneration(getStartProcessQuery, getProcessStartInfoQuery, registerLayoutPluginCommand);
+            Console.WriteLine(Globals.selectedEngine);
+            if (Globals.selectedEngine == "Neato")
+            {
+                wrapper.RenderingEngine = Enums.RenderingEngine.Neato;
+            }
+            else
+            {
+                if (Globals.selectedEngine == "Fdp")
+                {
+                    wrapper.RenderingEngine = Enums.RenderingEngine.Fdp;
+                }
+                else
+                {
+                    if (Globals.selectedEngine == "Sfdp")
+                    {
+                        wrapper.RenderingEngine = Enums.RenderingEngine.Sfdp;
+                    }
+                    else
+                    {
+                        if (Globals.selectedEngine == "Twopi")
+                        {
+                            wrapper.RenderingEngine = Enums.RenderingEngine.Twopi;
+                        }
+                        else
+                        {
+                            if (Globals.selectedEngine == "Circo")
+                            {
+                                wrapper.RenderingEngine = Enums.RenderingEngine.Circo;
+                            }
+                            else
+                            {
+                                wrapper.RenderingEngine = Enums.RenderingEngine.Dot;
+                            }
+                        }
+                    }
+                }
+            }
+            byte[] output = wrapper.GenerateGraph(Graph.ConvertDOTFormat(false), Enums.GraphReturnType.plain);
+            var stream = new StreamReader(new MemoryStream(output));
+            string line;
+            while ((line = stream.ReadLine()) != null)
+            {
+                string[] words = line.Split(' ');
+                if (String.Compare(words[0], "node") == 0)
+                {
+                    Graph.modifyGraph(words[1],
+                                        Convert.ToInt32(Convert.ToDouble(words[2], CultureInfo.InvariantCulture)) * Globals.DefaultNodeDistance * Globals.GridSize + Globals.DefaultRootX * Globals.GridSize,
+                                        Convert.ToInt32(Convert.ToDouble(words[3], CultureInfo.InvariantCulture)) * Globals.DefaultLayerDistance * Globals.GridSize + Globals.DefaultRootY * Globals.GridSize);
+                }
+            }
+            Graph.removeEdgeNodes();
+
+            if (Globals.WeightedArcs)
+            {
+                //lemeno elek nagyobb sullyal
+                byte[] output2 = wrapper.GenerateGraph(Graph.ConvertDOTFormat(true), Enums.GraphReturnType.plain);
+                var stream2 = new StreamReader(new MemoryStream(output2));
+                string line2;
+                while ((line2 = stream2.ReadLine()) != null)
+                {
+                    string[] words = line2.Split(' ');
+                    if (String.Compare(words[0], "node") == 0)
+                    {
+                        Graph.modifyGraph(words[1],
+                                            Convert.ToInt32(Convert.ToDouble(words[2], CultureInfo.InvariantCulture)) * Globals.DefaultNodeDistance * Globals.GridSize + Globals.DefaultRootX * Globals.GridSize,
+                                            Convert.ToInt32(Convert.ToDouble(words[3], CultureInfo.InvariantCulture)) * Globals.DefaultLayerDistance * Globals.GridSize + Globals.DefaultRootY * Globals.GridSize);
+                    }
+                }
+                Graph.addEdgeNodes();
+            }
+            pnsCanvas1.Refresh();
         }
     }
 }

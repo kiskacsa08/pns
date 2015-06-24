@@ -22,6 +22,7 @@ namespace PNSDraw
 
         string name;
         string title;
+        int fixed_position;
 
         public List<Canvas.IConnectableObject> connectedobjects;
         Canvas.IGraphicsStructure Container;
@@ -91,6 +92,16 @@ namespace PNSDraw
                 {
                     Label.Text = title;
                 }
+            }
+        }
+
+        [Browsable(false)]
+        public int Fixed_position
+        {
+            get { return fixed_position; }
+            set
+            {
+                fixed_position = value;
             }
         }
 
@@ -370,6 +381,24 @@ namespace PNSDraw
             Coords += (Size)offset;
             offset.X = 0;
             offset.Y = 0;
+        }
+
+        public void Pin(int fp)
+        {
+            fixed_position = fp;
+            if (fp == 1)
+            {
+                color = Color.Brown;
+            }
+            else
+            {
+                color = Color.Black;
+            }
+        }
+
+        public int getPin()
+        {
+            return fixed_position;
         }
 
         public bool IntersectsWith(Rectangle rect)

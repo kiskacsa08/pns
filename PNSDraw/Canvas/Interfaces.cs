@@ -31,6 +31,9 @@ namespace PNSDraw.Canvas
         void IntegrateOffset();
         Rectangle GetBoundary();
 
+        void Pin(int fp);
+        int getPin();
+
         bool IsMoveable();
         bool IsDeletable();
 

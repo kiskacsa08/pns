@@ -182,6 +182,15 @@ namespace PNSDraw
             }
         }
 
+        public void Pin(int fp)
+        {
+
+        }
+        public int getPin()
+        {
+            return 0;
+        }
+
         [Browsable(false)]
         Point LabelOffset
         {

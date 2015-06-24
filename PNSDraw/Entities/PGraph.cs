@@ -5,6 +5,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 using System.Globalization;
+using System.Drawing;
 
 namespace PNSDraw
 {
@@ -1263,6 +1264,229 @@ namespace PNSDraw
             }
 
             return code;
+        }
+
+        public string ConvertDOTFormat(bool weighted_arcs)
+        {
+            string DOT = "digraph{ ";
+            if (Globals.Align == "Horizontal") DOT += "rankdir=LR; ";
+            /*
+            foreach (Material m in Materials)
+            {
+                if (m.Fixed_position == 1)
+                {
+                    DOT += m.Name;
+                    DOT += " [pos=\"";
+                    //DOT += m.GetCoords().X;
+                    DOT += 1;
+                    DOT += ",";
+                    //DOT += m.GetCoords().Y;
+                    DOT += 1;
+                    DOT += "!\"];";
+                }
+            }
+            foreach (OperatingUnit o in OperatingUnits)
+            {
+                if (o.Fixed_position == 1)
+                {
+                    DOT += o.Name;
+                    DOT += " [pos=\"";
+                    DOT += o.GetCoords().X;
+                    DOT += ",";
+                    DOT += o.GetCoords().Y;
+                    DOT += "!\"];";
+                }
+            }*/
+
+            foreach (Edge e in Edges)
+            {
+                if (e.begin is Material && e.end is OperatingUnit)
+                {
+                    Material m = e.begin as Material;
+                    OperatingUnit o = e.end as OperatingUnit;
+                    DOT += m.Name;
+                    DOT += " -> ";
+                    DOT += o.Name;
+                    if (weighted_arcs)
+                    {
+                        if (m.GetCoords().Y < o.GetCoords().Y)
+                        {
+                            DOT += "[weight=10]";
+                        }
+                    }
+                    DOT += " ; ";
+                }
+                else if (e.begin is OperatingUnit && e.end is Material)
+                {
+                    Material m = e.end as Material;
+                    OperatingUnit o = e.begin as OperatingUnit;
+                    DOT += o.Name;
+                    DOT += " -> ";
+                    DOT += m.Name;
+                    if (weighted_arcs)
+                    {
+                        if (m.GetCoords().Y > o.GetCoords().Y)
+                        {
+                            DOT += "[weight=10]";
+                        }
+                    }
+                    DOT += " ; ";
+                }
+            }
+            if (Globals.FixedRaws)
+            {
+                DOT += " { rank=min; ";
+                foreach (Material m in Materials)
+                {
+                    if (m.Type == Globals.MaterialTypes.Raw)
+                    {
+                        DOT += m.Name;
+                        DOT += " ";
+                    }
+                }
+                DOT += "} ";
+            }
+            if (Globals.FixedProducts)
+            {
+                DOT += " { rank=max; ";
+                foreach (Material m in Materials)
+                {
+                    if (m.Type == Globals.MaterialTypes.Product)
+                    {
+                        DOT += m.Name;
+                        DOT += " ";
+                    }
+                }
+                DOT += "} ";
+            }
+
+
+
+            DOT += " }";
+            Console.WriteLine(DOT);
+            return DOT;
+        }
+
+        public void modifyGraph(string name, int x, int y)
+        {
+            foreach (Material m in Materials)
+            {
+                if (String.Compare(m.Name, name) == 0)
+                {
+                    if (m.Fixed_position == 0)
+                    {
+                        Point p = new Point(x, y);
+                        m.SetCoords(p);
+                    }
+
+                }
+
+            }
+            foreach (OperatingUnit o in OperatingUnits)
+            {
+                if (String.Compare(o.Name, name) == 0)
+                {
+                    if (o.Fixed_position == 0)
+                    {
+                        Point p = new Point(x, y);
+                        o.SetCoords(p);
+                    }
+
+                }
+
+            }
+        }
+
+        public void addEdgeNodes()
+        {
+            Random random = new Random();
+            double shift = 1.5;
+            foreach (Edge e in Edges)
+            {
+                if (e.begin is Material && e.end is OperatingUnit)
+                {
+                    Material m = e.begin as Material;
+                    OperatingUnit o = e.end as OperatingUnit;
+                    if (m.GetCoords().Y > o.GetCoords().Y)
+                    {
+                        List<EdgeNode> enodes = new List<EdgeNode>();
+                        EdgeNode en1 = new EdgeNode(e.GetContainer(), e);
+                        EdgeNode en2 = new EdgeNode(e.GetContainer(), e);
+                        en1.Needed = true;
+                        en2.Needed = true;
+                        en1.Temporary = false;
+                        en2.Temporary = false;
+                        if (o.GetCoords().X <= m.GetCoords().X)
+                        {
+                            Console.WriteLine("1");
+                            shift = random.NextDouble() * 0.5 + 1.25;
+                            en1.CoordsProp = new Point(o.GetCoords().X - Convert.ToInt32(shift * Globals.GridSize), m.GetCoords().Y + Globals.GridSize);
+                            en2.CoordsProp = new Point(o.GetCoords().X - Convert.ToInt32(shift * Globals.GridSize), o.GetCoords().Y - Globals.GridSize);
+                        }
+                        else
+                        {
+                            Console.WriteLine("2");
+                            shift = random.NextDouble() * 0.5 + 1.25;
+                            en1.CoordsProp = new Point(o.GetCoords().X + Convert.ToInt32(shift * Globals.GridSize), m.GetCoords().Y + Globals.GridSize);
+                            en2.CoordsProp = new Point(o.GetCoords().X + Convert.ToInt32(shift * Globals.GridSize), o.GetCoords().Y - Globals.GridSize);
+                        }
+                        //en1.CoordsProp = new Point(m.GetCoords().X-2*Globals.GridSize,m.GetCoords().Y+Globals.GridSize);
+                        //en2.CoordsProp = new Point(o.GetCoords().X - 2 * Globals.GridSize, o.GetCoords().Y-Globals.GridSize);
+                        enodes.Add(en1);
+                        enodes.Add(en2);
+                        e.SetNodes(enodes);
+                    }
+                }
+                else if (e.begin is OperatingUnit && e.end is Material)
+                {
+                    Material m = e.end as Material;
+                    OperatingUnit o = e.begin as OperatingUnit;
+                    if (m.GetCoords().Y < o.GetCoords().Y)
+                    {
+                        List<EdgeNode> enodes = new List<EdgeNode>();
+                        EdgeNode en1 = new EdgeNode(e.GetContainer(), e);
+                        EdgeNode en2 = new EdgeNode(e.GetContainer(), e);
+                        en1.Needed = true;
+                        en2.Needed = true;
+                        en1.Temporary = false;
+                        en2.Temporary = false;
+                        if (m.GetCoords().X <= o.GetCoords().X)
+                        {
+                            Console.WriteLine("3");
+                            shift = random.NextDouble() * 0.5 + 1.25;
+                            en1.CoordsProp = new Point(m.GetCoords().X - Convert.ToInt32(shift * Globals.GridSize), o.GetCoords().Y + Globals.GridSize);
+                            en2.CoordsProp = new Point(m.GetCoords().X - Convert.ToInt32(shift * Globals.GridSize), m.GetCoords().Y - Globals.GridSize);
+                        }
+                        else
+                        {
+                            Console.WriteLine("4");
+                            shift = random.NextDouble() * 0.5 + 1.25;
+                            en1.CoordsProp = new Point(m.GetCoords().X + Convert.ToInt32(shift * Globals.GridSize), o.GetCoords().Y + Globals.GridSize);
+                            en2.CoordsProp = new Point(m.GetCoords().X + Convert.ToInt32(shift * Globals.GridSize), m.GetCoords().Y - Globals.GridSize);
+                        }
+                        //en1.CoordsProp = new Point(o.GetCoords().X - 2 * Globals.GridSize, o.GetCoords().Y + Globals.GridSize);
+                        //en2.CoordsProp = new Point(m.GetCoords().X - 2 * Globals.GridSize, m.GetCoords().Y - Globals.GridSize);
+                        enodes.Add(en1);
+                        enodes.Add(en2);
+                        e.SetNodes(enodes);
+                    }
+                }
+            }
+        }
+
+        public void removeEdgeNodes()
+        {
+            foreach (Edge e in Edges)
+            {
+                List<EdgeNode> enodes = e.GetNodes();
+                foreach (EdgeNode en in enodes)
+                {
+                    if (((Canvas.IGraphicsObject)e.begin).getPin() == 0 || ((Canvas.IGraphicsObject)e.end).getPin() == 0)
+                    {
+                        e.RemoveNode(en);
+                    }
+                }
+            }
         }
     }
 }
