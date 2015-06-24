@@ -2038,7 +2038,21 @@ namespace PNSDraw
 
         private void layoutSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Adrián
+            LayoutSettingsWindow lw = new LayoutSettingsWindow();
+            lw.ShowDialog();
+
+            if (lw.Changed)
+            {
+                if (LockedMode)
+                {
+                    toolStripComboBox1_SelectedIndexChanged(this, EventArgs.Empty);
+                }
+                else
+                {
+                    pnsCanvas1.Refresh();
+                    propertyGrid1.Refresh();
+                }
+            }
         }
     }
 }

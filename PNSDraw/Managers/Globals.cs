@@ -21,6 +21,15 @@ namespace PNSDraw
 
         public static Dictionary<string, string> DefaultParameters = new Dictionary<string,string>();
 
+        public static int DefaultRootX = 5;
+        public static int DefaultRootY = 2;
+        public static int DefaultLayerDistance = 3;
+        public static int DefaultNodeDistance = 2;
+        public static bool WeightedArcs = false;
+        public static bool FixedRaws = false;
+        public static bool FixedProducts = false;
+        public static string selectedEngine = "Dot";
+        public static String Align = "Vertical";
 
         public static void ResetDefaults()
         {
