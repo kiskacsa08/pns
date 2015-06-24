@@ -143,7 +143,8 @@ namespace PNSDraw
         public enum MoneyUnit
         {
             EUR,
-            HUF
+            HUF,
+            USD
         }
         #endregion
 
