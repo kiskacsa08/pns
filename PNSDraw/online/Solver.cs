@@ -14,6 +14,7 @@ namespace PNSDraw.online
     class Solver
     {
         Problem problem;
+        string problemID;
 
         MongoHandler mh;
         SolverSocket socket;
@@ -23,6 +24,19 @@ namespace PNSDraw.online
             this.problem = problem;
             mh = new MongoHandler();
             socket = new SolverSocket();
+        }
+
+        public void Stop()
+        {
+            if (socket.IsConnected())
+            {
+                BsonDocument document = socket.ToBson("{\"HEAD\":{\"status\":\"REQUEST\"},\"BODY\":{\"data\":{\"request\":{\"query\":\"STOP\",\"params\":{\"mongoID\":\"" + problemID + "\"}}}}}");
+                socket.Send(document.ToString(), false);
+            }
+            else
+            {
+                MessageBox.Show("Online solver not connected!");
+            }
         }
 
         public Problem Run(BackgroundWorker worker)
@@ -64,6 +78,10 @@ namespace PNSDraw.online
                     MessageBox.Show(response["HEAD"]["statusNote"].AsString, "ERROR",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else if (response["HEAD"]["status"].Equals("STOPPED"))
+                {
+                    MessageBox.Show("Online solver stopped!");
+                }
 
                 worker.ReportProgress(100);
             }
@@ -77,7 +95,7 @@ namespace PNSDraw.online
 
         private string Work(BackgroundWorker worker)
         {
-            string problemID = SaveGraph();
+            problemID = SaveGraph();
 
             BsonDocument document = socket.ToBson("{\"HEAD\":{\"status\":\"REQUEST\"},\"BODY\":{\"data\":{\"request\":{\"query\":\"RUN\",\"params\":{\"mongoID\":\""+problemID+"\"}}}}}");
 

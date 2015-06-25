@@ -49,6 +49,8 @@ namespace PNSDraw
         string outPath;
         DialogResult res;
 
+        Solver solver;
+
         bool LockedMode
         {
             get
@@ -1367,15 +1369,26 @@ namespace PNSDraw
 
         private void cancelAsyncButton_Click(object sender, EventArgs e)
         {
-            if (backgroundWorkerOffline.WorkerSupportsCancellation == true)
+            if (Default.online)
             {
-                backgroundWorkerOffline.CancelAsync();
-                foreach (var process in Process.GetProcessesByName("pns_depth"))
+                if (backgroundWorkerOnline.WorkerSupportsCancellation == true)
                 {
-                    process.Kill();
+                    backgroundWorkerOnline.CancelAsync();
+                    solver.Stop();
                 }
-                pwd.Close();
             }
+            else
+            {
+                if (backgroundWorkerOffline.WorkerSupportsCancellation == true)
+                {
+                    backgroundWorkerOffline.CancelAsync();
+                    foreach (var process in Process.GetProcessesByName("pns_depth"))
+                    {
+                        process.Kill();
+                    }
+                }
+            }
+            pwd.Close();
         }
 
         private void UpdateSolutionsTab()
@@ -1861,7 +1874,7 @@ namespace PNSDraw
             BackgroundWorker worker = sender as BackgroundWorker;
 
             Problem problem = new Problem(algorithm, Graph, Default.processes, Default.limit);
-            Solver solver = new Solver(problem);
+            solver = new Solver(problem);
             problem = solver.Run(worker);
         }
 

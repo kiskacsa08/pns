@@ -44,7 +44,7 @@ namespace PNSDraw.online
             client.Close();
         }
 
-        public string Send(string msg)
+        public string Send(string msg, bool responseMsg=true)
         {
             string message = msg.Length + "$LENGTH$" + msg + "END_OF_DATAEND_OF_DATA";
 
@@ -56,15 +56,21 @@ namespace PNSDraw.online
                 stream = client.GetStream();
 
                 stream.Write(data, 0, data.Length);
+                if (responseMsg)
+                {
+                    data = new Byte[256];
 
-                data = new Byte[256];
+                    String responseData = String.Empty;
 
-                String responseData = String.Empty;
+                    Int32 bytes = stream.Read(data, 0, data.Length);
+                    responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
 
-                Int32 bytes = stream.Read(data, 0, data.Length);
-                responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-
-                return GetJsonString(responseData);
+                    return GetJsonString(responseData);
+                }
+                else
+                {
+                    return "";
+                }
             }
             catch (IOException ex)
             {
@@ -107,6 +113,11 @@ namespace PNSDraw.online
                 Console.WriteLine(ex.ToString());
                 return new BsonDocument();
             }
+        }
+
+        public bool IsConnected()
+        {
+            return client.Connected;
         }
     }
 }
