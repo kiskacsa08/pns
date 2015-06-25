@@ -86,29 +86,28 @@ namespace PNSDraw
         {
             get
             {
-                //if (Visible)
-                //{
-                //    if (NonValue != null && Value == NonValue)
-                //    {
-                //        if (Globals.DefaultParameters.ContainsKey(Name))
-                //        {
-                //            return Prefix + Globals.DefaultParameters[Name] + MU;
-                //        }
-                //        else
-                //        {
-                //            return Prefix + "-";
-                //        }
-                //    }
-                //    else
-                //    {
-                //        return Prefix + Value.ToString() + " " + MU;
-                //    }
-                //}
-                //else
-                //{
-                    //return "";
-                //}
-                return Visible.ToString() + ";" + Prefix.ToString() + ";" + Value.ToString() + ";" + MU.ToString();
+                if (Visible)
+                {
+                    if (NonValue != null && Value == NonValue)
+                    {
+                        if (Globals.DefaultParameters.ContainsKey(Name))
+                        {
+                            return Prefix + Globals.DefaultParameters[Name] + MU;
+                        }
+                        else
+                        {
+                            return Prefix + "-";
+                        }
+                    }
+                    else
+                    {
+                        return Prefix + Value.ToString() + " " + MU;
+                    }
+                }
+                else
+                {
+                    return "";
+                }
             }
         }
 
@@ -186,7 +185,7 @@ namespace PNSDraw
         [Category("Other"), PropertyOrder(12)]
         [DisplayName("Mu")]
         //[EditorAttribute(typeof(EditorUI), typeof(System.Drawing.Design.UITypeEditor))]
-        //[TypeConverter(typeof(MUConverter))]
+        [TypeConverter(typeof(MUConverter))]
         public string MUProp
         {
             get

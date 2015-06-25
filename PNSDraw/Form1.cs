@@ -1343,33 +1343,33 @@ namespace PNSDraw
 
             if (Default.online)
             {
-                if (backgroundWorker2.IsBusy != true)
+                if (backgroundWorkerOnline.IsBusy != true)
                 {
                     pwd = new PleaseWaitDialog();
                     pwd.Canceled += new EventHandler<EventArgs>(cancelAsyncButton_Click);
                     //pwd.StartPosition = FormStartPosition.CenterScreen;
                     pwd.Show(this);
-                    backgroundWorker2.RunWorkerAsync();
+                    backgroundWorkerOnline.RunWorkerAsync();
                 }
             }
             else
             {
-                if (backgroundWorker1.IsBusy != true)
+                if (backgroundWorkerOffline.IsBusy != true)
                 {
                     pwd = new PleaseWaitDialog();
                     pwd.Canceled += new EventHandler<EventArgs>(cancelAsyncButton_Click);
                     //pwd.StartPosition = FormStartPosition.CenterScreen;
                     pwd.Show(this);
-                    backgroundWorker1.RunWorkerAsync();
+                    backgroundWorkerOffline.RunWorkerAsync();
                 }
             }
         }
 
         private void cancelAsyncButton_Click(object sender, EventArgs e)
         {
-            if (backgroundWorker1.WorkerSupportsCancellation == true)
+            if (backgroundWorkerOffline.WorkerSupportsCancellation == true)
             {
-                backgroundWorker1.CancelAsync();
+                backgroundWorkerOffline.CancelAsync();
                 foreach (var process in Process.GetProcessesByName("pns_depth"))
                 {
                     process.Kill();
@@ -1530,7 +1530,7 @@ namespace PNSDraw
             }
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorkerOffline_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
 
@@ -1586,7 +1586,7 @@ namespace PNSDraw
             worker.ReportProgress(100);
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void backgroundWorkerOffline_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             labelResult.Text = (e.ProgressPercentage.ToString() + "%");
             pwd.Message = "In progress, please wait... " + e.ProgressPercentage.ToString() + "%";
@@ -1602,7 +1602,7 @@ namespace PNSDraw
             pwd.ProgressValue = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorkerOffline_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled == true)
             {
@@ -1856,7 +1856,7 @@ namespace PNSDraw
             }
         }
 
-        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorkerOnline_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
 
@@ -1865,7 +1865,7 @@ namespace PNSDraw
             problem = solver.Run(worker);
         }
 
-        private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void backgroundWorkerOnline_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             labelResult.Text = (e.ProgressPercentage.ToString() + "%");
             pwd.Message = "In progress, please wait... " + e.ProgressPercentage.ToString() + "%";
@@ -1881,7 +1881,7 @@ namespace PNSDraw
             }
         }
 
-        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorkerOnline_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled == true)
             {
