@@ -1249,18 +1249,12 @@ namespace PNSDraw.Canvas
         {
             if (Objects != null)
             {
-                List<IGraphicsObject> topin = new List<IGraphicsObject>();
                 foreach (IGraphicsObject obj in Objects)
                 {
                     if (obj.IsSelected() && obj.IsMoveable())
                     {
-                        topin.Add(obj);
+                        obj.Pin(1);
                     }
-                }
-
-                foreach (IGraphicsObject obj in topin)
-                {
-                    obj.Pin(1);
                 }
             }
             Refresh();
@@ -1269,18 +1263,12 @@ namespace PNSDraw.Canvas
         {
             if (Objects != null)
             {
-                List<IGraphicsObject> topin = new List<IGraphicsObject>();
                 foreach (IGraphicsObject obj in Objects)
                 {
                     if (obj.IsSelected() && obj.IsMoveable())
                     {
-                        topin.Add(obj);
+                        obj.Pin(0);
                     }
-                }
-
-                foreach (IGraphicsObject obj in topin)
-                {
-                    obj.Pin(0);
                 }
             }
             Refresh();
