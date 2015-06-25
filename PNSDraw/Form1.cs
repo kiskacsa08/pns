@@ -2150,5 +2150,15 @@ namespace PNSDraw
             }
             pnsCanvas1.Refresh();
         }
+
+        private void pinSelectedButton_Click(object sender, EventArgs e)
+        {
+            pnsCanvas1.PinSelectedObjects();
+        }
+
+        private void pinUnselectButton_Click(object sender, EventArgs e)
+        {
+            pnsCanvas1.UnPinSelectedObjects();
+        }
     }
 }

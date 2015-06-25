@@ -1245,6 +1245,47 @@ namespace PNSDraw.Canvas
             Refresh();
         }
 
+        public void PinSelectedObjects()
+        {
+            if (Objects != null)
+            {
+                List<IGraphicsObject> topin = new List<IGraphicsObject>();
+                foreach (IGraphicsObject obj in Objects)
+                {
+                    if (obj.IsSelected() && obj.IsMoveable())
+                    {
+                        topin.Add(obj);
+                    }
+                }
+
+                foreach (IGraphicsObject obj in topin)
+                {
+                    obj.Pin(1);
+                }
+            }
+            Refresh();
+        }
+        public void UnPinSelectedObjects()
+        {
+            if (Objects != null)
+            {
+                List<IGraphicsObject> topin = new List<IGraphicsObject>();
+                foreach (IGraphicsObject obj in Objects)
+                {
+                    if (obj.IsSelected() && obj.IsMoveable())
+                    {
+                        topin.Add(obj);
+                    }
+                }
+
+                foreach (IGraphicsObject obj in topin)
+                {
+                    obj.Pin(0);
+                }
+            }
+            Refresh();
+        }
+
         public void Reset()
         {
             ViewInfo.Reset();
