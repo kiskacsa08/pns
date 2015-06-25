@@ -1,6 +1,8 @@
 /.project
 
 
-/PNSDraw/bin/
+/PNSDraw/bin/Release/PNSDraw*
+/PNSDraw/bin/Debug/
 /PNSDraw/obj/
+
 /PNSDraw.v12.suo
