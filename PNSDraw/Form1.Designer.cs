@@ -111,6 +111,8 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.pinSelectedButton = new System.Windows.Forms.ToolStripButton();
+            this.pinUnselectButton = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -147,8 +149,6 @@
             this.menuSummaryExport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSummaryView = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorkerOnline = new System.ComponentModel.BackgroundWorker();
-            this.pinSelectedButton = new System.Windows.Forms.ToolStripButton();
-            this.pinUnselectButton = new System.Windows.Forms.ToolStripButton();
             this.pnsCanvas1 = new PNSDraw.Canvas.PNSCanvas();
             this.propertyGrid1 = new PNSDraw.MyPropertyGrid();
             this.menuStrip1.SuspendLayout();
@@ -823,6 +823,26 @@
             this.toolStripButton3.Text = "Generate layout";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
+            // pinSelectedButton
+            // 
+            this.pinSelectedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pinSelectedButton.Image = ((System.Drawing.Image)(resources.GetObject("pinSelectedButton.Image")));
+            this.pinSelectedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pinSelectedButton.Name = "pinSelectedButton";
+            this.pinSelectedButton.Size = new System.Drawing.Size(32, 34);
+            this.pinSelectedButton.Text = "Pin selected nodes";
+            this.pinSelectedButton.Click += new System.EventHandler(this.pinSelectedButton_Click);
+            // 
+            // pinUnselectButton
+            // 
+            this.pinUnselectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pinUnselectButton.Image = ((System.Drawing.Image)(resources.GetObject("pinUnselectButton.Image")));
+            this.pinUnselectButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pinUnselectButton.Name = "pinUnselectButton";
+            this.pinUnselectButton.Size = new System.Drawing.Size(32, 34);
+            this.pinUnselectButton.Text = "Unpin selected nodes";
+            this.pinUnselectButton.Click += new System.EventHandler(this.pinUnselectButton_Click);
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
@@ -886,7 +906,9 @@
             this.toolStripComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toolStripComboBox2.Items.AddRange(new object[] {
             "ABB",
-            "SSG"});
+            "SSG",
+            "SSG+LP",
+            "MSG"});
             this.toolStripComboBox2.Name = "toolStripComboBox2";
             this.toolStripComboBox2.Size = new System.Drawing.Size(121, 37);
             // 
@@ -1185,26 +1207,6 @@
             this.backgroundWorkerOnline.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerOnline_DoWork);
             this.backgroundWorkerOnline.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerOnline_ProgressChanged);
             this.backgroundWorkerOnline.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerOnline_RunWorkerCompleted);
-            // 
-            // pinSelectedButton
-            // 
-            this.pinSelectedButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pinSelectedButton.Image = ((System.Drawing.Image)(resources.GetObject("pinSelectedButton.Image")));
-            this.pinSelectedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pinSelectedButton.Name = "pinSelectedButton";
-            this.pinSelectedButton.Size = new System.Drawing.Size(32, 34);
-            this.pinSelectedButton.Text = "Pin selected nodes";
-            this.pinSelectedButton.Click += new System.EventHandler(this.pinSelectedButton_Click);
-            // 
-            // pinUnselectButton
-            // 
-            this.pinUnselectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pinUnselectButton.Image = ((System.Drawing.Image)(resources.GetObject("pinUnselectButton.Image")));
-            this.pinUnselectButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pinUnselectButton.Name = "pinUnselectButton";
-            this.pinUnselectButton.Size = new System.Drawing.Size(32, 34);
-            this.pinUnselectButton.Text = "Unpin selected nodes";
-            this.pinUnselectButton.Click += new System.EventHandler(this.pinUnselectButton_Click);
             // 
             // pnsCanvas1
             // 
