@@ -37,6 +37,8 @@ namespace PNSDraw
 
         Dictionary<string, ObjectProperty> parameterlist;
 
+        string QuantityType;
+
         #endregion;
 
 
@@ -251,6 +253,7 @@ namespace PNSDraw
             Highlighted = false;
             Name = Container.GenerateName(this);
             Title = "";
+            QuantityType = "Mass";
 
             parameterlist = new Dictionary<string, ObjectProperty>();
             Comment = new TextObject(container, this);
@@ -1167,6 +1170,22 @@ namespace PNSDraw
                 }
                 parameterlist["workinghour"] = value;
                 UpdateParametersLabel();
+            }
+        }
+
+        [Browsable(true)]
+        [Category("Parameters"), PropertyOrder(9)]
+        [DisplayName("Quantity Type")]
+        [TypeConverter(typeof(QuantityTypeConverter))]
+        public string QuantityTypeProp
+        {
+            get
+            {
+                return QuantityType;
+            }
+            set
+            {
+                QuantityType = value;
             }
         }
 
