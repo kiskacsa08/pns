@@ -55,23 +55,23 @@ namespace PNSDraw
 
         private void SolverSettingsDialog_Load(object sender, EventArgs e)
         {
-            selectedMassUnit = (int)Default.mass_mu;
-            selectedVolumeUnit = (int)Default.vol_mu;
-            selectedSubstanceUnit = (int)Default.sub_mu;
-            selectedEnergyUnit = (int)Default.energy_mu;
-            selectedLengthUnit = (int)Default.length_mu;
-            selectedCurrentUnit = (int)Default.curr_mu;
-            selectedAreaUnit = (int)Default.area_mu;
-            selectedSpeedUnit = (int)Default.speed_mu;
-            selectedAccelerationUnit = (int)Default.acc_mu;
-            selectedMassDensUnit = (int)Default.mdens_mu;
-            selectedThermoTempUnit = (int)Default.temp_mu;
-            selectedLuminIntensUnit = (int)Default.lum_mu;
-            selectedConcentrationUnit = (int)Default.conc_mu;
-            selectedForceUnit = (int)Default.force_mu;
-            selectedPressureUnit = (int)Default.press_mu;
-            selectedPowerUnit = (int)Default.power_mu;
-            selectedCapacityUnit = (int)Default.cap_mu;
+            selectedMassUnit = Array.IndexOf(Default.quantities["Mass"], Default.mass_mu);
+            selectedVolumeUnit = Array.IndexOf(Default.quantities["Volume"], Default.vol_mu);
+            selectedSubstanceUnit = Array.IndexOf(Default.quantities["Amount of substance"], Default.sub_mu);
+            selectedEnergyUnit = Array.IndexOf(Default.quantities["Energy, work, heat"], Default.energy_mu);
+            selectedLengthUnit = Array.IndexOf(Default.quantities["Length"], Default.length_mu);
+            selectedCurrentUnit = Array.IndexOf(Default.quantities["Electric current"], Default.curr_mu);
+            selectedAreaUnit = Array.IndexOf(Default.quantities["Area"], Default.area_mu);
+            selectedSpeedUnit = Array.IndexOf(Default.quantities["Speed"], Default.speed_mu);
+            selectedAccelerationUnit = Array.IndexOf(Default.quantities["Acceleration"], Default.acc_mu);
+            selectedMassDensUnit = Array.IndexOf(Default.quantities["Mass density"], Default.mdens_mu);
+            selectedThermoTempUnit = Array.IndexOf(Default.quantities["Thermodinamic temperature"], Default.temp_mu);
+            selectedLuminIntensUnit = Array.IndexOf(Default.quantities["Luminous intensity"], Default.lum_mu);
+            selectedConcentrationUnit = Array.IndexOf(Default.quantities["Concentration"], Default.conc_mu);
+            selectedForceUnit = Array.IndexOf(Default.quantities["Force"], Default.force_mu);
+            selectedPressureUnit = Array.IndexOf(Default.quantities["Pressure"], Default.press_mu);
+            selectedPowerUnit = Array.IndexOf(Default.quantities["Power"], Default.power_mu);
+            selectedCapacityUnit = Array.IndexOf(Default.quantities["Capacity"], Default.cap_mu);
 
             cmbDefMat.SelectedIndex = Default.type;
             cmbDefUnit.SelectedIndex = selectedMassUnit;
@@ -96,23 +96,23 @@ namespace PNSDraw
         private void btnApply_Click(object sender, EventArgs e)
         {
             Default.type = cmbDefMat.SelectedIndex;
-            Default.mass_mu = (Default.MassUnit)selectedMassUnit;
-            Default.vol_mu = (Default.VolumeUnit)selectedVolumeUnit;
-            Default.sub_mu = (Default.SubstanceUnit)selectedSubstanceUnit;
-            Default.energy_mu = (Default.EnergyUnit)selectedEnergyUnit;
-            Default.length_mu = (Default.LengthUnit)selectedLengthUnit;
-            Default.curr_mu = (Default.CurrentUnit)selectedCurrentUnit;
-            Default.area_mu = (Default.AreaUnit)selectedAreaUnit;
-            Default.speed_mu = (Default.SpeedUnit)selectedSpeedUnit;
-            Default.acc_mu = (Default.AccelerationUnit)selectedAccelerationUnit;
-            Default.mdens_mu = (Default.MassDensityUnit)selectedMassDensUnit;
-            Default.temp_mu = (Default.ThermoTempUnit)selectedThermoTempUnit;
-            Default.lum_mu = (Default.LuminIntensUnit)selectedLuminIntensUnit;
-            Default.conc_mu = (Default.ConcentrationUnit)selectedConcentrationUnit;
-            Default.force_mu = (Default.ForceUnit)selectedForceUnit;
-            Default.press_mu = (Default.PressureUnit)selectedPressureUnit;
-            Default.power_mu = (Default.PowerUnit)selectedPowerUnit;
-            Default.cap_mu = (Default.CapacityUnit)selectedCapacityUnit;
+            Default.mass_mu = Default.quantities["Mass"][selectedMassUnit];
+            Default.vol_mu = Default.quantities["Volume"][selectedVolumeUnit];
+            Default.sub_mu = Default.quantities["Amount of substance"][selectedSubstanceUnit];
+            Default.energy_mu = Default.quantities["Energy, work, heat"][selectedEnergyUnit];
+            Default.length_mu = Default.quantities["Length"][selectedLengthUnit];
+            Default.curr_mu = Default.quantities["Electric current"][selectedCurrentUnit];
+            Default.area_mu = Default.quantities["Area"][selectedAreaUnit];
+            Default.speed_mu = Default.quantities["Speed"][selectedSpeedUnit];
+            Default.acc_mu = Default.quantities["Acceleration"][selectedAccelerationUnit];
+            Default.mdens_mu = Default.quantities["Mass density"][selectedMassDensUnit];
+            Default.temp_mu = Default.quantities["Thermodinamic temperature"][selectedThermoTempUnit];
+            Default.lum_mu = Default.quantities["Luminous intensity"][selectedLuminIntensUnit];
+            Default.conc_mu = Default.quantities["Concentration"][selectedConcentrationUnit];
+            Default.force_mu = Default.quantities["Force"][selectedForceUnit];
+            Default.press_mu = Default.quantities["Pressure"][selectedPressureUnit];
+            Default.power_mu = Default.quantities["Power"][selectedPowerUnit];
+            Default.cap_mu = Default.quantities["Capacity"][selectedCapacityUnit];
             Default.money_mu = (Default.MoneyUnit)cmbMoneyUnit.SelectedIndex;
             Default.time_mu = (Default.TimeUnit)cmbTimeUnit.SelectedIndex;
             Default.working_hours_per_year = (int)numWorkingHour.Value;
@@ -140,74 +140,59 @@ namespace PNSDraw
 
         private void cmbQuantity_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cmbDefUnit.DataSource = Default.quantities[cmbQuantity.SelectedItem.ToString()];
+
             switch (cmbQuantity.SelectedIndex)
             {
                 case 0:
-                    cmbDefUnit.DataSource = massUnits;
                     cmbDefUnit.SelectedIndex = selectedMassUnit;
                     break;
                 case 1:
-                    cmbDefUnit.DataSource = volumeUnits;
                     cmbDefUnit.SelectedIndex = selectedVolumeUnit;
                     break;
                 case 2:
-                    cmbDefUnit.DataSource = substanceUnits;
                     cmbDefUnit.SelectedIndex = selectedSubstanceUnit;
                     break;
                 case 3:
-                    cmbDefUnit.DataSource = energyUnits;
                     cmbDefUnit.SelectedIndex = selectedEnergyUnit;
                     break;
                 case 4:
-                    cmbDefUnit.DataSource = lengthUnits;
                     cmbDefUnit.SelectedIndex = selectedLengthUnit;
                     break;
                 case 5:
-                    cmbDefUnit.DataSource = currentUnits;
                     cmbDefUnit.SelectedIndex = selectedCurrentUnit;
                     break;
                 case 6:
-                    cmbDefUnit.DataSource = areaUnits;
                     cmbDefUnit.SelectedIndex = selectedAreaUnit;
                     break;
                 case 7:
-                    cmbDefUnit.DataSource = speedUnits;
                     cmbDefUnit.SelectedIndex = selectedSpeedUnit;
                     break;
                 case 8:
-                    cmbDefUnit.DataSource = accelerationUnits;
                     cmbDefUnit.SelectedIndex = selectedAccelerationUnit;
                     break;
                 case 9:
-                    cmbDefUnit.DataSource = massDensUnits;
                     cmbDefUnit.SelectedIndex = selectedMassDensUnit;
                     break;
                 case 10:
-                    cmbDefUnit.DataSource = thermoTempUnits;
                     cmbDefUnit.SelectedIndex = selectedThermoTempUnit;
                     break;
                 case 11:
-                    cmbDefUnit.DataSource = luminIntensUnits;
                     cmbDefUnit.SelectedIndex = selectedLuminIntensUnit;
                     break;
                 case 12:
-                    cmbDefUnit.DataSource = concentrationUnits;
                     cmbDefUnit.SelectedIndex = selectedConcentrationUnit;
                     break;
                 case 13:
-                    cmbDefUnit.DataSource = forceUnits;
                     cmbDefUnit.SelectedIndex = selectedForceUnit;
                     break;
                 case 14:
-                    cmbDefUnit.DataSource = pressureUnits;
                     cmbDefUnit.SelectedIndex = selectedPressureUnit;
                     break;
                 case 15:
-                    cmbDefUnit.DataSource = powerUnits;
                     cmbDefUnit.SelectedIndex = selectedPowerUnit;
                     break;
                 case 16:
-                    cmbDefUnit.DataSource = capacityUnits;
                     cmbDefUnit.SelectedIndex = selectedCapacityUnit;
                     break;
                 default:
