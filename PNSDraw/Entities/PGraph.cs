@@ -359,6 +359,26 @@ namespace PNSDraw
                 o.ParameterList["workinghour"].Value = oxml.WorkingHours != null ? ConvertManager.ToDouble(oxml.WorkingHours) : Default.working_hours_per_year;
 
                 OperatingUnits.Add(o);
+
+                foreach (XMLPNSOperatingUnitMaterial edge in oxml.Input)
+                {
+                    Edge e = new Edge(this);
+                    Material m = Materials.Find(x=>x.Name.Equals(edge.Name));
+                    e.begin = m;
+                    e.end = o;
+                    e.Rate = edge.Rate != null ? edge.Rate : Default.io_flowrate;
+                    Edges.Add(e);
+                }
+
+                foreach (XMLPNSOperatingUnitMaterial edge in oxml.Output)
+                {
+                    Edge e = new Edge(this);
+                    Material m = Materials.Find(x => x.Name.Equals(edge.Name));
+                    e.end = m;
+                    e.begin = o;
+                    e.Rate = edge.Rate != null ? edge.Rate : Default.io_flowrate;
+                    Edges.Add(e);
+                }
             }
 
             return true;
