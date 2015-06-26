@@ -148,6 +148,29 @@ namespace PNSDraw
         }
         #endregion
 
+        #region QuantityTypes
+        static public Dictionary<string, string[]> quantities = new Dictionary<string, string[]>
+        {
+            {"Mass", new string[] { "gram", "kilogram", "ton" }},
+            {"Volume", new string[] { "cubic meter", "cubic decimeter", "cubic centimeter" }},
+            {"Amount of substance", new string[] { "mole", "millimole", "kilomole" }},
+            {"Energy, work, heat", new string[] { "joule", "kilojoule", "megajoule", "gigajoule", "terajoule", "watthour", "kilowatthour", "megawatthour", "gigawatthour", "terawatthour" }},
+            {"Length", new string[] { "meter", "kilometer", "decimeter", "centimeter", "millimeter", "coll" }},
+            {"Electric current", new string[] { "ampere", "milliampere", "kiloampere" }},
+            {"Area", new string[] { "square meter", "square kilometer", "square centimeter", "hectar" }},
+            {"Speed", new string[] { "meters per second", "kilometers per hour", "miles per hour" }},
+            {"Acceleration", new string[] { "meter per second squared" }},
+            {"Mass density", new string[] { "kilogram per cubic meter", "ton per cubic meter" }},
+            {"Thermodinamic temperature", new string[] { "kelvin" }},
+            {"Luminous intensity", new string[] { "candela" }},
+            {"Concentration", new string[] { "mole per cubic meter", "mole per cubic decimeter" }},
+            {"Force", new string[] { "newton" }},
+            {"Pressure", new string[] { "pascal", "kilopascal", "megapascal" }},
+            {"Power", new string[] { "watt", "kilowatt", "megawatt", "gigawatt", "terawatt" }},
+            {"Capacity", new string[] { "unit" }}
+        };
+        #endregion
+
         #region Values
         static public double flow_rate_lower_bound = 0; //flow_rate_lower_bound
         static public double flow_rate_upper_bound = 1000000000; //flow_rate_upper_bound
@@ -178,23 +201,23 @@ namespace PNSDraw
 
         static public double io_flowrate = 1; //flow rate
 
-        static public MassUnit mass_mu = MassUnit.t;
-        static public VolumeUnit vol_mu = VolumeUnit.m3;
-        static public SubstanceUnit sub_mu = SubstanceUnit.mol;
-        static public EnergyUnit energy_mu = EnergyUnit.J;
-        static public LengthUnit length_mu = LengthUnit.m;
-        static public CurrentUnit curr_mu = CurrentUnit.A;
-        static public AreaUnit area_mu = AreaUnit.m2;
-        static public SpeedUnit speed_mu = SpeedUnit.mps;
-        static public AccelerationUnit acc_mu = AccelerationUnit.mps2;
-        static public MassDensityUnit mdens_mu = MassDensityUnit.tpm3;
-        static public ThermoTempUnit temp_mu = ThermoTempUnit.K;
-        static public LuminIntensUnit lum_mu = LuminIntensUnit.cd;
-        static public ConcentrationUnit conc_mu = ConcentrationUnit.molpm3;
-        static public ForceUnit force_mu = ForceUnit.N;
-        static public PressureUnit press_mu = PressureUnit.Pa;
-        static public PowerUnit power_mu = PowerUnit.W;
-        static public CapacityUnit cap_mu = CapacityUnit.unit;
+        static public string mass_mu = quantities["Mass"][2];
+        static public string vol_mu = quantities["Volume"][0];
+        static public string sub_mu = quantities["Amount of substance"][0];
+        static public string energy_mu = quantities["Energy, work, heat"][0];
+        static public string length_mu = quantities["Length"][0];
+        static public string curr_mu = quantities["Electric current"][0];
+        static public string area_mu = quantities["Area"][0];
+        static public string speed_mu = quantities["Speed"][0];
+        static public string acc_mu = quantities["Acceleration"][0];
+        static public string mdens_mu = quantities["Mass density"][1];
+        static public string temp_mu = quantities["Thermodinamic temperature"][0];
+        static public string lum_mu = quantities["Luminous intensity"][0];
+        static public string conc_mu = quantities["Concentration"][0];
+        static public string force_mu = quantities["Force"][0];
+        static public string press_mu = quantities["Pressure"][0];
+        static public string power_mu = quantities["Power"][0];
+        static public string cap_mu = quantities["Capacity"][0];
         static public TimeUnit time_mu = TimeUnit.y;
         static public MoneyUnit money_mu = MoneyUnit.EUR;
 
