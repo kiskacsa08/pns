@@ -298,7 +298,7 @@ namespace PNSDraw
             parameterlist["payoutperiod"].Value = Default.payout_period;
             parameterlist["payoutperiod"].NonValue = -1;
             parameterlist["workinghour"].Prefix = "Working hours per year: ";
-            parameterlist["workinghour"].Value = Default.worging_hours_per_year;
+            parameterlist["workinghour"].Value = Default.working_hours_per_year;
             parameterlist["workinghour"].NonValue = -1;
         }
 

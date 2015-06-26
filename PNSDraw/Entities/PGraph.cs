@@ -291,6 +291,79 @@ namespace PNSDraw
             return xmlwriter.ToString();
         }
 
+        public bool ImportFromPNS(string xml)
+        {
+            Clear();
+            XmlSerializer xs = new XmlSerializer(typeof(XMLPNS));
+            XMLPNS pgraph = (XMLPNS)xs.Deserialize(new StringReader(xml));
+            foreach (XMLPNSMaterial mat in pgraph.Problem.Materials.Raw)
+            {
+                Material m = new Material(this);
+                m.Name = mat.Name;
+                m.Type = Globals.MaterialTypes.Raw;
+
+                m.ParameterList["price"].Value = mat.Price != null ? ConvertManager.ToDouble(mat.Price): Default.price;
+                m.ParameterList["reqflow"].Value = mat.Min != null ? ConvertManager.ToDouble(mat.Min) : Default.flow_rate_lower_bound;
+                m.ParameterList["maxflow"].Value = mat.Max != null ? ConvertManager.ToDouble(mat.Max) : Default.flow_rate_upper_bound;
+
+                Materials.Add(m);
+            }
+
+            foreach (XMLPNSMaterial mat in pgraph.Problem.Materials.Intermediate)
+            {
+                Material m = new Material(this);
+                m.Name = mat.Name;
+                m.Type = Globals.MaterialTypes.Intermediate;
+
+                m.ParameterList["price"].Value = mat.Price != null ? ConvertManager.ToDouble(mat.Price) : Default.price;
+                m.ParameterList["reqflow"].Value = mat.Min != null ? ConvertManager.ToDouble(mat.Min) : Default.flow_rate_lower_bound;
+                m.ParameterList["maxflow"].Value = mat.Max != null ? ConvertManager.ToDouble(mat.Max) : Default.flow_rate_upper_bound;
+
+                Materials.Add(m);
+            }
+
+            foreach (XMLPNSMaterial mat in pgraph.Problem.Materials.Product)
+            {
+                Material m = new Material(this);
+                m.Name = mat.Name;
+                m.Type = Globals.MaterialTypes.Product;
+
+                m.ParameterList["price"].Value = mat.Price != null ? ConvertManager.ToDouble(mat.Price) : Default.price;
+                m.ParameterList["reqflow"].Value = mat.Min != null ? ConvertManager.ToDouble(mat.Min) : Default.flow_rate_lower_bound;
+                m.ParameterList["maxflow"].Value = mat.Max != null ? ConvertManager.ToDouble(mat.Max) : Default.flow_rate_upper_bound;
+
+                Materials.Add(m);
+            }
+
+            foreach (XMLPNSOperatingUnit oxml in pgraph.Problem.OperatingUnits)
+            {
+                OperatingUnit o = new OperatingUnit(this);
+                /*top.Name = o.Name;
+                top.CapacityLower = o.ParameterList["caplower"].ToPNSValue();
+                top.CapacityUpper = o.ParameterList["capupper"].ToPNSValue();
+                top.InvestmentFix = o.ParameterList["investcostfix"].ToPNSValue();
+                top.InvestmentProp = o.ParameterList["investcostprop"].ToPNSValue();
+                top.OperatingFix = o.ParameterList["opercostfix"].ToPNSValue();
+                top.OperatingProp = o.ParameterList["opercostprop"].ToPNSValue();
+                top.PayoutPeriod = o.ParameterList["payoutperiod"].ToPNSValue();
+                top.WorkingHours = o.ParameterList["workinghour"].ToPNSValue();
+                ounits[o.GetID()] = top;*/
+                o.Name = oxml.Name;
+                o.ParameterList["caplower"].Value = oxml.CapacityLower != null ? ConvertManager.ToDouble(oxml.CapacityLower) : Default.capacity_lower_bound;
+                o.ParameterList["capupper"].Value = oxml.CapacityUpper != null ? ConvertManager.ToDouble(oxml.CapacityUpper) : Default.capacity_upper_bound;
+                o.ParameterList["investcostfix"].Value = oxml.InvestmentFix != null ? ConvertManager.ToDouble(oxml.InvestmentFix) : Default.i_fix;
+                o.ParameterList["investcostprop"].Value = oxml.InvestmentProp != null ? ConvertManager.ToDouble(oxml.InvestmentProp) : Default.i_prop;
+                o.ParameterList["opercostfix"].Value = oxml.OperatingFix != null ? ConvertManager.ToDouble(oxml.OperatingFix) : Default.o_fix;
+                o.ParameterList["opercostprop"].Value = oxml.OperatingProp != null ? ConvertManager.ToDouble(oxml.OperatingProp) : Default.o_prop;
+                o.ParameterList["payoutperiod"].Value = oxml.PayoutPeriod != null ? ConvertManager.ToDouble(oxml.PayoutPeriod) : Default.payout_period;
+                o.ParameterList["workinghour"].Value = oxml.WorkingHours != null ? ConvertManager.ToDouble(oxml.WorkingHours) : Default.working_hours_per_year;
+
+                OperatingUnits.Add(o);
+            }
+
+            return true;
+        }
+
         public string ExportToSVG()
         {
             string svg = "";

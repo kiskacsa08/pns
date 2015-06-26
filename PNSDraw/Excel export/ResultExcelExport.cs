@@ -367,7 +367,7 @@ namespace PNSDraw.Excel_export
                 {
                     t_ous_data[t_top + i - 1, t_left + j++ - 1] = "=" + def_Solution_Excel.text_ws_flows + "!" +
                         t_xlsx.CellName(t_flowtop + t_v_flows_offset - 1, t_flowleft + t_h_flows_offset + i - t_v_flows_offset);
-                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.WorkingHourProp.Value == ou.ParameterList["workinghour"].NonValue ? Default.worging_hours_per_year.ToString() : ou.WorkingHourProp.Value.ToString();
+                    t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.WorkingHourProp.Value == ou.ParameterList["workinghour"].NonValue ? Default.working_hours_per_year.ToString() : ou.WorkingHourProp.Value.ToString();
                     t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.PayoutPeriodProp.Value == ou.ParameterList["payoutperiod"].NonValue ? Default.payout_period.ToString() : ou.PayoutPeriodProp.Value.ToString();
                     t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.CapacityLowerProp.Value == ou.ParameterList["caplower"].NonValue ? Default.capacity_lower_bound.ToString() : ou.CapacityLowerProp.Value.ToString();
                     t_ous_data[t_top + i - 1, t_left + j++ - 1] = ou.CapacityUpperProp.Value == ou.ParameterList["capupper"].NonValue ? Default.capacity_upper_bound.ToString() : ou.CapacityUpperProp.Value.ToString();

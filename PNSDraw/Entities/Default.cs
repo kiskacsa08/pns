@@ -200,7 +200,7 @@ namespace PNSDraw
 
         public const double d_NperA = -1;
         static public double payout_period = 10;
-        static public int worging_hours_per_year = 8000;
+        static public int working_hours_per_year = 8000;
 
         static public double d_tolerance = 0.00000001;
         static public double d_solution_tolerance = 0.0001;

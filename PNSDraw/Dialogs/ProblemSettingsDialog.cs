@@ -78,7 +78,7 @@ namespace PNSDraw
             cmbQuantity.SelectedIndex = 0;
             cmbMoneyUnit.SelectedIndex = (int)Default.money_mu;
             cmbTimeUnit.SelectedIndex = (int)Default.time_mu;
-            numWorkingHour.Value = (decimal)Default.worging_hours_per_year;
+            numWorkingHour.Value = (decimal)Default.working_hours_per_year;
             numPayoutPeriod.Value = (decimal)Default.payout_period;
             numMatFlowRateLower.Value = (decimal)Default.flow_rate_lower_bound;
             numMatFlowRateUpper.Value = (decimal)Default.flow_rate_upper_bound;
@@ -115,7 +115,7 @@ namespace PNSDraw
             Default.cap_mu = (Default.CapacityUnit)selectedCapacityUnit;
             Default.money_mu = (Default.MoneyUnit)cmbMoneyUnit.SelectedIndex;
             Default.time_mu = (Default.TimeUnit)cmbTimeUnit.SelectedIndex;
-            Default.worging_hours_per_year = (int)numWorkingHour.Value;
+            Default.working_hours_per_year = (int)numWorkingHour.Value;
             Default.payout_period = (double)numPayoutPeriod.Value;
             Default.flow_rate_lower_bound = (double)numMatFlowRateLower.Value;
             Default.flow_rate_upper_bound = (double)numMatFlowRateUpper.Value;

@@ -236,7 +236,7 @@ namespace PNSDraw
 
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Multiselect = false;
-            ofd.Filter = "xml file|*.xml";
+            ofd.Filter = "xml file|*.xml|pns file|*.pns";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -246,10 +246,20 @@ namespace PNSDraw
                     
                     string xml = sr.ReadToEnd();
                     Graph.Reset();
-                    Graph.ImportFromXML(xml);
-                    
                     pnsCanvas1.Reset();
                     pnsCanvas1.GridSize = Globals.GridSize;
+
+                    string extension = Path.GetExtension(file.Name);
+
+                    if (extension.Equals(".xml"))
+                    {
+                        Graph.ImportFromXML(xml);
+                    }
+                    else if (extension.Equals(".pns"))
+                    {
+                        Graph.ImportFromPNS(xml);
+                    }
+
                     RefreshMinimap(); // Azert kell, mert a TextObjectek rajzolaskor szamoljak ki a meretuket
                     ZoomToFit();
                     pnsCanvas1.Refresh();
@@ -257,7 +267,6 @@ namespace PNSDraw
                     CurrentFile = ofd.FileName;
                     CreateUndo();
                     UpdateTitle();
-
 
                     UpdateSolutionsTab();
                     tabControl1.SelectedTab = tabPage1;
@@ -613,6 +622,7 @@ namespace PNSDraw
                     FileStream file = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write);
                     StreamWriter sw = new StreamWriter(file, Encoding.Unicode);
                     string xml = Graph.ExportToPNS();
+                    Console.WriteLine(xml);
                     sw.Write(xml);
                     sw.Close();
                     file.Close();
