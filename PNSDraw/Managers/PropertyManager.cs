@@ -213,4 +213,27 @@ namespace PNSDraw
             return new StandardValuesCollection(MeasurementUnits.listOfMUs);
         }
     }
+
+    internal class QuantityTypes
+    {
+        internal static string[] listOfQuantities;
+    }
+
+    public class QuantityTypeConverter : StringConverter
+    {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            return true;
+        }
+
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            return true;
+        }
+
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            return new StandardValuesCollection(QuantityTypes.listOfQuantities);
+        }
+    }
 }
