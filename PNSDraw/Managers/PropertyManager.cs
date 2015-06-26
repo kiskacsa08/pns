@@ -236,4 +236,27 @@ namespace PNSDraw
             return new StandardValuesCollection(QuantityTypes.listOfQuantities);
         }
     }
+
+    internal class PriceMUs
+    {
+        internal static string[] listOfPriceMUs;
+    }
+
+    public class PriceMUTypeConverter : StringConverter
+    {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            return true;
+        }
+
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            return true;
+        }
+
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            return new StandardValuesCollection(PriceMUs.listOfPriceMUs);
+        }
+    }
 }
