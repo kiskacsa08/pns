@@ -42,8 +42,6 @@ namespace PNSDraw
 
         PleaseWaitDialog pwd;
         string algorithm;
-        int limit;
-        int processes;
         bool isProblemExists;
         string inPath;
         string outPath;
@@ -70,6 +68,7 @@ namespace PNSDraw
             pnsCanvas1.GraphicsStructure = Graph;
             isProblemExists = false;
             UpdateListOfMUs();
+            UpdateListOfQuantities();
         }
 
         void pnsCanvas1_DataChanged(object sender, Canvas.CanvasEventArgs e)
@@ -1988,6 +1987,12 @@ namespace PNSDraw
             MeasurementUnits.listOfMUs[0] = "EUR";
             MeasurementUnits.listOfMUs[1] = "HUF";
             MeasurementUnits.listOfMUs[2] = "USD";
+        }
+
+        private void UpdateListOfQuantities()
+        {
+            QuantityTypes.listOfQuantities = new string[Default.quantities.Count];
+            Default.quantities.Keys.CopyTo(QuantityTypes.listOfQuantities, 0);
         }
 
         private void solverSettingsToolStripMenuItem_Click(object sender, EventArgs e)
