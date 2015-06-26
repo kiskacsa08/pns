@@ -95,9 +95,9 @@ namespace PNSDraw
                     default:
                         break;
                 }
-                file_str.Append(mat.ReqFlowProp.Value != Default.flow_rate_lower_bound && mat.ReqFlowProp.Value != mat.ParameterList["reqflow"].NonValue ? ", flow_rate_lower_bound=" + MUs.ConvertToUnifiedUnit(mat.ReqFlowProp.MU, mat.ReqFlowProp.Value) : "");
-                file_str.Append(mat.MaxFlowProp.Value != Default.flow_rate_upper_bound && mat.MaxFlowProp.Value != mat.ParameterList["maxflow"].NonValue ? ", flow_rate_upper_bound=" + MUs.ConvertToUnifiedUnit(mat.MaxFlowProp.MU, mat.MaxFlowProp.Value) : "");
-                file_str.Append(mat.PriceProp.Value != Default.price && mat.PriceProp.Value != mat.ParameterList["price"].NonValue ? ", price=" + MUs.ConvertToUnifiedUnit(mat.PriceProp.MU, mat.PriceProp.Value) : "");
+                file_str.Append(mat.ReqFlowProp.Value != Default.flow_rate_lower_bound && mat.ReqFlowProp.Value != mat.ParameterList["reqflow"].NonValue ? ", flow_rate_lower_bound=" + DoubleToGBString(MUs.ConvertToUnifiedUnit(mat.ReqFlowProp.MU, mat.ReqFlowProp.Value)) : "");
+                file_str.Append(mat.MaxFlowProp.Value != Default.flow_rate_upper_bound && mat.MaxFlowProp.Value != mat.ParameterList["maxflow"].NonValue ? ", flow_rate_upper_bound=" + DoubleToGBString(MUs.ConvertToUnifiedUnit(mat.MaxFlowProp.MU, mat.MaxFlowProp.Value)) : "");
+                file_str.Append(mat.PriceProp.Value != Default.price && mat.PriceProp.Value != mat.ParameterList["price"].NonValue ? ", price=" + DoubleToGBString(MUs.ConvertToUnifiedUnit(mat.PriceProp.MU, mat.PriceProp.Value)) : "");
 
                 file_str.Append("\n");
             }
@@ -110,8 +110,8 @@ namespace PNSDraw
             {
                 file_str.Append(ou.Name);
                 file_str.Append(":");
-                file_str.Append(ou.CapacityLowerProp.Value != Default.capacity_lower_bound && ou.CapacityLowerProp.Value != ou.ParameterList["caplower"].NonValue ? " capacity_lower_bound=" + MUs.ConvertToUnifiedUnit(ou.CapacityLowerProp.MU, ou.CapacityLowerProp.Value) + "," : "");
-                file_str.Append(ou.CapacityUpperProp.Value != Default.capacity_upper_bound && ou.CapacityUpperProp.Value != ou.ParameterList["capupper"].NonValue ? " capacity_upper_bound=" + MUs.ConvertToUnifiedUnit(ou.CapacityUpperProp.MU, ou.CapacityUpperProp.Value) + "," : "");
+                file_str.Append(ou.CapacityLowerProp.Value != Default.capacity_lower_bound && ou.CapacityLowerProp.Value != ou.ParameterList["caplower"].NonValue ? " capacity_lower_bound=" + DoubleToGBString(MUs.ConvertToUnifiedUnit(ou.CapacityLowerProp.MU, ou.CapacityLowerProp.Value)) + "," : "");
+                file_str.Append(ou.CapacityUpperProp.Value != Default.capacity_upper_bound && ou.CapacityUpperProp.Value != ou.ParameterList["capupper"].NonValue ? " capacity_upper_bound=" + DoubleToGBString(MUs.ConvertToUnifiedUnit(ou.CapacityUpperProp.MU, ou.CapacityUpperProp.Value)) + "," : "");
                 double fix_cost = ou.InvestmentCostFixProp.Value / (ou.PayoutPeriodProp.Value * ou.WorkingHourProp.Value) + ou.OperatingCostFixProp.Value;
                 file_str.Append(fix_cost != Default.fix_cost ? " fix_cost=" + DoubleToGBString(MUs.ConvertToUnifiedUnit(ou.InvestmentCostFixProp.MU, fix_cost)) + "," : "");
                 double prop_cost = ou.InvestmentCostPropProp.Value / (ou.PayoutPeriodProp.Value * ou.WorkingHourProp.Value) + ou.OperatingCostPropProp.Value;
