@@ -158,7 +158,7 @@ namespace PNSDraw
 
         static public int limit = 10;
         static public int processes = 1;
-        static public bool online = true;
+        static public bool online = false;
 
         static public string host = "193.6.33.141";
         static public int port = 51000;
