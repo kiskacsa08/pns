@@ -67,8 +67,9 @@ namespace PNSDraw
             Graph = new PGraph();
             pnsCanvas1.GraphicsStructure = Graph;
             isProblemExists = false;
-            UpdateListOfMUs();
+            //UpdateListOfMUs();
             UpdateListOfQuantities();
+            UpdateListOfPriceMUs();
         }
 
         void pnsCanvas1_DataChanged(object sender, Canvas.CanvasEventArgs e)
@@ -1981,18 +1982,24 @@ namespace PNSDraw
         }
 
         //TODO: Ezt átírni úgy, hogy a megfelelő típusú MU-kal töltse fel a listát
-        private void UpdateListOfMUs()
-        {
-            MeasurementUnits.listOfMUs = new string[3];
-            MeasurementUnits.listOfMUs[0] = "EUR";
-            MeasurementUnits.listOfMUs[1] = "HUF";
-            MeasurementUnits.listOfMUs[2] = "USD";
-        }
+        //private void UpdateListOfMUs()
+        //{
+        //    MeasurementUnits.listOfMUs = new string[3];
+        //    MeasurementUnits.listOfMUs[0] = "EUR";
+        //    MeasurementUnits.listOfMUs[1] = "HUF";
+        //    MeasurementUnits.listOfMUs[2] = "USD";
+        //}
 
         private void UpdateListOfQuantities()
         {
             QuantityTypes.listOfQuantities = new string[Default.quantities.Count];
             Default.quantities.Keys.CopyTo(QuantityTypes.listOfQuantities, 0);
+        }
+
+        private void UpdateListOfPriceMUs()
+        {
+            PriceMUs.listOfPriceMUs = new string[Enum.GetNames(typeof(Default.MoneyUnit)).Length];
+            PriceMUs.listOfPriceMUs = Enum.GetNames(typeof(Default.MoneyUnit));
         }
 
         private void solverSettingsToolStripMenuItem_Click(object sender, EventArgs e)
