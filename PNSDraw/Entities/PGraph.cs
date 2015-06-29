@@ -366,7 +366,7 @@ namespace PNSDraw
                     Material m = Materials.Find(x=>x.Name.Equals(edge.Name));
                     e.begin = m;
                     e.end = o;
-                    e.Rate = edge.Rate != null ? edge.Rate : Default.io_flowrate;
+                    e.Rate = edge.Rate;
                     Edges.Add(e);
                 }
 
@@ -376,7 +376,7 @@ namespace PNSDraw
                     Material m = Materials.Find(x => x.Name.Equals(edge.Name));
                     e.end = m;
                     e.begin = o;
-                    e.Rate = edge.Rate != null ? edge.Rate : Default.io_flowrate;
+                    e.Rate = edge.Rate;
                     Edges.Add(e);
                 }
             }

@@ -655,29 +655,29 @@ namespace PNSDraw
             foreach (Material mat in Graph.Materials)
             {
                 TreeNode tn = new TreeNode();
-                tn.ContextMenuStrip = contMenu;               
+                tn.ContextMenuStrip = contMenu;
+
+                tn.Name = mat.Name;
+                tn.Text = mat.Name;
+                tn.Nodes.Add("Price: " + mat.PriceProp.Value + " " + mat.PriceProp.MU);
+                tn.Nodes.Add("Req. flow: " + mat.ReqFlowProp.Value + " " + mat.ReqFlowProp.MU);
+                tn.Nodes.Add("Max. flow: " + mat.MaxFlowProp.Value + " " + mat.MaxFlowProp.MU);
+
                 switch (mat.Type)
                 {
                     case Globals.MaterialTypes.Raw:
-                        tn.Name = mat.Name;
-                        tn.Text = mat.Name;
                         treeMaterials.Nodes[0].Nodes[0].Nodes.Add(tn);
                         break;
                     case Globals.MaterialTypes.Intermediate:
-                        tn.Name = mat.Name;
-                        tn.Text = mat.Name;
                         treeMaterials.Nodes[0].Nodes[1].Nodes.Add(tn);
                         break;
                     case Globals.MaterialTypes.Product:
-                        tn.Name = mat.Name;
-                        tn.Text = mat.Name;
                         treeMaterials.Nodes[0].Nodes[2].Nodes.Add(tn);
                         break;
                     default:
                         break;
                 }
             }
-
 
             int i = 0;
             foreach (OperatingUnit ou in Graph.OperatingUnits)
@@ -686,12 +686,23 @@ namespace PNSDraw
                 tn2.ContextMenuStrip = contMenu;
                 tn2.Name = ou.Name;
                 tn2.Text = ou.Name;
+
+                tn2.Nodes.Add("Cap. lower bound: " + ou.CapacityLowerProp.Value + " " + ou.CapacityLowerProp.MU);
+                tn2.Nodes.Add("Cap. upper bound: " + ou.CapacityUpperProp.Value + " " + ou.CapacityUpperProp.MU);
+                tn2.Nodes.Add("Inv. cost - fix: " + ou.InvestmentCostFixProp.Value + " " + ou.InvestmentCostFixProp.MU);
+                tn2.Nodes.Add("Inv. cost - prop.: " + ou.InvestmentCostPropProp.Value + " " + ou.InvestmentCostPropProp.MU);
+                tn2.Nodes.Add("Oper. cost - fix: " + ou.OperatingCostFixProp.Value + " " + ou.OperatingCostFixProp.MU);
+                tn2.Nodes.Add("Oper. cost - prop.: " + ou.OperatingCostPropProp.Value + " " + ou.OperatingCostPropProp.MU);
+                tn2.Nodes.Add("Payout period: " + ou.PayoutPeriodProp.Value + " " + ou.PayoutPeriodProp.MU);
+                tn2.Nodes.Add("Working hour/year: " + ou.WorkingHourProp.Value + " " + ou.WorkingHourProp.MU);
+
                 treeOpUnits.Nodes[0].Nodes.Add(tn2);
                 treeOpUnits.Nodes[0].Nodes[i].Nodes.Add("Input materials");
                 treeOpUnits.Nodes[0].Nodes[i].Nodes.Add("Output materials");
+
                 foreach (Canvas.IConnectableObject obj in ou.connectedobjects)
                 {
-                    treeOpUnits.Nodes[0].Nodes[i].Nodes[0].Nodes.Add(((Material)obj).Name);
+                    treeOpUnits.Nodes[0].Nodes[i].Nodes[8].Nodes.Add(((Material)obj).Name);
                 }
 
                 foreach (Material mat in Graph.Materials)
@@ -701,7 +712,7 @@ namespace PNSDraw
                         OperatingUnit act = (OperatingUnit)obj;
                         if (act.Name == ou.Name)
                         {
-                            treeOpUnits.Nodes[0].Nodes[i].Nodes[1].Nodes.Add(mat.Name);
+                            treeOpUnits.Nodes[0].Nodes[i].Nodes[9].Nodes.Add(mat.Name);
                         }
                     }
                 }
@@ -719,6 +730,14 @@ namespace PNSDraw
             }
 
             treeMaterials.ExpandAll();
+
+            for (int k = 0; k < treeMaterials.Nodes[0].Nodes.Count; k++)
+            {
+                for(int j=0;j<treeMaterials.Nodes[0].Nodes[k].Nodes.Count;j++){
+                    treeMaterials.Nodes[0].Nodes[k].Nodes[j].Collapse();
+                }
+                
+            }
 
             treeMaterials.Update();
             treeOpUnits.Update();
