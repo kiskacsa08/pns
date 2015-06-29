@@ -259,8 +259,6 @@ namespace PNSDraw
                     {
                         Graph.ImportFromPNS(xml);
                         Graph.GenerateLayout();
-                        pnsCanvas1.Refresh();
-                        RefreshMinimap();
                     }
 
                     RefreshMinimap(); // Azert kell, mert a TextObjectek rajzolaskor szamoljak ki a meretuket
