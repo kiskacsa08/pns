@@ -306,7 +306,7 @@ namespace PNSDraw
                 m.ParameterList["reqflow"].Value = mat.Min != null ? ConvertManager.ToDouble(mat.Min) : Default.flow_rate_lower_bound;
                 m.ParameterList["maxflow"].Value = mat.Max != null ? ConvertManager.ToDouble(mat.Max) : Default.flow_rate_upper_bound;
 
-                Materials.Add(m);
+                AddMaterial(m);
             }
 
             foreach (XMLPNSMaterial mat in pgraph.Problem.Materials.Intermediate)
@@ -319,7 +319,7 @@ namespace PNSDraw
                 m.ParameterList["reqflow"].Value = mat.Min != null ? ConvertManager.ToDouble(mat.Min) : Default.flow_rate_lower_bound;
                 m.ParameterList["maxflow"].Value = mat.Max != null ? ConvertManager.ToDouble(mat.Max) : Default.flow_rate_upper_bound;
 
-                Materials.Add(m);
+                AddMaterial(m);
             }
 
             foreach (XMLPNSMaterial mat in pgraph.Problem.Materials.Product)
@@ -332,7 +332,7 @@ namespace PNSDraw
                 m.ParameterList["reqflow"].Value = mat.Min != null ? ConvertManager.ToDouble(mat.Min) : Default.flow_rate_lower_bound;
                 m.ParameterList["maxflow"].Value = mat.Max != null ? ConvertManager.ToDouble(mat.Max) : Default.flow_rate_upper_bound;
 
-                Materials.Add(m);
+                AddMaterial(m);
             }
 
             foreach (XMLPNSOperatingUnit oxml in pgraph.Problem.OperatingUnits)
@@ -358,7 +358,7 @@ namespace PNSDraw
                 o.ParameterList["payoutperiod"].Value = oxml.PayoutPeriod != null ? ConvertManager.ToDouble(oxml.PayoutPeriod) : Default.payout_period;
                 o.ParameterList["workinghour"].Value = oxml.WorkingHours != null ? ConvertManager.ToDouble(oxml.WorkingHours) : Default.working_hours_per_year;
 
-                OperatingUnits.Add(o);
+                AddOperatingUnit(o);
 
                 foreach (XMLPNSOperatingUnitMaterial edge in oxml.Input)
                 {
@@ -367,7 +367,7 @@ namespace PNSDraw
                     e.begin = m;
                     e.end = o;
                     e.Rate = edge.Rate;
-                    Edges.Add(e);
+                    AddEdge(e);
                 }
 
                 foreach (XMLPNSOperatingUnitMaterial edge in oxml.Output)
@@ -377,7 +377,7 @@ namespace PNSDraw
                     e.end = m;
                     e.begin = o;
                     e.Rate = edge.Rate;
-                    Edges.Add(e);
+                    AddEdge(e);
                 }
             }
 
