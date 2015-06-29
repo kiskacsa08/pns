@@ -12,41 +12,41 @@ namespace PNSDraw
 {
     public partial class ProblemSettingsDialog : Form
     {
-        private string[] massUnits = new string[] { "gram", "kilogram", "ton" };
-        private string[] volumeUnits = new string[] { "cubic meter", "cubic decimeter", "cubic centimeter" };
-        private string[] substanceUnits = new string[] { "mole", "millimole", "kilomole" };
-        private string[] energyUnits = new string[] { "joule", "kilojoule", "megajoule", "gigajoule", "terajoule", "watthour", "kilowatthour", "megawatthour", "gigawatthour", "terawatthour" };
-        private string[] lengthUnits = new string[] { "meter", "kilometer", "decimeter", "centimeter", "millimeter", "coll" };
-        private string[] currentUnits = new string[] { "ampere", "milliampere", "kiloampere" };
-        private string[] areaUnits = new string[] { "square meter", "square kilometer", "square centimeter", "hectar" };
-        private string[] speedUnits = new string[] { "meters per second", "kilometers per hour", "miles per hour" };
-        private string[] accelerationUnits = new string[] { "meter per second squared" };
-        private string[] massDensUnits = new string[] { "kilogram per cubic meter", "ton per cubic meter" };
-        private string[] thermoTempUnits = new string[] { "kelvin" };
-        private string[] luminIntensUnits = new string[] { "candela" };
-        private string[] concentrationUnits = new string[] { "mole per cubic meter", "mole per cubic decimeter" };
-        private string[] forceUnits = new string[] { "newton" };
-        private string[] pressureUnits = new string[] { "pascal", "kilopascal", "megapascal" };
-        private string[] powerUnits = new string[] { "watt", "kilowatt", "megawatt", "gigawatt", "terawatt" };
-        private string[] capacityUnits = new string[] { "unit" };
+        //private string[] massUnits = new string[] { "gram", "kilogram", "ton" };
+        //private string[] volumeUnits = new string[] { "cubic meter", "cubic decimeter", "cubic centimeter" };
+        //private string[] substanceUnits = new string[] { "mole", "millimole", "kilomole" };
+        //private string[] energyUnits = new string[] { "joule", "kilojoule", "megajoule", "gigajoule", "terajoule", "watthour", "kilowatthour", "megawatthour", "gigawatthour", "terawatthour" };
+        //private string[] lengthUnits = new string[] { "meter", "kilometer", "decimeter", "centimeter", "millimeter", "coll" };
+        //private string[] currentUnits = new string[] { "ampere", "milliampere", "kiloampere" };
+        //private string[] areaUnits = new string[] { "square meter", "square kilometer", "square centimeter", "hectar" };
+        //private string[] speedUnits = new string[] { "meters per second", "kilometers per hour", "miles per hour" };
+        //private string[] accelerationUnits = new string[] { "meter per second squared" };
+        //private string[] massDensUnits = new string[] { "kilogram per cubic meter", "ton per cubic meter" };
+        //private string[] thermoTempUnits = new string[] { "kelvin" };
+        //private string[] luminIntensUnits = new string[] { "candela" };
+        //private string[] concentrationUnits = new string[] { "mole per cubic meter", "mole per cubic decimeter" };
+        //private string[] forceUnits = new string[] { "newton" };
+        //private string[] pressureUnits = new string[] { "pascal", "kilopascal", "megapascal" };
+        //private string[] powerUnits = new string[] { "watt", "kilowatt", "megawatt", "gigawatt", "terawatt" };
+        //private string[] capacityUnits = new string[] { "unit" };
 
-        private int selectedMassUnit;
-        private int selectedVolumeUnit;
-        private int selectedSubstanceUnit;
-        private int selectedEnergyUnit;
-        private int selectedLengthUnit;
-        private int selectedCurrentUnit;
-        private int selectedAreaUnit;
-        private int selectedSpeedUnit;
-        private int selectedAccelerationUnit;
-        private int selectedMassDensUnit;
-        private int selectedThermoTempUnit;
-        private int selectedLuminIntensUnit;
-        private int selectedConcentrationUnit;
-        private int selectedForceUnit;
-        private int selectedPressureUnit;
-        private int selectedPowerUnit;
-        private int selectedCapacityUnit;
+        private string selectedMassUnit;
+        private string selectedVolumeUnit;
+        private string selectedSubstanceUnit;
+        private string selectedEnergyUnit;
+        private string selectedLengthUnit;
+        private string selectedCurrentUnit;
+        private string selectedAreaUnit;
+        private string selectedSpeedUnit;
+        private string selectedAccelerationUnit;
+        private string selectedMassDensUnit;
+        private string selectedThermoTempUnit;
+        private string selectedLuminIntensUnit;
+        private string selectedConcentrationUnit;
+        private string selectedForceUnit;
+        private string selectedPressureUnit;
+        private string selectedPowerUnit;
+        private string selectedCapacityUnit;
 
         public ProblemSettingsDialog()
         {
@@ -55,27 +55,28 @@ namespace PNSDraw
 
         private void SolverSettingsDialog_Load(object sender, EventArgs e)
         {
-            selectedMassUnit = Array.IndexOf(Default.quantities["Mass"], Default.mass_mu);
-            selectedVolumeUnit = Array.IndexOf(Default.quantities["Volume"], Default.vol_mu);
-            selectedSubstanceUnit = Array.IndexOf(Default.quantities["Amount of substance"], Default.sub_mu);
-            selectedEnergyUnit = Array.IndexOf(Default.quantities["Energy, work, heat"], Default.energy_mu);
-            selectedLengthUnit = Array.IndexOf(Default.quantities["Length"], Default.length_mu);
-            selectedCurrentUnit = Array.IndexOf(Default.quantities["Electric current"], Default.curr_mu);
-            selectedAreaUnit = Array.IndexOf(Default.quantities["Area"], Default.area_mu);
-            selectedSpeedUnit = Array.IndexOf(Default.quantities["Speed"], Default.speed_mu);
-            selectedAccelerationUnit = Array.IndexOf(Default.quantities["Acceleration"], Default.acc_mu);
-            selectedMassDensUnit = Array.IndexOf(Default.quantities["Mass density"], Default.mdens_mu);
-            selectedThermoTempUnit = Array.IndexOf(Default.quantities["Thermodinamic temperature"], Default.temp_mu);
-            selectedLuminIntensUnit = Array.IndexOf(Default.quantities["Luminous intensity"], Default.lum_mu);
-            selectedConcentrationUnit = Array.IndexOf(Default.quantities["Concentration"], Default.conc_mu);
-            selectedForceUnit = Array.IndexOf(Default.quantities["Force"], Default.force_mu);
-            selectedPressureUnit = Array.IndexOf(Default.quantities["Pressure"], Default.press_mu);
-            selectedPowerUnit = Array.IndexOf(Default.quantities["Power"], Default.power_mu);
-            selectedCapacityUnit = Array.IndexOf(Default.quantities["Capacity"], Default.cap_mu);
+            selectedMassUnit = Default.GetDefaultMUName("Mass") + " (" + Default.GetDefaultMUSymbol("Mass") + ")";
+            selectedVolumeUnit = Default.GetDefaultMUName("Volume") + " (" + Default.GetDefaultMUSymbol("Volume") + ")";
+            selectedSubstanceUnit = Default.GetDefaultMUName("Amount of substance") + " (" + Default.GetDefaultMUSymbol("Amount of substance") + ")";
+            selectedEnergyUnit = Default.GetDefaultMUName("Energy, work, heat") + " (" + Default.GetDefaultMUSymbol("Energy, work, heat") + ")";
+            selectedLengthUnit = Default.GetDefaultMUName("Length") + " (" + Default.GetDefaultMUSymbol("Length") + ")";
+            selectedCurrentUnit = Default.GetDefaultMUName("Electric current") + " (" + Default.GetDefaultMUSymbol("Electric current") + ")";
+            selectedAreaUnit = Default.GetDefaultMUName("Area") + " (" + Default.GetDefaultMUSymbol("Area") + ")";
+            selectedSpeedUnit = Default.GetDefaultMUName("Speed") + " (" + Default.GetDefaultMUSymbol("Speed") + ")";
+            selectedAccelerationUnit = Default.GetDefaultMUName("Acceleration") + " (" + Default.GetDefaultMUSymbol("Acceleration") + ")";
+            selectedMassDensUnit = Default.GetDefaultMUName("Mass density") + " (" + Default.GetDefaultMUSymbol("Mass density") + ")";
+            selectedThermoTempUnit = Default.GetDefaultMUName("Thermodinamic temperature") + " (" + Default.GetDefaultMUSymbol("Thermodinamic temperature") + ")";
+            selectedLuminIntensUnit = Default.GetDefaultMUName("Luminous intensity") + " (" + Default.GetDefaultMUSymbol("Luminous intensity") + ")";
+            selectedConcentrationUnit = Default.GetDefaultMUName("Concentration") + " (" + Default.GetDefaultMUSymbol("Concentration") + ")";
+            selectedForceUnit = Default.GetDefaultMUName("Force") + " (" + Default.GetDefaultMUSymbol("Force") + ")";
+            selectedPressureUnit = Default.GetDefaultMUName("Pressure") + " (" + Default.GetDefaultMUSymbol("Pressure") + ")";
+            selectedPowerUnit = Default.GetDefaultMUName("Power") + " (" + Default.GetDefaultMUSymbol("Power") + ")";
+            selectedCapacityUnit = Default.GetDefaultMUName("Capacity") + " (" + Default.GetDefaultMUSymbol("Capacity") + ")";
 
             cmbDefMat.SelectedIndex = Default.type;
-            cmbDefUnit.SelectedIndex = selectedMassUnit;
-            cmbQuantity.SelectedIndex = 0;
+            cmbQuantity.SelectedItem = Default.quant_type;
+            cmbDefUnit.DataSource = Default.GetListOfMUs(cmbQuantity.SelectedItem.ToString());
+            SetSelectedUnit();
             cmbMoneyUnit.SelectedIndex = (int)Default.money_mu;
             cmbTimeUnit.SelectedIndex = (int)Default.time_mu;
             numWorkingHour.Value = (decimal)Default.working_hours_per_year;
@@ -96,23 +97,24 @@ namespace PNSDraw
         private void btnApply_Click(object sender, EventArgs e)
         {
             Default.type = cmbDefMat.SelectedIndex;
-            Default.mass_mu = Default.quantities["Mass"][selectedMassUnit];
-            Default.vol_mu = Default.quantities["Volume"][selectedVolumeUnit];
-            Default.sub_mu = Default.quantities["Amount of substance"][selectedSubstanceUnit];
-            Default.energy_mu = Default.quantities["Energy, work, heat"][selectedEnergyUnit];
-            Default.length_mu = Default.quantities["Length"][selectedLengthUnit];
-            Default.curr_mu = Default.quantities["Electric current"][selectedCurrentUnit];
-            Default.area_mu = Default.quantities["Area"][selectedAreaUnit];
-            Default.speed_mu = Default.quantities["Speed"][selectedSpeedUnit];
-            Default.acc_mu = Default.quantities["Acceleration"][selectedAccelerationUnit];
-            Default.mdens_mu = Default.quantities["Mass density"][selectedMassDensUnit];
-            Default.temp_mu = Default.quantities["Thermodinamic temperature"][selectedThermoTempUnit];
-            Default.lum_mu = Default.quantities["Luminous intensity"][selectedLuminIntensUnit];
-            Default.conc_mu = Default.quantities["Concentration"][selectedConcentrationUnit];
-            Default.force_mu = Default.quantities["Force"][selectedForceUnit];
-            Default.press_mu = Default.quantities["Pressure"][selectedPressureUnit];
-            Default.power_mu = Default.quantities["Power"][selectedPowerUnit];
-            Default.cap_mu = Default.quantities["Capacity"][selectedCapacityUnit];
+            Default.quant_type = (string)cmbQuantity.SelectedItem;
+            Default.mass_mu = Default.GetMUSymbolFromText(selectedMassUnit);
+            Default.vol_mu = Default.GetMUSymbolFromText(selectedVolumeUnit);
+            Default.sub_mu = Default.GetMUSymbolFromText(selectedSubstanceUnit);
+            Default.energy_mu = Default.GetMUSymbolFromText(selectedEnergyUnit);
+            Default.length_mu = Default.GetMUSymbolFromText(selectedLengthUnit);
+            Default.curr_mu = Default.GetMUSymbolFromText(selectedCurrentUnit);
+            Default.area_mu = Default.GetMUSymbolFromText(selectedAreaUnit);
+            Default.speed_mu = Default.GetMUSymbolFromText(selectedSpeedUnit);
+            Default.acc_mu = Default.GetMUSymbolFromText(selectedAccelerationUnit);
+            Default.mdens_mu = Default.GetMUSymbolFromText(selectedMassDensUnit);
+            Default.temp_mu = Default.GetMUSymbolFromText(selectedThermoTempUnit);
+            Default.lum_mu = Default.GetMUSymbolFromText(selectedLuminIntensUnit);
+            Default.conc_mu = Default.GetMUSymbolFromText(selectedConcentrationUnit);
+            Default.force_mu = Default.GetMUSymbolFromText(selectedForceUnit);
+            Default.press_mu = Default.GetMUSymbolFromText(selectedPressureUnit);
+            Default.power_mu = Default.GetMUSymbolFromText(selectedPowerUnit);
+            Default.cap_mu = Default.GetMUSymbolFromText(selectedCapacityUnit);
             Default.money_mu = (Default.MoneyUnit)cmbMoneyUnit.SelectedIndex;
             Default.time_mu = (Default.TimeUnit)cmbTimeUnit.SelectedIndex;
             Default.working_hours_per_year = (int)numWorkingHour.Value;
@@ -140,64 +142,12 @@ namespace PNSDraw
 
         private void cmbQuantity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmbDefUnit.DataSource = Default.quantities[cmbQuantity.SelectedItem.ToString()];
-
-            switch (cmbQuantity.SelectedIndex)
+            if (btnApply.Enabled == false)
             {
-                case 0:
-                    cmbDefUnit.SelectedIndex = selectedMassUnit;
-                    break;
-                case 1:
-                    cmbDefUnit.SelectedIndex = selectedVolumeUnit;
-                    break;
-                case 2:
-                    cmbDefUnit.SelectedIndex = selectedSubstanceUnit;
-                    break;
-                case 3:
-                    cmbDefUnit.SelectedIndex = selectedEnergyUnit;
-                    break;
-                case 4:
-                    cmbDefUnit.SelectedIndex = selectedLengthUnit;
-                    break;
-                case 5:
-                    cmbDefUnit.SelectedIndex = selectedCurrentUnit;
-                    break;
-                case 6:
-                    cmbDefUnit.SelectedIndex = selectedAreaUnit;
-                    break;
-                case 7:
-                    cmbDefUnit.SelectedIndex = selectedSpeedUnit;
-                    break;
-                case 8:
-                    cmbDefUnit.SelectedIndex = selectedAccelerationUnit;
-                    break;
-                case 9:
-                    cmbDefUnit.SelectedIndex = selectedMassDensUnit;
-                    break;
-                case 10:
-                    cmbDefUnit.SelectedIndex = selectedThermoTempUnit;
-                    break;
-                case 11:
-                    cmbDefUnit.SelectedIndex = selectedLuminIntensUnit;
-                    break;
-                case 12:
-                    cmbDefUnit.SelectedIndex = selectedConcentrationUnit;
-                    break;
-                case 13:
-                    cmbDefUnit.SelectedIndex = selectedForceUnit;
-                    break;
-                case 14:
-                    cmbDefUnit.SelectedIndex = selectedPressureUnit;
-                    break;
-                case 15:
-                    cmbDefUnit.SelectedIndex = selectedPowerUnit;
-                    break;
-                case 16:
-                    cmbDefUnit.SelectedIndex = selectedCapacityUnit;
-                    break;
-                default:
-                    break;
+                btnApply.Enabled = true;
             }
+            cmbDefUnit.DataSource = Default.GetListOfMUs(cmbQuantity.SelectedItem.ToString());
+            SetSelectedUnit();
         }
 
         private void cmbDefUnit_SelectedIndexChanged(object sender, EventArgs e)
@@ -210,55 +160,115 @@ namespace PNSDraw
             switch (cmbQuantity.SelectedIndex)
             {
                 case 0:
-                    selectedMassUnit = cmbDefUnit.SelectedIndex;
+                    selectedMassUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 1:
-                    selectedVolumeUnit = cmbDefUnit.SelectedIndex;
+                    selectedVolumeUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 2:
-                    selectedSubstanceUnit = cmbDefUnit.SelectedIndex;
+                    selectedSubstanceUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 3:
-                    selectedEnergyUnit = cmbDefUnit.SelectedIndex;
+                    selectedEnergyUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 4:
-                    selectedLengthUnit = cmbDefUnit.SelectedIndex;
+                    selectedLengthUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 5:
-                    selectedCurrentUnit = cmbDefUnit.SelectedIndex;
+                    selectedCurrentUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 6:
-                    selectedAreaUnit = cmbDefUnit.SelectedIndex;
+                    selectedAreaUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 7:
-                    selectedSpeedUnit = cmbDefUnit.SelectedIndex;
+                    selectedSpeedUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 8:
-                    selectedAccelerationUnit = cmbDefUnit.SelectedIndex;
+                    selectedAccelerationUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 9:
-                    selectedMassDensUnit = cmbDefUnit.SelectedIndex;
+                    selectedMassDensUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 10:
-                    selectedThermoTempUnit = cmbDefUnit.SelectedIndex;
+                    selectedThermoTempUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 11:
-                    selectedLuminIntensUnit = cmbDefUnit.SelectedIndex;
+                    selectedLuminIntensUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 12:
-                    selectedConcentrationUnit = cmbDefUnit.SelectedIndex;
+                    selectedConcentrationUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 13:
-                    selectedForceUnit = cmbDefUnit.SelectedIndex;
+                    selectedForceUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 14:
-                    selectedPressureUnit = cmbDefUnit.SelectedIndex;
+                    selectedPressureUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 15:
-                    selectedPowerUnit = cmbDefUnit.SelectedIndex;
+                    selectedPowerUnit = cmbDefUnit.SelectedItem.ToString();
                     break;
                 case 16:
-                    selectedCapacityUnit = cmbDefUnit.SelectedIndex;
+                    selectedCapacityUnit = cmbDefUnit.SelectedItem.ToString();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void SetSelectedUnit()
+        {
+            switch (cmbQuantity.SelectedItem.ToString())
+            {
+                case "Mass":
+                    cmbDefUnit.SelectedItem = selectedMassUnit;
+                    break;
+                case "Volume":
+                    cmbDefUnit.SelectedItem = selectedVolumeUnit;
+                    break;
+                case "Amount of substance":
+                    cmbDefUnit.SelectedItem = selectedSubstanceUnit;
+                    break;
+                case "Energy, work, heat":
+                    cmbDefUnit.SelectedItem = selectedEnergyUnit;
+                    break;
+                case "Length":
+                    cmbDefUnit.SelectedItem = selectedLengthUnit;
+                    break;
+                case "Electric current":
+                    cmbDefUnit.SelectedItem = selectedCurrentUnit;
+                    break;
+                case "Area":
+                    cmbDefUnit.SelectedItem = selectedAreaUnit;
+                    break;
+                case "Speed":
+                    cmbDefUnit.SelectedItem = selectedSpeedUnit;
+                    break;
+                case "Acceleration":
+                    cmbDefUnit.SelectedItem = selectedAccelerationUnit;
+                    break;
+                case "Mass density":
+                    cmbDefUnit.SelectedItem = selectedMassDensUnit;
+                    break;
+                case "Thermodinamic temperature":
+                    cmbDefUnit.SelectedItem = selectedThermoTempUnit;
+                    break;
+                case "Luminous intensity":
+                    cmbDefUnit.SelectedItem = selectedLuminIntensUnit;
+                    break;
+                case "Concentration":
+                    cmbDefUnit.SelectedItem = selectedConcentrationUnit;
+                    break;
+                case "Force":
+                    cmbDefUnit.SelectedItem = selectedForceUnit;
+                    break;
+                case "Pressure":
+                    cmbDefUnit.SelectedItem = selectedPressureUnit;
+                    break;
+                case "Power":
+                    cmbDefUnit.SelectedItem = selectedPowerUnit;
+                    break;
+                case "Capacity":
+                    cmbDefUnit.SelectedItem = selectedCapacityUnit;
                     break;
                 default:
                     break;

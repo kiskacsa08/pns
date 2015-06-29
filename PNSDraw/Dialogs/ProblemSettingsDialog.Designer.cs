@@ -34,6 +34,10 @@
             this.btnApply = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.numPayoutPeriod = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.numWorkingHour = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
             this.cmbQuantity = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -66,13 +70,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cmbDefMat = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.numWorkingHour = new System.Windows.Forms.NumericUpDown();
-            this.numPayoutPeriod = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPayoutPeriod)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numWorkingHour)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numIProp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numIFixed)).BeginInit();
@@ -84,8 +86,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numMatPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMatFlowRateUpper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMatFlowRateLower)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numWorkingHour)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numPayoutPeriod)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -164,6 +164,50 @@
             this.tabPage1.Text = "Measurement Units";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // numPayoutPeriod
+            // 
+            this.numPayoutPeriod.Location = new System.Drawing.Point(183, 371);
+            this.numPayoutPeriod.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numPayoutPeriod.Name = "numPayoutPeriod";
+            this.numPayoutPeriod.Size = new System.Drawing.Size(120, 20);
+            this.numPayoutPeriod.TabIndex = 14;
+            this.numPayoutPeriod.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(22, 373);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(137, 13);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "Default payout period (year)";
+            // 
+            // numWorkingHour
+            // 
+            this.numWorkingHour.Location = new System.Drawing.Point(183, 305);
+            this.numWorkingHour.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numWorkingHour.Name = "numWorkingHour";
+            this.numWorkingHour.Size = new System.Drawing.Size(120, 20);
+            this.numWorkingHour.TabIndex = 10;
+            this.numWorkingHour.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(22, 307);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(146, 13);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "Default working hour per year";
+            // 
             // cmbQuantity
             // 
             this.cmbQuantity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -216,7 +260,8 @@
             this.cmbMoneyUnit.FormattingEnabled = true;
             this.cmbMoneyUnit.Items.AddRange(new object[] {
             "EUR",
-            "HUF"});
+            "HUF",
+            "USD"});
             this.cmbMoneyUnit.Location = new System.Drawing.Point(183, 238);
             this.cmbMoneyUnit.Name = "cmbMoneyUnit";
             this.cmbMoneyUnit.Size = new System.Drawing.Size(185, 21);
@@ -566,51 +611,7 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Default material type";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(22, 307);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(146, 13);
-            this.label12.TabIndex = 9;
-            this.label12.Text = "Default working hour per year";
-            // 
-            // numWorkingHour
-            // 
-            this.numWorkingHour.Location = new System.Drawing.Point(183, 305);
-            this.numWorkingHour.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.numWorkingHour.Name = "numWorkingHour";
-            this.numWorkingHour.Size = new System.Drawing.Size(120, 20);
-            this.numWorkingHour.TabIndex = 10;
-            this.numWorkingHour.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
-            // 
-            // numPayoutPeriod
-            // 
-            this.numPayoutPeriod.Location = new System.Drawing.Point(183, 371);
-            this.numPayoutPeriod.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.numPayoutPeriod.Name = "numPayoutPeriod";
-            this.numPayoutPeriod.Size = new System.Drawing.Size(120, 20);
-            this.numPayoutPeriod.TabIndex = 14;
-            this.numPayoutPeriod.ValueChanged += new System.EventHandler(this.cmbDefMat_SelectedIndexChanged);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(22, 373);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(137, 13);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "Default payout period (year)";
-            // 
-            // SolverSettingsDialog
+            // ProblemSettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -618,13 +619,15 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "SolverSettingsDialog";
-            this.Text = "Solver Settings";
+            this.Name = "ProblemSettingsDialog";
+            this.Text = "Problem Settings";
             this.Load += new System.EventHandler(this.SolverSettingsDialog_Load);
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPayoutPeriod)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numWorkingHour)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numIProp)).EndInit();
@@ -637,8 +640,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numMatPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMatFlowRateUpper)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMatFlowRateLower)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numWorkingHour)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numPayoutPeriod)).EndInit();
             this.ResumeLayout(false);
 
         }
