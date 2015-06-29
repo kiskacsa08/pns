@@ -273,10 +273,10 @@ namespace PNSDraw
             Highlighted = false;
             Name = container.GenerateName(this);
             Title = "";
-            QuantityType = "Mass";
-            MeasurementUnit = "ton";
+            QuantityType = Default.quant_type;
+            MeasurementUnit = Default.GetTextFromSymbol(Default.GetDefaultMUSymbol(QuantityType));
             UpdateListOfMUs();
-            PriceMU = "EUR";
+            PriceMU = Default.money_mu.ToString() + "/" + Default.time_mu;
 
             this.QuantityPropertyChanged += new EventHandler(QuantityPropChanged);
             this.MUPropertyChanged += new EventHandler(MUPropChanged);
@@ -308,11 +308,11 @@ namespace PNSDraw
             parameterlist["reqflow"].Prefix = "Required flow: ";
             parameterlist["reqflow"].Value = Default.flow_rate_lower_bound;
             parameterlist["reqflow"].NonValue = -1;
-            parameterlist["reqflow"].MU = MeasurementUnit;
+            parameterlist["reqflow"].MU = Default.GetMUSymbolFromText(MeasurementUnit) + "/" + Default.time_mu;
             parameterlist["maxflow"].Prefix = "Maximum flow: ";
             parameterlist["maxflow"].Value = Default.flow_rate_upper_bound;
             parameterlist["maxflow"].NonValue = -1;
-            parameterlist["maxflow"].MU = MeasurementUnit;
+            parameterlist["maxflow"].MU = Default.GetMUSymbolFromText(MeasurementUnit) + "/" + Default.time_mu;
             
         }
 
@@ -608,8 +608,8 @@ namespace PNSDraw
 
         void MUPropChanged(object sender, EventArgs e)
         {
-            parameterlist["reqflow"].MU = MeasurementUnit;
-            parameterlist["maxflow"].MU = MeasurementUnit;
+            parameterlist["reqflow"].MU = Default.GetMUSymbolFromText(MeasurementUnit) + "/" + Default.time_mu;
+            parameterlist["maxflow"].MU = Default.GetMUSymbolFromText(MeasurementUnit) + "/" + Default.time_mu;
         }
 
         void QuantityPropChanged(object sender, EventArgs e)
@@ -619,55 +619,55 @@ namespace PNSDraw
             switch (QuantityType)
             {
                 case "Mass":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.mass_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.mass_mu);
                     break;
                 case "Volume":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.vol_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.vol_mu);
                     break;
                 case "Amount of substance":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.sub_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.sub_mu);
                     break;
                 case "Energy, work, heat":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.energy_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.energy_mu);
                     break;
                 case "Length":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.length_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.length_mu);
                     break;
                 case "Electric current":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.curr_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.curr_mu);
                     break;
                 case "Area":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.area_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.area_mu);
                     break;
                 case "Speed":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.speed_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.speed_mu);
                     break;
                 case "Acceleration":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.acc_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.acc_mu);
                     break;
                 case "Mass density":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.mdens_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.mdens_mu);
                     break;
                 case "Thermodinamic temperature":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.temp_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.temp_mu);
                     break;
                 case "Luminous intensity":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.lum_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.lum_mu);
                     break;
                 case "Concentration":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.conc_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.conc_mu);
                     break;
                 case "Force":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.force_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.force_mu);
                     break;
                 case "Pressure":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.press_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.press_mu);
                     break;
                 case "Power":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.power_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.power_mu);
                     break;
                 case "Capacity":
-                    MeasurementUnitProp = Default.quantities[QuantityType][Array.IndexOf(Default.quantities[QuantityType], Default.cap_mu)];
+                    MeasurementUnitProp = Default.GetTextFromSymbol(Default.cap_mu);
                     break;
                 default:
                     break;
@@ -676,8 +676,8 @@ namespace PNSDraw
 
         private void UpdateListOfMUs()
         {
-            MeasurementUnits.listOfMUs = new string[Default.quantities[QuantityType].Length];
-            MeasurementUnits.listOfMUs = Default.quantities[QuantityType];
+            MeasurementUnits.listOfMUs = new string[Default.GetListOfMUs(QuantityType).Count];
+            MeasurementUnits.listOfMUs = Default.GetListOfMUs(QuantityType).ToArray();
         }
 
         public void OnAddToGraph()
@@ -1311,7 +1311,7 @@ namespace PNSDraw
             }
             set
             {
-                PriceMU = value;
+                PriceMU = value + "/" + Default.time_mu;
                 OnPriceMUNotify();
             }
         }
