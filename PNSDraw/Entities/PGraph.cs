@@ -6,6 +6,9 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Globalization;
 using System.Drawing;
+using GraphVizWrapper.Queries;
+using GraphVizWrapper.Commands;
+using GraphVizWrapper;
 
 namespace PNSDraw
 {
@@ -1579,6 +1582,84 @@ namespace PNSDraw
                         e.RemoveNode(en);
                     }
                 }
+            }
+        }
+
+        public void GenerateLayout()
+        {
+            var getStartProcessQuery = new GetStartProcessQuery();
+            var getProcessStartInfoQuery = new GetProcessStartInfoQuery();
+            var registerLayoutPluginCommand = new RegisterLayoutPluginCommand(getProcessStartInfoQuery, getStartProcessQuery);
+            var wrapper = new GraphGeneration(getStartProcessQuery, getProcessStartInfoQuery, registerLayoutPluginCommand);
+            Console.WriteLine(Globals.selectedEngine);
+            if (Globals.selectedEngine == "Neato")
+            {
+                wrapper.RenderingEngine = Enums.RenderingEngine.Neato;
+            }
+            else
+            {
+                if (Globals.selectedEngine == "Fdp")
+                {
+                    wrapper.RenderingEngine = Enums.RenderingEngine.Fdp;
+                }
+                else
+                {
+                    if (Globals.selectedEngine == "Sfdp")
+                    {
+                        wrapper.RenderingEngine = Enums.RenderingEngine.Sfdp;
+                    }
+                    else
+                    {
+                        if (Globals.selectedEngine == "Twopi")
+                        {
+                            wrapper.RenderingEngine = Enums.RenderingEngine.Twopi;
+                        }
+                        else
+                        {
+                            if (Globals.selectedEngine == "Circo")
+                            {
+                                wrapper.RenderingEngine = Enums.RenderingEngine.Circo;
+                            }
+                            else
+                            {
+                                wrapper.RenderingEngine = Enums.RenderingEngine.Dot;
+                            }
+                        }
+                    }
+                }
+            }
+            byte[] output = wrapper.GenerateGraph(ConvertDOTFormat(false), Enums.GraphReturnType.plain);
+            var stream = new StreamReader(new MemoryStream(output));
+            string line;
+            while ((line = stream.ReadLine()) != null)
+            {
+                string[] words = line.Split(' ');
+                if (String.Compare(words[0], "node") == 0)
+                {
+                    modifyGraph(words[1],
+                                        Convert.ToInt32(Convert.ToDouble(words[2], CultureInfo.InvariantCulture)) * Globals.DefaultNodeDistance * Globals.GridSize + Globals.DefaultRootX * Globals.GridSize,
+                                        Convert.ToInt32(Convert.ToDouble(words[3], CultureInfo.InvariantCulture)) * Globals.DefaultLayerDistance * Globals.GridSize + Globals.DefaultRootY * Globals.GridSize);
+                }
+            }
+            removeEdgeNodes();
+
+            if (Globals.WeightedArcs)
+            {
+                //lemeno elek nagyobb sullyal
+                byte[] output2 = wrapper.GenerateGraph(ConvertDOTFormat(true), Enums.GraphReturnType.plain);
+                var stream2 = new StreamReader(new MemoryStream(output2));
+                string line2;
+                while ((line2 = stream2.ReadLine()) != null)
+                {
+                    string[] words = line2.Split(' ');
+                    if (String.Compare(words[0], "node") == 0)
+                    {
+                        modifyGraph(words[1],
+                                            Convert.ToInt32(Convert.ToDouble(words[2], CultureInfo.InvariantCulture)) * Globals.DefaultNodeDistance * Globals.GridSize + Globals.DefaultRootX * Globals.GridSize,
+                                            Convert.ToInt32(Convert.ToDouble(words[3], CultureInfo.InvariantCulture)) * Globals.DefaultLayerDistance * Globals.GridSize + Globals.DefaultRootY * Globals.GridSize);
+                    }
+                }
+                addEdgeNodes();
             }
         }
     }
