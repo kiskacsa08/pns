@@ -68,6 +68,7 @@ namespace PNSDraw.Dialogs
                 else
                 {
                     MessageBox.Show("Error pinging host:'" + txtHost.Text + ":" + numPort.Value.ToString() + "'");
+                    Default.online = false;
                 }
             }
             else
