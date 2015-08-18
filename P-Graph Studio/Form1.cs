@@ -1339,7 +1339,6 @@ namespace PNSDraw
                 {
                     SignInButton.Text = Config.Instance.Login.Username + " / Logout";
                 }
-
             }
             else
             {

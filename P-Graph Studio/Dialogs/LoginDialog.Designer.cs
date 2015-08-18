@@ -51,8 +51,8 @@ namespace PNSDraw
             this.loginButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.registerGroupBox = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -88,14 +88,14 @@ namespace PNSDraw
             this.loginGroupBox.Controls.Add(this.loginButton);
             this.loginGroupBox.Controls.Add(this.label3);
             this.loginGroupBox.Controls.Add(this.cancelButton);
-            this.loginGroupBox.Controls.Add(this.usernameTextBox);
             this.loginGroupBox.Controls.Add(this.passwordTextBox);
+            this.loginGroupBox.Controls.Add(this.usernameTextBox);
             this.loginGroupBox.Location = new System.Drawing.Point(12, 12);
             this.loginGroupBox.Name = "loginGroupBox";
             this.loginGroupBox.Size = new System.Drawing.Size(295, 194);
             this.loginGroupBox.TabIndex = 0;
             this.loginGroupBox.TabStop = false;
-            this.loginGroupBox.Text = "Login";
+            this.loginGroupBox.Text = "Change Password";
             // 
             // forgotPasswordButton
             // 
@@ -142,7 +142,7 @@ namespace PNSDraw
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(7, 107);
+            this.label3.Location = new System.Drawing.Point(8, 108);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.MaximumSize = new System.Drawing.Size(105, 25);
             this.label3.MinimumSize = new System.Drawing.Size(105, 25);
@@ -163,6 +163,16 @@ namespace PNSDraw
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // passwordTextBox
+            // 
+            this.passwordTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.passwordTextBox.Location = new System.Drawing.Point(121, 111);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.PasswordChar = '•';
+            this.passwordTextBox.Size = new System.Drawing.Size(164, 20);
+            this.passwordTextBox.TabIndex = 2;
+            this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.loginPanel_KeyDown);
+            // 
             // usernameTextBox
             // 
             this.usernameTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -171,15 +181,6 @@ namespace PNSDraw
             this.usernameTextBox.Size = new System.Drawing.Size(164, 20);
             this.usernameTextBox.TabIndex = 1;
             this.usernameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.loginPanel_KeyDown);
-            // 
-            // passwordTextBox
-            // 
-            this.passwordTextBox.Location = new System.Drawing.Point(120, 110);
-            this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.PasswordChar = '•';
-            this.passwordTextBox.Size = new System.Drawing.Size(164, 20);
-            this.passwordTextBox.TabIndex = 2;
-            this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.loginPanel_KeyDown);
             // 
             // registerGroupBox
             // 
@@ -342,25 +343,25 @@ namespace PNSDraw
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button loginButton;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox upPassTextBox;
-        private System.Windows.Forms.TextBox upEmailTextBox;
-        private System.Windows.Forms.TextBox upUsernameTextBox;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox upPassConfirmTextBox;
         private System.Windows.Forms.Button registerUpButton;
         private System.Windows.Forms.Button cancelButton2;
         private System.Windows.Forms.GroupBox loginGroupBox;
         private System.Windows.Forms.GroupBox registerGroupBox;
         private System.Windows.Forms.LinkLabel forgotPasswordButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox upUsernameTextBox;
+        private System.Windows.Forms.TextBox upEmailTextBox;
+        private System.Windows.Forms.TextBox upPassConfirmTextBox;
+        private System.Windows.Forms.TextBox upPassTextBox;
+        private System.Windows.Forms.TextBox passwordTextBox;
 
     }
 }

@@ -41,6 +41,7 @@ namespace PNSDraw.Excel_export
             f_mats = mats;
             f_ous = ous;
             f_solutions = solutions;
+            f_solutions.RemoveAll(x => x.Title == "Maximal Structure");
             raw_list = new List<Material>();
             prod_list = new List<Material>();
             foreach (Material mat in f_mats)

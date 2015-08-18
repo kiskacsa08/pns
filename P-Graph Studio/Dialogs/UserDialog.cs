@@ -37,7 +37,7 @@ namespace PNSDraw
         {
             LoginSuccess = false;
             LogoutSuccess = false;
-            
+
             InitializeComponent();
 
             chUsernameTextBox.Text = username;

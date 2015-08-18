@@ -68,7 +68,6 @@ namespace PNSDraw
             }
 
             BsonDocument info = GetUser(username, password);
-            Console.WriteLine(info.ToString());
             if (info["code"].AsInt32 == 200)
             {
                 Config.Instance.Login.Username = info["body"]["username"].AsString;
