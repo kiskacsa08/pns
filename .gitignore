@@ -1,8 +1,11 @@
 /.project
 
 
-/PNSDraw/bin/Release/PNSDraw*
-/PNSDraw/bin/Debug/
-/PNSDraw/obj/
-
-/PNSDraw.v12.suo
+/P-Graph Studio/bin/Release/P-Graph Studio*
+/P-Graph Studio/bin/Debug/P-Graph Studio*
+/P-Graph Studio/bin/Release/quicksave_config.xml
+/P-Graph Studio/bin/Debug/quicksave_config.xml
+/P-Graph Studio/bin/Release/quicksave_graph.xml
+/P-Graph Studio/bin/Debug/quicksave_graph.xml
+/P-Graph Studio/obj/*
+/P-Graph Studio.v12.suo

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishUrlHistory>ftp://pgraph.dcs.uni-pannon.hu/PGraphStudio/|ftp://pgraph.dcs.uni-pannon.hu/PGraphStudio/test/|pgraph.dcs.uni-pannon.hu/PGraphStudio/|ftp://pgraph.dcs.uni-pannon.hu/workspace/backend/lib/init/PGraphStudio/|sftp://pgraph.dcs.uni-pannon.hu:22/</PublishUrlHistory>
+    <InstallUrlHistory>http://pgraph.dcs.uni-pannon.hu/|http://pgraph.dcs.uni-pannon.hu/test/|\\localhost\P-Graph Studio\|\\pgraph.dcs.uni-pannon.hu/PGraphStudio/|//pgraph.dcs.uni-pannon.hu/PGraphStudio/</InstallUrlHistory>
+    <SupportUrlHistory>http://www.pgraph.com</SupportUrlHistory>
+    <UpdateUrlHistory />
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <StartArguments>
+    </StartArguments>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
+  </PropertyGroup>
+</Project>
